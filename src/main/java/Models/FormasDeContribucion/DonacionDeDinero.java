@@ -1,6 +1,5 @@
 package Models.FormasDeContribucion;
-import Models.Colaborador;
-import Models.Humano;
+import Models.Personas.Colaborador;
 import Models.TipoFrecuencia;
 import lombok.Getter;
 

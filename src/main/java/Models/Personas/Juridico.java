@@ -1,6 +1,11 @@
-package Models;
+package Models.Personas;
 
-public class Juridico extends Colaborador{
+import Models.Direccion;
+import Models.MedioDeNotificacion;
+import Models.Personas.Colaborador;
+import Models.TipoJuridico;
+
+public class Juridico extends Colaborador {
     private String razonSocial;
     private TipoJuridico tipoJuridico;
 

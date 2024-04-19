@@ -1,4 +1,7 @@
-package Models;
+package Models.Personas;
+
+import Models.Direccion;
+import Models.TipoDeDocumento;
 
 import java.time.LocalDate;
 

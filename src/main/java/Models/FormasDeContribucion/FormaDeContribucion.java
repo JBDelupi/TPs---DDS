@@ -1,7 +1,6 @@
 package Models.FormasDeContribucion;
 
-import Models.Colaborador;
-import Models.Humano;
+import Models.Personas.Colaborador;
 import lombok.Getter;
 
 @Getter

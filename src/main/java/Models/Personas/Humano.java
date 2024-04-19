@@ -1,13 +1,10 @@
-package Models;
+package Models.Personas;
 
-import Models.FormasDeContribucion.DonacionDeDinero;
-import Models.FormasDeContribucion.FormaDeContribucion;
+import Models.Personas.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter

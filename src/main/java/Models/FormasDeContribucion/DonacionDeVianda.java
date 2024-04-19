@@ -1,8 +1,7 @@
 package Models.FormasDeContribucion;
 
-import Models.Colaborador;
+import Models.Personas.Colaborador;
 import Models.Heladera;
-import Models.Humano;
 import Models.Vianda;
 import lombok.Setter;
 

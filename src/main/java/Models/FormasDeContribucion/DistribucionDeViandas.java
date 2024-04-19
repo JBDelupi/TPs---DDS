@@ -1,6 +1,6 @@
 package Models.FormasDeContribucion;
 
-import Models.Colaborador;
+import Models.Personas.Colaborador;
 import Models.Heladera;
 
 import java.time.LocalDate;
