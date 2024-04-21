@@ -1,20 +1,20 @@
 import Controller.DonacionController;
+import Models.*;
 import Models.FormasDeContribucion.FormaDeContribucion;
-import Models.Heladera;
 import Models.Personas.Colaborador;
 import Models.Personas.Humano;
-import Models.TipoFrecuencia;
-import Models.Vianda;
+import Models.Personas.Juridico;
 
 public class Main {
     public static void main(String[] args) {
-        Colaborador lucas = new Humano("lucas","iturrioz");
+        Colaborador lucas = new Juridico("lucas", TipoJuridico.ONG,null,null);
 
         DonacionController controller = new DonacionController(lucas);
         System.out.println("1) Cantidad donaciones -> " + lucas.getFormaDeContribucion().size());
         System.out.println("..............................................................");
 
         controller.create("1", 15, TipoFrecuencia.ANUAL);
+
         System.out.println("2) Cantidad donaciones -> " + lucas.getFormaDeContribucion().size());
         System.out.println("Tipo Donacion -> "+ lucas.getFormaDeContribucion().get(0).getClass().getSimpleName());
         System.out.println("..............................................................");

@@ -12,6 +12,14 @@ public class DistribucionDeViandas extends FormaDeContribucion{
     private String motivo;
     private LocalDate fechaRealizada;
 
+    public DistribucionDeViandas(Heladera heladeraOrigen, Heladera heladeraDestino, Integer cantidadDeViandasAMover, String motivo) {
+        this.heladeraOrigen = new Heladera();
+        this.heladeraDestino = new Heladera();
+        this.cantidadDeViandasAMover = 0;
+        this.motivo = "";
+        this.fechaRealizada = LocalDate.now();
+    }
+
     @Override
     public void generarDonacion(Colaborador humano) {
 
