@@ -20,7 +20,7 @@ public class DonacionController {
 
     private void checkUserRoleAndProceed(String tipoRol) {
        if(colaborador.getClass().getSimpleName() != tipoRol) {
-        System.exit(403);
+           throw new UnauthorizedAccessException("El usuario no tiene el rol adecuado para realizar esta acción.");
        }
 
     }
@@ -29,11 +29,11 @@ public class DonacionController {
 
     public void create(String context, Object ... Args){
 
-        nuevaDonacion = this.factoryMethod(context,Args[0],Args[1]);
+        nuevaDonacion = this.factoryMethod(context,Args);
         colaborador.agregarNuevaDonacion(nuevaDonacion);
     }
 
-    public FormaDeContribucion donacionDeDinero(String context, Integer monto, TipoFrecuencia tipoFrecuencia){
+    public FormaDeContribucion donacionDeDinero(String context, Double monto, TipoFrecuencia tipoFrecuencia){
 
         FormaDeContribucion donacion = new DonacionDeDinero(monto,tipoFrecuencia);
 
@@ -60,6 +60,10 @@ public class DonacionController {
 
     public FormaDeContribucion hacerceCargoDeHeladera(String Context, String nombreCaracteristico, TipoDeOrganizacion tipoDeOrganizacion, Heladera heladera){
         this.checkUserRoleAndProceed( Juridico.class.getSimpleName() );
+
+        FormaDeContribucion donacion = new HacerseCargoDeHeladera(nombreCaracteristico, tipoDeOrganizacion, heladera);
+
+        return donacion;
     }
 
 
@@ -70,12 +74,18 @@ public class DonacionController {
     public FormaDeContribucion factoryMethod(String context, Object ... Args){
         FormaDeContribucion contribucion = null;
         switch(context){
-            case "1" : contribucion = this.donacionDeDinero(context, (Integer) Args[0], (TipoFrecuencia) Args[1]); break;
+            case "1" : contribucion = this.donacionDeDinero(context, (Double) Args[0], (TipoFrecuencia) Args[1]); break;
             case "2" : contribucion = this.donacionDeVianda(context, (Vianda) Args[0], (Heladera) Args[1]); break;
+            case "3" : contribucion = this.hacerceCargoDeHeladera(context, (String) Args[0], (TipoDeOrganizacion) Args[1], (Heladera) Args[2]); break;
+            case "4" : contribucion = this.distribucionDeVianda(context, (Heladera) Args[0],(Heladera) Args[1], (Integer) Args[2], (String) Args[3]); break;
 
         }
         return contribucion;
     }
 
-
+    public class UnauthorizedAccessException extends RuntimeException {
+        public UnauthorizedAccessException(String message) {
+            super(message);
+        }
+    }
 }

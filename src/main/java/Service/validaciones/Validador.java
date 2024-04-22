@@ -1,4 +1,4 @@
-package domain.validaciones;
+package Service.validaciones;
 
 import java.util.ArrayList;
 import java.util.Arrays;

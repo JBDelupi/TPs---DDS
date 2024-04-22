@@ -13,7 +13,7 @@ public class Main {
         System.out.println("1) Cantidad donaciones -> " + lucas.getFormaDeContribucion().size());
         System.out.println("..............................................................");
 
-        controller.create("1", 15, TipoFrecuencia.ANUAL);
+        controller.create("3", null,null,null);
 
         System.out.println("2) Cantidad donaciones -> " + lucas.getFormaDeContribucion().size());
         System.out.println("Tipo Donacion -> "+ lucas.getFormaDeContribucion().get(0).getClass().getSimpleName());
