@@ -1,5 +1,8 @@
 package Models;
 
+import lombok.Getter;
+
+@Getter
 public class Direccion {
     private String calle;
     private String numero;

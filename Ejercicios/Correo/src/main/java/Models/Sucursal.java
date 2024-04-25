@@ -1,7 +1,10 @@
 package Models;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class Sucursal {
     private Integer id;
     private String nombre;

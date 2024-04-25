@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -18,10 +19,15 @@ public abstract class Envio {
     private Sucursal sucursalOrigen;
 
     public Envio(){
+        
         this.estadoActual = new ArrayList<>();
-        Estado estadoInicial = new Estado(TipoEstado.PROCESANDO, sucursalOrigen);
-        this.agregarNuevoEstado(estadoInicial);
         this.fueEntregado = false;
+        this.codigoRastreo = new CodigoRastreo( Double.toString( new Random().nextDouble() ) );
+
+    }
+
+    public Estado estadoInicial(){
+        return  new Estado(TipoEstado.PROCESANDO, new Sucursal(0, "REMITENTE", remitente.getDireccion()) );
     }
 
     public void agregarNuevoEstado(Estado estado){
@@ -29,8 +35,10 @@ public abstract class Envio {
     }
 
     public void paqueteEntregado() {
-        Estado estadofinal = new Estado(TipoEstado.ENTREGADO, null);
+        Estado estadofinal = new Estado(TipoEstado.ENTREGADO, new Sucursal(1,"ENTREGADO",destinatario.getDireccion()) );
         estadoActual.add(estadofinal);
         fueEntregado = true;
     }
+
+
 }
