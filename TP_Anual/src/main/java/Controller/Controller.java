@@ -1,14 +1,18 @@
 package Controller;
 
 import Models.Personas.Colaborador;
+import Models.Personas.Rol;
+import Models.Personas.Usuario;
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
-public abstract class Controller {
-    Colaborador colaborador;
+@Getter
+public abstract class Controller extends Usuario {
+    Usuario usuario;
 
-    protected void checkUserRoleAndProceed(String tipoRol) {
-        if(colaborador.getClass().getSimpleName() != tipoRol) {
+    protected void checkUserRoleAndProceed(Rol tipoRol) {
+        if(usuario.getTipoRol() != tipoRol) {
             throw new Controller.UnauthorizedAccessException("El usuario no tiene el rol adecuado para realizar esta acción.");
         }
 
@@ -19,4 +23,8 @@ public abstract class Controller {
             super(message);
         }
     }
+
+    public abstract void create(Object... Args);
+
+
 }

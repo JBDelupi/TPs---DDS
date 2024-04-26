@@ -1,0 +1,8 @@
+package Models.FormasDeContribucion;
+
+public enum TipoDonacion {
+    DISTRIBUCION_VIANDAS,
+    DONACION_DINERO,
+    DONACION_DE_VIANDA,
+    HACERSE_CARGO_DE_HELADERA
+}

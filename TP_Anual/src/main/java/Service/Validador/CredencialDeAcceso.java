@@ -1,4 +1,4 @@
-package Service.validaciones;
+package Service.Validador;
 
 import lombok.Getter;
 import lombok.Setter;

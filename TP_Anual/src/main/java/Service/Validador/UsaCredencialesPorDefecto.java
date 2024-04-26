@@ -1,4 +1,4 @@
-package Service.validaciones;
+package Service.Validador;
 
 public class UsaCredencialesPorDefecto implements Validacion{
 

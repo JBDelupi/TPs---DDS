@@ -1,4 +1,4 @@
-package Service.validaciones;
+package Service.Validador;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

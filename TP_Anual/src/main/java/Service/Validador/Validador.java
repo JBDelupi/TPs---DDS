@@ -1,4 +1,4 @@
-package Service.validaciones;
+package Service.Validador;
 
 import java.util.ArrayList;
 import java.util.Arrays;

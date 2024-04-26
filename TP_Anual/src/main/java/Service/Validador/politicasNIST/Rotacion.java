@@ -1,7 +1,7 @@
-package Service.validaciones.politicasNIST;
+package Service.Validador.politicasNIST;
 
-import Service.validaciones.CredencialDeAcceso;
-import Service.validaciones.Validacion;
+import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Validacion;
 
 public class Rotacion implements Validacion {
 

@@ -2,10 +2,14 @@ package Models.Personas;
 
 import Models.Direccion;
 import Models.TipoDeDocumento;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-public class PersonaVulnerable {
+@Setter
+@Getter
+public class PersonaVulnerable extends Usuario{
     private String nombre;
     private LocalDate fechaDeNacimiento;
     private LocalDate fechaRegistro;

@@ -1,4 +1,5 @@
 import Controller.DonacionController;
+import Models.FormasDeContribucion.TipoDonacion;
 import Models.Heladera;
 import Models.Personas.Colaborador;
 import Models.Personas.Humano;
@@ -6,8 +7,6 @@ import Models.Personas.Juridico;
 import Models.TipoFrecuencia;
 import Models.TipoJuridico;
 import Models.Vianda;
-import Service.validaciones.CredencialDeAcceso;
-import Service.validaciones.Validador;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,24 +34,24 @@ public class TestEntrega1 {
 
     @Test
     public void unaPersonaHumanaHaceDosDonaciones() throws IOException{
-        controllerNahu.create("1", 15.00, TipoFrecuencia.ANUAL);
+        controllerNahu.create(TipoDonacion.DONACION_DINERO, 15.00, TipoFrecuencia.ANUAL);
         Heladera heladera = new Heladera();
         Vianda vianda = new Vianda();
-        controllerNahu.create("2", vianda, heladera);
+        controllerNahu.create(TipoDonacion.DONACION_DE_VIANDA, vianda, heladera);
 
         Assertions.assertEquals( 2 ,nahu.getFormaDeContribucion().size());
     }
 
     @Test
     public void unaPersonaJuridicaHaceUnaDonacion() throws IOException{
-        controllerUnicef.create("1", 15.00, TipoFrecuencia.ANUAL);
+        controllerUnicef.create(TipoDonacion.DONACION_DINERO, 15.00, TipoFrecuencia.ANUAL);
 
         Assertions.assertEquals( 1 ,unicef.getFormaDeContribucion().size());
     }
     @Test
     public void unaPersonaHumanaNoPuedeHacerUnaDonacionJuridica() {
         Assertions.assertThrows(DonacionController.UnauthorizedAccessException.class, () -> {
-            controllerNahu.create("3", null, null, null); // Aquí invocas el método dentro de la lambda
+            controllerNahu.create(TipoDonacion.HACERSE_CARGO_DE_HELADERA, null, null, null); // Aquí invocas el método dentro de la lambda
         });
 
     }
@@ -61,7 +60,7 @@ public class TestEntrega1 {
     @Test
     public void unaPersonaJuridicaNoPuedeHacerUnaDonacionHumana() throws IOException{
         Assertions.assertThrows(DonacionController.UnauthorizedAccessException.class, () -> {
-            controllerUnicef.create("2", null, null ,null ,null); // Aquí invocas el método dentro de la lambda
+            controllerUnicef.create(TipoDonacion.DONACION_DE_VIANDA, null, null ,null ,null); // Aquí invocas el método dentro de la lambda
         });
 
     }

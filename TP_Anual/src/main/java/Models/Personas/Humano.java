@@ -16,6 +16,7 @@ public class Humano extends Colaborador {
     public Humano(String nombre, String apellido){
         this.nombre = nombre;
         this.apellido = apellido;
+        this.setTipoRol(Rol.HUMANO);
 
     }
 

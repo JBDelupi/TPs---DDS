@@ -1,7 +1,7 @@
 
-import Service.validaciones.*;
+import Service.Validador.*;
 
-import Service.validaciones.politicasNIST.*;
+import Service.Validador.politicasNIST.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

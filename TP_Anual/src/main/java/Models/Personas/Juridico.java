@@ -14,6 +14,8 @@ public class Juridico extends Colaborador {
         this.razonSocial = razonSocial;
         this.setDireccion(direccion);
         this.setMedioDeNotificacion(medioDeNotificacion);
+        this.setTipoRol(Rol.JURIDICO);
+
     }
 
 }
