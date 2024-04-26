@@ -9,21 +9,14 @@ import Models.TipoDeOrganizacion;
 import Models.TipoFrecuencia;
 import Models.Vianda;
 
-public class DonacionController {
+public class DonacionController extends Controller {
     FormaDeContribucion nuevaDonacion;
-    Colaborador colaborador;
 
 
     public DonacionController(Colaborador colaborador){
         this.colaborador = colaborador;
     }
 
-    private void checkUserRoleAndProceed(String tipoRol) {
-       if(colaborador.getClass().getSimpleName() != tipoRol) {
-           throw new UnauthorizedAccessException("El usuario no tiene el rol adecuado para realizar esta acción.");
-       }
-
-    }
 
 
 
@@ -83,9 +76,5 @@ public class DonacionController {
         return contribucion;
     }
 
-    public class UnauthorizedAccessException extends RuntimeException {
-        public UnauthorizedAccessException(String message) {
-            super(message);
-        }
-    }
+
 }

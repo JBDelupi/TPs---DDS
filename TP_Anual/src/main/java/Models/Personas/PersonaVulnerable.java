@@ -12,7 +12,7 @@ public class PersonaVulnerable {
     private Boolean flagSituacionDeCalle;
     private Direccion domicilio;
     private TipoDeDocumento tipoDeDocumento;
-    private Integer numeroDocumento;
+    private String numeroDocumento;
     private Integer menoresACargo;
 
     public Boolean tieneMenoresACargo(){
