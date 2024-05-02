@@ -29,6 +29,7 @@ public class DonacionController extends Controller {
     public FormaDeContribucion donacionDeVianda(Vianda vianda, Heladera heladera){
 
         this.checkUserRoleAndProceed(Rol.HUMANO);
+
         FormaDeContribucion donacion = new DonacionDeVianda(vianda,heladera);
         return donacion;
 

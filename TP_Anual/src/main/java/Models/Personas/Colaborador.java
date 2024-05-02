@@ -16,7 +16,6 @@ public abstract class Colaborador extends Usuario {
     private MedioDeNotificacion medioDeNotificacion;
     private Direccion direccion;
     private List<FormaDeContribucion> formaDeContribucion;
-    private CredencialDeAcceso credencial;
 
 
     public Colaborador(){

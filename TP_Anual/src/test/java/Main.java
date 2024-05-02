@@ -12,13 +12,13 @@ public class Main {
     public static void main(String[] args) {
         Controller usuario = new HumanoController();
         usuario.create("lucas","iturrioz");
-        Controller donacion = new DonacionController( usuario.getUsuario() );
 
-        Usuario test = new Administrador();
+         Usuario test = new Administrador();
 
-        Controller personaVulnerable = new PersonaVulnerableController( usuario.getUsuario() );
+        Controller personaVulnerable = new PersonaVulnerableController( test );
 
         personaVulnerable.create("lucas");
+
     }
 
 }

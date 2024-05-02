@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public abstract class Controller extends Usuario {
+public abstract class Controller {
     Usuario usuario;
 
     protected void checkUserRoleAndProceed(Rol tipoRol) {

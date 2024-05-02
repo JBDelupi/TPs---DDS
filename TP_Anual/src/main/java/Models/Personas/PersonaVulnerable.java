@@ -9,7 +9,8 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-public class PersonaVulnerable extends Usuario{
+public class PersonaVulnerable{
+
     private String nombre;
     private LocalDate fechaDeNacimiento;
     private LocalDate fechaRegistro;
