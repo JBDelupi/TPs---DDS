@@ -1,4 +1,4 @@
-import Controller.DonacionController;
+import Controller.ContribucionController;
 import Models.FormasDeContribucion.TipoDonacion;
 import Models.Heladera;
 import Models.Personas.Colaborador;
@@ -22,14 +22,14 @@ public class TestEntrega1 {
 
     Colaborador nahu ;
     Colaborador unicef;
-    DonacionController controllerNahu;
-    DonacionController controllerUnicef;
+    ContribucionController controllerNahu;
+    ContribucionController controllerUnicef;
     @BeforeEach
     public void init(){
         nahu = new Humano("Nahuel","Gimenez");
         unicef = new Juridico("Unicef", TipoJuridico.ONG, null, null);
-        controllerNahu = new DonacionController(nahu);
-        controllerUnicef = new DonacionController(unicef);
+        controllerNahu = new ContribucionController(nahu);
+        controllerUnicef = new ContribucionController(unicef);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TestEntrega1 {
     }
     @Test
     public void unaPersonaHumanaNoPuedeHacerUnaDonacionJuridica() {
-        Assertions.assertThrows(DonacionController.UnauthorizedAccessException.class, () -> {
+        Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
             controllerNahu.create(TipoDonacion.HACERSE_CARGO_DE_HELADERA, null, null, null); // Aquí invocas el método dentro de la lambda
         });
 
@@ -59,7 +59,7 @@ public class TestEntrega1 {
 
     @Test
     public void unaPersonaJuridicaNoPuedeHacerUnaDonacionHumana() throws IOException{
-        Assertions.assertThrows(DonacionController.UnauthorizedAccessException.class, () -> {
+        Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
             controllerUnicef.create(TipoDonacion.DONACION_DE_VIANDA, null, null ,null ,null); // Aquí invocas el método dentro de la lambda
         });
 

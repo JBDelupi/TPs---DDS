@@ -20,6 +20,12 @@ public class PersonaVulnerable{
     private String numeroDocumento;
     private Integer menoresACargo;
 
+    public  PersonaVulnerable (String nombre, Integer menoresACargo){
+        this.nombre = nombre;
+        this.menoresACargo = menoresACargo;
+    }
+
+
     public Boolean tieneMenoresACargo(){
         return menoresACargo>0;
     }

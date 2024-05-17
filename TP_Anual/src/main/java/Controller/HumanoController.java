@@ -9,6 +9,11 @@ public class HumanoController extends Controller {
         this.usuario = new Humano( (String) Args[0],(String) Args[1]);
     }
 
+    public void solicitudTarjeta(){
+        this.checkUserRoleAndProceed(Rol.HUMANO);
+        // SOLICITA TARJETA
+    }
+
     public void edit() {
 
     }

@@ -11,6 +11,7 @@ import lombok.Setter;
 public abstract class Controller {
     Usuario usuario;
 
+
     protected void checkUserRoleAndProceed(Rol tipoRol) {
         if(usuario.getTipoRol() != tipoRol) {
             throw new Controller.UnauthorizedAccessException("El usuario no tiene el rol adecuado para realizar esta acción.");

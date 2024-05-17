@@ -13,6 +13,8 @@ public class Humano extends Colaborador {
     private String apellido;
     private LocalDate fechaNacimiento;
 
+
+
     public Humano(String nombre, String apellido){
         this.nombre = nombre;
         this.apellido = apellido;
