@@ -1,0 +1,29 @@
+Página web salaequis.es
+
+Apenas ingresamos al sitio, somos bombardeados visualmente por una cantidad excesiva de contenido en movimiento y tamaños variados de letras. Tres títulos principales del mismo tamaño giran a diferentes velocidades, intercalados con dos imágenes que no aportan continuidad visual. El sitio es simétrico si se corta horizontalmente por el medio; sin embargo, aunque se respeta la similitud, no se cumplen los principios de proximidad ni de continuidad según la teoría de la Gestalt.
+
+En la sección de "Programación", resulta complicado completar la compra de una entrada. La ausencia de imágenes de las películas, siendo éstas un elemento tan visual, dificulta distinguir y recordar las opciones disponibles. Navegar en "Taquilla" también es confuso. Es difícil identificar dónde hacer clic para comprar una entrada de cine. Después de un tiempo, te das cuenta que tenés que seleccionar la hora de la sesión. Una vez elegida la hora y el número de entradas, aparece el precio. Pero, sorprendentemente, no hay una opción inmediata de compra. Se necesita un tiempo hasta darse cuenta de que hay que seleccionar la categoría "Elegir butacas" en la parte superior derecha para continuar con la compra.
+Para mejorar y corregir los errores previamente mencionados en el sitio web de Sala Equis, se podrían implementar las siguientes sugerencias:
+
+1. Reducir la cantidad de contenido en movimiento:
+   - Limitar el uso de textos giratorios y otros elementos en movimiento. Utilizar animaciones más sutiles y enfocarse en una sola dirección de movimiento para evitar distracciones y mejorar la legibilidad.
+
+2. Mejorar la jerarquía visual:
+   - Rediseñar los títulos principales y subtítulos para que tengan tamaños y estilos diferenciados, estableciendo una clara jerarquía visual. Esto ayudará a los usuarios a identificar rápidamente las secciones más importantes.
+
+3. Aplicar los principios de proximidad y continuidad:
+   - Agrupar la información relacionada de manera más compacta y coherente. Por ejemplo, en la página de inicio, organizar los elementos visuales y textuales de forma que se perciban como conjuntos unidos.
+   - Asegurar que las imágenes y los textos relacionados estén alineados para guiar el ojo del usuario de manera natural a través del contenido.
+
+4.Incluir imágenes de las películas en la sección de "Programación":
+   - Agregar imágenes de las películas junto a sus descripciones. Esto no solo facilitará la identificación y el recuerdo de cada película, sino que también hará la página más atractiva visualmente.
+
+5. Optimizar el proceso de compra en la "Taquilla":
+   - Simplificar y clarificar los pasos para la compra de entradas. Incluir botones más visibles y claramente etiquetados como "Comprar Entradas" en cada paso del proceso.
+   - Reubicar o destacar la opción "Elegir butacas" de manera más prominente y accesible para que los usuarios puedan avanzar fácilmente en el proceso de compra.
+
+6. Pruebas de usuario y feedback continuo:
+   - Como último punto pero no menor, es muy útil realizar pruebas de usabilidad con usuarios reales para identificar áreas problemáticas y obtener feedback directo sobre la experiencia de navegación.
+
+Al aplicar estas sugerencias, se puede mejorar significativamente la experiencia del usuario en el sitio web de Sala Equis, haciéndolo más atractivo, intuitivo y fácil de navegar.
+  
