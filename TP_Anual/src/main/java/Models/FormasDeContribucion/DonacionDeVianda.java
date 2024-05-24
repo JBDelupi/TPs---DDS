@@ -14,6 +14,7 @@ public class DonacionDeVianda extends FormaDeContribucion{
     private Heladera heladera;
 
     public DonacionDeVianda(Vianda vianda, Heladera heladera){
+        heladera.agregarVianda(vianda);
         this.vianda = vianda;
         this.heladera = heladera;
     }
