@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Actores.Rol;
 import Models.Personas.Humano;
 
 public class HumanoController extends Controller {

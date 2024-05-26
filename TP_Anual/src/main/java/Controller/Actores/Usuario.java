@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Actores;
 
 
 import Models.FormasDeContribucion.FormaDeContribucion;

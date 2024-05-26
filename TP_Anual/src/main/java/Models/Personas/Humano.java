@@ -1,6 +1,6 @@
 package Models.Personas;
 
-import Controller.Rol;
+import Controller.Actores.Rol;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
 package Models.Personas;
 
-import Controller.Usuario;
+import Controller.Actores.Usuario;
 import Models.Direccion;
 import Models.FormasDeContribucion.FormaDeContribucion;
 import Models.MedioDeNotificacion;

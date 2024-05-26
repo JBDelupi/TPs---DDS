@@ -1,9 +1,9 @@
-package Controller;
+package Controller.Actores;
 
 import lombok.Getter;
 
 @Getter
-public class Administrador extends Usuario{
+public class Administrador extends Usuario {
 
     private String nombre;
     private String apellido;

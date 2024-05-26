@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Actores.Rol;
+import Controller.Actores.Usuario;
 import Models.FormasDeContribucion.*;
 import Models.Heladera;
 import Models.Personas.*;

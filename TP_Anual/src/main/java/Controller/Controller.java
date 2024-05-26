@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Actores.Rol;
+import Controller.Actores.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 

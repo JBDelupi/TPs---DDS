@@ -1,6 +1,6 @@
 package Models.Personas;
 
-import Controller.Rol;
+import Controller.Actores.Rol;
 import Models.Direccion;
 import Models.MedioDeNotificacion;
 import Models.TipoJuridico;
