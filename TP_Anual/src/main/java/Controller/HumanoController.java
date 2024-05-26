@@ -1,7 +1,6 @@
 package Controller;
 
 import Models.Personas.Humano;
-import Models.Personas.Rol;
 
 public class HumanoController extends Controller {
 

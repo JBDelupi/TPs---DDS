@@ -1,7 +1,5 @@
 package Controller;
 
-import Models.Personas.Humano;
-import Models.Personas.Rol;
 import Models.Personas.Tecnico;
 
 public class AdministradorController extends Controller{

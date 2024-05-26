@@ -1,4 +1,4 @@
-package Models.Personas;
+package Controller;
 
 
 import Models.FormasDeContribucion.FormaDeContribucion;

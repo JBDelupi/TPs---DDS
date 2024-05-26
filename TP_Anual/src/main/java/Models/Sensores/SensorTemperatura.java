@@ -1,6 +1,8 @@
 package Models.Sensores;
 
 import Models.Heladera;
+import Models.Sensores.TareaDiferida.AdapterChromeTask;
+import Models.Sensores.TareaDiferida.ChromeTask;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,30 +15,26 @@ import java.util.concurrent.TimeUnit;
 @Setter
 public class SensorTemperatura implements Sensor {
     private Heladera heladera;
-
+    private AdapterChromeTask tareaProgramada;
     public SensorTemperatura(Heladera heladera) {
         this.heladera = heladera;
-        this.tareaProgramada();
-    }
-
-    public void tareaProgramada(){
-
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        scheduler.scheduleAtFixedRate(() -> {
-            this.chequear();
-            System.out.println("Registrando temperatura: " + heladera.getTemperaturaActual());
-        }, 0, 5, TimeUnit.MINUTES);
+        this.tareaProgramada = new ChromeTask(5,this,"chequear");
     }
 
 
     public void chequear(){
-
-       if (heladera.getTemperaturaActual() > heladera.getTemperaturaMax() || heladera.getTemperaturaActual() < heladera.getTemperaturaMin())
+       if ( this.superaTemperaturaMax() || this.superaTemperaturaMin() )
        {
            this.notificar();
        }
+    }
 
+    public boolean superaTemperaturaMax(){
+        return heladera.getTemperaturaActual() > heladera.getTemperaturaMax();
+    }
+
+    public boolean superaTemperaturaMin(){
+        return heladera.getTemperaturaActual() < heladera.getTemperaturaMin();
     }
 
     public void notificar(){
@@ -45,39 +43,3 @@ public class SensorTemperatura implements Sensor {
 
 
 }
-
-/*
-public class SensorTemperatura implements Sensor {
-    private Heladera heladera;
-    private ScheduledExecutorService scheduler;
-
-    public SensorTemperatura(Heladera heladera) {
-        this.heladera = heladera;
-        this.iniciarTareaProgramada();
-    }
-
-    public void iniciarTareaProgramada() {
-        if (scheduler == null || scheduler.isShutdown()) {
-            scheduler = Executors.newScheduledThreadPool(1);
-            scheduler.scheduleAtFixedRate(() -> {
-                this.chequear();
-                System.out.println("Registrando temperatura: " + heladera.getTemperaturaActual());
-            }, 0, 5, TimeUnit.SECONDS);
-        }
-    }
-
-    public void pausarTareaProgramada() {
-        if (scheduler != null && !scheduler.isShutdown()) {
-            scheduler.shutdown();
-            try {
-                if (!scheduler.awaitTermination(5, TimeUnit.SECONDS)) {
-                    scheduler.shutdownNow();
-                }
-            } catch (InterruptedException e) {
-                scheduler.shutdownNow();
-                Thread.currentThread().interrupt();
-            }
-        }
-    }
-
-    */

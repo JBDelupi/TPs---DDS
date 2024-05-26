@@ -1,4 +1,4 @@
-package Models.Personas;
+package Controller;
 
 public enum Rol {
     ADMINISTRADOR,

@@ -1,6 +1,5 @@
-package Models.Personas;
+package Controller;
 
-import Service.Validador.CredencialDeAcceso;
 import lombok.Getter;
 
 @Getter

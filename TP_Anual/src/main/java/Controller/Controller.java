@@ -1,8 +1,5 @@
 package Controller;
 
-import Models.Personas.Colaborador;
-import Models.Personas.Rol;
-import Models.Personas.Usuario;
 import lombok.Getter;
 import lombok.Setter;
 

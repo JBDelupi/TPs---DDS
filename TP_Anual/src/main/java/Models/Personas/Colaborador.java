@@ -1,9 +1,9 @@
 package Models.Personas;
 
+import Controller.Usuario;
 import Models.Direccion;
 import Models.FormasDeContribucion.FormaDeContribucion;
 import Models.MedioDeNotificacion;
-import Service.Validador.CredencialDeAcceso;
 import lombok.Getter;
 import lombok.Setter;
 

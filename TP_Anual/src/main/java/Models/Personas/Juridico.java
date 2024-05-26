@@ -1,8 +1,8 @@
 package Models.Personas;
 
+import Controller.Rol;
 import Models.Direccion;
 import Models.MedioDeNotificacion;
-import Models.Personas.Colaborador;
 import Models.TipoJuridico;
 
 public class Juridico extends Colaborador {

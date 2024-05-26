@@ -1,22 +1,5 @@
-
-import Controller.*;
-
-import Models.FormasDeContribucion.EntregaDeTarjeta;
-import Models.FormasDeContribucion.FormaDeContribucion;
-import Models.FormasDeContribucion.TipoDonacion;
 import Models.Heladera;
-import Models.Sensores.SensorTemperatura;
-import Models.Personas.Administrador;
-import Models.Personas.Colaborador;
-import Models.Personas.Humano;
-import Models.Personas.Usuario;
-import Models.Tarjeta.RegistroDeUso;
-import Models.Tarjeta.Tarjeta;
 import Models.Vianda;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class Main {
