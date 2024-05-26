@@ -25,10 +25,22 @@
             <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- TAREA DIFERIDA -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>2.3.2</version>
+        </dependency>
+        <!-- API REST -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>2.9.0</version>
         </dependency>
         <!-- ARQUITECTURA WEB -->
         <dependency>

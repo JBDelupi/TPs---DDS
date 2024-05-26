@@ -1,9 +1,13 @@
 import Models.Heladera;
 import Models.Vianda;
+import Service.APIPuntos.Punto;
+import Service.APIPuntos.ServicioPuntosAPI;
+
+import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         /*
         Colaborador lucas = new Humano("lucas","iturrioz");
 
@@ -27,6 +31,7 @@ public class Main {
         /*
 
         */
+        /*
        Heladera heladera = new Heladera();
        Vianda vianda = new Vianda();
        heladera.setCapacidadDeViandas(3);
@@ -35,11 +40,15 @@ public class Main {
        heladera.setTemperaturaActual(50.00);
        Thread.sleep(10000);
        heladera.setTemperaturaActual(110.00);
-
+        */
       // heladera.agregarVianda(vianda);
       // heladera.setAbierto(true);
 
       // Vianda vianda1 = heladera.obtenerVianda();
+
+        Punto punto = ServicioPuntosAPI.getInstance().obtenerPunto("1");
+        System.out.println("Latitud : " + punto.getLatitud());
+        System.out.println("Longitud : " + punto.getLongitud());
 
     }
 
