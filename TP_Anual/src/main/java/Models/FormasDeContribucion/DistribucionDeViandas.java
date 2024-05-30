@@ -20,8 +20,9 @@ public class DistribucionDeViandas extends FormaDeContribucion{
         this.fechaRealizada = LocalDate.now();
     }
 
-    @Override
-    public void generarDonacion(Colaborador humano) {
 
+    @Override
+    public Double generarPuntaje() {
+        return cantidadDeViandasAMover.doubleValue() * 1;
     }
 }

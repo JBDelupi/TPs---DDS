@@ -16,10 +16,5 @@ public class HacerseCargoDeHeladera extends FormaDeContribucion {
     }
 
 
-    @Override
-    public void generarDonacion(Colaborador humano) {
-        humano.agregarNuevaDonacion(this);
-    }
-
 
 }

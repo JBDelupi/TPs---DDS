@@ -1,6 +1,5 @@
 package Models.FormasDeContribucion;
 
-import Models.Personas.Colaborador;
 import Models.Heladera;
 import Models.Vianda;
 import lombok.Setter;
@@ -21,11 +20,7 @@ public class DonacionDeVianda extends FormaDeContribucion{
 
 
     @Override
-    public void generarDonacion(Colaborador humano) {
-        humano.agregarNuevaDonacion(this);
-
+    public Double generarPuntaje() {
+        return 1 * 1.5;
     }
-
 }
-
-

@@ -1,54 +1,44 @@
-import Models.Heladera;
-import Models.Vianda;
 import Service.APIPuntos.Punto;
 import Service.APIPuntos.ServicioPuntosAPI;
+import Service.ImportadorCSV.AdapterLectorArchivoCSV;
+import Service.ImportadorCSV.DTO.ColaboradorDTO;
+import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
+import Service.ImportadorCSV.ImportadorCSV;
+import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException, IOException {
-        /*
-        Colaborador lucas = new Humano("lucas","iturrioz");
+    public static void main(String[] args) throws InterruptedException, IOException, CsvValidationException {
 
-        ContribucionController usuario = new ContribucionController(lucas);
 
-        usuario.create(TipoDonacion.ENTREGA_TARJETAS,"Jose",0);
+    //    -- (PUNTO;Radio) -> [API MOCKEA] -> LISTA POSIBLES PUNTOS dentro del radio
 
-        EntregaDeTarjeta formaDeContribucion = (EntregaDeTarjeta) lucas.getFormaDeContribucion().get(0);
-        Tarjeta tarjeta = formaDeContribucion.getTarjeta();
+        ImportadorCSV importadorCSV = new ImportadorCSV("test.csv");
+            System.out.println("Colaboradres importados");
+            System.out.println("________________________");
+        for( ColaboradorDTO colaborador : importadorCSV.getColaboradoresDTO() ){
+            System.out.println("Tipo Documento:" + colaborador.getTipoDocumento());
+            System.out.println("Documento:" + colaborador.getNumDocumento());
+            System.out.println("Nombre:" + colaborador.getNombre());
+            System.out.println("Apellido:" + colaborador.getApellido());
+            System.out.println("Mail:" + colaborador.getMail());
+            System.out.println("________________________ Colaboraciones __________________");
+            importadorCSV.getColaboracionesDTO().stream()
+                    .filter(f -> f.getNumDocumento() == colaborador.getNumDocumento())
+                    .forEach(g ->
+                           System.out.println(
+                                   " Fecha Colaboracion: " + g.getFechaColaboracion() +
+                                   " Forma Colaboracion: " + g.getFormaDeColaboracion() +
+                                   " Cantidad: " + g.getCantidad()
 
-        // Supongamos que usa la tarjeta "JOSE"
+                           )
 
-        RegistroDeUso nuevoUso = new RegistroDeUso(new Heladera());
-        tarjeta.agregarNuevoUso(nuevoUso); // 1 VEZ
-        tarjeta.agregarNuevoUso(nuevoUso); // 2 VEZ
-        tarjeta.agregarNuevoUso(nuevoUso); // 3 VEZ
-        tarjeta.agregarNuevoUso(nuevoUso); // 4 VEZ
-        tarjeta.agregarNuevoUso(nuevoUso); // 5 VEZ -> no lo dejaria
-        */
-        /////////////////////////-------------- test/////////////////////////
-        /*
+                    );
+            System.out.println("________________________ _____ __________________");
+        }
 
-        */
-        /*
-       Heladera heladera = new Heladera();
-       Vianda vianda = new Vianda();
-       heladera.setCapacidadDeViandas(3);
-       heladera.setTemperaturaMax(100.0);
-       heladera.setTemperaturaMin(30.0);
-       heladera.setTemperaturaActual(50.00);
-       Thread.sleep(10000);
-       heladera.setTemperaturaActual(110.00);
-        */
-      // heladera.agregarVianda(vianda);
-      // heladera.setAbierto(true);
-
-      // Vianda vianda1 = heladera.obtenerVianda();
-
-        Punto punto = ServicioPuntosAPI.getInstance().obtenerPunto("1");
-        System.out.println("Latitud : " + punto.getLatitud());
-        System.out.println("Longitud : " + punto.getLongitud());
 
     }
 

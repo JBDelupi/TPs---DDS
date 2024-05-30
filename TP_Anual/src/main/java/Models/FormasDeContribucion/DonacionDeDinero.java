@@ -17,9 +17,10 @@ public class DonacionDeDinero extends FormaDeContribucion {
         this.fechaDeDonacion = LocalDate.now();
     }
 
-    @Override
-    public void generarDonacion(Colaborador humano){
-        humano.agregarNuevaDonacion(this);
+
+
+    public Double generarPuntaje(){
+        return monto * 0.5;
     }
 
 }

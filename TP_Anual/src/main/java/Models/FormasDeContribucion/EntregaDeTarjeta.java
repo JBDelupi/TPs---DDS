@@ -14,8 +14,10 @@ public class EntregaDeTarjeta extends FormaDeContribucion{
         this.tarjeta = tarjeta;
         this.fechaRegistro = LocalDate.now();
     }
+
+
     @Override
-    public void generarDonacion(Colaborador humano) {
-        humano.agregarNuevaDonacion(this);
+    public Double generarPuntaje() {
+        return 1 * 2.0;
     }
 }
