@@ -2,10 +2,16 @@ package Models.FormasDeContribucion;
 
 import Models.Personas.Colaborador;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Getter
-
+@Setter
 public abstract class FormaDeContribucion {
+
+    protected LocalDate fechaDeDonacion;
+
     public void generarContribucion(Colaborador persona){ persona.agregarNuevaDonacion(this);}
 
 

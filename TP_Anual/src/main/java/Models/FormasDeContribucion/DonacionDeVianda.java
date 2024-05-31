@@ -9,15 +9,17 @@ import java.time.LocalDate;
 @Setter
 public class DonacionDeVianda extends FormaDeContribucion{
     private Vianda vianda;
-    private LocalDate fechaDonacion;
     private Heladera heladera;
 
     public DonacionDeVianda(Vianda vianda, Heladera heladera){
         heladera.agregarVianda(vianda);
         this.vianda = vianda;
         this.heladera = heladera;
+        this.fechaDeDonacion = LocalDate.now();
     }
 
+    public DonacionDeVianda(){
+    }
 
     @Override
     public Double generarPuntaje() {

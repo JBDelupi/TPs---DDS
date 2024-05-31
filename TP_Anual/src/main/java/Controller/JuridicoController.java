@@ -19,4 +19,6 @@ public class JuridicoController extends Controller {
     public void delete() {
 
     }
+
+
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Getter
 public class DonacionDeDinero extends FormaDeContribucion {
-    private LocalDate fechaDeDonacion;
+
     private Double monto;
     private TipoFrecuencia frecuencia;
 
@@ -17,7 +17,9 @@ public class DonacionDeDinero extends FormaDeContribucion {
         this.fechaDeDonacion = LocalDate.now();
     }
 
+    public DonacionDeDinero(){
 
+    }
 
     public Double generarPuntaje(){
         return monto * 0.5;

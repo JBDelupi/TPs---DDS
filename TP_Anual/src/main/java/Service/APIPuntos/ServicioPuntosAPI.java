@@ -5,6 +5,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ServicioPuntosAPI {
         private static ServicioPuntosAPI instacia = null;
@@ -26,9 +27,9 @@ public class ServicioPuntosAPI {
             return instacia;
         }
 
-    public Punto obtenerPunto ( String id ) throws IOException {
+    public List<Punto> obtenerPuntosEstrategicos(String punto,String Radio ) throws IOException {
         ServicioPuntosAPIAdapter servicioPokeAPIAdapter = this.retrofit.create(ServicioPuntosAPIAdapter.class);
-        Call<Punto> requestPokemon = servicioPokeAPIAdapter.punto(id);
+        Call<List<Punto>> requestPokemon = servicioPokeAPIAdapter.punto(punto);
         return  requestPokemon.execute().body();
     }
 

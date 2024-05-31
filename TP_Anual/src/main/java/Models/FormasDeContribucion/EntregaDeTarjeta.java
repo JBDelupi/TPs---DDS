@@ -9,10 +9,13 @@ import java.time.LocalDate;
 @Getter
 public class EntregaDeTarjeta extends FormaDeContribucion{
     private Tarjeta tarjeta;
-    private LocalDate fechaRegistro;
+
     public EntregaDeTarjeta(Tarjeta tarjeta){
         this.tarjeta = tarjeta;
-        this.fechaRegistro = LocalDate.now();
+        this.fechaDeDonacion = LocalDate.now();
+    }
+    public EntregaDeTarjeta(){
+
     }
 
 

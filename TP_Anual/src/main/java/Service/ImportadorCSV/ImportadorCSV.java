@@ -1,12 +1,12 @@
 package Service.ImportadorCSV;
 
-import Service.ImportadorCSV.DTO.ColaboradorDTO;
-import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
+import Service.DTO.ColaboradorDTO;
+import Service.DTO.FormaColaboracionDTO;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Getter;
 
+import javax.print.Doc;
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,12 +16,10 @@ import java.util.Set;
 public class ImportadorCSV {
     private AdapterImportadorCSV adapterImportadorCSV;
     private Set<ColaboradorDTO> colaboradoresDTO;
-    private List<FormaColaboracionDTO> colaboracionesDTO;
     private String URL;
 
     public ImportadorCSV(String URL) throws CsvValidationException, IOException {
         this.URL = URL;
-        this.colaboracionesDTO = new ArrayList<>();
         this.colaboradoresDTO = new HashSet<>();
         this.adapterImportadorCSV = new AdapterLectorArchivoCSV();
         this.cargarDatosColaborador();
@@ -33,31 +31,47 @@ public class ImportadorCSV {
         this.ToDtoColaborador(datosCSV);
     }
 
-    private boolean esColaboradorRepetido(String TipoDocumento, String numeroDocumento){
-        return colaboradoresDTO.stream().anyMatch(f->f.getTipoDocumento().equals((String) TipoDocumento )  && f.getNumDocumento().equals((String)numeroDocumento ));
+    private boolean esElMismoDocumento(String unDocumento, String otroDocumento){
+        return unDocumento.equals((String) otroDocumento);
     }
+
+    private boolean esElMismoTipoDocumento(String unTipoDocumento, String otroTipoDocumento){
+        return unTipoDocumento.equals((String) otroTipoDocumento);
+    }
+
+    private boolean esColaboradorRepetido(String TipoDocumento, String numeroDocumento){
+        return colaboradoresDTO.stream().anyMatch( unColaborador -> this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento()));
+    }
+
+    private ColaboradorDTO getColaboradorDTO(String TipoDocumento, String numeroDocumento){
+        return  colaboradoresDTO.stream().filter(unColaborador ->this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento())).findFirst().get();
+    }
+
 
     private void ToDtoColaborador(List<String[]> list) {
 
         for (String[] linea : list) {
-            ColaboradorDTO unColaborador = new ColaboradorDTO();
+
             FormaColaboracionDTO unaForma = new FormaColaboracionDTO();
+            ColaboradorDTO unColaborador = null;
 
             if(! this.esColaboradorRepetido(linea[0],linea[1]) ) {
+                unColaborador = new ColaboradorDTO();
                 unColaborador.setTipoDocumento(linea[0]);
                 unColaborador.setNumDocumento(linea[1]);
                 unColaborador.setNombre(linea[2]);
                 unColaborador.setApellido(linea[3]);
                 unColaborador.setMail(linea[4]);
                 colaboradoresDTO.add(unColaborador);
+            } else{
+                unColaborador = this.getColaboradorDTO(linea[0],linea[1]);
             }
-            unaForma.setTipoDocumento(linea[0]);
-            unaForma.setNumDocumento(linea[1]);
             unaForma.setFechaColaboracion(linea[5]);
             unaForma.setFormaDeColaboracion(linea[6]);
             unaForma.setCantidad(linea[7]);
+            unColaborador.agregarColaboracion(unaForma);
 
-            colaboracionesDTO.add(unaForma);
+
 
         }
 
