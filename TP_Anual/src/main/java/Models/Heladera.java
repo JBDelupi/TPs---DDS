@@ -16,8 +16,6 @@ public class Heladera {
 
     public Heladera() {
         this.viandas = new ArrayList<>();
-        this.sensorMovimiento = new SensorMovimiento(this);
-        this.sensorTemperatura = new SensorTemperatura(this);
 
     }
 
@@ -43,10 +41,13 @@ public class Heladera {
         }
     }
     public Vianda obtenerVianda() {
-        Vianda vianda = viandas.get(0);
-        viandas.remove(vianda);
-        sensorMovimiento.chequear();
-        return vianda;
+        if (!this.viandas.isEmpty()) {
+            Vianda vianda = viandas.get(0);
+            viandas.remove(vianda);
+            sensorMovimiento.chequear();
+            return vianda;
+        }
+        return null;
     }
 
 }

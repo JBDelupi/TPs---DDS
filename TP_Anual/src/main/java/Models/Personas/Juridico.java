@@ -12,7 +12,7 @@ import java.util.List;
 public class Juridico extends Colaborador {
     private String razonSocial;
     private TipoJuridico tipoJuridico;
-    private List<Producto> productosQueOfrece;
+    private List<Producto> productosOfrecidos;
 
     public Juridico(String razonSocial, TipoJuridico tipoJuridico, Direccion direccion, MedioDeNotificacion medioDeNotificacion){
         this.tipoJuridico = tipoJuridico;
@@ -20,8 +20,6 @@ public class Juridico extends Colaborador {
         this.setDireccion(direccion);
         this.setMedioDeNotificacion(medioDeNotificacion);
         this.setTipoRol(Rol.JURIDICO);
-        this.productosQueOfrece = new ArrayList<>();
-
+        this.productosOfrecidos = new ArrayList<>();
     }
-
 }

@@ -1,12 +1,18 @@
 package Models.Tarjeta;
 
+import Models.Heladera;
 import Models.Personas.Humano;
 import Models.Personas.PersonaVulnerable;
+import Models.Vianda;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
+@Getter
 public class Tarjeta {
     private String codigo;
     private PersonaVulnerable titular;
@@ -25,10 +31,12 @@ public class Tarjeta {
         this.usos = new ArrayList<>();
     }
 
-    public void agregarNuevoUso(RegistroDeUso uso){
-        this.getUsosHoy();
+    public void agregarNuevoUso(Heladera heladera){
+        this.calcularUsosHoy();
         if(this.usosHoy < this.cantMaxUso ){
-            usos.add(uso);
+            Vianda viandaConsume = heladera.obtenerVianda();
+            RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume);
+            usos.add(unNuevoUso);
             this.usosHoy++;
             System.out.println("Uso exitoso tarjeta cantidad disponible: " +  (cantMaxUso - usosHoy) );
         } else {
@@ -37,12 +45,11 @@ public class Tarjeta {
 
     }
 
-    public void getUsosHoy() {
+    public void calcularUsosHoy() {
         LocalDate hoy = LocalDate.now();
         if (! hoy.equals( this.fechaUltUso ) ) {
             this.fechaUltUso = hoy;
             this.usosHoy = 0;
         }
     }
-
 }

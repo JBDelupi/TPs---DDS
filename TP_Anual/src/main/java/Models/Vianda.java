@@ -1,7 +1,11 @@
 package Models;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Setter @Getter
 public class Vianda {
     private String nombre;
     private LocalDate fechaDeCaducidad;

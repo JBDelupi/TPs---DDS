@@ -26,6 +26,7 @@ public class SensorTemperatura implements Sensor {
        if ( this.superaTemperaturaMax() || this.superaTemperaturaMin() )
        {
            this.notificar();
+           this.tareaProgramada.pausarTarea();
        }
     }
 
