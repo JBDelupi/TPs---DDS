@@ -14,8 +14,8 @@ public class DistribucionDeViandas extends FormaDeContribucion{
     public DistribucionDeViandas(Heladera heladeraOrigen, Heladera heladeraDestino, Integer cantidadDeViandasAMover, String motivo) {
         this.heladeraOrigen = new Heladera();
         this.heladeraDestino = new Heladera();
-        this.cantidadDeViandasAMover = 0;
-        this.motivo = "";
+        this.cantidadDeViandasAMover = cantidadDeViandasAMover;
+        this.motivo = motivo;
         this.fechaDeDonacion = LocalDate.now();
     }
     public DistribucionDeViandas(){
@@ -24,6 +24,6 @@ public class DistribucionDeViandas extends FormaDeContribucion{
 
     @Override
     public Double generarPuntaje() {
-        return cantidadDeViandasAMover.doubleValue() * 1;
+        return (double)cantidadDeViandasAMover * 1;
     }
 }

@@ -13,6 +13,14 @@ public class Producto extends FormaDeContribucion{
     private Integer cantidad;
     private String imagen;
 
+    public Producto (TipoRubro rubro, String nombre, Double puntosNecesarios, Integer cantidad, String imagen) {
+        this.rubro = rubro;
+        this.nombre = nombre;
+        this.puntosNecesarios = puntosNecesarios;
+        this.cantidad = cantidad;
+        this.imagen = imagen;
+    }
+
     // POSIBLEMENTE SEPARAR PRODUCTO DE CANTIDAD
     // VER COMO AGREGAR PRODUCTO A LA LISTA DE PRODUCTOS DE PERSONA JURIDICA. AHORA ESTA AGREGANDOLO A LA LISTA DE CONTRIBUCIONES.
 

@@ -34,12 +34,12 @@ public abstract class Colaborador extends Usuario {
     }
 
     public void sumarPuntaje(FormaDeContribucion unaDonacion){
-        puntaje =+ unaDonacion.generarPuntaje();
+        puntaje += unaDonacion.generarPuntaje();
     }
 
     public void realizarCanje(Producto producto, Integer cantidad){
-        if ((puntaje >= producto.getPuntosNecesarios() && cantidad>=producto.getCantidad())){
-            puntaje -= producto.getPuntosNecesarios();
+        if ((puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad>=producto.getCantidad())){
+            puntaje -= producto.getPuntosNecesarios()*cantidad;
             producto.setCantidad(producto.getCantidad() - cantidad);
             // Decidir si eliminar el producto o mantenerlo pero con cantidad 0
             Canje canje = new Canje(producto,this);
