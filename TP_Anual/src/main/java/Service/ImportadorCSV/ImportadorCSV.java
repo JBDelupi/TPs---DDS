@@ -27,7 +27,7 @@ public class ImportadorCSV {
     }
 
     private void cargarDatosColaborador() throws CsvValidationException, IOException {
-        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(URL);
+        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(URL, ";");
         this.ToDtoColaborador(datosCSV);
     }
 
@@ -52,7 +52,7 @@ public class ImportadorCSV {
 
         for (String[] linea : list) {
 
-            FormaColaboracionDTO unaForma = new FormaColaboracionDTO();
+            FormaColaboracionDTO unaColaboracion = new FormaColaboracionDTO();
             ColaboradorDTO unColaborador = null;
 
             if(! this.esColaboradorRepetido(linea[0],linea[1]) ) {
@@ -66,10 +66,10 @@ public class ImportadorCSV {
             } else{
                 unColaborador = this.getColaboradorDTO(linea[0],linea[1]);
             }
-            unaForma.setFechaColaboracion(linea[5]);
-            unaForma.setFormaDeColaboracion(linea[6]);
-            unaForma.setCantidad(linea[7]);
-            unColaborador.agregarColaboracion(unaForma);
+            unaColaboracion.setFechaColaboracion(linea[5]);
+            unaColaboracion.setFormaDeColaboracion(linea[6]);
+            unaColaboracion.setCantidad(linea[7]);
+            unColaborador.agregarColaboracion(unaColaboracion);
 
 
 

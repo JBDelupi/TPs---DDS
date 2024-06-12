@@ -1,27 +1,29 @@
 package Controller;
 
 import Controller.Actores.Rol;
-import Controller.Actores.Usuario;
-import Models.FormasDeContribucion.*;
-import Models.Heladera;
-import Models.Personas.*;
-import Models.Tarjeta.Tarjeta;
-import Models.TipoDeOrganizacion;
-import Models.TipoFrecuencia;
-import Models.Vianda;
+import Models.Domain.FormasDeContribucion.*;
+import Models.Domain.Heladera;
+import Models.Domain.Personas.Colaborador;
+import Models.Domain.Personas.Humano;
+import Models.Domain.Personas.PersonaVulnerable;
+import Models.Domain.Tarjeta.Tarjeta;
+import Models.Domain.TipoDeOrganizacion;
+import Models.Domain.TipoFrecuencia;
+import Models.Domain.Vianda;
+
 
 public class ContribucionController extends Controller {
     FormaDeContribucion nuevaDonacion;
 
 
-    public ContribucionController(Usuario colaborador){
+    public ContribucionController(Colaborador colaborador){
         this.usuario = colaborador;
     }
 
 
     public void create(Object ... Args){
         nuevaDonacion = this.factoryMethod(Args);
-        usuario.agregarNuevaDonacion(nuevaDonacion);
+        this.usuario.generarNuevaDonacion(nuevaDonacion);
     }
 
     // ------------------- LO HACEN TODOS ----------------------------------------//
@@ -94,9 +96,6 @@ public class ContribucionController extends Controller {
         FormaDeContribucion donacion = new HacerseCargoDeHeladera(nombreCaracteristico, tipoDeOrganizacion, heladera);
         return donacion;
     }
-
-
-
 
 
 

@@ -1,10 +1,10 @@
 package TestEntrega2;
 
 import Controller.*;
-import Models.FormasDeContribucion.*;
-import Models.Personas.Colaborador;
-import Models.Personas.Humano;
-import Models.TipoFrecuencia;
+import Models.Domain.FormasDeContribucion.*;
+import Models.Domain.Personas.Colaborador;
+import Models.Domain.Personas.Humano;
+import Models.Domain.TipoFrecuencia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

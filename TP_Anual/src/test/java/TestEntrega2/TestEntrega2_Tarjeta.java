@@ -1,27 +1,23 @@
 package TestEntrega2;
 
 import Controller.ContribucionController;
-import Controller.Controller;
-import Models.FormasDeContribucion.EntregaDeTarjeta;
-import Models.FormasDeContribucion.FormaDeContribucion;
-import Models.FormasDeContribucion.TipoDonacion;
-import Models.Heladera;
-import Models.Personas.Colaborador;
-import Models.Personas.Humano;
-import Models.Personas.Juridico;
-import Models.Personas.PersonaVulnerable;
-import Models.Tarjeta.RegistroDeUso;
-import Models.Tarjeta.Tarjeta;
-import Models.TipoJuridico;
-import Models.Vianda;
+import Models.Domain.FormasDeContribucion.EntregaDeTarjeta;
+import Models.Domain.FormasDeContribucion.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.TipoDonacion;
+import Models.Domain.Heladera;
+import Models.Domain.Personas.Colaborador;
+import Models.Domain.Personas.Humano;
+import Models.Domain.Personas.Juridico;
+import Models.Domain.Personas.PersonaVulnerable;
+import Models.Domain.Tarjeta.Tarjeta;
+import Models.Domain.TipoJuridico;
+import Models.Domain.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Clock;
-import java.time.ZoneId;
 
 public class TestEntrega2_Tarjeta {
     Colaborador fulano;

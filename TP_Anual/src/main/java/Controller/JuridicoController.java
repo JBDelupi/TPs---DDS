@@ -1,10 +1,9 @@
 package Controller;
 
-import Models.Direccion;
-import Models.MedioDeNotificacion;
-import Models.Personas.Humano;
-import Models.Personas.Juridico;
-import Models.TipoJuridico;
+import Models.Domain.Direccion;
+import Models.Domain.MedioDeNotificacion;
+import Models.Domain.Personas.Juridico;
+import Models.Domain.TipoJuridico;
 
 public class JuridicoController extends Controller {
 

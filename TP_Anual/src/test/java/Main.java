@@ -1,4 +1,4 @@
-import Models.Personas.Humano;
+import Models.Domain.Personas.Humano;
 import Service.APIPuntos.Punto;
 import Service.APIPuntos.ServicioPuntosAPI;
 import Service.Converters.HumanoService;

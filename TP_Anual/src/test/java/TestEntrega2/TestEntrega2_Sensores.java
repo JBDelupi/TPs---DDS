@@ -1,7 +1,7 @@
 package TestEntrega2;
 
-import Models.Heladera;
-import Models.Sensores.SensorTemperatura;
+import Models.Domain.Heladera;
+import Models.Domain.Sensores.SensorTemperatura;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

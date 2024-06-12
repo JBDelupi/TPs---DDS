@@ -23,4 +23,7 @@ public class ColaboradorDTO {
     public void agregarColaboracion(FormaColaboracionDTO colaboracionDTO){
         colaboracionDTOS.add(colaboracionDTO);
     }
+
+
+
 }

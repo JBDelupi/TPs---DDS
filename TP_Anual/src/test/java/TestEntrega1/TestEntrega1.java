@@ -1,11 +1,11 @@
 package TestEntrega1;
 
 import Controller.ContribucionController;
-import Models.FormasDeContribucion.TipoDonacion;
+import Models.Domain.FormasDeContribucion.TipoDonacion;
 import Models.Heladera;
-import Models.Personas.Colaborador;
-import Models.Personas.Humano;
-import Models.Personas.Juridico;
+import Models.Domain.Personas.Colaborador;
+import Models.Domain.Personas.Humano;
+import Models.Domain.Personas.Juridico;
 import Models.TipoFrecuencia;
 import Models.TipoJuridico;
 import Models.Vianda;

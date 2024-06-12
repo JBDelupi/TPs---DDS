@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AdapterImportadorCSV {
 
-    List<String[]> cargarArchivosCSV(String Link) throws IOException, CsvValidationException;
+    List<String[]> cargarArchivosCSV(String Link, String separador) throws IOException, CsvValidationException;
 }

@@ -1,7 +1,7 @@
 package Controller;
 
 import Controller.Actores.Rol;
-import Models.Personas.Tecnico;
+import Models.Domain.Personas.Tecnico;
 
 public class AdministradorController extends Controller{
 
