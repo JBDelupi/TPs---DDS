@@ -1,21 +1,17 @@
+import Models.Domain.Builder.HumanoBuilder;
 import Models.Domain.Personas.Humano;
-import Service.APIPuntos.Punto;
-import Service.APIPuntos.ServicioPuntosAPI;
-import Service.Converters.HumanoService;
-import Service.DTO.ColaboradorDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException, CsvValidationException {
 
         ImportadorCSV importadorCSV = new ImportadorCSV("test.csv");
-
+        /*
         System.out.println("Colaboradres importados DTO");
         System.out.println("________________________");
         for( ColaboradorDTO colaborador : importadorCSV.getColaboradoresDTO() ){
@@ -65,6 +61,19 @@ public class Main {
             System.out.println("Longitud :" + punto.getLongitud());
         }
 
+    */
+        HumanoBuilder humanoBuilder = new HumanoBuilder();
+        Humano humano =
+                humanoBuilder
+                        .apellido("iturrioz")
+                        .nombre("lucas")
+                        .fechaNacimiento(LocalDate.now())
+                        .construir();
+
+        System.out.println(humano.getNombre());
+
+
     }
+
 
 }

@@ -1,21 +1,30 @@
-package Service.Converters;
+package Service.Mappers;
 
-import Models.Domain.FormasDeContribucion.*;
+import Models.Domain.Builder.HumanoBuilder;
 import Models.Domain.FormasDeContribucion.*;
 import Models.Domain.Personas.Humano;
-import Service.DTO.ColaboradorDTO;
+import Models.Domain.TipoDeDocumento;
+import Service.DTO.HumanoDTO;
 import Service.DTO.FormaColaboracionDTO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class HumanoService {
+public class HumanoMapper {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-    public Humano toEntity(ColaboradorDTO dto) {
+    public Humano toEntity(HumanoDTO dto) {
 
-        Humano colaborador = new Humano(dto.getNombre(), dto.getApellido());
+        HumanoBuilder humanoBuilder = new HumanoBuilder();
+
+        Humano colaborador = humanoBuilder
+                .nombre(dto.getNombre())
+                .apellido(dto.getApellido())
+                .numeroDocumento(dto.getNumDocumento())
+                .tipoDocumento( this.TipoSeleccionado(dto.getTipoDocumento() ) )
+                .construir();
+
         Double puntaje = 0.0;
 
         for(FormaColaboracionDTO colaboracionDTO : dto.getColaboracionDTOS() ){
@@ -38,12 +47,25 @@ public class HumanoService {
 
 
 
-
-    public ColaboradorDTO toDTO(Humano humano) {
+    public HumanoDTO toDTO(Humano humano) {
 
         return null;
     }
 
+
+
+    public TipoDeDocumento TipoSeleccionado(String tipoDocumento){
+        TipoDeDocumento tipoDeDocumento = null;
+        switch(tipoDocumento){
+            case "DNI" :
+                tipoDeDocumento = TipoDeDocumento.DNI; break;
+            case "LE" :
+                tipoDeDocumento = TipoDeDocumento.LIBRETA; break;
+            case "LC" :
+                tipoDeDocumento = TipoDeDocumento.PASAPORTE; break;
+        }
+        return tipoDeDocumento;
+    }
 
     public FormaDeContribucion FactoryContribucion(String nombre) {
             FormaDeContribucion controller = null;
@@ -63,5 +85,7 @@ public class HumanoService {
             }
             return controller;
     }
+
+
 
 }

@@ -1,13 +1,11 @@
 package Service.ImportadorCSV;
 
-import Service.DTO.ColaboradorDTO;
+import Service.DTO.HumanoDTO;
 import Service.DTO.FormaColaboracionDTO;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Getter;
 
-import javax.print.Doc;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +13,7 @@ import java.util.Set;
 @Getter
 public class ImportadorCSV {
     private AdapterImportadorCSV adapterImportadorCSV;
-    private Set<ColaboradorDTO> colaboradoresDTO;
+    private Set<HumanoDTO> colaboradoresDTO;
     private String URL;
 
     public ImportadorCSV(String URL) throws CsvValidationException, IOException {
@@ -43,7 +41,7 @@ public class ImportadorCSV {
         return colaboradoresDTO.stream().anyMatch( unColaborador -> this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento()));
     }
 
-    private ColaboradorDTO getColaboradorDTO(String TipoDocumento, String numeroDocumento){
+    private HumanoDTO getColaboradorDTO(String TipoDocumento, String numeroDocumento){
         return  colaboradoresDTO.stream().filter(unColaborador ->this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento())).findFirst().get();
     }
 
@@ -53,10 +51,10 @@ public class ImportadorCSV {
         for (String[] linea : list) {
 
             FormaColaboracionDTO unaColaboracion = new FormaColaboracionDTO();
-            ColaboradorDTO unColaborador = null;
+            HumanoDTO unColaborador = null;
 
             if(! this.esColaboradorRepetido(linea[0],linea[1]) ) {
-                unColaborador = new ColaboradorDTO();
+                unColaborador = new HumanoDTO();
                 unColaborador.setTipoDocumento(linea[0]);
                 unColaborador.setNumDocumento(linea[1]);
                 unColaborador.setNombre(linea[2]);

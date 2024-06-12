@@ -2,13 +2,13 @@ package TestEntrega1;
 
 import Controller.ContribucionController;
 import Models.Domain.FormasDeContribucion.TipoDonacion;
-import Models.Heladera;
+import Models.Domain.Heladera;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
 import Models.Domain.Personas.Juridico;
-import Models.TipoFrecuencia;
-import Models.TipoJuridico;
-import Models.Vianda;
+import Models.Domain.TipoFrecuencia;
+import Models.Domain.TipoJuridico;
+import Models.Domain.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +28,8 @@ public class TestEntrega1 {
     ContribucionController controllerUnicef;
     @BeforeEach
     public void init(){
-        nahu = new Humano("Nahuel","Gimenez");
-        unicef = new Juridico("Unicef", TipoJuridico.ONG, null, null);
+        nahu = new Humano();
+        unicef = new Juridico();
         controllerNahu = new ContribucionController(nahu);
         controllerUnicef = new ContribucionController(unicef);
     }

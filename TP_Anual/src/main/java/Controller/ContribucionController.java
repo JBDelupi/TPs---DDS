@@ -1,6 +1,9 @@
 package Controller;
 
 import Controller.Actores.Rol;
+import Models.Domain.Builder.ContribucionBuilder.DistribucionDeViandasBuilder;
+import Models.Domain.Builder.ContribucionBuilder.DonacionDeViandaBuilder;
+import Models.Domain.Builder.ContribucionBuilder.HacerseCargoDeHeladeraBuilder;
 import Models.Domain.FormasDeContribucion.*;
 import Models.Domain.Heladera;
 import Models.Domain.Personas.Colaborador;
@@ -44,8 +47,16 @@ public class ContribucionController extends Controller {
         Vianda vianda = (Vianda) Context[1];
         Heladera heladera = (Heladera) Context[2];
 
+        heladera.agregarVianda(vianda);
 
-        FormaDeContribucion donacion = new DonacionDeVianda(vianda,heladera);
+        DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
+
+        FormaDeContribucion donacion = builder
+                .heladera(heladera)
+                .vianda(vianda)
+                .construir();
+
+
         return donacion;
 
     }
@@ -56,11 +67,19 @@ public class ContribucionController extends Controller {
 
         Heladera heladeraOrigen = (Heladera) Context[1];
         Heladera heladeraDestino = (Heladera) Context[2];
-        Integer cantidadDeViandasAMover = (Integer) Context[3];
+        Integer cantidad = (Integer) Context[3];
         String motivo = (String) Context[4];
 
 
-        FormaDeContribucion donacion = new DistribucionDeViandas(heladeraOrigen, heladeraDestino, cantidadDeViandasAMover, motivo);
+        DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
+
+        FormaDeContribucion donacion = builder
+                .heladeraOrigen(heladeraOrigen)
+                .heladeraDestino(heladeraDestino)
+                .cantidadDeViandasAMover(cantidad)
+                .motivos(motivo)
+                .construir();
+
         return donacion;
     }
 
@@ -93,7 +112,13 @@ public class ContribucionController extends Controller {
         TipoDeOrganizacion tipoDeOrganizacion = (TipoDeOrganizacion) Context[2];
         Heladera heladera = (Heladera) Context[3];
 
-        FormaDeContribucion donacion = new HacerseCargoDeHeladera(nombreCaracteristico, tipoDeOrganizacion, heladera);
+        HacerseCargoDeHeladeraBuilder hacerseCargoDeHeladeraBuilder = new HacerseCargoDeHeladeraBuilder();
+        FormaDeContribucion donacion = hacerseCargoDeHeladeraBuilder
+                .nombreCaracteristico(nombreCaracteristico)
+                .tipoOrganizacion(tipoDeOrganizacion)
+                .heladera(heladera)
+                .construir();
+
         return donacion;
     }
 

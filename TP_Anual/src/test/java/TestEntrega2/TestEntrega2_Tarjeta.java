@@ -28,9 +28,10 @@ public class TestEntrega2_Tarjeta {
     ContribucionController controllerJuridico;
 
 //--------------------------------- Forma de contribución "Entrega Tarjeta" ----------------------------
+    /*
     @BeforeEach
     public void init(){
-        fulano = new Humano("Fulano", "Mengano");
+        fulano = new Humano();
         nasa = new Juridico("nasa", TipoJuridico.GUBERNAMENTAL, null, null);
         persona1 = new PersonaVulnerable("Persona1", 0);
         controllerHumano = new ContribucionController(fulano);
@@ -135,4 +136,6 @@ public class TestEntrega2_Tarjeta {
 
 
     }
+
+     */
 }

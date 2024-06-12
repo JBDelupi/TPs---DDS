@@ -1,6 +1,7 @@
 package Models.Domain.Personas;
 
 import Controller.Actores.Rol;
+import Models.Domain.TipoDeDocumento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,14 +13,12 @@ public class Humano extends Colaborador {
     private String nombre;
     private String apellido;
     private LocalDate fechaNacimiento;
+    private TipoDeDocumento tipoDeDocumento;
+    private String numeroDocumento;
 
 
-
-    public Humano(String nombre, String apellido){
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public Humano(){
         this.setTipoRol(Rol.HUMANO);
-
     }
 
 

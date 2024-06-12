@@ -1,13 +1,36 @@
 package Controller;
 
 import Controller.Actores.Rol;
+import Models.Domain.Builder.HumanoBuilder;
 import Models.Domain.Personas.Humano;
+import Models.Domain.TipoDeDocumento;
 import Models.Repository.Dao;
+import Models.Repository.RepoColaboradores;
+
+import java.time.LocalDate;
 
 public class HumanoController extends Controller {
 
     public void create(Object ... Args) {
-        this.usuario = new Humano( (String) Args[0],(String) Args[1]);
+
+        String nombre = (String) Args[0];
+        String apellido = (String) Args[1];
+        LocalDate fechaNacimiento = (LocalDate) Args[2];
+        String correo = (String) Args[3];
+        String nroDocumento = (String) Args[4];
+        TipoDeDocumento tipoDeDocumento = (TipoDeDocumento) Args[5];
+
+        HumanoBuilder humanoBuilder = new HumanoBuilder();
+        Humano humano = humanoBuilder
+                .nombre(nombre)
+                .apellido(apellido)
+                .fechaNacimiento(fechaNacimiento)
+                .correoElectronico(correo)
+                .numeroDocumento(nroDocumento)
+                .tipoDocumento(tipoDeDocumento)
+                .construir();
+
+        RepoColaboradores.getInstance().agregarColaborador(humano);
     }
 
     public void solicitudTarjeta(){
@@ -18,16 +41,13 @@ public class HumanoController extends Controller {
     // POST
     public void generarCanje(Object ... Context){
         this.checkUserRoleAndProceed(Rol.HUMANO);
-      //  usuario.realizarCanje(Context[0],Context[1]);
-      //  Dao repositorio = new Dao();
-      //  repositorio.modificar(usuario);
+
     }
 
     // GET
     public void verCanje(Object ... Context){
         this.checkUserRoleAndProceed(Rol.HUMANO);
-        // DATOS DE CANJE
-        // Javalin.mostrar(ruta, datos) -> []
+
     }
 
 

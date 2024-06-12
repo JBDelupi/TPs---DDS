@@ -20,6 +20,7 @@ public abstract class Colaborador extends Usuario {
     private List<FormaDeContribucion> formaDeContribucion;
     private List<Canje> historialCanje;
     private Double puntaje;
+    private String correoElectronico;
 
 
     public Colaborador(){
