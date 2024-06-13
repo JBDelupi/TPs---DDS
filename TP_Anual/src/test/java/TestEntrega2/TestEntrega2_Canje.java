@@ -79,40 +79,52 @@ public class TestEntrega2_Canje {
 
 
     // No se realiza el canje porque la cantidad del producto es menor a 0
-    /*
     @Test
     public void noSeDisponeDeLaCantidadDeProductos() throws IOException {
-        colaborador1.sumarPuntaje(new DonacionDeDinero(40.0, TipoFrecuencia.DIARIO));
-        // 20 puntos
-        colaborador1.sumarPuntaje(new DistribucionDeViandas(null,null,10,""));
-        // 10 puntos
-        colaborador1.realizarCanje(producto,1);
+        controller = new ContribucionController(colaborador1);
 
-        // SEGUNDO COLABORADOR
-        colaborador2.sumarPuntaje(new DonacionDeDinero(40.0, TipoFrecuencia.DIARIO));
+        controller.create(TipoDonacion.OFRECER_PRODUCTO, notebook,30.00,1);
+
+        controller.setUsuario(colaborador2);
+
+        controller.create(TipoDonacion.DONACION_DINERO, 40.00, TipoFrecuencia.DIARIO);
         // 20 puntos
-        colaborador2.sumarPuntaje(new DistribucionDeViandas(null,null,10,""));
+        controller.create(TipoDonacion.DISTRIBUCION_VIANDAS, null, null, 10, "");
         // 10 puntos
-        colaborador1.realizarCanje(producto,1);
+
+        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+                .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
+                .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
+                .toList();
+        OfrecerProducto producto = productos.get(0);
+
+        colaborador2.realizarCanje(producto,2);
+
         Assertions.assertEquals(0, colaborador2.getHistorialCanje().size());
     }
 
+
     @Test
-    public void laPersonaCanjeSusPuntosPorLaptop2() throws IOException {
+    public void laPersonaJuridicaCanjeSusPuntosPorLaptop2() throws IOException {
 
-        Controller controller = new ContribucionController(colaborador1);
+        controller = new ContribucionController(colaborador1);
 
-        System.out.println("Puntaje actual " + colaborador1.getPuntaje());
-        controller.create(TipoDonacion.DONACION_DINERO,60.00, TipoFrecuencia.DIARIO);
+        controller.create(TipoDonacion.OFRECER_PRODUCTO, tv,70.00,1);
 
-        System.out.println("Puntaje actual " + colaborador1.getPuntaje());
+        controller.create(TipoDonacion.DONACION_DINERO,140.00, TipoFrecuencia.DIARIO);
+
+        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+                .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
+                .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
+                .toList();
+        OfrecerProducto producto = productos.get(0);
 
         colaborador1.realizarCanje(producto,1);
 
-        Assertions.assertEquals("Laptop", colaborador1.getHistorialCanje().get(0).getProducto().getNombre());
+        Assertions.assertEquals("smartTV", colaborador1.getHistorialCanje().get(0).getOfrecerProducto().getProducto().getNombre());
 
     }
 
 
-     */
+
 }

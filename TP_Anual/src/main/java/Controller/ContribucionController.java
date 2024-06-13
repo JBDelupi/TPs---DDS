@@ -149,7 +149,7 @@ public class ContribucionController extends Controller {
             case DONACION_DE_VIANDA: contribucion = this.donacionDeVianda( Context ); break;
             case HACERSE_CARGO_DE_HELADERA: contribucion = this.hacerceCargoDeHeladera( Context ); break;
             case DISTRIBUCION_VIANDAS: contribucion = this.distribucionDeVianda( Context ); break;
-            case ENTREGA_TARJETAS : contribucion = this.registrarTarjeta( Context );
+            case ENTREGA_TARJETAS : contribucion = this.registrarTarjeta( Context ); break;
             case OFRECER_PRODUCTO: contribucion = this.ofrecerProducto( Context ); break;
         }
         return contribucion;

@@ -24,39 +24,39 @@ public class TestEntrega2_Tarjeta {
     Colaborador nasa;
     PersonaVulnerable persona1;
     Tarjeta tarjeta1;
-    ContribucionController controllerHumano;
-    ContribucionController controllerJuridico;
+    ContribucionController controller;
 
 //--------------------------------- Forma de contribución "Entrega Tarjeta" ----------------------------
-    /*
+
     @BeforeEach
     public void init(){
         fulano = new Humano();
-        nasa = new Juridico("nasa", TipoJuridico.GUBERNAMENTAL, null, null);
+        nasa = new Juridico();
         persona1 = new PersonaVulnerable("Persona1", 0);
-        controllerHumano = new ContribucionController(fulano);
-        controllerJuridico = new ContribucionController(nasa);
         tarjeta1 = new Tarjeta((Humano) fulano, persona1);
     }
 
     // Se crea correctamente la entrega de tarjetas
     @Test
     public void creacionDeEntregaTarjetas()throws IOException {
-        controllerHumano.create(TipoDonacion.ENTREGA_TARJETAS, "Persona1", 3);
+        controller = new ContribucionController(fulano);
+        controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
         Assertions.assertEquals(1, fulano.getFormaDeContribucion().size());
     }
+
 
     // Se crea una persona vulnerable
     @Test
     public void registroDePersonaVulnerable() throws IOException {
-        controllerHumano.create(TipoDonacion.ENTREGA_TARJETAS, "Persona1", 3);
+        controller = new ContribucionController(fulano);
+        controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
         FormaDeContribucion contribucion = fulano.getFormaDeContribucion().get(0);
 
         // Verifica si la contribución es del tipo que tiene una tarjeta
         if (contribucion instanceof EntregaDeTarjeta) {
             EntregaDeTarjeta contribucionConTarjeta = (EntregaDeTarjeta) contribucion;
             String nombre = contribucionConTarjeta.getTarjeta().getTitular().getNombre();
-            Assertions.assertEquals("Persona1", nombre);
+            Assertions.assertEquals("PersonaVulnerable", nombre);
         } else {
             Assertions.fail("La contribución no es del tipo ContribucionConTarjeta");
         }
@@ -65,8 +65,9 @@ public class TestEntrega2_Tarjeta {
     // Tira error si una juridica trata de entregar tarjetas
     @Test
     public void unaPersonaJuridicaNoPuedeEntregarTarjeta()throws IOException {
+        controller = new ContribucionController(nasa);
         Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
-            controllerJuridico.create(TipoDonacion.ENTREGA_TARJETAS, null, null ,null ,null);
+            controller.create(TipoDonacion.ENTREGA_TARJETAS, null, null);
         });
     }
 
@@ -105,7 +106,7 @@ public class TestEntrega2_Tarjeta {
 
     // Se reinicia la cantidad de usos tras un nuevo dia
     @Test
-    public void reinicioDeUsos(){
+    public void reinicioDeUsos() {
         Heladera heladera = new Heladera();
         heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
@@ -133,9 +134,6 @@ public class TestEntrega2_Tarjeta {
         tarjeta1.agregarNuevoUso(heladera);
         System.out.println(tarjeta1.getUsos().get(3).getVianda());
         Assertions.assertEquals(1, tarjeta1.getUsosHoy());
-
-
     }
 
-     */
 }
