@@ -1,4 +1,4 @@
-package Models.Domain.Builder;
+package Models.Domain.Builder.UsuariosBuilder;
 
 import Models.Domain.Personas.Juridico;
 import Models.Domain.TipoJuridico;

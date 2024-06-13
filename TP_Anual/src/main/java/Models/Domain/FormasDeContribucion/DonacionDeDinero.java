@@ -1,20 +1,16 @@
 package Models.Domain.FormasDeContribucion;
 import Models.Domain.TipoFrecuencia;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Setter
 @Getter
 public class DonacionDeDinero extends FormaDeContribucion {
 
     private Double monto;
     private TipoFrecuencia frecuencia;
-
-    public DonacionDeDinero(Double monto, TipoFrecuencia frecuencia){
-        this.monto = monto;
-        this.frecuencia = frecuencia;
-        this.fechaDeDonacion = LocalDate.now();
-    }
 
     public DonacionDeDinero(){
 

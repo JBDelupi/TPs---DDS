@@ -1,10 +1,9 @@
 package Controller;
 
 import Controller.Actores.Rol;
-import Models.Domain.Builder.HumanoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;
-import Models.Repository.Dao;
 import Models.Repository.RepoColaboradores;
 
 import java.time.LocalDate;

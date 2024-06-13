@@ -1,10 +1,19 @@
-import Models.Domain.Builder.HumanoBuilder;
+import Controller.ContribucionController;
+import Controller.Controller;
+import Models.Domain.FormasDeContribucion.OfrecerProducto;
+import Models.Domain.FormasDeContribucion.TipoDonacion;
+import Models.Domain.FormasDeContribucion.TipoRubro;
+import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
+import Models.Domain.Personas.Juridico;
+import Models.Domain.TipoFrecuencia;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.io.InputStreamReader;
+import java.util.List;
 
 
 public class Main {
@@ -62,16 +71,48 @@ public class Main {
         }
 
     */
-        HumanoBuilder humanoBuilder = new HumanoBuilder();
-        Humano humano =
-                humanoBuilder
-                        .apellido("iturrioz")
-                        .nombre("lucas")
-                        .fechaNacimiento(LocalDate.now())
-                        .construir();
+        /*
+        Colaborador colaborador1 = new Juridico();
+        Colaborador colaborador2 = new Humano();
+        Controller controller;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println(humano.getNombre());
+        controller = new ContribucionController(colaborador1);
 
+        controller.create(TipoDonacion.OFRECER_PRODUCTO, TipoRubro.ELECTRONICA,"Laptop",30.00,1,"Notebook");
+        controller.create(TipoDonacion.OFRECER_PRODUCTO, TipoRubro.ELECTRONICA,"TV",70.00,1,"Smart TV");
+        controller.create(TipoDonacion.OFRECER_PRODUCTO, TipoRubro.ELECTRONICA,"Lampara",10.00,1,"Iluminacion");
+
+
+        controller.setUsuario(colaborador2);
+
+        controller.create(TipoDonacion.DONACION_DINERO, 40.00, TipoFrecuencia.DIARIO);
+        // 20 puntos
+        controller.create(TipoDonacion.DISTRIBUCION_VIANDAS, null, null, 10, "");
+        // 10 puntos
+
+        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+                .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
+                .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
+                .toList();
+
+        for(OfrecerProducto producto : productos ){
+            System.out.println("Nombre de producto : " + producto.getProducto().getNombre());
+            System.out.println("Precio : " + producto.getPuntosNecesarios() );
+            System.out.println("Cantidad : " + producto.getStock());
+            System.out.println("------------------------------------------------");
+        }
+        System.out.println("Selecciona una opcion : ");
+        int opcion = Integer.parseInt(br.readLine());
+
+        OfrecerProducto producto = productos.get(opcion);
+
+        colaborador2.realizarCanje(producto,1);
+
+        System.out.println("Opcion seleccionada");
+        System.out.println("Producto comprado : " + colaborador2.getHistorialCanje().get(0).getProducto().getNombre());
+        System.out.println("Fecha : " + colaborador2.getHistorialCanje().get(0).getProducto().getFechaDeDonacion());
+        */
 
     }
 

@@ -1,11 +1,10 @@
-package Models.Domain.Builder;
+package Models.Domain.Builder.UsuariosBuilder;
 
 
 import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;
 
 import java.time.LocalDate;
-import java.util.concurrent.ExecutionException;
 
 public class HumanoBuilder {
     private Humano humano;

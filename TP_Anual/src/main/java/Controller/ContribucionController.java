@@ -1,20 +1,17 @@
 package Controller;
 
 import Controller.Actores.Rol;
-import Models.Domain.Builder.ContribucionBuilder.DistribucionDeViandasBuilder;
-import Models.Domain.Builder.ContribucionBuilder.DonacionDeViandaBuilder;
-import Models.Domain.Builder.ContribucionBuilder.HacerseCargoDeHeladeraBuilder;
+import Models.Domain.*;
+import Models.Domain.Builder.ContribucionBuilder.*;
 import Models.Domain.FormasDeContribucion.*;
-import Models.Domain.Heladera;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
 import Models.Domain.Personas.PersonaVulnerable;
 import Models.Domain.Tarjeta.Tarjeta;
-import Models.Domain.TipoDeOrganizacion;
-import Models.Domain.TipoFrecuencia;
-import Models.Domain.Vianda;
+import lombok.Getter;
 
 
+@Getter
 public class ContribucionController extends Controller {
     FormaDeContribucion nuevaDonacion;
 
@@ -35,7 +32,12 @@ public class ContribucionController extends Controller {
         Double monto = (Double) Context[1];
         TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) Context[2];
 
-        FormaDeContribucion donacion = new DonacionDeDinero(monto,tipoFrecuencia);
+        DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
+
+        FormaDeContribucion donacion = builder
+                .monto(monto)
+                .frecuencia(tipoFrecuencia)
+                .construir();
         return  donacion;
     }
 
@@ -102,8 +104,6 @@ public class ContribucionController extends Controller {
 
 
 
-
-
     public FormaDeContribucion hacerceCargoDeHeladera(Object ... Context){
 
         this.checkUserRoleAndProceed( Rol.JURIDICO );
@@ -122,7 +122,24 @@ public class ContribucionController extends Controller {
         return donacion;
     }
 
+    public  FormaDeContribucion ofrecerProducto(Object ... Context){
+        this.checkUserRoleAndProceed(Rol.JURIDICO);
 
+        Producto producto = (Producto) Context[1];
+        Double puntosNecesarios = (Double) Context[2];
+        Integer stock = (Integer) Context[3];
+
+
+        OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
+
+        FormaDeContribucion donacion = builder
+                .producto(producto)
+                .stock(stock)
+                .puntosNecesarios(puntosNecesarios)
+                .construir();
+
+        return donacion;
+    }
 
 
     public FormaDeContribucion factoryMethod(Object ... Context){
@@ -133,6 +150,7 @@ public class ContribucionController extends Controller {
             case HACERSE_CARGO_DE_HELADERA: contribucion = this.hacerceCargoDeHeladera( Context ); break;
             case DISTRIBUCION_VIANDAS: contribucion = this.distribucionDeVianda( Context ); break;
             case ENTREGA_TARJETAS : contribucion = this.registrarTarjeta( Context );
+            case OFRECER_PRODUCTO: contribucion = this.ofrecerProducto( Context ); break;
         }
         return contribucion;
     }

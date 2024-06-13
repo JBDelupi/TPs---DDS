@@ -27,9 +27,9 @@ public class ServicioPuntosAPI {
             return instacia;
         }
 
-    public List<Punto> obtenerPuntosEstrategicos(String punto,String Radio ) throws IOException {
+    public List<Punto> obtenerPuntosEstrategicos(Punto punto,String radio ) throws IOException {
         ServicioPuntosAPIAdapter servicioPokeAPIAdapter = this.retrofit.create(ServicioPuntosAPIAdapter.class);
-        Call<List<Punto>> requestPokemon = servicioPokeAPIAdapter.punto(punto);
+        Call<List<Punto>> requestPokemon = servicioPokeAPIAdapter.puntos(punto.getLatitud(), punto.getLongitud(),radio);
         return  requestPokemon.execute().body();
     }
 

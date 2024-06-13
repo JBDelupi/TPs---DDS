@@ -1,6 +1,6 @@
 package Service.Mappers;
 
-import Models.Domain.Builder.HumanoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.FormasDeContribucion.*;
 import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;

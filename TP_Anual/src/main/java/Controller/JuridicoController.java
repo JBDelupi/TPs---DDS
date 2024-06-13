@@ -1,10 +1,9 @@
 package Controller;
 
 import Controller.Actores.Rol;
-import Models.Domain.Builder.JuridicoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.Personas.Juridico;
 import Models.Domain.TipoJuridico;
-import Models.Repository.Dao;
 import Models.Repository.RepoColaboradores;
 
 

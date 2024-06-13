@@ -4,7 +4,7 @@ import Controller.Actores.Usuario;
 import Models.Domain.Canje;
 import Models.Domain.Direccion;
 import Models.Domain.FormasDeContribucion.FormaDeContribucion;
-import Models.Domain.FormasDeContribucion.Producto;
+import Models.Domain.FormasDeContribucion.OfrecerProducto;
 import Models.Domain.MedioDeNotificacion;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +43,7 @@ public abstract class Colaborador extends Usuario {
         puntaje += unaDonacion.generarPuntaje();
     }
 
-    public void realizarCanje(Producto producto, Integer cantidad){
+    public void realizarCanje(OfrecerProducto producto, Integer cantidad){
         if ((puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad>=producto.getStock() ) ){
             puntaje -= producto.getPuntosNecesarios()*cantidad;
             producto.setStock(producto.getStock() - cantidad);
