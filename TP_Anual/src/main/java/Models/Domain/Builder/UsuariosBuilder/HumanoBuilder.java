@@ -46,7 +46,6 @@ public class HumanoBuilder {
 
     public Humano construir(){
         if(humano.getFechaNacimiento() == null){
-            System.out.println("Excepcion de humano sin fecha nacimiento");
         }
 
         return this.humano;

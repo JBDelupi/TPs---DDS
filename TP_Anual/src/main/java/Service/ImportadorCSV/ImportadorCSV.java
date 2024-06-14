@@ -15,17 +15,29 @@ public class ImportadorCSV {
     private AdapterImportadorCSV adapterImportadorCSV;
     private Set<HumanoDTO> colaboradoresDTO;
     private String URL;
+    private static ImportadorCSV instacia;
 
-    public ImportadorCSV(String URL) throws CsvValidationException, IOException {
+    private ImportadorCSV(String URL, String separador) throws CsvValidationException, IOException {
         this.URL = URL;
         this.colaboradoresDTO = new HashSet<>();
         this.adapterImportadorCSV = new AdapterLectorArchivoCSV();
-        this.cargarDatosColaborador();
+        this.cargarDatosColaborador(separador);
 
     }
 
-    private void cargarDatosColaborador() throws CsvValidationException, IOException {
-        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(URL, ";");
+    public static ImportadorCSV getInstance(String URL, String separador) throws CsvValidationException, IOException {
+        if(instacia==null){
+            instacia = new ImportadorCSV(URL, separador);
+        }
+        return instacia;
+    }
+
+
+
+
+
+    private void cargarDatosColaborador(String separador) throws CsvValidationException, IOException {
+        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(URL, separador);
         this.ToDtoColaborador(datosCSV);
     }
 

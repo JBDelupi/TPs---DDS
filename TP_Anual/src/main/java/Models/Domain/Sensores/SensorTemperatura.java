@@ -21,9 +21,16 @@ public class SensorTemperatura implements Sensor {
 
     public SensorTemperatura(Heladera heladera) {
         this.heladera = heladera;
-        this.tareaProgramada = new ChromeTask(5,this,"chequear");
+        this.tareaProgramada = new ChromeTask();
     }
 
+    public void activar(){
+        this.tareaProgramada.ejecutarTareaPrograma(5,this,"chequear");
+    }
+
+    public void desactivar(){
+        this.tareaProgramada.pausarTarea();
+    }
 
     public void chequear(){
        if ( this.superaTemperaturaMax() || this.superaTemperaturaMin() )
@@ -32,6 +39,9 @@ public class SensorTemperatura implements Sensor {
            this.tareaProgramada.pausarTarea();
        }
     }
+
+
+
 
     public boolean superaTemperaturaMax(){
         return heladera.getTemperaturaActual() > heladera.getTemperaturaMax();

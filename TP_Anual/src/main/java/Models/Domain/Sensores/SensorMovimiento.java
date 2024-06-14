@@ -15,6 +15,16 @@ public class SensorMovimiento implements Sensor {
         }
     }
 
+    @Override
+    public void activar() {
+        this.chequear();
+    }
+
+    @Override
+    public void desactivar() {
+
+    }
+
     public void notificar(){
         System.out.println("Estan robando !!! D:");
     }

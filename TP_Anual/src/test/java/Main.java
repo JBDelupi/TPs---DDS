@@ -19,7 +19,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws InterruptedException, IOException, CsvValidationException {
 
-        ImportadorCSV importadorCSV = new ImportadorCSV("test.csv");
+       // ImportadorCSV importadorCSV = new ImportadorCSV("test.csv");
         /*
         System.out.println("Colaboradres importados DTO");
         System.out.println("________________________");

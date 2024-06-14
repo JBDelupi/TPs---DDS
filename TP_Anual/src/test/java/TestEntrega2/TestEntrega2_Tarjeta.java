@@ -26,14 +26,33 @@ public class TestEntrega2_Tarjeta {
     Tarjeta tarjeta1;
     ContribucionController controller;
 
+    Vianda pollo;
+    Vianda galletita;
+    Vianda carne;
+    Vianda salchicha;
+
+    Heladera heladera;
+
+
 //--------------------------------- Forma de contribución "Entrega Tarjeta" ----------------------------
 
     @BeforeEach
     public void init(){
         fulano = new Humano();
         nasa = new Juridico();
+
         persona1 = new PersonaVulnerable("Persona1", 0);
         tarjeta1 = new Tarjeta((Humano) fulano, persona1);
+
+        pollo = new Vianda();
+        galletita = new Vianda();
+        carne = new Vianda();
+        salchicha = new Vianda();
+
+        heladera = new Heladera();
+        heladera.setCapacidadDeViandas(5);
+
+        heladera.agregarVianda(pollo , galletita, carne, salchicha);
     }
 
     // Se crea correctamente la entrega de tarjetas
@@ -50,6 +69,7 @@ public class TestEntrega2_Tarjeta {
     public void registroDePersonaVulnerable() throws IOException {
         controller = new ContribucionController(fulano);
         controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
+
         FormaDeContribucion contribucion = fulano.getFormaDeContribucion().get(0);
 
         // Verifica si la contribución es del tipo que tiene una tarjeta
@@ -76,23 +96,7 @@ public class TestEntrega2_Tarjeta {
     //La cantidad de usos no se sigue sumando si se alcanza la cantidad maxima de usos
     @Test
     public void cantidadDeUsosMaximaAlcanzada(){
-        Heladera heladera = new Heladera();
-        heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
-
-        Vianda vianda = new Vianda();
-        vianda.setNombre("Pollo");
-        Vianda vianda2 = new Vianda();
-        vianda2.setNombre("Galletita");
-        Vianda vianda3 = new Vianda();
-        vianda3.setNombre("Carne");
-        Vianda vianda4 = new Vianda();
-        vianda4.setNombre("Salchicha");
-
-        heladera.agregarVianda(vianda);
-        heladera.agregarVianda(vianda2);
-        heladera.agregarVianda(vianda3);
-        heladera.agregarVianda(vianda4);
 
         tarjeta1.agregarNuevoUso(heladera);
         tarjeta1.agregarNuevoUso(heladera);
@@ -107,32 +111,19 @@ public class TestEntrega2_Tarjeta {
     // Se reinicia la cantidad de usos tras un nuevo dia
     @Test
     public void reinicioDeUsos() {
-        Heladera heladera = new Heladera();
-        heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
 
-        Vianda vianda = new Vianda();
-        vianda.setNombre("Pollo");
-        Vianda vianda2 = new Vianda();
-        vianda2.setNombre("Galletita");
-        Vianda vianda3 = new Vianda();
-        vianda3.setNombre("Carne");
-        Vianda vianda4 = new Vianda();
-        vianda4.setNombre("Salchicha");
+        tarjeta1.agregarNuevoUso(heladera);
+        tarjeta1.agregarNuevoUso(heladera);
+        tarjeta1.agregarNuevoUso(heladera);
+        tarjeta1.agregarNuevoUso(heladera);
 
-        heladera.agregarVianda(vianda);
-        heladera.agregarVianda(vianda2);
-        heladera.agregarVianda(vianda3);
-        heladera.agregarVianda(vianda4);
-
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
         LocalDate maniana = LocalDate.now().plusDays(1);
         tarjeta1.setFechaUltUso(maniana);
+
         tarjeta1.agregarNuevoUso(heladera);
-        System.out.println(tarjeta1.getUsos().get(3).getVianda());
+
+
         Assertions.assertEquals(1, tarjeta1.getUsosHoy());
     }
 
