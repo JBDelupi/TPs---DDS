@@ -1,7 +1,7 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
-import Models.Domain.Personas.Juridico;
-import Models.Domain.TipoJuridico;
+import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Personas.Utilidades.TipoJuridico;
 
 public class JuridicoBuilder {
     private Juridico juridico;

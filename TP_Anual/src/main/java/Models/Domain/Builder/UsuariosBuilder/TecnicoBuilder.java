@@ -1,8 +1,8 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
-import Models.Domain.Personas.AreaCobertura;
-import Models.Domain.Personas.Tecnico;
-import Models.Domain.TipoDeDocumento;
+import Service.APIPuntos.AreaCobertura;
+import Models.Domain.Personas.Actores.Tecnico;
+import Models.Domain.DatosPersonales.TipoDeDocumento;
 
 public class TecnicoBuilder {
     private Tecnico tecnico;

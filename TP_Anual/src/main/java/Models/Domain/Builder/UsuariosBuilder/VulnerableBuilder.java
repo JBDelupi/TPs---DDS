@@ -1,6 +1,6 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
-import Models.Domain.Personas.PersonaVulnerable;
+import Models.Domain.Personas.Actores.PersonaVulnerable;
 
 public class VulnerableBuilder {
     private PersonaVulnerable personaVulnerable;

@@ -1,8 +1,8 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 
-import Models.Domain.Personas.Humano;
-import Models.Domain.TipoDeDocumento;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.DatosPersonales.TipoDeDocumento;
 
 import java.time.LocalDate;
 

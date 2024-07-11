@@ -1,10 +1,9 @@
 package Controller;
 
-import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.Personas.Humano;
-import Models.Domain.TipoDeDocumento;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.DatosPersonales.TipoDeDocumento;
 import Models.Repository.RepoColaboradores;
 import Service.Server.ICrudViewsHandler;
 

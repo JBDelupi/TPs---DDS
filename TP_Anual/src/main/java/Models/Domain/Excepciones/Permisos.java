@@ -1,7 +1,7 @@
 package Models.Domain.Excepciones;
 
-import Models.Domain.Personas.Persona;
-import Models.Domain.Personas.TipoRolNegocio;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 
 public class Permisos {
     Persona persona;

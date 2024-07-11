@@ -1,8 +1,6 @@
 package Models.Domain.Builder;
 
-import Models.Domain.Heladera;
-import Models.Domain.Sensores.Sensor;
-import Models.Domain.Sensores.SensorTemperatura;
+import Models.Domain.Heladera.Heladera;
 
 public class HeladeraBuilder {
     private Heladera heladera;

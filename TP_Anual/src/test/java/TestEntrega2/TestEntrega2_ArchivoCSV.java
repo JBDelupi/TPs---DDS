@@ -1,6 +1,6 @@
 package TestEntrega2;
 
-import Models.Domain.Personas.Humano;
+import Models.Domain.Personas.Actores.Humano;
 import Service.DTO.HumanoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import Service.Mappers.HumanoMapper;

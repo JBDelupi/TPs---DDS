@@ -1,22 +1,5 @@
 package TestEntrega2;
 
-import Models.Domain.FormasDeContribucion.FactoryContribucion;
-import Models.Domain.FormasDeContribucion.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.FormaDeContribucion;
-import Models.Domain.FormasDeContribucion.TipoDonacion;
-import Models.Domain.Heladera;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.Juridico;
-import Models.Domain.Personas.PersonaVulnerable;
-import Models.Domain.Tarjeta.Tarjeta;
-import Models.Domain.Vianda;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.time.LocalDate;
 /*
 public class TestEntrega2_Tarjeta {
     Colaborador fulano;

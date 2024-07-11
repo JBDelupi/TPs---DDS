@@ -1,16 +1,14 @@
 package TestEntrega1;
 
 import Controller.ContribucionController;
-import Controller.Controller;
 import Models.Domain.Excepciones.Permisos;
-import Models.Domain.FormasDeContribucion.FactoryContribucion;
-import Models.Domain.FormasDeContribucion.TipoDonacion;
-import Models.Domain.Heladera;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.Juridico;
-import Models.Domain.TipoFrecuencia;
-import Models.Domain.Vianda;
+import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
+import Models.Domain.Heladera.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

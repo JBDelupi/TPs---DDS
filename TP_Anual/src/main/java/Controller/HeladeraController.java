@@ -1,7 +1,6 @@
 package Controller;
 
-import Controller.Actores.TipoRol;
-import Models.Domain.Heladera;
+import Controller.Controller;
 import Service.Server.ICrudViewsHandler;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {

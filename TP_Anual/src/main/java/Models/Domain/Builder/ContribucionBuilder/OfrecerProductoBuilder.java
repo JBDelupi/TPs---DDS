@@ -1,8 +1,7 @@
 package Models.Domain.Builder.ContribucionBuilder;
 
-import Models.Domain.FormasDeContribucion.OfrecerProducto;
-import Models.Domain.FormasDeContribucion.TipoRubro;
-import Models.Domain.Producto;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
+import Models.Domain.Producto.Producto;
 
 public class OfrecerProductoBuilder {
     private OfrecerProducto ofrecerProducto;

@@ -1,9 +1,13 @@
 package Service.Mappers;
 
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.FormasDeContribucion.*;
-import Models.Domain.Personas.Humano;
-import Models.Domain.TipoDeDocumento;
+import Models.Domain.FormasDeContribucion.ContribucionesGenerales.DonacionDeDinero;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.DistribucionDeViandas;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.DonacionDeVianda;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
+import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.DatosPersonales.TipoDeDocumento;
 import Service.DTO.HumanoDTO;
 import Service.DTO.FormaColaboracionDTO;
 

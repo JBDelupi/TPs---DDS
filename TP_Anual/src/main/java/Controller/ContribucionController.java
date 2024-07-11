@@ -1,10 +1,9 @@
 package Controller;
 
 import Controller.Actores.Usuario;
-import Models.Domain.FormasDeContribucion.FactoryContribucion;
-import Models.Domain.FormasDeContribucion.FormaDeContribucion;
-import Models.Domain.Personas.Colaborador;
-import Models.Repository.RepoColaboradores;
+import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.Personas.Actores.Colaborador;
 import Service.Server.ICrudViewsHandler;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {

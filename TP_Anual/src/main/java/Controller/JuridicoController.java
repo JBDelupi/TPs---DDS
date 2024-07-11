@@ -1,10 +1,9 @@
 package Controller;
 
-import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
-import Models.Domain.Personas.Juridico;
-import Models.Domain.TipoJuridico;
+import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.RepoColaboradores;
 import Service.Server.ICrudViewsHandler;
 

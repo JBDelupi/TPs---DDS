@@ -1,17 +1,5 @@
 package TestEntrega2;
 
-import Controller.AdministradorController;
-import Controller.Controller;
-import Models.Domain.Personas.AreaCobertura;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.Tecnico;
-import Models.Domain.TipoDeDocumento;
-import Service.APIPuntos.Punto;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 public class TestEntrega2_Tecnico {
 
 /*

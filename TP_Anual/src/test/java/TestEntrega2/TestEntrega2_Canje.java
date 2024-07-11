@@ -1,12 +1,14 @@
 package TestEntrega2;
 
 import Controller.*;
-import Models.Domain.FormasDeContribucion.*;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.Juridico;
-import Models.Domain.Producto;
-import Models.Domain.TipoFrecuencia;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
+import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Producto.Producto;
+import Models.Domain.Producto.TipoRubro;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

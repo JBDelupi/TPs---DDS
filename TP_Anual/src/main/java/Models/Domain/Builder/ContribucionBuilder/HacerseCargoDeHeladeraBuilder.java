@@ -1,8 +1,7 @@
 package Models.Domain.Builder.ContribucionBuilder;
 
-import Models.Domain.FormasDeContribucion.HacerseCargoDeHeladera;
-import Models.Domain.Heladera;
-import Models.Domain.TipoDeOrganizacion;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.HacerseCargoDeHeladera;
+import Models.Domain.Heladera.Heladera;
 
 public class HacerseCargoDeHeladeraBuilder {
     HacerseCargoDeHeladera hacerseCargoDeHeladera;
@@ -16,10 +15,6 @@ public class HacerseCargoDeHeladeraBuilder {
         return this;
     }
 
-    public HacerseCargoDeHeladeraBuilder tipoOrganizacion(TipoDeOrganizacion tipoOrganizacion){
-        this.hacerseCargoDeHeladera.setTipoDeOrganizacion(tipoOrganizacion);
-        return this;
-    }
 
     public HacerseCargoDeHeladeraBuilder heladera(Heladera heladera){
         this.hacerseCargoDeHeladera.setHeladera(heladera);

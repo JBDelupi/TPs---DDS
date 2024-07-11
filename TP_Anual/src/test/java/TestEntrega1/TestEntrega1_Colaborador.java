@@ -2,14 +2,12 @@ package TestEntrega1;
 
 import Controller.HumanoController;
 import Controller.JuridicoController;
-import Controller.Controller;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.TipoDeDocumento;
-import Models.Domain.TipoJuridico;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.RepoColaboradores;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

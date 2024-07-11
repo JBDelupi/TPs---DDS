@@ -1,12 +1,10 @@
 package TestEntrega2;
 
-import Models.Domain.Personas.AreaCobertura;
 import Service.APIPuntos.Punto;
 import Service.APIPuntos.ServicioPuntosAPI;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.geom.Area;
 import java.io.IOException;
 import java.util.List;
 

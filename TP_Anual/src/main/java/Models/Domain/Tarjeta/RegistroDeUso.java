@@ -1,11 +1,9 @@
 package Models.Domain.Tarjeta;
 
 
-import Models.Domain.Heladera;
-import Models.Domain.Vianda;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Vianda;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
 
 import java.time.LocalDate;
 

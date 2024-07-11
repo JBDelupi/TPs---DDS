@@ -1,11 +1,8 @@
 package TestEntrega2;
 
 import Models.Domain.Builder.HeladeraBuilder;
-import Models.Domain.Heladera;
-import Models.Domain.Sensores.Sensor;
-import Models.Domain.Sensores.SensorMovimiento;
-import Models.Domain.Sensores.SensorTemperatura;
-import Models.Domain.Vianda;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +49,7 @@ public class TestEntrega2_Sensores {
         Vianda sanguche = new Vianda();
         Vianda milanesa = new Vianda();
         heladera.agregarVianda(sanguche,milanesa);
+        heladera.getSensorMovimiento().desactivar();
         heladera.setAbierto(true);
 
         Vianda unaVianda = heladera.obtenerVianda();
@@ -64,6 +62,7 @@ public class TestEntrega2_Sensores {
         Vianda sanguche = new Vianda();
         Vianda milanesa = new Vianda();
         heladera.agregarVianda(sanguche,milanesa);
+        heladera.getSensorMovimiento().activar();
         heladera.setAbierto(false);
 
         Vianda unaVianda = heladera.obtenerVianda();

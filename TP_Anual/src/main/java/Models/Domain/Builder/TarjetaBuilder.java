@@ -1,7 +1,7 @@
 package Models.Domain.Builder;
 
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.PersonaVulnerable;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Tarjeta.Tarjeta;
 
 public class TarjetaBuilder {

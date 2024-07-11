@@ -1,7 +1,7 @@
 package Models.Domain.Builder.ContribucionBuilder;
 
-import Models.Domain.FormasDeContribucion.DistribucionDeViandas;
-import Models.Domain.Heladera;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.DistribucionDeViandas;
+import Models.Domain.Heladera.Heladera;
 
 public class DistribucionDeViandasBuilder {
     private DistribucionDeViandas distribucionDeViandas;

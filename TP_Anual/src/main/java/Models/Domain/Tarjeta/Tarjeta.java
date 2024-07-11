@@ -1,9 +1,9 @@
 package Models.Domain.Tarjeta;
 
-import Models.Domain.Heladera;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.PersonaVulnerable;
-import Models.Domain.Vianda;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.PersonaVulnerable;
+import Models.Domain.Heladera.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 

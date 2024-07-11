@@ -1,7 +1,7 @@
 package Models.Domain.Builder.ContribucionBuilder;
 
-import Models.Domain.FormasDeContribucion.DonacionDeDinero;
-import Models.Domain.TipoFrecuencia;
+import Models.Domain.FormasDeContribucion.ContribucionesGenerales.DonacionDeDinero;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 
 public class DonacionDeDineroBuilder {
     private DonacionDeDinero donacionDeDinero;

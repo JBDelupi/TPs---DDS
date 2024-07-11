@@ -1,9 +1,8 @@
 package Models.Domain.Builder.ContribucionBuilder;
 
-import Models.Domain.FormasDeContribucion.DonacionDeDinero;
-import Models.Domain.FormasDeContribucion.DonacionDeVianda;
-import Models.Domain.Heladera;
-import Models.Domain.Vianda;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.DonacionDeVianda;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Vianda;
 
 public class DonacionDeViandaBuilder {
     private DonacionDeVianda donacionDeVianda;
