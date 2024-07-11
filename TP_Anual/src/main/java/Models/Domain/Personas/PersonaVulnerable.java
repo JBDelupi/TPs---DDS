@@ -21,8 +21,6 @@ public class PersonaVulnerable extends Persona {
     private Integer menoresACargo;
 
     public  PersonaVulnerable (){
-        this.nombre = nombre;
-        this.menoresACargo = menoresACargo;
         this.setRolNegocio(TipoRolNegocio.VULNERABLE);
     }
 

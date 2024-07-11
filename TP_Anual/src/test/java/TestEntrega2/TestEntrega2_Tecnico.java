@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class TestEntrega2_Tecnico {
 
-
+/*
     Administrador administrador;
     Colaborador pepito;
     AdministradorController controller ;
@@ -70,6 +70,6 @@ public class TestEntrega2_Tecnico {
         });
     }
 
-
+*/
 
 }

@@ -1,15 +1,22 @@
 package Controller;
 
 import Controller.Actores.TipoRol;
+import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.Personas.Juridico;
 import Models.Domain.TipoJuridico;
 import Models.Repository.RepoColaboradores;
+import Service.Server.ICrudViewsHandler;
 
 
-public class JuridicoController extends Controller {
+public class JuridicoController extends Controller implements ICrudViewsHandler {
 
-    public void create(Object ... Context) {
+    public JuridicoController(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    //  @POST
+    public void save(Object ... Context) {
 
         String razonSocial = (String) Context[0];
         TipoJuridico tipoJuridico = (TipoJuridico) Context[1];
@@ -27,18 +34,24 @@ public class JuridicoController extends Controller {
 
     }
 
-    public void edit() {
+    public void index(Object ... Context){
+
+    }
+    public void show(Object ... Context){
 
     }
 
-    public void generarCanje(Object ... Context){
-        this.checkUserRoleAndProceed(TipoRol.JURIDICO);
+    //@GET
+    public void create(Object ... Context){
 
     }
+    public void edit(Object ... Context){
 
-    // GET
-    public void verCanje(Object ... Context){
-        this.checkUserRoleAndProceed(TipoRol.JURIDICO);
+    }
+    public void update(Object ... Context){
+
+    }
+    public void delete(Object ... Context){
 
     }
 

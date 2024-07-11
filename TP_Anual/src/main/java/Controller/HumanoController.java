@@ -1,16 +1,24 @@
 package Controller;
 
 import Controller.Actores.TipoRol;
+import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;
 import Models.Repository.RepoColaboradores;
+import Service.Server.ICrudViewsHandler;
 
 import java.time.LocalDate;
 
-public class HumanoController extends Controller {
+public class HumanoController extends Controller implements ICrudViewsHandler {
 
-    public void create(Object ... Args) {
+    public HumanoController(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+
+
+    public void save(Object ... Args) {
 
         String nombre = (String) Args[0];
         String apellido = (String) Args[1];
@@ -32,30 +40,25 @@ public class HumanoController extends Controller {
         RepoColaboradores.getInstance().agregarColaborador(humano);
     }
 
-    public void solicitudTarjeta(){
-        this.checkUserRoleAndProceed(TipoRol.HUMANO);
-        // SOLICITA TARJETA
-    }
+    public void index(Object ... Context){
 
-    // POST
-    public void generarCanje(Object ... Context){
-        this.checkUserRoleAndProceed(TipoRol.HUMANO);
+    }
+    public void show(Object ... Context){
 
     }
 
-    // GET
-    public void verCanje(Object ... Context){
-        this.checkUserRoleAndProceed(TipoRol.HUMANO);
+    public void create(Object ... Context){
+
+    }
+    public void edit(Object ... Context){
+
+    }
+    public void update(Object ... Context){
+
+    }
+    public void delete(Object ... Context){
 
     }
 
 
-    public void edit() {
-
-    }
-
-
-    public void delete() {
-
-    }
 }

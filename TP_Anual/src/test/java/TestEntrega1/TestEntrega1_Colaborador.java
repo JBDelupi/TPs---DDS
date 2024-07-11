@@ -3,6 +3,8 @@ package TestEntrega1;
 import Controller.HumanoController;
 import Controller.JuridicoController;
 import Controller.Controller;
+import Models.Domain.Personas.Colaborador;
+import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;
 import Models.Domain.TipoJuridico;
 import Models.Repository.RepoColaboradores;
@@ -15,17 +17,19 @@ import java.time.LocalDate;
 
 public class TestEntrega1_Colaborador {
 
-    Controller controllerUno;
-    Controller controllerDos;
+    JuridicoController controllerUno;
+    HumanoController controllerDos;
+    Colaborador lucas;
     @BeforeEach
     public void init(){
-        controllerUno = new JuridicoController();
-        controllerDos = new HumanoController();
+        lucas = new Humano();
+        controllerUno = new JuridicoController(lucas);
+        controllerDos = new HumanoController(lucas);
     }
 
     @Test
     public void registrarPersonaJuridica(){
-        controllerUno.create("Caritas", TipoJuridico.ONG,"Caritas@gmail.com");
+        controllerUno.save("Caritas", TipoJuridico.ONG,"Caritas@gmail.com");
 
         Assertions.assertEquals( 1 , RepoColaboradores.getInstance().getColaboradorlist().size() );
 
@@ -33,7 +37,7 @@ public class TestEntrega1_Colaborador {
 
     @Test
     public void registrarPersonaHumana(){
-        controllerDos.create("Lucas", "Iturrioz", LocalDate.now(), "Lucas@gmail.com", "4107732", TipoDeDocumento.DNI);
+        controllerDos.save("Lucas", "Iturrioz", LocalDate.now(), "Lucas@gmail.com", "4107732", TipoDeDocumento.DNI);
 
         Assertions.assertTrue(! RepoColaboradores.getInstance().getColaboradorlist().isEmpty() );
 

@@ -23,8 +23,6 @@ public class Tarjeta {
     private LocalDate fechaUltUso;
 
     public Tarjeta(){
-        this.titular = titular;
-        this.colaborador = colaborador;
         this.cantMaxUso = 4 + 2 * titular.getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
         this.usosHoy = 0;

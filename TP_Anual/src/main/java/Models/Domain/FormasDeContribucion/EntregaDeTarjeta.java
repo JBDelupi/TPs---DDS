@@ -14,7 +14,7 @@ public class EntregaDeTarjeta extends FormaDeContribucion{
         this.fechaDeDonacion = LocalDate.now();
     }
     public EntregaDeTarjeta(){
-
+        this.fechaDeDonacion = LocalDate.now();
     }
 
 

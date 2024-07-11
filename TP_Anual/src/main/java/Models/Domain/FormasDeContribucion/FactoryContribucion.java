@@ -4,6 +4,8 @@ import Controller.Actores.Permiso;
 import Controller.Actores.TipoRol;
 import Models.Domain.*;
 import Models.Domain.Builder.ContribucionBuilder.*;
+import Models.Domain.Builder.TarjetaBuilder;
+import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
@@ -26,7 +28,7 @@ public class FactoryContribucion {
     }
 
     // ------------------- LO HACEN TODOS ----------------------------------------//
-    public FormaDeContribucion donacionDeDinero(Object ... Context){
+    private FormaDeContribucion donacionDeDinero(Object ... Context){
 
         Double monto = (Double) Context[1];
         TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) Context[2];
@@ -37,11 +39,14 @@ public class FactoryContribucion {
                 .monto(monto)
                 .frecuencia(tipoFrecuencia)
                 .construir();
+
+        this.colaborador.agregarNuevaDonacion(donacion);
+
         return  donacion;
     }
 
 
-    public FormaDeContribucion donacionDeVianda(Object ... Context){
+    private FormaDeContribucion donacionDeVianda(Object ... Context){
 
         permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
@@ -58,11 +63,13 @@ public class FactoryContribucion {
                 .construir();
 
 
+        this.colaborador.agregarNuevaDonacion(donacion);
+
         return donacion;
 
     }
 
-    public FormaDeContribucion distribucionDeVianda(Object ... Context){
+    private FormaDeContribucion distribucionDeVianda(Object ... Context){
 
         permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
@@ -81,29 +88,44 @@ public class FactoryContribucion {
                 .motivos(motivo)
                 .construir();
 
+        this.colaborador.agregarNuevaDonacion(donacion);
+
         return donacion;
     }
 
-    public FormaDeContribucion registrarTarjeta(Object ... Context){
+    private FormaDeContribucion registrarTarjeta(Object ... Context){
 
         permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
         String nombre = (String) Context[1];
         Integer menoresACargo = (Integer) Context[2];
 
-        PersonaVulnerable personaVulnerable = new PersonaVulnerable(nombre,menoresACargo );
+        VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
+        TarjetaBuilder tarjetaBuilder = new TarjetaBuilder();
 
-        Tarjeta nuevaTarjeta = new Tarjeta( (Humano) colaborador, personaVulnerable);
+        PersonaVulnerable persona =
+                vulnerableBuilder
+                        .nombre(nombre)
+                        .menoresACargo(menoresACargo)
+                        .construir();
+
+
+        Tarjeta nuevaTarjeta =
+                tarjetaBuilder
+                .colaborador((Humano)colaborador)
+                .titular(persona)
+                        .construir();
 
         FormaDeContribucion donacion = new EntregaDeTarjeta(nuevaTarjeta);
 
+        this.colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
     }
 
 
 
-    public FormaDeContribucion hacerceCargoDeHeladera(Object ... Context){
+    private FormaDeContribucion hacerceCargoDeHeladera(Object ... Context){
 
         permisos.checkUserRoleAndProceed( TipoRolNegocio.JURIDICO );
 
@@ -111,18 +133,20 @@ public class FactoryContribucion {
         TipoDeOrganizacion tipoDeOrganizacion = (TipoDeOrganizacion) Context[2];
         Heladera heladera = (Heladera) Context[3];
 
-        HacerseCargoDeHeladeraBuilder hacerseCargoDeHeladeraBuilder = new HacerseCargoDeHeladeraBuilder();
+        HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
 
-        FormaDeContribucion donacion = hacerseCargoDeHeladeraBuilder
+        FormaDeContribucion donacion = builder
                 .nombreCaracteristico(nombreCaracteristico)
                 .tipoOrganizacion(tipoDeOrganizacion)
                 .heladera(heladera)
                 .construir();
 
+        this.colaborador.agregarNuevaDonacion(donacion);
+
         return donacion;
     }
 
-    public  FormaDeContribucion ofrecerProducto(Object ... Context){
+    private  FormaDeContribucion ofrecerProducto(Object ... Context){
 
         permisos.checkUserRoleAndProceed(TipoRolNegocio.JURIDICO);
 
@@ -139,11 +163,13 @@ public class FactoryContribucion {
                 .puntosNecesarios(puntosNecesarios)
                 .construir();
 
+        this.colaborador.agregarNuevaDonacion(donacion);
+
         return donacion;
     }
 
 
-    public static FormaDeContribucion factoryMethod(Object ... Context){
+    public FormaDeContribucion factoryMethod(Object ... Context){
         FormaDeContribucion contribucion = null;
         switch( (TipoDonacion) Context[0] ){
             case DONACION_DINERO: contribucion = this.donacionDeDinero( Context ); break;

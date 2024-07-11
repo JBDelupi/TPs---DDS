@@ -18,5 +18,6 @@ public class TarjetaBuilder {
         this.tarjeta.setColaborador(colaborador);
         return this;
     }
-    
+
+    public Tarjeta construir(){return this.tarjeta;}
 }
