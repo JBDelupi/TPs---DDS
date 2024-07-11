@@ -1,4 +1,4 @@
-package Models.Domain.Sensores.TareaDiferida;
+package Service.TareaDiferida;
 
 public class ChromeTask implements AdapterChromeTask{
     private  AdapterScheduledExecutorService adapterChromeTask;

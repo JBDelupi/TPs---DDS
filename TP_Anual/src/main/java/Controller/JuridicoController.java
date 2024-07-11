@@ -1,6 +1,6 @@
 package Controller;
 
-import Controller.Actores.Rol;
+import Controller.Actores.TipoRol;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.Personas.Juridico;
 import Models.Domain.TipoJuridico;
@@ -32,13 +32,13 @@ public class JuridicoController extends Controller {
     }
 
     public void generarCanje(Object ... Context){
-        this.checkUserRoleAndProceed(Rol.JURIDICO);
+        this.checkUserRoleAndProceed(TipoRol.JURIDICO);
 
     }
 
     // GET
     public void verCanje(Object ... Context){
-        this.checkUserRoleAndProceed(Rol.JURIDICO);
+        this.checkUserRoleAndProceed(TipoRol.JURIDICO);
 
     }
 

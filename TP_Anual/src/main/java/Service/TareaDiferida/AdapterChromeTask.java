@@ -1,4 +1,4 @@
-package Models.Domain.Sensores.TareaDiferida;
+package Service.TareaDiferida;
 
 public interface AdapterChromeTask {
     public void ejecutarTareaPrograma(int tiempo, Object objeto, String metodo);

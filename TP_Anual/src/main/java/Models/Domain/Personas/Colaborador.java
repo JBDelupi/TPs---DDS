@@ -6,6 +6,7 @@ import Models.Domain.Direccion;
 import Models.Domain.FormasDeContribucion.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.OfrecerProducto;
 import Models.Domain.MedioDeNotificacion;
+import Service.Notificacion.Notificacion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +15,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Colaborador extends Usuario {
-    private MedioDeNotificacion medioDeNotificacion;
+public abstract class Colaborador extends Persona {
+    private Notificacion medioDeNotificacion;
     private Direccion direccion;
     private List<FormaDeContribucion> formaDeContribucion;
     private List<Canje> historialCanje;

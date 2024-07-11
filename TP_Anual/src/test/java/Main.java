@@ -1,19 +1,6 @@
-import Controller.ContribucionController;
-import Controller.Controller;
-import Models.Domain.FormasDeContribucion.OfrecerProducto;
-import Models.Domain.FormasDeContribucion.TipoDonacion;
-import Models.Domain.FormasDeContribucion.TipoRubro;
-import Models.Domain.Personas.Colaborador;
-import Models.Domain.Personas.Humano;
-import Models.Domain.Personas.Juridico;
-import Models.Domain.TipoFrecuencia;
-import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
 
 
 public class Main {

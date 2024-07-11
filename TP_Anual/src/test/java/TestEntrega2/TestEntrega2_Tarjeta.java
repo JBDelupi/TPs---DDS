@@ -1,6 +1,6 @@
 package TestEntrega2;
 
-import Controller.ContribucionController;
+import Models.Domain.FormasDeContribucion.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.EntregaDeTarjeta;
 import Models.Domain.FormasDeContribucion.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.TipoDonacion;
@@ -10,7 +10,6 @@ import Models.Domain.Personas.Humano;
 import Models.Domain.Personas.Juridico;
 import Models.Domain.Personas.PersonaVulnerable;
 import Models.Domain.Tarjeta.Tarjeta;
-import Models.Domain.TipoJuridico;
 import Models.Domain.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +23,7 @@ public class TestEntrega2_Tarjeta {
     Colaborador nasa;
     PersonaVulnerable persona1;
     Tarjeta tarjeta1;
-    ContribucionController controller;
+    FactoryContribucion controller;
 
     Vianda pollo;
     Vianda galletita;
@@ -58,7 +57,7 @@ public class TestEntrega2_Tarjeta {
     // Se crea correctamente la entrega de tarjetas
     @Test
     public void creacionDeEntregaTarjetas()throws IOException {
-        controller = new ContribucionController(fulano);
+        controller = new FactoryContribucion(fulano);
         controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
         Assertions.assertEquals(1, fulano.getFormaDeContribucion().size());
     }
@@ -67,7 +66,7 @@ public class TestEntrega2_Tarjeta {
     // Se crea una persona vulnerable
     @Test
     public void registroDePersonaVulnerable() throws IOException {
-        controller = new ContribucionController(fulano);
+        controller = new FactoryContribucion(fulano);
         controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
 
         FormaDeContribucion contribucion = fulano.getFormaDeContribucion().get(0);
@@ -85,8 +84,8 @@ public class TestEntrega2_Tarjeta {
     // Tira error si una juridica trata de entregar tarjetas
     @Test
     public void unaPersonaJuridicaNoPuedeEntregarTarjeta()throws IOException {
-        controller = new ContribucionController(nasa);
-        Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
+        controller = new FactoryContribucion(nasa);
+        Assertions.assertThrows(FactoryContribucion.UnauthorizedAccessException.class, () -> {
             controller.create(TipoDonacion.ENTREGA_TARJETAS, null, null);
         });
     }

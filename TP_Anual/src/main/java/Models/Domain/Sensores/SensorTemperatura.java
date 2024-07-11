@@ -1,16 +1,11 @@
 package Models.Domain.Sensores;
 
 import Models.Domain.Heladera;
-import Models.Domain.Sensores.Sensor;
-import Models.Domain.Sensores.TareaDiferida.AdapterChromeTask;
+import Service.TareaDiferida.AdapterChromeTask;
 
-import Models.Domain.Sensores.TareaDiferida.ChromeTask;
+import Service.TareaDiferida.ChromeTask;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 @Getter

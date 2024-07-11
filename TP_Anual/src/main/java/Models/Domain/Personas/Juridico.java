@@ -1,6 +1,6 @@
 package Models.Domain.Personas;
 
-import Controller.Actores.Rol;
+import Controller.Actores.TipoRol;
 import Models.Domain.FormasDeContribucion.OfrecerProducto;
 import Models.Domain.TipoJuridico;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public class Juridico extends Colaborador {
     private List<OfrecerProducto> productosOfrecidos;
 
     public Juridico(){
-        this.setTipoRol(Rol.JURIDICO);
+        this.setRolNegocio(TipoRolNegocio.JURIDICO);
         this.productosOfrecidos = new ArrayList<>();
     }
 

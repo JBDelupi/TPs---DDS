@@ -22,7 +22,7 @@ public class Tarjeta {
     private Integer usosHoy;
     private LocalDate fechaUltUso;
 
-    public Tarjeta(Humano colaborador, PersonaVulnerable titular){
+    public Tarjeta(){
         this.titular = titular;
         this.colaborador = colaborador;
         this.cantMaxUso = 4 + 2 * titular.getMenoresACargo();

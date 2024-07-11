@@ -1,4 +1,4 @@
-package Models.Domain.Sensores.TareaDiferida;
+package Service.TareaDiferida;
 import java.lang.reflect.Method;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

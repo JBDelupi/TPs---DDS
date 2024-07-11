@@ -1,6 +1,6 @@
 package Controller;
 
-import Controller.Actores.Rol;
+import Controller.Actores.TipoRol;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Humano;
 import Models.Domain.TipoDeDocumento;
@@ -33,19 +33,19 @@ public class HumanoController extends Controller {
     }
 
     public void solicitudTarjeta(){
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        this.checkUserRoleAndProceed(TipoRol.HUMANO);
         // SOLICITA TARJETA
     }
 
     // POST
     public void generarCanje(Object ... Context){
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        this.checkUserRoleAndProceed(TipoRol.HUMANO);
 
     }
 
     // GET
     public void verCanje(Object ... Context){
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        this.checkUserRoleAndProceed(TipoRol.HUMANO);
 
     }
 

@@ -1,29 +1,28 @@
-package Controller;
+package Models.Domain.FormasDeContribucion;
 
-import Controller.Actores.Rol;
+import Controller.Actores.Permiso;
+import Controller.Actores.TipoRol;
 import Models.Domain.*;
 import Models.Domain.Builder.ContribucionBuilder.*;
-import Models.Domain.FormasDeContribucion.*;
+import Models.Domain.Excepciones.Permisos;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
 import Models.Domain.Personas.PersonaVulnerable;
+import Models.Domain.Personas.TipoRolNegocio;
 import Models.Domain.Tarjeta.Tarjeta;
 import lombok.Getter;
 
 
 @Getter
-public class ContribucionController extends Controller {
+public class FactoryContribucion {
     FormaDeContribucion nuevaDonacion;
 
 
-    public ContribucionController(Colaborador colaborador){
-        this.usuario = colaborador;
-    }
-
-
-    public void create(Object ... Args){
-        nuevaDonacion = this.factoryMethod(Args);
-        this.usuario.generarNuevaDonacion(nuevaDonacion);
+    Permisos permisos;
+    Colaborador colaborador;
+    public FactoryContribucion(Colaborador colaborador) {
+       this.colaborador = colaborador;
+       this.permisos = new Permisos(colaborador);
     }
 
     // ------------------- LO HACEN TODOS ----------------------------------------//
@@ -44,7 +43,7 @@ public class ContribucionController extends Controller {
 
     public FormaDeContribucion donacionDeVianda(Object ... Context){
 
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
         Vianda vianda = (Vianda) Context[1];
         Heladera heladera = (Heladera) Context[2];
@@ -65,7 +64,7 @@ public class ContribucionController extends Controller {
 
     public FormaDeContribucion distribucionDeVianda(Object ... Context){
 
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
         Heladera heladeraOrigen = (Heladera) Context[1];
         Heladera heladeraDestino = (Heladera) Context[2];
@@ -87,15 +86,15 @@ public class ContribucionController extends Controller {
 
     public FormaDeContribucion registrarTarjeta(Object ... Context){
 
-        this.checkUserRoleAndProceed(Rol.HUMANO);
+        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
 
         String nombre = (String) Context[1];
         Integer menoresACargo = (Integer) Context[2];
+
         PersonaVulnerable personaVulnerable = new PersonaVulnerable(nombre,menoresACargo );
 
+        Tarjeta nuevaTarjeta = new Tarjeta( (Humano) colaborador, personaVulnerable);
 
-
-        Tarjeta nuevaTarjeta = new Tarjeta( (Humano) usuario, personaVulnerable);
         FormaDeContribucion donacion = new EntregaDeTarjeta(nuevaTarjeta);
 
 
@@ -106,13 +105,14 @@ public class ContribucionController extends Controller {
 
     public FormaDeContribucion hacerceCargoDeHeladera(Object ... Context){
 
-        this.checkUserRoleAndProceed( Rol.JURIDICO );
+        permisos.checkUserRoleAndProceed( TipoRolNegocio.JURIDICO );
 
         String nombreCaracteristico = (String) Context[1];
         TipoDeOrganizacion tipoDeOrganizacion = (TipoDeOrganizacion) Context[2];
         Heladera heladera = (Heladera) Context[3];
 
         HacerseCargoDeHeladeraBuilder hacerseCargoDeHeladeraBuilder = new HacerseCargoDeHeladeraBuilder();
+
         FormaDeContribucion donacion = hacerseCargoDeHeladeraBuilder
                 .nombreCaracteristico(nombreCaracteristico)
                 .tipoOrganizacion(tipoDeOrganizacion)
@@ -123,7 +123,8 @@ public class ContribucionController extends Controller {
     }
 
     public  FormaDeContribucion ofrecerProducto(Object ... Context){
-        this.checkUserRoleAndProceed(Rol.JURIDICO);
+
+        permisos.checkUserRoleAndProceed(TipoRolNegocio.JURIDICO);
 
         Producto producto = (Producto) Context[1];
         Double puntosNecesarios = (Double) Context[2];
@@ -142,7 +143,7 @@ public class ContribucionController extends Controller {
     }
 
 
-    public FormaDeContribucion factoryMethod(Object ... Context){
+    public static FormaDeContribucion factoryMethod(Object ... Context){
         FormaDeContribucion contribucion = null;
         switch( (TipoDonacion) Context[0] ){
             case DONACION_DINERO: contribucion = this.donacionDeDinero( Context ); break;

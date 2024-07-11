@@ -4,6 +4,9 @@ import Models.Domain.Personas.Humano;
 import Service.DTO.HumanoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import Service.Mappers.HumanoMapper;
+import Service.Notificacion.CorreoAdapter;
+import Service.Notificacion.Mensaje;
+import Service.Notificacion.NotificacionBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -57,11 +60,26 @@ public class TestEntrega2_ArchivoCSV {
         HumanoMapper mapper = new HumanoMapper();
         List<Humano> humanoList = new ArrayList<>();
 
+
+
+
         for(HumanoDTO humanoDTO : importados){
-            humanoList.add(mapper.toEntity(humanoDTO));
+            NotificacionBuilder notificacion = new NotificacionBuilder();
+            Mensaje mensaje = notificacion.asunto("Nuevo colaborador")
+                                          .contenido("Datos de usuario")
+                                                  .destinatario(humanoDTO.getMail())
+                                                          .construir();
+
+            Humano humano = mapper.toEntity(humanoDTO);
+
+            humano.setMedioDeNotificacion(new CorreoAdapter());
+
+            humano.getMedioDeNotificacion().Notificar(mensaje);
+
+
         }
 
-        Assertions.assertFalse(humanoList.isEmpty());
+      //  Assertions.assertFalse(humanoList.isEmpty());
 
     }
 

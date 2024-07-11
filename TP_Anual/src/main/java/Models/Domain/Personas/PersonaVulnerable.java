@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-public class PersonaVulnerable{
+public class PersonaVulnerable extends Persona {
 
     private String nombre;
     private LocalDate fechaDeNacimiento;
@@ -20,9 +20,10 @@ public class PersonaVulnerable{
     private String numeroDocumento;
     private Integer menoresACargo;
 
-    public  PersonaVulnerable (String nombre, Integer menoresACargo){
+    public  PersonaVulnerable (){
         this.nombre = nombre;
         this.menoresACargo = menoresACargo;
+        this.setRolNegocio(TipoRolNegocio.VULNERABLE);
     }
 
 

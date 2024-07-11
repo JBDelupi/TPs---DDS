@@ -46,7 +46,7 @@ public class TecnicoBuilder {
         return this;
     }
 
-    public Tecnico contruir(){
+    public Tecnico construir(){
         return this.tecnico;
     }
 

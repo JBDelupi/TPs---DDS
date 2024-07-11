@@ -1,13 +1,12 @@
 package TestEntrega1;
 
-import Controller.ContribucionController;
+import Models.Domain.FormasDeContribucion.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.TipoDonacion;
 import Models.Domain.Heladera;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
 import Models.Domain.Personas.Juridico;
 import Models.Domain.TipoFrecuencia;
-import Models.Domain.TipoJuridico;
 import Models.Domain.Vianda;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,14 +23,14 @@ public class TestEntrega1 {
 
     Colaborador nahu ;
     Colaborador unicef;
-    ContribucionController controllerNahu;
-    ContribucionController controllerUnicef;
+    FactoryContribucion controllerNahu;
+    FactoryContribucion controllerUnicef;
     @BeforeEach
     public void init(){
         nahu = new Humano();
         unicef = new Juridico();
-        controllerNahu = new ContribucionController(nahu);
-        controllerUnicef = new ContribucionController(unicef);
+        controllerNahu = new FactoryContribucion(nahu);
+        controllerUnicef = new FactoryContribucion(unicef);
     }
 
     @Test
@@ -52,7 +51,7 @@ public class TestEntrega1 {
     }
     @Test
     public void unaPersonaHumanaNoPuedeHacerUnaDonacionJuridica() {
-        Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
+        Assertions.assertThrows(FactoryContribucion.UnauthorizedAccessException.class, () -> {
             controllerNahu.create(TipoDonacion.HACERSE_CARGO_DE_HELADERA, null, null, null); // Aquí invocas el método dentro de la lambda
         });
 
@@ -61,7 +60,7 @@ public class TestEntrega1 {
 
     @Test
     public void unaPersonaJuridicaNoPuedeHacerUnaDonacionHumana() throws IOException{
-        Assertions.assertThrows(ContribucionController.UnauthorizedAccessException.class, () -> {
+        Assertions.assertThrows(FactoryContribucion.UnauthorizedAccessException.class, () -> {
             controllerUnicef.create(TipoDonacion.DONACION_DE_VIANDA, null, null ,null ,null); // Aquí invocas el método dentro de la lambda
         });
 

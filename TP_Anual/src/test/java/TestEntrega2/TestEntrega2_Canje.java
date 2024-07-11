@@ -35,7 +35,7 @@ public class TestEntrega2_Canje {
     // Persona humana canjea un producto
     @Test
     public void laPersonaCanjeaSusPuntosPorLaptop() throws IOException {
-        controller = new ContribucionController(colaborador1);
+        controller = new FactoryContribucion(colaborador1);
 
         controller.create(TipoDonacion.OFRECER_PRODUCTO, notebook,30.00,1);
         controller.create(TipoDonacion.OFRECER_PRODUCTO, tv,70.00,1);
@@ -63,7 +63,7 @@ public class TestEntrega2_Canje {
 
     @Test
     public void laPersonaNoTienePuntosSuficientes() throws IOException {
-        controller = new ContribucionController(colaborador1);
+        controller = new FactoryContribucion(colaborador1);
         controller.create(TipoDonacion.OFRECER_PRODUCTO,notebook,30.00,1);
 
         List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
@@ -81,7 +81,7 @@ public class TestEntrega2_Canje {
     // No se realiza el canje porque la cantidad del producto es menor a 0
     @Test
     public void noSeDisponeDeLaCantidadDeProductos() throws IOException {
-        controller = new ContribucionController(colaborador1);
+        controller = new FactoryContribucion(colaborador1);
 
         controller.create(TipoDonacion.OFRECER_PRODUCTO, notebook,30.00,1);
 
@@ -107,7 +107,7 @@ public class TestEntrega2_Canje {
     @Test
     public void laPersonaJuridicaCanjeSusPuntosPorLaptop2() throws IOException {
 
-        controller = new ContribucionController(colaborador1);
+        controller = new FactoryContribucion(colaborador1);
 
         controller.create(TipoDonacion.OFRECER_PRODUCTO, tv,70.00,1);
 

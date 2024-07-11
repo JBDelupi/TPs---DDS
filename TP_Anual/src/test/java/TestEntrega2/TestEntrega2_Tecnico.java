@@ -1,10 +1,7 @@
 package TestEntrega2;
 
-import Controller.Actores.Administrador;
 import Controller.AdministradorController;
 import Controller.Controller;
-import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
-import Models.Domain.FormasDeContribucion.TipoDonacion;
 import Models.Domain.Personas.AreaCobertura;
 import Models.Domain.Personas.Colaborador;
 import Models.Domain.Personas.Humano;
@@ -14,8 +11,6 @@ import Service.APIPuntos.Punto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static java.util.function.Predicate.not;
 
 public class TestEntrega2_Tecnico {
 
