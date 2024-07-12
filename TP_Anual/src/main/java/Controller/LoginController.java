@@ -3,13 +3,13 @@ package Controller;
 import Models.Domain.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Actores.Humano;
 import io.javalin.http.Context;
+import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginController extends Controller {
-
 
     public void create(Context context){
         context.render("/login.hbs");
@@ -19,7 +19,7 @@ public class LoginController extends Controller {
         if (context.sessionAttribute("usuarioActual") == null) {
             context.render("/login.hbs");
         } else {
-            context.redirect("/index");
+            context.redirect("/index/humano");
         }
     }
 
@@ -27,5 +27,30 @@ public class LoginController extends Controller {
         context.render("main.hbs");
     }
 
+    public void manejarInicioSesion(Context context) {
+        String nombreUsuario = context.formParam("user");
+        String contrasenia = context.formParam("password");
+        context.sessionAttribute("usuarioActual", nombreUsuario);
 
+        // Persona usuario = repositorio.buscarUsuarioPorCredenciales(nombreUsuario,contrasenia);
+
+        if (usuario != null) {
+        //      String idPersona = Integer.toString(usuario.getId());
+        //    context.sessionAttribute("idPersona", idPersona); // Almacena el ID en la sesión
+            context.redirect("/index/humano");
+        } else {
+            HttpSession httpSession = context.req().getSession();
+            httpSession.removeAttribute("usuarioActual");
+            context.redirect("/login");
+        }
+
+    }
+
+
+    public void manejarCierreSesion(Context context) {
+        HttpSession httpSession = context.req().getSession();
+        httpSession.removeAttribute("usuarioActual");
+        httpSession.removeAttribute("tipo_rol");
+        context.redirect("/login");
+    }
 }

@@ -1,10 +1,14 @@
 package Service.Server.handlers;
 
+import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.Javalin;
 
 public class AccessDeniedHandler implements IHandler{
 
-    public void setHandle(Javalin app){
-
+    @Override
+    public void setHandle(Javalin app) {
+        app.exception(AccessDeniedException.class, (e, context) -> {
+            context.render("401.hbs");
+        });
     }
 }

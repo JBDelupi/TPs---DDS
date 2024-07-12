@@ -1,5 +1,6 @@
 package Service.Server;
 
+import Service.Server.handlers.AppHandlers;
 import io.javalin.Javalin;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -25,7 +26,7 @@ public class Server {
             Integer port = Integer.parseInt(System.getProperty("port", "8080"));
             app = Javalin.create(config()).start(port);
             initTemplateEngine();
-       //     AppHandlers.applyHandlers(app);
+            AppHandlers.applyHandlers(app);
             new Router().init();
 
         }
@@ -56,7 +57,7 @@ public class Server {
                         context.status(HttpStatus.NOT_FOUND);
                         return "No se encuentra la página indicada...";
                     }
-                }, ".hbs", "html" // Extensión del archivo de template
+                }, ".hbs" // Extensión del archivo de template
         );
     }
 

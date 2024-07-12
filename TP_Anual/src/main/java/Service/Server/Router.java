@@ -4,6 +4,7 @@ import Controller.FactoryController;
 import Controller.HumanoController;
 import Controller.JuridicoController;
 import Controller.LoginController;
+import Controller.HeladeraController;
 
 public class Router {
     public static void init(){
@@ -17,6 +18,10 @@ public class Router {
 
         Server.app().get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
         Server.app().post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
+
+
+        Server.app().get("/fridge/map", ((HeladeraController) FactoryController.controller("heladeras"))::index);
+        Server.app().get("/index/humano", ((LoginController) FactoryController.controller("index")::index);
 
     }
 
