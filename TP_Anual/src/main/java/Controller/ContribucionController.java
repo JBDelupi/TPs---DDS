@@ -6,6 +6,8 @@ import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Service.Server.ICrudViewsHandler;
 
+import javax.naming.Context;
+
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
     public ContribucionController(Usuario usuario) {
@@ -30,10 +32,9 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         FactoryContribucion factoryContribucion = new FactoryContribucion((Colaborador) this.usuario);
         FormaDeContribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
 
-        // Repo guardar
-        // Context.redirect
 
     }
+
     public void edit(Object ... Context){
 
     }

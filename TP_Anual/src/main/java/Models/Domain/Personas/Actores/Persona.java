@@ -11,6 +11,4 @@ import lombok.Setter;
 public class Persona extends Usuario {
     private TipoRolNegocio rolNegocio;
 
-
-
 }

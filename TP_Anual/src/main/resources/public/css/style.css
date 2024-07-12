@@ -268,7 +268,10 @@ button {
 }
 
 .navbar {
+    /*position: fixed;*/
     padding: 0px 0px 20px 0px;
+    /*z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    /*animation: slideDown 0.5s ease;*/
 }
 
 .user_icon {

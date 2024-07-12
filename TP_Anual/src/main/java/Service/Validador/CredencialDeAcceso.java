@@ -11,8 +11,9 @@ public class CredencialDeAcceso {
     private String nombreUsuario;
     private String contrasenia;
 
-    public CredencialDeAcceso(String nombreUsuario) {
+    public CredencialDeAcceso(String nombreUsuario, String contrasenia) {
         this.nombreUsuario = nombreUsuario;
+        this.contrasenia = contrasenia;
     }
 
 
