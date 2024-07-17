@@ -114,14 +114,13 @@ public class FactoryContribucion {
                         .menoresACargo(menoresACargo)
                         .construir();
 
-
+    /*
         TarjetaPersonaVulnerable nuevaTarjetaPersonaVulnerable =
                 tarjetaBuilder
-                .colaborador((Humano)colaborador)
                 .titular(persona)
                         .construir();
-
-        FormaDeContribucion donacion = new EntregaDeTarjeta(nuevaTarjetaPersonaVulnerable);
+    */
+        FormaDeContribucion donacion = new EntregaDeTarjeta();
 
         this.colaborador.agregarNuevaDonacion(donacion);
 

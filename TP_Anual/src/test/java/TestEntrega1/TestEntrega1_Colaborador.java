@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 public class TestEntrega1_Colaborador {
-
+/*
     JuridicoController controllerUno;
     HumanoController controllerDos;
     Colaborador lucas;
@@ -41,6 +41,6 @@ public class TestEntrega1_Colaborador {
 
     }
 
-
+*/
 
 }

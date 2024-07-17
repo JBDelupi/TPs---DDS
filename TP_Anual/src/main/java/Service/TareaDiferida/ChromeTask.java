@@ -15,5 +15,4 @@ public class ChromeTask implements AdapterChromeTask{
         adapterChromeTask.pausarTareaProgramada();
     }
 
-
 }

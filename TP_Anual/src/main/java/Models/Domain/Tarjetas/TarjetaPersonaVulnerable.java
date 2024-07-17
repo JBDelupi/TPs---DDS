@@ -2,6 +2,7 @@ package Models.Domain.Tarjetas;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Heladera.Vianda;
 import lombok.Getter;
@@ -19,7 +20,8 @@ public class TarjetaPersonaVulnerable extends Tarjeta {
     private Integer usosHoy;
     private LocalDate fechaUltUso;
 
-    public TarjetaPersonaVulnerable(){
+    public TarjetaPersonaVulnerable(Persona titular){
+        this.titular = titular;
         this.cantMaxUso = 4 + 2 * ((PersonaVulnerable)getTitular()).getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
         this.usosHoy = 0;

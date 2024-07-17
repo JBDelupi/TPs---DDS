@@ -5,7 +5,7 @@ import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
 
 public class TarjetaBuilder {
-    private TarjetaPersonaVulnerable tarjetaPersonaVulnerable;
+ /*   private TarjetaPersonaVulnerable tarjetaPersonaVulnerable;
 
     public TarjetaBuilder() {this.tarjetaPersonaVulnerable = new TarjetaPersonaVulnerable();}
 
@@ -20,4 +20,6 @@ public class TarjetaBuilder {
     }
 
     public TarjetaPersonaVulnerable construir(){return this.tarjetaPersonaVulnerable;}
+
+  */
 }

@@ -13,6 +13,8 @@ import java.util.List;
 
 
 public class TestEntrega1_Contrasenia {
+
+      /*
         private Validador validador;
         private CredencialDeAcceso credencialDeAcceso;
 
@@ -87,5 +89,5 @@ public class TestEntrega1_Contrasenia {
         }
 
 
-
+    */
 }

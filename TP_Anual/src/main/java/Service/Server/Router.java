@@ -21,7 +21,7 @@ public class Router {
 
 
         Server.app().get("/fridge/map", ((HeladeraController) FactoryController.controller("heladeras"))::index);
-        Server.app().get("/index/humano", ((LoginController) FactoryController.controller("index")::index);
+        Server.app().get("/index/humano", ((LoginController) FactoryController.controller("index"))::index);
 
     }
 

@@ -20,7 +20,7 @@ public class Heladera {
         this.viandas = new ArrayList<>();
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
-
+        this.cantidadDeFallas = 0;
     }
 
     private Direccion direccion;
@@ -36,6 +36,7 @@ public class Heladera {
     private Sensor sensorMovimiento;
     private Sensor sensorTemperatura;
     private Double temperaturaActual;
+    private int cantidadDeFallas;
 
     public void agregarVianda(Vianda ... vianda) {
         if ( capacidadDeViandas > viandas.size() ) {
@@ -54,6 +55,14 @@ public class Heladera {
         return null;
     }
 
+    //  Registrar una falla
+    public void registrarFalla() {
+        this.cantidadDeFallas++;
+    }
 
+    // Reestablecer la cantidad de fallas a 0
+    public void reestablecerFallas() {
+        this.cantidadDeFallas = 0;
+    }
 }
 

@@ -1,10 +1,13 @@
 package Models.Domain.Incidentes;
 
+import Models.Domain.Heladera.EstadoHeladera;
+
 public class Alerta extends Incidente {
     private TipoAlerta tipo;
 
     public Alerta(TipoAlerta tipo) {
         this.tipo = tipo;
+        this.heladera.setActual(EstadoHeladera.NO_DISPONIBLE);
     }
 
     @Override
