@@ -2,22 +2,22 @@ package Models.Domain.Builder;
 
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Domain.Tarjeta.Tarjeta;
+import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
 
 public class TarjetaBuilder {
-    private Tarjeta tarjeta;
+    private TarjetaPersonaVulnerable tarjetaPersonaVulnerable;
 
-    public TarjetaBuilder() {this.tarjeta = new Tarjeta();}
+    public TarjetaBuilder() {this.tarjetaPersonaVulnerable = new TarjetaPersonaVulnerable();}
 
     public TarjetaBuilder titular(PersonaVulnerable titular) {
-        this.tarjeta.setTitular(titular);
+        this.tarjetaPersonaVulnerable.setTitular(titular);
         return this;
     }
 
     public TarjetaBuilder colaborador(Humano colaborador) {
-        this.tarjeta.setColaborador(colaborador);
+        this.tarjetaPersonaVulnerable.setColaborador(colaborador);
         return this;
     }
 
-    public Tarjeta construir(){return this.tarjeta;}
+    public TarjetaPersonaVulnerable construir(){return this.tarjetaPersonaVulnerable;}
 }

@@ -1,17 +1,17 @@
 package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
-import Models.Domain.Tarjeta.Tarjeta;
+import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
 public class EntregaDeTarjeta extends FormaDeContribucion {
-    private Tarjeta tarjeta;
+    private TarjetaPersonaVulnerable tarjetaPersonaVulnerable;
 
-    public EntregaDeTarjeta(Tarjeta tarjeta){
-        this.tarjeta = tarjeta;
+    public EntregaDeTarjeta(TarjetaPersonaVulnerable tarjetaPersonaVulnerable){
+        this.tarjetaPersonaVulnerable = tarjetaPersonaVulnerable;
         this.fechaDeDonacion = LocalDate.now();
     }
     public EntregaDeTarjeta(){

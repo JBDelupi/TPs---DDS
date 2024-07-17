@@ -1,4 +1,4 @@
-package Models.Domain.Tarjeta;
+package Models.Domain.Tarjetas;
 
 
 import Models.Domain.Heladera.Heladera;
@@ -9,14 +9,16 @@ import java.time.LocalDate;
 
 @Getter
 public class RegistroDeUso {
-
-    public RegistroDeUso(Heladera heladera, Vianda vianda){
-        this.heladera = heladera;
-        this.vianda = vianda;
-        this.fecha = LocalDate.now();
-    }
     private LocalDate fecha;
     private Heladera heladera;
     private Vianda vianda;
+    private TipoAccion accion;
+
+    public RegistroDeUso(Heladera heladera, Vianda vianda, TipoAccion accion){
+        this.heladera = heladera;
+        this.vianda = vianda;
+        this.fecha = LocalDate.now();
+        this.accion = accion;
+    }
 
 }

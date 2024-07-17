@@ -1,4 +1,4 @@
-package Models.Domain.Tarjeta;
+package Models.Domain.Tarjetas;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Humano;
@@ -13,28 +13,24 @@ import java.util.List;
 
 @Setter
 @Getter
-public class Tarjeta {
-    private String codigo;
-    private PersonaVulnerable titular;
+public class TarjetaPersonaVulnerable extends Tarjeta {
     private Humano colaborador;
     private Integer cantMaxUso;
-    private List<RegistroDeUso> usos;
     private Integer usosHoy;
     private LocalDate fechaUltUso;
 
-    public Tarjeta(){
-        this.cantMaxUso = 4 + 2 * titular.getMenoresACargo();
+    public TarjetaPersonaVulnerable(){
+        this.cantMaxUso = 4 + 2 * ((PersonaVulnerable)getTitular()).getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
         this.usosHoy = 0;
-        this.usos = new ArrayList<>();
     }
 
     public void agregarNuevoUso(Heladera heladera){
         this.calcularUsosHoy();
         if(this.usosHoy < this.cantMaxUso ){
             Vianda viandaConsume = heladera.obtenerVianda();
-            RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume);
-            usos.add(unNuevoUso);
+            RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume,TipoAccion.QUITAR);
+            getUsos().add(unNuevoUso);
             this.usosHoy++;
             System.out.println("Uso exitoso tarjeta cantidad disponible: " +  (cantMaxUso - usosHoy) );
         } else {

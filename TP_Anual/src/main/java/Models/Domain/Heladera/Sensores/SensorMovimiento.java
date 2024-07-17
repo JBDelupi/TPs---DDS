@@ -1,5 +1,7 @@
 package Models.Domain.Heladera.Sensores;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Incidentes.Alerta;
+import Models.Domain.Incidentes.TipoAlerta;
 
 public class SensorMovimiento implements Sensor {
     private Heladera heladera;
@@ -27,7 +29,9 @@ public class SensorMovimiento implements Sensor {
     }
 
     public void notificar(){
-        System.out.println("Estan robando !!! D:");
+        //System.out.println("Estan robando !!! D:");
+        var incidente = new Alerta(TipoAlerta.FRAUDE);
+        incidente.notificar();
     }
 
 

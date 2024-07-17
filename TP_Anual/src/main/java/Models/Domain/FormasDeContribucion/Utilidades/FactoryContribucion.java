@@ -13,7 +13,7 @@ import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Producto.Producto;
-import Models.Domain.Tarjeta.Tarjeta;
+import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
 import lombok.Getter;
 
 
@@ -80,6 +80,9 @@ public class FactoryContribucion {
         Integer cantidad = (Integer) Context[3];
         String motivo = (String) Context[4];
 
+        // Arreglar
+
+
 
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
 
@@ -112,13 +115,13 @@ public class FactoryContribucion {
                         .construir();
 
 
-        Tarjeta nuevaTarjeta =
+        TarjetaPersonaVulnerable nuevaTarjetaPersonaVulnerable =
                 tarjetaBuilder
                 .colaborador((Humano)colaborador)
                 .titular(persona)
                         .construir();
 
-        FormaDeContribucion donacion = new EntregaDeTarjeta(nuevaTarjeta);
+        FormaDeContribucion donacion = new EntregaDeTarjeta(nuevaTarjetaPersonaVulnerable);
 
         this.colaborador.agregarNuevaDonacion(donacion);
 
