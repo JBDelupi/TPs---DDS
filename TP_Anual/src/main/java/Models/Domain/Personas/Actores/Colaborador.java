@@ -1,9 +1,11 @@
 package Models.Domain.Personas.Actores;
 
+import Models.Domain.Heladera.Suscripciones.Publicacion;
 import Models.Domain.Producto.Canje;
 import Models.Domain.DatosPersonales.Direccion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
+import Service.Notificacion.Mensaje;
 import Service.Notificacion.Notificacion;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +44,18 @@ public abstract class Colaborador extends Persona {
         puntaje += unaDonacion.generarPuntaje();
     }
 
+    public void notify(Publicacion publicacion){
+        String tipoPublicacion = publicacion.getTipoPublicacion().toString();
+        String descripcion = publicacion.getDescripcion();
+        Mensaje mensaje = new Mensaje();
+        mensaje.setAsunto(tipoPublicacion);
+        mensaje.setDestinatario(this.correoElectronico);
+        mensaje.setContenido(descripcion);
+
+        medioDeNotificacion.Notificar(mensaje);
+    }
+
+
     public void realizarCanje(OfrecerProducto producto, Integer cantidad){
         if ((puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad>=producto.getStock() ) ){
             puntaje -= producto.getPuntosNecesarios()*cantidad;
@@ -55,10 +69,5 @@ public abstract class Colaborador extends Persona {
         }
 
     }
+
 }
-/*
-
-[Cantidad] -> [1,2,3]
-
-
-*/

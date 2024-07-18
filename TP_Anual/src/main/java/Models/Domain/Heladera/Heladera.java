@@ -4,6 +4,9 @@ import Models.Domain.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
+import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
+import Models.Domain.Heladera.Suscripciones.Publicacion;
+import Service.APIPuntos.AreaCobertura;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +21,7 @@ public class Heladera {
 
     public Heladera() {
         this.viandas = new ArrayList<>();
+        this.subscriptores = new ArrayList<>();
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
         this.cantidadDeFallas = 0;
@@ -36,7 +40,10 @@ public class Heladera {
     private Sensor sensorMovimiento;
     private Sensor sensorTemperatura;
     private Double temperaturaActual;
-    private int cantidadDeFallas;
+    private Integer cantidadDeFallas;
+    private Integer cantidadDeviandasRetiradas;
+    private List<ObserverHeladera> subscriptores;
+
 
     public void agregarVianda(Vianda ... vianda) {
         if ( capacidadDeViandas > viandas.size() ) {
@@ -63,6 +70,27 @@ public class Heladera {
     // Reestablecer la cantidad de fallas a 0
     public void reestablecerFallas() {
         this.cantidadDeFallas = 0;
+    }
+
+    public void registrarVianda(){ this.cantidadDeviandasRetiradas++; }
+
+    public void reestablecerViandas(){ this.cantidadDeviandasRetiradas = 0; }
+
+
+    public void agregarSubscriptor(ObserverHeladera observer) {
+        this.subscriptores.add(observer);
+    }
+
+    public void quitarSubscriptor(ObserverHeladera observer) {
+        this.subscriptores.remove(observer);
+    }
+
+    public void generarNuevaPublicacion(Publicacion publicacion) {
+        this.subscriptores.forEach(f->f.notify(publicacion, this));
+    }
+
+    public Boolean tieneCantidadDisponible(Integer cantidad){
+        return cantidad > (capacidadDeViandas - viandas.size());
     }
 }
 

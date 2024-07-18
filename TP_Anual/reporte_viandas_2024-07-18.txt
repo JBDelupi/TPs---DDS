@@ -1,0 +1,9 @@
+Reporte de Viandas por Colaborador
+==================================
+
+Colaborador: juan
+Cantidad de Viandas: 8
+
+Colaborador: jose
+Cantidad de Viandas: 25
+

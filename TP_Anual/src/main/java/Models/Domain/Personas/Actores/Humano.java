@@ -15,13 +15,14 @@ public class Humano extends Colaborador {
     private LocalDate fechaNacimiento;
     private TipoDeDocumento tipoDeDocumento;
     private String numeroDocumento;
-
+    private Integer cantidadViandasDonadas;
 
 
     public Humano(){
         this.setRolNegocio(TipoRolNegocio.HUMANO);
     }
 
-
+    public void reestablecerViandas(){this.cantidadViandasDonadas = 0;}
+    public void agregarVianda(){this.cantidadViandasDonadas++;}
 
 }
