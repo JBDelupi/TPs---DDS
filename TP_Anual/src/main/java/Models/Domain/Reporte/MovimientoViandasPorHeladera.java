@@ -57,8 +57,8 @@ public class MovimientoViandasPorHeladera {
                 int cantidadRetiradas = (int) heladeraMov[1];
                 int cantidadDepositadas = (int) heladeraMov[2];
                 writer.write("Heladera en: " + direccion);
-                writer.write("Viandas Depostiadas: " + cantidadDepositadas);
-                writer.write("Viandas Retiradas: " + cantidadRetiradas + "\n");
+                writer.write(" Viandas Depostiadas: " + cantidadDepositadas);
+                writer.write(" Viandas Retiradas: " + cantidadRetiradas + "\n");
             }
         }
     }

@@ -7,6 +7,7 @@ import Models.Domain.Heladera.Sensores.SensorTemperatura;
 import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
 import Models.Domain.Heladera.Suscripciones.Publicacion;
 import Service.APIPuntos.AreaCobertura;
+import Service.APIPuntos.Punto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,10 +29,10 @@ public class Heladera {
     }
 
     private Direccion direccion;
-    private Double longitud;
+    private Punto coordenadas;
     private int capacidadDeViandas;
     private LocalDate fechaDePuestaEnMarcha;
-    private EstadoHeladera actual;
+    private EstadoHeladera estadoActual;
     private Double temperaturaMax; //Celsius
     private Double temperaturaMin;
     private Boolean abierto;

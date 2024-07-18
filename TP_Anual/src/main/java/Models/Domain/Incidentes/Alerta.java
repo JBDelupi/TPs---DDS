@@ -7,7 +7,7 @@ public class Alerta extends Incidente {
 
     public Alerta(TipoAlerta tipo) {
         this.tipo = tipo;
-        this.heladera.setActual(EstadoHeladera.NO_DISPONIBLE);
+        this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
     }
 
     @Override

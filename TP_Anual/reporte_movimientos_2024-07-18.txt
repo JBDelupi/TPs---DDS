@@ -1,0 +1,6 @@
+Reporte de Movimientos Por Heladera
+=============================================
+
+Heladera en: Models.Domain.DatosPersonales.Direccion@c1f932c Viandas Depostiadas: 0 Viandas Retiradas: 1
+Heladera en: Models.Domain.DatosPersonales.Direccion@3cb26f41 Viandas Depostiadas: 0 Viandas Retiradas: 1
+Heladera en: Models.Domain.DatosPersonales.Direccion@5322247e Viandas Depostiadas: 0 Viandas Retiradas: 1

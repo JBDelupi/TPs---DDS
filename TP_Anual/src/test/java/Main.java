@@ -55,12 +55,15 @@ public class Main {
 
         Heladera heladera = new Heladera();
         heladera.setDireccion(new Direccion());
+        heladera.setCantidadDeviandasRetiradas(1);
 
         Heladera heladera2 = new Heladera();
         heladera2.setDireccion(new Direccion());
+        heladera2.setCantidadDeviandasRetiradas(1);
 
         Heladera heladera3 = new Heladera();
         heladera3.setDireccion(new Direccion());
+        heladera3.setCantidadDeviandasRetiradas(1);
 
         movimientoViandasPorHeladera.cargarListasheladeras(heladera);
         movimientoViandasPorHeladera.cargarListasheladeras(heladera2);
