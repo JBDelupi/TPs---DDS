@@ -1,5 +1,6 @@
 package Models.Domain.Builder;
 
+import Models.Domain.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 
 public class HeladeraBuilder {
@@ -24,9 +25,19 @@ public class HeladeraBuilder {
         return this;
     }
 
+    public HeladeraBuilder Direccion(Direccion direccion){
+        heladera.setDireccion(direccion);
+        return this;
+    }
+
+    public HeladeraBuilder abierto(Boolean abierto){
+        heladera.setAbierto(abierto);
+        return this;
+    }
+
+
 
     public Heladera construir(){
-
 
         return heladera;
     }

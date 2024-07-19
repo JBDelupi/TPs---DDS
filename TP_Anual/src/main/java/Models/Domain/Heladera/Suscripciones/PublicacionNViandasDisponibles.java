@@ -7,9 +7,11 @@ public class PublicacionNViandasDisponibles extends Publicacion {
 
     public PublicacionNViandasDisponibles(int cant) {
         this.cantidadDisponible = cant;
+        this.tipoPublicacion = TipoPublicacion.N_VIANDAS_DISPONIBLES;
     }
 
-    public Boolean verificarCondicion(Heladera heladera){
-        return  tipoPublicacion == TipoPublicacion.N_VIANDAS_DISPONIBLES && cantidadDisponible  == heladera.getCapacidadDeViandas();
+    @Override
+    public Boolean verificarCondicion(Publicacion publicacion, Heladera heladera){
+        return  publicacion.getTipoPublicacion() == tipoPublicacion  && cantidadDisponible  == heladera.getViandas().size();
     }
 }

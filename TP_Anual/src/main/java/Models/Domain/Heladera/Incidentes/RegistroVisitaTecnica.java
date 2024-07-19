@@ -1,4 +1,4 @@
-package Models.Domain.Incidentes;
+package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;

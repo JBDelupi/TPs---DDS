@@ -50,7 +50,8 @@ public abstract class Colaborador extends Persona {
         Mensaje mensaje = new Mensaje();
         mensaje.setAsunto(tipoPublicacion);
         mensaje.setDestinatario(this.correoElectronico);
-        mensaje.setContenido(descripcion);
+        mensaje.setRemitente(this.correoElectronico);
+        mensaje.setContenido(publicacion.getDescripcion());
 
         medioDeNotificacion.Notificar(mensaje);
     }

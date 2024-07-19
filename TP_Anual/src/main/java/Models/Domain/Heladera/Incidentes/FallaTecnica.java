@@ -1,7 +1,8 @@
-package Models.Domain.Incidentes;
+package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Suscripciones.PublicacionSufrioDesperfecto;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
@@ -10,7 +11,6 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public class FallaTecnica extends Incidente {
@@ -24,20 +24,17 @@ public class FallaTecnica extends Incidente {
     public FallaTecnica(Heladera heladera, Colaborador colaborador) {
         this.heladera = heladera;
         this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
+        this.heladera.generarNuevaPublicacion(new PublicacionSufrioDesperfecto());
         //this.avisarATecnico();
-        this.foto = "";
         this.colaborador = colaborador;
-        this.descripcion = "";
         this.visitasTecnicas = new ArrayList<>();
-        this.tipo = null;
     }
 
-    public List<Tecnico> avisarATecnico(List<Tecnico> tecnicos) {
-        SistemaGeolocalizacion sistemaGeolocalizacion = new SistemaGeolocalizacion();
+    public void avisarATecnico(List<Tecnico> tecnicos) {
+        SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
-        return sistemaGeolocalizacion.getTecnicosRegistrados().stream().
-                filter(f-> sistemaGeolocalizacion.estaDentroDe(f.getArea(), heladera.getCoordenadas()))
-                .collect(Collectors.toList());
+        Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
+        //Notificar al tecnico
     }
 
     public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado){

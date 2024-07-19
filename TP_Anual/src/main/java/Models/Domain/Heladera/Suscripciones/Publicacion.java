@@ -9,7 +9,5 @@ public abstract class Publicacion {
     protected String descripcion;
     protected TipoPublicacion tipoPublicacion;
 
-    protected Boolean verificarCondicion(Heladera heladera) {
-        return false;
-    }
+    protected abstract Boolean verificarCondicion(Publicacion publicacion, Heladera heladera);
 }

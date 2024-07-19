@@ -6,4 +6,6 @@ public interface ObserverHeladera {
 
 
     public void notify(Publicacion publicacion, Heladera heladera);
+
+    public void agregarPublicacion(Publicacion publicacion);
 }

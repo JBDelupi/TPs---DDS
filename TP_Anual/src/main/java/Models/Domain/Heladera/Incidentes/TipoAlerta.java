@@ -1,4 +1,4 @@
-package Models.Domain.Incidentes;
+package Models.Domain.Heladera.Incidentes;
 
 public enum TipoAlerta {
     TEMPERATURA,

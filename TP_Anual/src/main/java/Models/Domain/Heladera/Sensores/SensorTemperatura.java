@@ -1,8 +1,8 @@
 package Models.Domain.Heladera.Sensores;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Incidentes.Alerta;
-import Models.Domain.Incidentes.TipoAlerta;
+import Models.Domain.Heladera.Incidentes.Alerta;
+import Models.Domain.Heladera.Incidentes.TipoAlerta;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
@@ -51,7 +51,6 @@ public class SensorTemperatura implements Sensor {
     }
 
     public void notificar(){
-        //System.out.println(" TEMPERATURA EN PELIGRO DANGER D:");
         var incidente = new Alerta(TipoAlerta.TEMPERATURA);
         incidente.notificar();
     }

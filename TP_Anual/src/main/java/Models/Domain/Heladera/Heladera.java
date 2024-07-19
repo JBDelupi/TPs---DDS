@@ -6,6 +6,8 @@ import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
 import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
 import Models.Domain.Heladera.Suscripciones.Publicacion;
+import Models.Domain.Heladera.Suscripciones.PublicacionFaltanNViandasParaLLena;
+import Models.Domain.Heladera.Suscripciones.PublicacionNViandasDisponibles;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
@@ -49,6 +51,7 @@ public class Heladera {
     public void agregarVianda(Vianda ... vianda) {
         if ( capacidadDeViandas > viandas.size() ) {
             Collections.addAll(this.viandas, vianda);
+            generarNuevaPublicacion(new PublicacionFaltanNViandasParaLLena(capacidadDeViandas-viandas.size()));
         } else {
             estaLlena = true;
         }
@@ -58,6 +61,7 @@ public class Heladera {
             Vianda vianda = viandas.get(0);
             viandas.remove(vianda);
             sensorMovimiento.chequear();
+            generarNuevaPublicacion(new PublicacionNViandasDisponibles(this.viandas.size()));
             return vianda;
         }
         return null;
@@ -68,6 +72,8 @@ public class Heladera {
         this.cantidadDeFallas++;
     }
 
+
+
     // Reestablecer la cantidad de fallas a 0
     public void reestablecerFallas() {
         this.cantidadDeFallas = 0;
@@ -76,6 +82,10 @@ public class Heladera {
     public void registrarVianda(){ this.cantidadDeviandasRetiradas++; }
 
     public void reestablecerViandas(){ this.cantidadDeviandasRetiradas = 0; }
+
+
+
+
 
 
     public void agregarSubscriptor(ObserverHeladera observer) {
@@ -91,7 +101,8 @@ public class Heladera {
     }
 
     public Boolean tieneCantidadDisponible(Integer cantidad){
-        return cantidad > (capacidadDeViandas - viandas.size());
+        return cantidad < (capacidadDeViandas - viandas.size());
     }
+
 }
 
