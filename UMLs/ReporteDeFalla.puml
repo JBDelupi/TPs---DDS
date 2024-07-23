@@ -1,0 +1,52 @@
+@startuml ReporteDeFalla
+actor Colaborador
+boundary Interfaz_De_Usuario
+control Controlador_De_Rol
+entity Reporte_De_Falla
+entity Heladera
+entity Sistema_De_Geolocalizacion
+entity Tecnico
+
+
+Colaborador->Interfaz_De_Usuario: Generar reporte de falla tecnica
+activate Interfaz_De_Usuario
+
+Interfaz_De_Usuario->Controlador_De_Rol: Controlar Rol
+activate Controlador_De_Rol
+
+alt sin permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Sin permisos
+    Interfaz_De_Usuario->Colaborador: Acceso denegado
+else con permisos
+    Controlador_De_Rol->Reporte_De_Falla: Crear reporte de Falla
+    activate Reporte_De_Falla
+deactivate Controlador_De_Rol
+deactivate Interfaz_De_Usuario
+end
+
+Reporte_De_Falla->Heladera: Marcar como inactiva
+activate Heladera
+deactivate Heladera
+
+Reporte_De_Falla->Sistema_De_Geolocalizacion: Buscar tecnico mas cercano
+activate Sistema_De_Geolocalizacion
+Sistema_De_Geolocalizacion->Reporte_De_Falla: Tecnico mas cercano
+deactivate Sistema_De_Geolocalizacion
+
+Reporte_De_Falla->Tecnico: Notificar
+activate Tecnico
+deactivate Tecnico
+Reporte_De_Falla->Interfaz_De_Usuario: Reporte creador con exito
+deactivate Reporte_De_Falla
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario->Colaborador: Mostrar mensaje de exito
+activate Colaborador
+deactivate Colaborador
+deactivate Interfaz_De_Usuario
+
+
+
+
+
+
+@enduml

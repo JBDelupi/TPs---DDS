@@ -1,0 +1,41 @@
+@startuml GenerarRegistroDeVisita
+actor Tecnico
+boundary Interfaz_De_Usuario
+control Controlador_De_Rol
+entity Registro_De_Visita
+entity Heladera
+database Registros_BD
+
+Tecnico->Interfaz_De_Usuario: Generar reporte de visita
+activate Interfaz_De_Usuario
+
+Interfaz_De_Usuario->Controlador_De_Rol: Controlar Rol
+activate Controlador_De_Rol
+
+alt Sin permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Sin permisos
+    Interfaz_De_Usuario->Tecnico: Acceso denegado
+else Con permisos
+    Controlador_De_Rol->Registro_De_Visita: Crear registro de visita
+    activate Registro_De_Visita
+deactivate Controlador_De_Rol
+deactivate Interfaz_De_Usuario
+end
+
+alt Se soluciono el problema
+    Registro_De_Visita->Heladera: Marcar como activa
+    activate Heladera
+    deactivate Heladera
+end
+
+Registro_De_Visita->Registros_BD: almacenar registro
+activate Registros_BD
+deactivate Registros_BD
+
+Registro_De_Visita->Interfaz_De_Usuario:Registro creado con exito
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario->Tecnico: Mostrar mensaje de exito
+activate Tecnico
+deactivate Interfaz_De_Usuario
+
+@enduml

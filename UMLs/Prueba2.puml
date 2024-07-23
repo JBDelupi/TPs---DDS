@@ -1,0 +1,10 @@
+@startuml
+!include Prueba1.puml
+
+class C{
+    + domicilio
+}
+
+B->C
+
+@enduml

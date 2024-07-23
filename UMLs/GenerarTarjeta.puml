@@ -1,0 +1,31 @@
+@startuml GenerarTarjeta
+actor Persona_Humana
+boundary Interfaz_De_Usuario
+control Controlador_De_Rol
+entity Tarjeta
+
+Persona_Humana->Interfaz_De_Usuario: Generar tarjeta de persona vulnerable
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario-> Controlador_De_Rol: Controlar Rol de colaborador
+activate Controlador_De_Rol
+
+alt Sin permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Sin permisos
+    Interfaz_De_Usuario-> Persona_Humana: Acceso denegado
+    activate Persona_Humana
+
+else Con permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Acceso permitido
+end
+
+Interfaz_De_Usuario-> Persona_Humana: Pedir datos de persona vulnerable 
+deactivate Controlador_De_Rol
+Persona_Humana-> Interfaz_De_Usuario: Datos de persona vulnerable
+deactivate Persona_Humana
+Interfaz_De_Usuario->Tarjeta: Crear tarjeta con datos de persona vulnerable
+activate Tarjeta
+
+
+
+
+@enduml

@@ -1,0 +1,11 @@
+class A{
+    - nombre
+    - apellido
+}
+
+class B{
+    - color
+    - forma
+}
+
+A->B
