@@ -1,0 +1,47 @@
+@startuml
+actor PersonaJuridica
+boundary Interfaz_De_Usuario
+control Controlador_De_Rol
+control ControladorHeladera
+entity Heladera
+
+PersonaJuridica -> Interfaz_De_Usuario: Solicitar hacerse cargo de una heladera
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario -> Controlador_De_Rol : Verificar rol del usuario
+activate Controlador_De_Rol
+
+alt Usuario no tiene permisos
+    Controlador_De_Rol -> Interfaz_De_Usuario : Denegar rol
+    Interfaz_De_Usuario -> PersonaJuridica : Notificar falta de permisos
+else Usuario tiene permisos
+    Controlador_De_Rol -> Interfaz_De_Usuario : Confirmar rol
+    deactivate Controlador_De_Rol
+
+    Interfaz_De_Usuario -> ControladorHeladera : Procesar solicitud
+    deactivate Interfaz_De_Usuario
+    activate ControladorHeladera
+    deactivate ControladorHeladera
+    ControladorHeladera -> Heladera : Verificar disponibilidad de heladera
+    deactivate ControladorHeladera
+    activate Heladera
+
+    alt Heladera no disponible
+        Heladera -> ControladorHeladera : Confirmar no disponibilidad
+        activate ControladorHeladera
+        ControladorHeladera -> Interfaz_De_Usuario : Notificar no disponibilidad
+        deactivate ControladorHeladera
+        activate Interfaz_De_Usuario
+        Interfaz_De_Usuario -> PersonaJuridica : Notificar heladera no disponible
+        deactivate Interfaz_De_Usuario
+    else Heladera disponible
+        Heladera -> ControladorHeladera : Confirmar disponibilidad
+        deactivate Heladera
+        activate ControladorHeladera
+        ControladorHeladera -> Interfaz_De_Usuario : Confirmar procesamiento
+        deactivate ControladorHeladera
+        activate Interfaz_De_Usuario
+        Interfaz_De_Usuario -> PersonaJuridica : Notificar resultado
+        deactivate Interfaz_De_Usuario
+end
+end
+@enduml
