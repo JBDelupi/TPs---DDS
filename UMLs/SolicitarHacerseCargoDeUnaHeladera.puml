@@ -4,6 +4,7 @@ boundary Interfaz_De_Usuario
 control Controlador_De_Rol
 control ControladorHeladera
 entity Heladera
+boundary APIPUNTOS
 
 PersonaJuridica -> Interfaz_De_Usuario: Solicitar hacerse cargo de una heladera
 activate Interfaz_De_Usuario
@@ -37,11 +38,25 @@ else Usuario tiene permisos
         Heladera -> ControladorHeladera : Confirmar disponibilidad
         deactivate Heladera
         activate ControladorHeladera
-        ControladorHeladera -> Interfaz_De_Usuario : Confirmar procesamiento
-        deactivate ControladorHeladera
-        activate Interfaz_De_Usuario
-        Interfaz_De_Usuario -> PersonaJuridica : Notificar resultado
-        deactivate Interfaz_De_Usuario
+
+        alt Persona jurídica tiene local a la calle
+            ControladorHeladera -> Interfaz_De_Usuario : Confirmar procesamiento
+            activate Interfaz_De_Usuario
+            Interfaz_De_Usuario -> PersonaJuridica : Notificar resultado
+            deactivate Interfaz_De_Usuario
+        else Persona jurídica no tiene local a la calle
+            ControladorHeladera -> APIPUNTOS : Solicitar puntos de colocación
+            deactivate ControladorHeladera
+            activate APIPUNTOS
+            APIPUNTOS -> ControladorHeladera : Devolver puntos de colocación
+            deactivate APIPUNTOS
+            ControladorHeladera -> Interfaz_De_Usuario : Confirmar puntos de colocación
+            deactivate ControladorHeladera
+            activate Interfaz_De_Usuario
+            Interfaz_De_Usuario -> PersonaJuridica : Notificar puntos de colocación
+            deactivate Interfaz_De_Usuario
+        end
 end
 end
+
 @enduml
