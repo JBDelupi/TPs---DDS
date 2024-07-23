@@ -4,6 +4,9 @@ boundary Interfaz_De_Usuario
 control Controlador_De_Rol
 entity Donacion_De_Dinero
 
+activate Colaborador
+activate Interfaz_De_Usuario
+activate Controlador_De_Rol
 Colaborador->Interfaz_De_Usuario: Generar donacion de dinero
 
 Interfaz_De_Usuario->Controlador_De_Rol: Controlar Rol
@@ -16,7 +19,9 @@ alt Sin permisos
 end
 
 Controlador_De_Rol->Donacion_De_Dinero: Donar Dinero
+activate Donacion_De_Dinero
 Donacion_De_Dinero->Controlador_De_Rol: OK
 Controlador_De_Rol->Interfaz_De_Usuario: OK
 Interfaz_De_Usuario->Colaborador: OK
+
 @enduml
