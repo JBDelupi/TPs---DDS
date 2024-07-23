@@ -2,7 +2,7 @@ package Models.Domain.Personas.Actores;
 
 import Models.Domain.Heladera.Suscripciones.Publicacion;
 import Models.Domain.Producto.Canje;
-import Models.Domain.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Service.Notificacion.Mensaje;
@@ -45,15 +45,15 @@ public abstract class Colaborador extends Persona {
     }
 
     public void notify(Publicacion publicacion){
-        String tipoPublicacion = publicacion.getTipoPublicacion().toString();
-        String descripcion = publicacion.getDescripcion();
+
+
         Mensaje mensaje = new Mensaje();
-        mensaje.setAsunto(tipoPublicacion);
+        mensaje.setAsunto( publicacion.getTipoPublicacion().toString() );
         mensaje.setDestinatario(this.correoElectronico);
         mensaje.setRemitente(this.correoElectronico);
-        mensaje.setContenido(publicacion.getDescripcion());
+        mensaje.setContenido( publicacion.getDescripcion() );
 
-        medioDeNotificacion.Notificar(mensaje);
+       medioDeNotificacion.Notificar(mensaje);
     }
 
 

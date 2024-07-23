@@ -1,7 +1,7 @@
 package Service.SistemaDeGeolocalizacion;
 
 import Models.Domain.Builder.HeladeraBuilder;
-import Models.Domain.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 import Service.APIPuntos.Punto;
 
@@ -25,41 +25,39 @@ public class PseudoBaseDatosHeladera {
         heladera4 = new Heladera();
         heladera5 = new Heladera();
 
-        baseHeladeras = new ArrayList<Heladera>();
+        baseHeladeras = new ArrayList<>();
 
-        agregar(heladera1,heladera2,heladera3,heladera4,heladera5);
+        agregar(heladera1, heladera2, heladera3, heladera4, heladera5);
 
         ejecutar();
     }
 
-    public void agregar(Heladera ... h) {
+    public void agregar(Heladera... h) {
         Collections.addAll(this.baseHeladeras, h);
     }
 
-    public void ejecutar(){
-
-        for (Integer i = 0; i < baseHeladeras.size(); i++) {
+    public void ejecutar() {
+        for (int i = 0; i < baseHeladeras.size(); i++) {
             Punto punto = new Punto();
-            punto.setLongitud(i.toString());
-            punto.setLatitud(i.toString());
+            punto.setLongitud(Integer.toString(i));
+            punto.setLatitud(Integer.toString(i));
             Direccion direccion = new Direccion();
-            direccion.setCalle(i.toString() + 1);
+            direccion.setCalle(Integer.toString(i) + 1);
             direccion.setCentro(punto);
-            init(baseHeladeras.get(i),direccion);
+            baseHeladeras.set(i, init(baseHeladeras.get(i), direccion));
         }
-
     }
 
-    public Heladera init(Heladera heladera, Direccion direccion){
+    public Heladera init(Heladera heladera, Direccion direccion) {
         HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
-        return heladera = heladeraBuilder
+        return heladeraBuilder
                 .capacidadMaxima(10)
                 .abierto(true)
                 .Direccion(direccion)
                 .construir();
-
     }
 
 
-
 }
+
+

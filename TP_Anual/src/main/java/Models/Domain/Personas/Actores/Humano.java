@@ -1,6 +1,6 @@
 package Models.Domain.Personas.Actores;
 
-import Models.Domain.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import lombok.Getter;
 import lombok.Setter;

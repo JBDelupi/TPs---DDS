@@ -1,4 +1,4 @@
-package Models.Domain.DatosPersonales;
+package Models.Domain.Personas.DatosPersonales;
 
 import Service.APIPuntos.Punto;
 import lombok.Getter;

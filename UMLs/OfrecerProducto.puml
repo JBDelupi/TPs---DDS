@@ -1,0 +1,35 @@
+@startuml OfrecerProducto
+actor Colaborador_Juridico
+boundary Interfaz_De_Usuario
+control Controlador_De_Rol
+control Controlador_De_Compra
+entity Producto_Ofrecido
+
+activate Colaborador_Juridico
+Colaborador_Juridico->Interfaz_De_Usuario: Solcitar ofrecer un producto
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario->Controlador_De_Rol: Controlar rol
+activate Controlador_De_Rol
+alt Sin permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Sin permisos
+    Interfaz_De_Usuario->Colaborador_Juridico: Acceso denegado
+else Con permisos
+    Controlador_De_Rol->Interfaz_De_Usuario: Con permisos
+    Interfaz_De_Usuario->Colaborador_Juridico: Acceso permitido
+deactivate Controlador_De_Rol
+end
+
+Colaborador_Juridico->Interfaz_De_Usuario: Seleccionar producto
+Interfaz_De_Usuario->Controlador_De_Compra: Verificar disponibilidad de producto y puntos
+activate Controlador_De_Compra
+alt No se puede realizar el canje
+    Controlador_De_Compra->Interfaz_De_Usuario: Rechazar canje
+    Interfaz_De_Usuario->Colaborador_Juridico: Canje no posible
+else Se pudo realizar el canje
+    Controlador_De_Compra-> Producto_Ofrecido: Canjear producto
+    activate Producto_Ofrecido
+    deactivate Producto_Ofrecido
+    Controlador_De_Compra->Interfaz_De_Usuario: Aceptar canje
+    Interfaz_De_Usuario->Colaborador_Juridico: Canje realizado
+end
+@enduml

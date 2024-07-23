@@ -1,13 +1,7 @@
 package Controller;
 
-import Models.Domain.DatosPersonales.TipoDeDocumento;
-import Models.Domain.Personas.Actores.Humano;
 import io.javalin.http.Context;
 import jakarta.servlet.http.HttpSession;
-
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginController extends Controller {
 

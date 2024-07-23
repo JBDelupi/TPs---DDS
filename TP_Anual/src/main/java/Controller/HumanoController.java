@@ -1,16 +1,12 @@
 package Controller;
 
-import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Actores.Humano;
-import Models.Domain.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Repository.RepoColaboradores;
-import Service.Server.ICrudViewsHandler;
 
 import io.javalin.http.Context;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HumanoController extends Controller  {
     public HumanoController() {

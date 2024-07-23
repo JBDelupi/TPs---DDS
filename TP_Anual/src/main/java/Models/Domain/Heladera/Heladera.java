@@ -1,6 +1,6 @@
 package Models.Domain.Heladera;
 
-import Models.Domain.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
@@ -8,7 +8,6 @@ import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
 import Models.Domain.Heladera.Suscripciones.Publicacion;
 import Models.Domain.Heladera.Suscripciones.PublicacionFaltanNViandasParaLLena;
 import Models.Domain.Heladera.Suscripciones.PublicacionNViandasDisponibles;
-import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
 import lombok.Setter;

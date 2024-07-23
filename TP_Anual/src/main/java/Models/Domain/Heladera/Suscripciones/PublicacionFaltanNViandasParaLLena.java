@@ -14,6 +14,7 @@ public class PublicacionFaltanNViandasParaLLena extends Publicacion{
 
     @Override
     public Boolean verificarCondicion(Publicacion publicacion,Heladera heladera){
+        this.descripcion = "Cantidad " + String.valueOf(heladera.getViandas().size() );
         return tipoPublicacion == publicacion.getTipoPublicacion() &&
                 (heladera.getCapacidadDeViandas() - heladera.getViandas().size()  == cantidadFaltante || heladera.getEstaLlena());
 

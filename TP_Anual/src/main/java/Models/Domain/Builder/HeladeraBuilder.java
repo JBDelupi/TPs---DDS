@@ -1,6 +1,6 @@
 package Models.Domain.Builder;
 
-import Models.Domain.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 
 public class HeladeraBuilder {

@@ -12,6 +12,7 @@ public class PublicacionNViandasDisponibles extends Publicacion {
 
     @Override
     public Boolean verificarCondicion(Publicacion publicacion, Heladera heladera){
+        this.descripcion = "Cantidad " + String.valueOf(heladera.getViandas().size() );
         return  publicacion.getTipoPublicacion() == tipoPublicacion  && cantidadDisponible  == heladera.getViandas().size();
     }
 }

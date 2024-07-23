@@ -2,7 +2,7 @@ package TestEntrega3;
 
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Suscripciones.*;
@@ -13,8 +13,6 @@ import Service.Notificacion.CorreoAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.awt.dnd.DragGestureEvent;
 
 public class TestEntrega3_Suscripcion {
     Humano lucas;
@@ -28,7 +26,7 @@ public class TestEntrega3_Suscripcion {
         lucas = humanoBuilder
                 .nombre("Lucas")
                 .apellido("martinez")
-                .correoElectronico("juanchydelupi@gmail.com")
+                .correoElectronico("lucasiturrioz212@gmail.com")
                 .construir();
         lucas.setMedioDeNotificacion(new CorreoAdapter());
 
@@ -115,11 +113,16 @@ public class TestEntrega3_Suscripcion {
         Publicacion unaPublicacion = new PublicacionSufrioDesperfecto();
         subscriptor.agregarPublicacion(unaPublicacion);
 
+
+
+
         Punto punto = new Punto();
-        punto.setLatitud("3");
-        punto.setLongitud("3");
+        punto.setLatitud("7");
+        punto.setLongitud("7");
+
         Direccion direccion = new Direccion();
         direccion.setCentro(punto);
+
         heladera.setDireccion(direccion);
 
         FallaTecnica unaFalla = new FallaTecnica(heladera,lucas);

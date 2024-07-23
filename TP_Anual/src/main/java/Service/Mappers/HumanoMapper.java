@@ -7,7 +7,7 @@ import Models.Domain.FormasDeContribucion.ContribucionesHumana.DonacionDeVianda;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.Personas.Actores.Humano;
-import Models.Domain.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.DTO.HumanoDTO;
 import Service.DTO.FormaColaboracionDTO;
 

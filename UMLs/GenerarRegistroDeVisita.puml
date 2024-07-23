@@ -4,7 +4,6 @@ boundary Interfaz_De_Usuario
 control Controlador_De_Rol
 entity Registro_De_Visita
 entity Heladera
-database Registros_BD
 
 Tecnico->Interfaz_De_Usuario: Generar reporte de visita
 activate Interfaz_De_Usuario
@@ -28,9 +27,6 @@ alt Se soluciono el problema
     deactivate Heladera
 end
 
-Registro_De_Visita->Registros_BD: almacenar registro
-activate Registros_BD
-deactivate Registros_BD
 
 Registro_De_Visita->Interfaz_De_Usuario:Registro creado con exito
 activate Interfaz_De_Usuario

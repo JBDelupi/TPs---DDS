@@ -2,7 +2,7 @@ package Models.Domain.Builder.UsuariosBuilder;
 
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
-import Models.Domain.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 
 public class TecnicoBuilder {
     private Tecnico tecnico;

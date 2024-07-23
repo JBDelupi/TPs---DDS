@@ -34,12 +34,6 @@ public class SistemaGeolocalizacion {
 
 
     public List<Heladera> generarHeladerasDisponibles(AreaCobertura area, Integer cantidadDeAlimentos) {
-        System.out.println(
-                heladerasDisponibles.stream().filter(
-                        f->f.tieneCantidadDisponible(cantidadDeAlimentos)
-                ).toList().size()
-
-        );
         return heladerasDisponibles.stream().filter(
                 f->f.tieneCantidadDisponible(cantidadDeAlimentos) && estaDentroDe(area, f.getDireccion().getCentro())
         ).toList();
