@@ -1,0 +1,42 @@
+@startuml
+actor PersonaHumana
+boundary Interfaz_De_Usuario
+control ControladorDeRol
+control ContribucionController
+entity TarjetaDeAcceso
+
+PersonaHumana -> Interfaz_De_Usuario: Solicitar donar vianda
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario -> ControladorDeRol: Verificar rol del usuario
+activate ControladorDeRol
+
+alt Usuario no tiene permisos
+    ControladorDeRol -> Interfaz_De_Usuario: Denegar rol
+    Interfaz_De_Usuario -> PersonaHumana: Notificar falta de permisos
+    deactivate Interfaz_De_Usuario
+end
+    ControladorDeRol -> Interfaz_De_Usuario: Confirmar rol
+    deactivate ControladorDeRol
+    activate Interfaz_De_Usuario
+
+    Interfaz_De_Usuario -> ContribucionController: Procesar solicitud de donación
+    deactivate Interfaz_De_Usuario
+    activate ContribucionController
+
+    alt Primera vez colaborando
+        ContribucionController -> TarjetaDeAcceso: Crear tarjeta de acceso
+        deactivate ContribucionController
+        activate TarjetaDeAcceso
+        TarjetaDeAcceso -> ContribucionController: Tarjeta creada
+        deactivate TarjetaDeAcceso
+        activate ContribucionController
+    end
+
+    ContribucionController -> Interfaz_De_Usuario: Confirmar procesamiento de donación
+    deactivate ContribucionController
+    activate Interfaz_De_Usuario
+    Interfaz_De_Usuario -> PersonaHumana: Notificar resultado
+    deactivate Interfaz_De_Usuario
+
+
+@enduml
