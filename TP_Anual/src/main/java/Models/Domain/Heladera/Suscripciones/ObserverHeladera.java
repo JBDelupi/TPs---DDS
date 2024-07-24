@@ -4,8 +4,6 @@ import Models.Domain.Heladera.Heladera;
 
 public interface ObserverHeladera {
 
+     void update(TipoDePublicacion tipoDePublicacion,Heladera heladera);
 
-    public void notify(Publicacion publicacion, Heladera heladera);
-
-    public void agregarPublicacion(Publicacion publicacion);
 }

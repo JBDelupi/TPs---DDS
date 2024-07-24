@@ -1,29 +1,29 @@
 package Service.Notificacion;
 
-public class NotificacionBuilder {
+public class MensajeBuilder {
   private Mensaje  mensaje;
 
 
-  public NotificacionBuilder() {
+  public MensajeBuilder() {
       mensaje = new Mensaje();
   }
 
-  public NotificacionBuilder contenido(String contenido){
+  public MensajeBuilder contenido(String contenido){
       this.mensaje.setContenido(contenido);
       return this;
   }
 
-    public NotificacionBuilder destinatario(String destinatario){
+    public MensajeBuilder destinatario(String destinatario){
         this.mensaje.setDestinatario(destinatario);
         return this;
     }
 
-    public NotificacionBuilder remitente(String remitente){
+    public MensajeBuilder remitente(String remitente){
         this.mensaje.setRemitente(remitente);
         return this;
     }
 
-    public NotificacionBuilder asunto(String asunto){
+    public MensajeBuilder asunto(String asunto){
         this.mensaje.setAsunto(asunto);
         return this;
     }

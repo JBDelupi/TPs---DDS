@@ -1,13 +1,10 @@
 package Models.Domain.Heladera;
 
+import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
-import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
-import Models.Domain.Heladera.Suscripciones.Publicacion;
-import Models.Domain.Heladera.Suscripciones.PublicacionFaltanNViandasParaLLena;
-import Models.Domain.Heladera.Suscripciones.PublicacionNViandasDisponibles;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +24,7 @@ public class Heladera {
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
         this.cantidadDeFallas = 0;
+        this.cantidadDeviandasRetiradas = 0;
     }
 
     private Direccion direccion;
@@ -50,7 +48,7 @@ public class Heladera {
     public void agregarVianda(Vianda ... vianda) {
         if ( capacidadDeViandas > viandas.size() ) {
             Collections.addAll(this.viandas, vianda);
-            generarNuevaPublicacion(new PublicacionFaltanNViandasParaLLena(capacidadDeViandas-viandas.size()));
+            generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
         } else {
             estaLlena = true;
         }
@@ -60,11 +58,13 @@ public class Heladera {
             Vianda vianda = viandas.get(0);
             viandas.remove(vianda);
             sensorMovimiento.chequear();
-            generarNuevaPublicacion(new PublicacionNViandasDisponibles(this.viandas.size()));
+            generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
             return vianda;
         }
         return null;
     }
+
+
 
     //  Registrar una falla
     public void registrarFalla() {
@@ -95,8 +95,8 @@ public class Heladera {
         this.subscriptores.remove(observer);
     }
 
-    public void generarNuevaPublicacion(Publicacion publicacion) {
-        this.subscriptores.forEach(f->f.notify(publicacion, this));
+    public void generarNuevaPublicacion(TipoDePublicacion publicacion) {
+        this.subscriptores.forEach(f->f.update(publicacion, this));
     }
 
     public Boolean tieneCantidadDisponible(Integer cantidad){

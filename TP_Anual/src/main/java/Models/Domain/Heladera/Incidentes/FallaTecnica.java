@@ -2,7 +2,8 @@ package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Suscripciones.PublicacionSufrioDesperfecto;
+import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
+import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
@@ -24,7 +25,7 @@ public class FallaTecnica extends Incidente {
     public FallaTecnica(Heladera heladera, Colaborador colaborador) {
         this.heladera = heladera;
         this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
-        this.heladera.generarNuevaPublicacion(new PublicacionSufrioDesperfecto());
+        this.heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
         //this.avisarATecnico();
         this.colaborador = colaborador;
         this.visitasTecnicas = new ArrayList<>();

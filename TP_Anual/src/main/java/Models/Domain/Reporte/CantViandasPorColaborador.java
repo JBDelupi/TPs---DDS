@@ -34,6 +34,7 @@ public class CantViandasPorColaborador {
         listashumanos.add(humano);
     }
 
+
     // Saco una lista de tuplas con nombre y cantidad de viandas
     public List<Object[]> obtenerListadoDeViandas(List<Humano> humanos) {
         List<Object[]> listadoDeViandas = new ArrayList<>();

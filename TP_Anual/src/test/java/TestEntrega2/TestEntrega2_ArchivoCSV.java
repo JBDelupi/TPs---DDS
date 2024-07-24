@@ -6,7 +6,7 @@ import Service.ImportadorCSV.ImportadorCSV;
 import Service.Mappers.HumanoMapper;
 import Service.Notificacion.CorreoAdapter;
 import Service.Notificacion.Mensaje;
-import Service.Notificacion.NotificacionBuilder;
+import Service.Notificacion.MensajeBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -64,7 +64,7 @@ public class TestEntrega2_ArchivoCSV {
 
 
         for(HumanoDTO humanoDTO : importados){
-            NotificacionBuilder notificacion = new NotificacionBuilder();
+            MensajeBuilder notificacion = new MensajeBuilder();
             Mensaje mensaje = notificacion.asunto("Nuevo colaborador")
                                           .contenido("Datos de usuario")
                                                   .destinatario(humanoDTO.getMail())

@@ -1,7 +1,7 @@
 package Models.Domain.Heladera.Suscripciones;
 
-public enum TipoPublicacion {
+public enum TipoDePublicacion {
+    FALTAN_N_VIANDAS,
     N_VIANDAS_DISPONIBLES,
-    FALTAN_N_VIANDAS_PARA_LLENA,
     SUFRIO_DESPERFECTO
 }

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 public class TestEntrega3_Suscripcion {
     Humano lucas;
-    ObserverHeladera subscriptor;
     Heladera heladera;
 
     @BeforeEach
@@ -28,27 +27,25 @@ public class TestEntrega3_Suscripcion {
                 .apellido("martinez")
                 .correoElectronico("lucasiturrioz212@gmail.com")
                 .construir();
-        lucas.setMedioDeNotificacion(new CorreoAdapter());
-
-        HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
+                lucas.setMedioDeNotificacion(new CorreoAdapter());
 
         heladera = new Heladera();
 
-        subscriptor = new SubscriptorHeladera(lucas);
     }
     @Test
     public void PrimeraSubscripcion(){
+        ObserverHeladera subscriptor = new FaltanNViandasParaLlenar(lucas,1);
         heladera.agregarSubscriptor(subscriptor);
+
         Assertions.assertEquals(1, heladera.getSubscriptores().size());
     }
 
     @Test
     public void LeInteresaQueLeNotifiquenNViandasDisponibles(){
+        ObserverHeladera subscriptor = new NViandasDisponibles(lucas,0);
+
         heladera.agregarSubscriptor(subscriptor);
 
-        Publicacion unaPublicacion = new PublicacionNViandasDisponibles(0);
-
-        subscriptor.agregarPublicacion(unaPublicacion);
         heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
         heladera.agregarVianda(new Vianda());
@@ -60,13 +57,16 @@ public class TestEntrega3_Suscripcion {
 
     @Test
     public void NoLeInteresaQueLeNotifiquenNviandasDisponibles(){
+        ObserverHeladera subscriptor = new NViandasDisponibles(lucas,1);
+//
         heladera.agregarSubscriptor(subscriptor);
 
-        Publicacion unaPublicacion = new PublicacionNViandasDisponibles(1);
-
-        subscriptor.agregarPublicacion(unaPublicacion);
         heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
+
+        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda(new Vianda());
         heladera.agregarVianda(new Vianda());
 
         Vianda vianda = heladera.obtenerVianda();
@@ -76,11 +76,9 @@ public class TestEntrega3_Suscripcion {
 
     @Test
     public void LeInteresaQueLeNotifiquenPublicacionesNviandasParaLlenar(){
+        ObserverHeladera subscriptor = new FaltanNViandasParaLlenar(lucas,1);
         heladera.agregarSubscriptor(subscriptor);
 
-        Publicacion unaPublicacion = new PublicacionFaltanNViandasParaLLena(1);
-
-        subscriptor.agregarPublicacion(unaPublicacion);
         heladera.setCapacidadDeViandas(2);
         heladera.setAbierto(true);
         heladera.agregarVianda(new Vianda());
@@ -92,12 +90,11 @@ public class TestEntrega3_Suscripcion {
 
     @Test
     public void NoLeInteresaQueLeNotifiquenPublicacionesNviandasParaLlenar(){
+        ObserverHeladera subscriptor = new FaltanNViandasParaLlenar(lucas,2);
         heladera.agregarSubscriptor(subscriptor);
 
-        Publicacion unaPublicacion = new PublicacionFaltanNViandasParaLLena(2);
 
-        subscriptor.agregarPublicacion(unaPublicacion);
-        heladera.setCapacidadDeViandas(2);
+        heladera.setCapacidadDeViandas(5);
         heladera.setAbierto(true);
         heladera.agregarVianda(new Vianda());
 
@@ -108,22 +105,10 @@ public class TestEntrega3_Suscripcion {
 
     @Test
     public void LeInteresaQueLeNotifiqueHeladeraSeRompio(){
+
+        ObserverHeladera subscriptor = new SufrioDesperfecto(lucas);
         heladera.agregarSubscriptor(subscriptor);
 
-        Publicacion unaPublicacion = new PublicacionSufrioDesperfecto();
-        subscriptor.agregarPublicacion(unaPublicacion);
-
-
-
-
-        Punto punto = new Punto();
-        punto.setLatitud("7");
-        punto.setLongitud("7");
-
-        Direccion direccion = new Direccion();
-        direccion.setCentro(punto);
-
-        heladera.setDireccion(direccion);
 
         FallaTecnica unaFalla = new FallaTecnica(heladera,lucas);
 

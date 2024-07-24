@@ -1,6 +1,5 @@
 package Models.Domain.Personas.Actores;
 
-import Models.Domain.Heladera.Suscripciones.Publicacion;
 import Models.Domain.Producto.Canje;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
@@ -44,16 +43,8 @@ public abstract class Colaborador extends Persona {
         puntaje += unaDonacion.generarPuntaje();
     }
 
-    public void notify(Publicacion publicacion){
-
-
-        Mensaje mensaje = new Mensaje();
-        mensaje.setAsunto( publicacion.getTipoPublicacion().toString() );
-        mensaje.setDestinatario(this.correoElectronico);
-        mensaje.setRemitente(this.correoElectronico);
-        mensaje.setContenido( publicacion.getDescripcion() );
-
-       medioDeNotificacion.Notificar(mensaje);
+    public void notify(Mensaje publicacion){
+       medioDeNotificacion.Notificar(publicacion);
     }
 
 
