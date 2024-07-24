@@ -14,7 +14,7 @@ activate Controlador_De_Rol
 alt Usuario no tiene permisos
     Controlador_De_Rol -> Interfaz_De_Usuario : Denegar rol
     Interfaz_De_Usuario -> PersonaJuridica : Notificar falta de permisos
-else Usuario tiene permisos
+end
     Controlador_De_Rol -> Interfaz_De_Usuario : Confirmar rol
     deactivate Controlador_De_Rol
 
@@ -34,7 +34,7 @@ else Usuario tiene permisos
         activate Interfaz_De_Usuario
         Interfaz_De_Usuario -> PersonaJuridica : Notificar heladera no disponible
         deactivate Interfaz_De_Usuario
-    else Heladera disponible
+    end
         Heladera -> ControladorHeladera : Confirmar disponibilidad
         deactivate Heladera
         activate ControladorHeladera
@@ -55,8 +55,6 @@ else Usuario tiene permisos
             activate Interfaz_De_Usuario
             Interfaz_De_Usuario -> PersonaJuridica : Notificar puntos de colocación
             deactivate Interfaz_De_Usuario
-        end
-end
 end
 
 @enduml
