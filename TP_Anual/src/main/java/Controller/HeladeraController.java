@@ -13,6 +13,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     public void index(Context context){
         context.render("fridge-map.hbs");
     }
+
+
     public void show(Object ... Context){
 
     }

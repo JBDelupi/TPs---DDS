@@ -51,8 +51,9 @@ public class SensorTemperatura implements Sensor {
     }
 
     public void notificar(){
-        var incidente = new Alerta(TipoAlerta.TEMPERATURA);
-        incidente.notificar();
+        // var incidente = new Alerta(TipoAlerta.TEMPERATURA);
+      //  incidente.notificar();
+        System.out.println("SE ESTA QUEMANDO UFF");
     }
 
 

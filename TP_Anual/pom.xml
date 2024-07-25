@@ -19,11 +19,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
         </dependency>
+        <!-- NOTIFICACION -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <!-- TESTING-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -79,5 +81,18 @@
             <artifactId>handlebars</artifactId>
             <version>4.3.1</version>
         </dependency>
+        <!-- BROKER -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.21.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20240303</version>
+        </dependency>
+
     </dependencies>
 </project>

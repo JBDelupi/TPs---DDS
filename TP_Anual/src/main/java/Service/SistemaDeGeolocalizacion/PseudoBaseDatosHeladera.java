@@ -45,6 +45,10 @@ public class PseudoBaseDatosHeladera {
             direccion.setCalle(Integer.toString(i) + 1);
             direccion.setCentro(punto);
             baseHeladeras.set(i, init(baseHeladeras.get(i), direccion));
+            baseHeladeras.get(i).setID(i+1);
+            baseHeladeras.get(i).setTemperaturaMin(5.00);
+            baseHeladeras.get(i).setTemperaturaMax(10.00);
+
         }
     }
 

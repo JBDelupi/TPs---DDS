@@ -27,6 +27,8 @@ public class Heladera {
         this.cantidadDeviandasRetiradas = 0;
     }
 
+
+    private Integer ID;
     private Direccion direccion;
     private Punto coordenadas;
     private int capacidadDeViandas;
@@ -102,6 +104,11 @@ public class Heladera {
     public Boolean tieneCantidadDisponible(Integer cantidad){
         return cantidad < (capacidadDeViandas - viandas.size());
     }
+
+
+
+
+
 
 }
 
