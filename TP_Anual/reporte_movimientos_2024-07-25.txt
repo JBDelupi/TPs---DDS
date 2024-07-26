@@ -1,0 +1,23 @@
+Reporte de Movimientos Por Heladera
+=============================================
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@20fa23c1
+Viandas Depositadas: 0
+Viandas Retiradas: 0
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@3581c5f3
+Viandas Depositadas: 0
+Viandas Retiradas: 0
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@6aa8ceb6
+Viandas Depositadas: 0
+Viandas Retiradas: 0
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@2530c12
+Viandas Depositadas: 0
+Viandas Retiradas: 0
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@73c6c3b2
+Viandas Depositadas: 0
+Viandas Retiradas: 0
+

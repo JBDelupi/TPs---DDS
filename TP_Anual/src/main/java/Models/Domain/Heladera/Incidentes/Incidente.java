@@ -13,10 +13,5 @@ public abstract class Incidente {
     protected Heladera heladera;
     protected Boolean solucionado;
 
-    public Incidente() {
 
-    }
-
-
-    public void notificar(){}
 }

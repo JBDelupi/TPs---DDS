@@ -3,6 +3,7 @@ package Models.Domain.FormasDeContribucion.Utilidades;
 import Models.Domain.Builder.ContribucionBuilder.*;
 import Models.Domain.Builder.TarjetaBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
+import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
@@ -13,8 +14,11 @@ import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Producto.Producto;
-import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
+import Models.Domain.Tarjetas.*;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -42,7 +46,7 @@ public class FactoryContribucion {
                 .frecuencia(tipoFrecuencia)
                 .construir();
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return  donacion;
     }
@@ -65,7 +69,7 @@ public class FactoryContribucion {
                 .construir();
 
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return donacion;
 
@@ -80,8 +84,17 @@ public class FactoryContribucion {
         Integer cantidad = (Integer) Context[3];
         String motivo = (String) Context[4];
 
-        // Arreglar
 
+        TarjetaAccesosAHeladera tarjeta = this.colaborador.getTarjeta();
+
+        SolicitudDeApertura solicitudDeApertura;
+        solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
+
+        if(solicitudDeApertura == null){
+            throw new NoHaySolicitudExepction("No hay solicitud o expiro");
+        }
+        solicitudDeApertura.setRealizada(true);
+        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.QUITAR);
 
 
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
@@ -93,7 +106,7 @@ public class FactoryContribucion {
                 .motivos(motivo)
                 .construir();
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return donacion;
     }
@@ -106,7 +119,6 @@ public class FactoryContribucion {
         Integer menoresACargo = (Integer) Context[2];
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
-        TarjetaBuilder tarjetaBuilder = new TarjetaBuilder();
 
         PersonaVulnerable persona =
                 vulnerableBuilder
@@ -114,15 +126,12 @@ public class FactoryContribucion {
                         .menoresACargo(menoresACargo)
                         .construir();
 
-    /*
-        TarjetaPersonaVulnerable nuevaTarjetaPersonaVulnerable =
-                tarjetaBuilder
-                .titular(persona)
-                        .construir();
-    */
-        FormaDeContribucion donacion = new EntregaDeTarjeta();
+        TarjetaPersonaVulnerable tarjeta = new TarjetaPersonaVulnerable(persona);
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        FormaDeContribucion donacion = new EntregaDeTarjeta(tarjeta);
+
+
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return donacion;
     }
@@ -143,7 +152,7 @@ public class FactoryContribucion {
                 .heladera(heladera)
                 .construir();
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return donacion;
     }
@@ -165,7 +174,7 @@ public class FactoryContribucion {
                 .puntosNecesarios(puntosNecesarios)
                 .construir();
 
-        this.colaborador.agregarNuevaDonacion(donacion);
+        this.colaborador.generarNuevaDonacion(donacion);
 
         return donacion;
     }
@@ -184,5 +193,17 @@ public class FactoryContribucion {
         return contribucion;
     }
 
+    public SolicitudDeApertura procesarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion contexto) {
+        LocalDateTime ahora = LocalDateTime.now();
+        SolicitudDeApertura solicitudDeApertura = null;
+
+        for (SolicitudDeApertura solicitud : solicitudes) {
+            if (solicitud.getAccion().equals(contexto) && !solicitud.getFechaLimite().isBefore(ahora) && !solicitud.getRealizada()) {
+                solicitudDeApertura = solicitud;
+                break;
+            }
+        }
+        return  solicitudDeApertura;
+    }
 
 }

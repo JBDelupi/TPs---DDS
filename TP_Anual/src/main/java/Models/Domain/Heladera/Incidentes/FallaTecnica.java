@@ -2,17 +2,20 @@ package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
+import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
+import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @Getter
 public class FallaTecnica extends Incidente {
     private Colaborador colaborador;
@@ -46,4 +49,5 @@ public class FallaTecnica extends Incidente {
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);
         }
     }
+
 }

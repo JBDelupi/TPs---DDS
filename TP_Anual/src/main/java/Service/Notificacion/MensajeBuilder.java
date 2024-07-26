@@ -1,7 +1,7 @@
 package Service.Notificacion;
 
 public class MensajeBuilder {
-  private Mensaje  mensaje;
+  private Mensaje mensaje;
 
 
   public MensajeBuilder() {

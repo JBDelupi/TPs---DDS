@@ -1,6 +1,5 @@
-package Service.Broker;
+package Service.Broker.Controllers;
 
-import Service.Notificacion.Mensaje;
 import org.json.JSONObject;
 
 public interface Publicacion {

@@ -10,7 +10,4 @@ public class HacerseCargoDeHeladera extends FormaDeContribucion {
     private Heladera heladera;
 
 
-    public HacerseCargoDeHeladera (){
-    }
-
 }

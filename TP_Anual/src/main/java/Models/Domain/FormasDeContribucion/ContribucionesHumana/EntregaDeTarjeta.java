@@ -14,6 +14,7 @@ public class EntregaDeTarjeta extends FormaDeContribucion {
         this.tarjetaPersonaVulnerable = tarjetaPersonaVulnerable;
         this.fechaDeDonacion = LocalDate.now();
     }
+
     public EntregaDeTarjeta(){
         this.fechaDeDonacion = LocalDate.now();
     }

@@ -1,14 +1,10 @@
-package Service.Notificacion;
+package Service.Notificacion.Correo;
 
 
-
-import org.eclipse.jetty.http.HttpTester;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 

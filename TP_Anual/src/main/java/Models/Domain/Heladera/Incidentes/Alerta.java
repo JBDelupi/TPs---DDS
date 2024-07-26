@@ -1,17 +1,17 @@
 package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.EstadoHeladera;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
+import lombok.Getter;
 
+@Getter
 public class Alerta extends Incidente {
     private TipoAlerta tipo;
 
-    public Alerta(TipoAlerta tipo) {
+    public Alerta(TipoAlerta tipo, Heladera heladera) {
         this.tipo = tipo;
-        this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
+        this.heladera = heladera;
     }
 
-    @Override
-    public void notificar() {
-        System.out.println("PELIGRO! Alerta de tipo: " + tipo);
-    }
 }

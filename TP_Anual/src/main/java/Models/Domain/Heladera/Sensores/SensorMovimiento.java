@@ -1,7 +1,8 @@
 package Models.Domain.Heladera.Sensores;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
-import Models.Domain.Heladera.Incidentes.TipoAlerta;
+import Models.Domain.Heladera.Incidentes.Incidente;
+import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 
 public class SensorMovimiento implements Sensor {
     private Heladera heladera;
@@ -14,7 +15,8 @@ public class SensorMovimiento implements Sensor {
 
     public void chequear(){
         if(this.estaCerradaHeladera() && this.estaPrendido){
-            this.notificar();
+            Alerta incidente = new Alerta(TipoAlerta.FRAUDE, heladera);
+            heladera.notify(incidente);
         }
     }
 
@@ -26,12 +28,6 @@ public class SensorMovimiento implements Sensor {
     @Override
     public void desactivar() {
         this.estaPrendido = false;
-    }
-
-    public void notificar(){
-
-        var incidente = new Alerta(TipoAlerta.FRAUDE);
-        incidente.notificar();
     }
 
 

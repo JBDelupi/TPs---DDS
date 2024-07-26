@@ -10,46 +10,39 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovimientoViandasPorHeladera  extends Reporte{
+public class MovimientoViandasPorHeladera  extends TemplateReporte<Heladera> {
 
 
-    public MovimientoViandasPorHeladera() {
-        this.chromeTask = new ChromeTask();
-        this.listaObjecto = new ArrayList<>();
-    }
 
-
-    public List<Object[]> obtenerListadoDeMovimientos(List<Object> objetos) {
+    @Override
+    protected List<Object[]> obtenerListado(List<Heladera> heladeras) {
         List<Object[]> listadoDeMovimientos = new ArrayList<>();
-
-        for (Object obj : objetos) {
-            if (obj instanceof Heladera) {
-                Heladera heladera = (Heladera) obj;
-                String direccion = heladera.getDireccion().toString();
-                int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
-                int cantidadDeViandasDepositadas = heladera.getViandas().size();
-
-                listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasRetiradas, cantidadDeViandasDepositadas});
-            }
+        for (Heladera heladera : heladeras) {
+            String direccion = heladera.getDireccion().toString();
+            int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
+            int cantidadDeViandasDepositadas = heladera.getViandas().size();
+            listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasRetiradas, cantidadDeViandasDepositadas});
         }
         return listadoDeMovimientos;
     }
 
+    @Override
+    protected String getFilePath() {
+        return "reporte_movimientos_" + LocalDate.now().toString() + ".txt";
+    }
 
-    public void armarReporte(String filePath) throws IOException {
+    @Override
+    protected void armarReporte(List<Object[]> listado, String filePath) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("Reporte de Movimientos Por Heladera\n");
             writer.write("=============================================\n\n");
-
-
-            for (Object[] heladeraMov : obtenerListadoDeMovimientos( listaObjecto)  ) {
-
+            for (Object[] heladeraMov : listado) {
                 String direccion = (String) heladeraMov[0];
                 int cantidadRetiradas = (int) heladeraMov[1];
                 int cantidadDepositadas = (int) heladeraMov[2];
-                writer.write("Heladera en: " + direccion);
-                writer.write(" Viandas Depostiadas: " + cantidadDepositadas);
-                writer.write(" Viandas Retiradas: " + cantidadRetiradas + "\n");
+                writer.write("Heladera en: " + direccion + "\n");
+                writer.write("Viandas Depositadas: " + cantidadDepositadas + "\n");
+                writer.write("Viandas Retiradas: " + cantidadRetiradas + "\n\n");
             }
         }
     }

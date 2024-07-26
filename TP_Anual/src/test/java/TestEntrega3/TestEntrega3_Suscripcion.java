@@ -1,15 +1,13 @@
 package TestEntrega3;
 
-import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.Humano;
-import Service.APIPuntos.Punto;
-import Service.Notificacion.CorreoAdapter;
+import Service.Notificacion.Correo.CorreoAdapter;
+import Service.Notificacion.Telegram.TelegramAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +23,9 @@ public class TestEntrega3_Suscripcion {
         lucas = humanoBuilder
                 .nombre("Lucas")
                 .apellido("martinez")
-                .correoElectronico("lucasiturrioz212@gmail.com")
+                .correoElectronico("2067757786")
                 .construir();
-                lucas.setMedioDeNotificacion(new CorreoAdapter());
+                lucas.setMedioDeNotificacion(new TelegramAdapter());
 
         heladera = new Heladera();
 

@@ -1,5 +1,6 @@
 package Service.Broker;
 
+import Service.Broker.Controllers.Publicacion;
 import com.rabbitmq.client.*;
 import org.json.JSONObject;
 

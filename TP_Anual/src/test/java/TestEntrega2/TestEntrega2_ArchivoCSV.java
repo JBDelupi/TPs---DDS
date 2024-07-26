@@ -4,7 +4,7 @@ import Models.Domain.Personas.Actores.Humano;
 import Service.DTO.HumanoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import Service.Mappers.HumanoMapper;
-import Service.Notificacion.CorreoAdapter;
+import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 import com.opencsv.exceptions.CsvValidationException;

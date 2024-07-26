@@ -1,0 +1,13 @@
+Reporte de Fallas por Heladera
+===============================
+
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@20fa23c1
+Cantidad de Fallas: 0
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@3581c5f3
+Cantidad de Fallas: 0
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@6aa8ceb6
+Cantidad de Fallas: 0
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@2530c12
+Cantidad de Fallas: 0
+Heladera en: Models.Domain.Personas.DatosPersonales.Direccion@73c6c3b2
+Cantidad de Fallas: 0

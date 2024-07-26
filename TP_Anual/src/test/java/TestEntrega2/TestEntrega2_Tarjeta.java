@@ -1,12 +1,36 @@
 package TestEntrega2;
 
-/*
+
+import Controller.Controller;
+import Controller.ContribucionController;
+import Models.Domain.Excepciones.LimiteDeTarjetaException;
+import Models.Domain.Excepciones.Permisos;
+import Models.Domain.Excepciones.SinViandasException;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
+import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
+import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Vianda;
+import Models.Domain.Personas.Actores.*;
+import Models.Domain.Tarjetas.Tarjeta;
+import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
+import Models.Domain.Tarjetas.TipoAccion;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.time.LocalDate;
+
 public class TestEntrega2_Tarjeta {
     Colaborador fulano;
     Colaborador nasa;
     PersonaVulnerable persona1;
-    Tarjeta tarjeta1;
-    FactoryContribucion controller;
+    TarjetaPersonaVulnerable tarjeta1;
+    ContribucionController controller;
+
+
 
     Vianda pollo;
     Vianda galletita;
@@ -23,8 +47,12 @@ public class TestEntrega2_Tarjeta {
         fulano = new Humano();
         nasa = new Juridico();
 
-        persona1 = new PersonaVulnerable("Persona1", 0);
-        tarjeta1 = new Tarjeta((Humano) fulano, persona1);
+        persona1 = new PersonaVulnerable();
+        persona1.setMenoresACargo(0);
+        persona1.setNombre("PersonaVulnerable");
+
+        tarjeta1 = new TarjetaPersonaVulnerable(persona1);
+        tarjeta1.setColaborador((Humano) fulano);
 
         pollo = new Vianda();
         galletita = new Vianda();
@@ -40,8 +68,8 @@ public class TestEntrega2_Tarjeta {
     // Se crea correctamente la entrega de tarjetas
     @Test
     public void creacionDeEntregaTarjetas()throws IOException {
-        controller = new FactoryContribucion(fulano);
-        controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
+        controller = new ContribucionController(fulano);
+        controller.save(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
         Assertions.assertEquals(1, fulano.getFormaDeContribucion().size());
     }
 
@@ -49,16 +77,16 @@ public class TestEntrega2_Tarjeta {
     // Se crea una persona vulnerable
     @Test
     public void registroDePersonaVulnerable() throws IOException {
-        controller = new FactoryContribucion(fulano);
-        controller.create(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
+        controller = new ContribucionController(fulano);
+        controller.save(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
 
         FormaDeContribucion contribucion = fulano.getFormaDeContribucion().get(0);
 
         // Verifica si la contribución es del tipo que tiene una tarjeta
         if (contribucion instanceof EntregaDeTarjeta) {
             EntregaDeTarjeta contribucionConTarjeta = (EntregaDeTarjeta) contribucion;
-            String nombre = contribucionConTarjeta.getTarjeta().getTitular().getNombre();
-            Assertions.assertEquals("PersonaVulnerable", nombre);
+            PersonaVulnerable persona = (PersonaVulnerable) contribucionConTarjeta.getTarjetaPersonaVulnerable().getTitular();
+            Assertions.assertEquals("PersonaVulnerable", persona.getNombre());
         } else {
             Assertions.fail("La contribución no es del tipo ContribucionConTarjeta");
         }
@@ -67,9 +95,9 @@ public class TestEntrega2_Tarjeta {
     // Tira error si una juridica trata de entregar tarjetas
     @Test
     public void unaPersonaJuridicaNoPuedeEntregarTarjeta()throws IOException {
-        controller = new FactoryContribucion(nasa);
-        Assertions.assertThrows(FactoryContribucion.UnauthorizedAccessException.class, () -> {
-            controller.create(TipoDonacion.ENTREGA_TARJETAS, null, null);
+        controller = new ContribucionController(nasa);
+        Assertions.assertThrows(Permisos.UnauthorizedAccessException.class, () -> {
+            controller.save(TipoDonacion.ENTREGA_TARJETAS, null, null);
         });
     }
 
@@ -80,34 +108,53 @@ public class TestEntrega2_Tarjeta {
     public void cantidadDeUsosMaximaAlcanzada(){
         heladera.setAbierto(true);
 
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
+        tarjeta1.agregarNuevoUso(heladera, TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
 
-
-        Assertions.assertEquals(4, tarjeta1.getUsos().size());
+        Assertions.assertThrows(LimiteDeTarjetaException.class, () -> {
+            tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        });
     }
 
     // Se reinicia la cantidad de usos tras un nuevo dia
     @Test
-    public void reinicioDeUsos() {
+    public void reinicioDeUsosPeroNoHayMasViandasEnLaHeladera() {
         heladera.setAbierto(true);
 
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
-        tarjeta1.agregarNuevoUso(heladera);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
 
         LocalDate maniana = LocalDate.now().plusDays(1);
         tarjeta1.setFechaUltUso(maniana);
 
-        tarjeta1.agregarNuevoUso(heladera);
+        Assertions.assertThrows(SinViandasException.class, () -> {
+            tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        });
 
 
-        Assertions.assertEquals(1, tarjeta1.getUsosHoy());
     }
 
+    @Test
+    public void reinicioDeUsos(){
+        heladera.setAbierto(true);
+
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+
+        LocalDate maniana = LocalDate.now().plusDays(1);
+        tarjeta1.setFechaUltUso(maniana);
+
+        tarjeta1.agregarNuevoUso(heladera,TipoAccion.QUITAR);
+
+        Assertions.assertEquals(4, tarjeta1.getUsos().size());
+
+    }
+
+
+
+
 }
-*/

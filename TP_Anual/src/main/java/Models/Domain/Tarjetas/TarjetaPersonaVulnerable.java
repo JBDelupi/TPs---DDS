@@ -1,5 +1,7 @@
 package Models.Domain.Tarjetas;
 
+import Models.Domain.Excepciones.LimiteDeTarjetaException;
+import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Persona;
@@ -25,21 +27,26 @@ public class TarjetaPersonaVulnerable extends Tarjeta {
         this.cantMaxUso = 4 + 2 * ((PersonaVulnerable)getTitular()).getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
         this.usosHoy = 0;
+        this.usos = new ArrayList<>();
     }
 
-    public void agregarNuevoUso(Heladera heladera){
+    public void agregarNuevoUso(Heladera heladera, TipoAccion tipoAccion){
         this.calcularUsosHoy();
-        if(this.usosHoy < this.cantMaxUso ){
-            Vianda viandaConsume = heladera.obtenerVianda();
-            RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume,TipoAccion.QUITAR);
-            getUsos().add(unNuevoUso);
-            this.usosHoy++;
-            System.out.println("Uso exitoso tarjeta cantidad disponible: " +  (cantMaxUso - usosHoy) );
-        } else {
-            System.out.println("Cantidad limite usada");
+
+        if (this.usosHoy >= this.cantMaxUso) {
+            throw new LimiteDeTarjetaException("Cantidad límite usada");
         }
 
+        Vianda viandaConsume = heladera.obtenerVianda();
+        RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume,tipoAccion);
+        nuevoRegistro(unNuevoUso);
+        this.usosHoy++;
+        System.out.println("Uso exitoso tarjeta cantidad disponible: " +  (cantMaxUso - usosHoy) );
+
+
     }
+
+
 
     public void calcularUsosHoy() {
         LocalDate hoy = LocalDate.now();

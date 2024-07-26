@@ -1,4 +1,7 @@
-package Service.Notificacion;
+package Service.Notificacion.Correo;
+
+import Service.Notificacion.Mensaje;
+import Service.Notificacion.Notificacion;
 
 public class CorreoAdapter implements Notificacion {
 

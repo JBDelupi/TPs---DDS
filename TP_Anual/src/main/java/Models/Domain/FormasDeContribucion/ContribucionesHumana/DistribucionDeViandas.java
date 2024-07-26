@@ -11,9 +11,6 @@ public class DistribucionDeViandas extends FormaDeContribucion {
     private Integer cantidadDeViandasAMover;
     private String motivo;
 
-    public DistribucionDeViandas(){
-
-    }
 
 
     @Override

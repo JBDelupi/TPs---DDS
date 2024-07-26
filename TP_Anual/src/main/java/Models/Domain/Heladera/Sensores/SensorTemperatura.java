@@ -2,7 +2,8 @@ package Models.Domain.Heladera.Sensores;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
-import Models.Domain.Heladera.Incidentes.TipoAlerta;
+import Models.Domain.Heladera.Incidentes.Incidente;
+import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
@@ -34,12 +35,11 @@ public class SensorTemperatura implements Sensor {
     public void chequear(){
        if ( this.superaTemperaturaMax() || this.superaTemperaturaMin() )
        {
-           this.notificar();
+           Alerta incidente = new Alerta(TipoAlerta.TEMPERATURA, heladera);
+           heladera.notify(incidente);
            this.tareaProgramada.pausarTarea();
        }
     }
-
-
 
 
     public boolean superaTemperaturaMax(){
@@ -48,12 +48,6 @@ public class SensorTemperatura implements Sensor {
 
     public boolean superaTemperaturaMin(){
         return heladera.getTemperaturaActual() < heladera.getTemperaturaMin();
-    }
-
-    public void notificar(){
-        // var incidente = new Alerta(TipoAlerta.TEMPERATURA);
-      //  incidente.notificar();
-        System.out.println("SE ESTA QUEMANDO UFF");
     }
 
 

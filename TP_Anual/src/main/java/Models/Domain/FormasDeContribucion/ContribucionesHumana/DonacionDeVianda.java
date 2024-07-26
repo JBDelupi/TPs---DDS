@@ -10,8 +10,6 @@ public class DonacionDeVianda extends FormaDeContribucion {
     private Vianda vianda;
     private Heladera heladera;
 
-    public DonacionDeVianda(){
-    }
 
     @Override
     public Double generarPuntaje() {

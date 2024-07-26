@@ -4,6 +4,7 @@ import Models.Domain.Personas.Actores.Persona;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -14,10 +15,10 @@ public abstract class Tarjeta {
     protected List<RegistroDeUso> usos;
 
     public Tarjeta() {
-
+        this.usos = new ArrayList<>();
     }
 
-    public void agregarNuevoUso(RegistroDeUso registroDeUso) {
+    public void nuevoRegistro(RegistroDeUso registroDeUso) {
         usos.add(registroDeUso);
     }
 }

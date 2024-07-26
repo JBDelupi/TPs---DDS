@@ -1,7 +1,5 @@
-package Models.Domain.Heladera.Incidentes;
+package Models.Domain.Heladera.Incidentes.Utils;
 
-import Models.Domain.Heladera.EstadoHeladera;
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Tecnico;
 import lombok.Getter;
 import lombok.Setter;

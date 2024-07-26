@@ -12,10 +12,4 @@ public class OfrecerProducto extends FormaDeContribucion {
     private Double puntosNecesarios;
     private Integer stock;
 
-
-    public OfrecerProducto() {
-    }
-
-
-
 }

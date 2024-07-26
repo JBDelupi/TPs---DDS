@@ -1,5 +1,9 @@
 package Models.Domain.Heladera;
 
+import Models.Domain.Excepciones.HeladeraLlenaException;
+import Models.Domain.Excepciones.SinViandasException;
+import Models.Domain.Heladera.Incidentes.Alerta;
+import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
@@ -48,22 +52,29 @@ public class Heladera {
 
 
     public void agregarVianda(Vianda ... vianda) {
-        if ( capacidadDeViandas > viandas.size() ) {
-            Collections.addAll(this.viandas, vianda);
-            generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
-        } else {
-            estaLlena = true;
+
+        if ( capacidadDeViandas == viandas.size() ) {
+            this.estaLlena = true;
+            throw new HeladeraLlenaException("Esta llena la heladera");
         }
+
+        Collections.addAll(this.viandas, vianda);
+        generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
+
     }
+
+
+
     public Vianda obtenerVianda() {
-        if (!this.viandas.isEmpty()) {
-            Vianda vianda = viandas.get(0);
-            viandas.remove(vianda);
-            sensorMovimiento.chequear();
-            generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
-            return vianda;
+        if (this.viandas.isEmpty()) {
+            throw new SinViandasException("No ha viandas");
         }
-        return null;
+        Vianda vianda = viandas.get(0);
+        viandas.remove(vianda);
+        sensorMovimiento.chequear();
+        generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
+        return vianda;
+
     }
 
 
@@ -105,7 +116,9 @@ public class Heladera {
         return cantidad < (capacidadDeViandas - viandas.size());
     }
 
-
+    public void notify(Alerta incidente){
+        System.out.println("Hay un incidente el incidente es :" + incidente.getTipo());
+    }
 
 
 

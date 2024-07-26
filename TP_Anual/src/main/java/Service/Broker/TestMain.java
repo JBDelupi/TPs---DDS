@@ -52,6 +52,14 @@ public class TestMain {
         // Ruta de ejemplo en Javalin
         app.get("/", ctx -> ctx.result("Servidor Javalin funcionando!"));
         */
+        JSONObject message = new JSONObject();
+        message.put("type", "alerta"); // Esta es la clave esperada por el consumidor
+        message.put("value", "Temperatura alta en la heladera"); // Esta clave también debe estar presente en el consumidor
+        message.put("heladeraId", "1"); // Asegúrate de incluir esta clave si es necesaria para el consumidor
+
+// Publicar el mensaje con una clave de enrutamiento específica
+        String routingKey = "heladera.1";
+        adapter.publish(routingKey, message);
 
 
     }
