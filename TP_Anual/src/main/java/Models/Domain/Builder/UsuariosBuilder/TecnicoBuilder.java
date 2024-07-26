@@ -3,6 +3,7 @@ package Models.Domain.Builder.UsuariosBuilder;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Service.Notificacion.Notificacion;
 
 public class TecnicoBuilder {
     private Tecnico tecnico;
@@ -26,8 +27,13 @@ public class TecnicoBuilder {
         return this;
     }
 
-    public TecnicoBuilder medioDeContacto(String medioDeContacto){
-        tecnico.setMedioDeContacto(medioDeContacto);
+    public TecnicoBuilder correoElectronico(String correoElectronico){
+        tecnico.setCorreoElectronico(correoElectronico);
+        return this;
+    }
+
+    public TecnicoBuilder medioDeNotificacion(Notificacion medioDeNotificacion){
+        tecnico.setMedioDeNotificacion(medioDeNotificacion);
         return this;
     }
 

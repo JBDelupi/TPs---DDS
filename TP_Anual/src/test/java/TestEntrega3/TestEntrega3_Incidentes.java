@@ -10,6 +10,7 @@ import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
+import Service.Notificacion.Correo.CorreoAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,14 +69,21 @@ public class TestEntrega3_Incidentes {
         heladera = new Heladera();
         tecnicoBuilder1 = new TecnicoBuilder();
         tecnicoBuilder1.area(area1);
+        tecnicoBuilder1.nombre("Tecnico 1");;
+        tecnicoBuilder1.medioDeNotificacion(new CorreoAdapter());
         tecnico1 = tecnicoBuilder1.construir();
 
         tecnicoBuilder2 = new TecnicoBuilder();
         tecnicoBuilder2.area(area2);
+        tecnicoBuilder2.nombre("Tecnico 2");
+        tecnicoBuilder2.correoElectronico("juanchydelupi@gmail.com");
+        tecnicoBuilder2.medioDeNotificacion(new CorreoAdapter());
         tecnico2 = tecnicoBuilder2.construir();
 
         tecnicoBuilder3 = new TecnicoBuilder();
         tecnicoBuilder3.area(area3);
+        tecnicoBuilder3.nombre("Tecnico 3");
+        tecnicoBuilder3.medioDeNotificacion(new CorreoAdapter());
         tecnico3 = tecnicoBuilder3.construir();
 
         listaTecnicos = new ArrayList<Tecnico>();
@@ -117,7 +125,8 @@ public class TestEntrega3_Incidentes {
     //Se debe permitir que los técnicos sean avisados cuando corresponde y registren las visitas.
     public void TecnicoRecibeAvisoFallaTecnica() throws IOException {
         fallaTecnicaHumano = new FallaTecnica(heladera, colaboradorHumano);
-    //    Assertions.assertEquals(2,fallaTecnicaHumano.avisarATecnico(listaTecnicos).size());
+        Tecnico tecnicoANotificar = fallaTecnicaHumano.avisarATecnico(listaTecnicos);
+        Assertions.assertEquals("Tecnico 2",tecnicoANotificar.getNombre());
     }
 }
 

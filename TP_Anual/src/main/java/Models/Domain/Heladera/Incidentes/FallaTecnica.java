@@ -7,6 +7,7 @@ import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Tecnico;
+import Service.Notificacion.Mensaje;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,16 +30,20 @@ public class FallaTecnica extends Incidente {
         this.heladera = heladera;
         this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         this.heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
-        //this.avisarATecnico();
         this.colaborador = colaborador;
         this.visitasTecnicas = new ArrayList<>();
     }
 
-    public void avisarATecnico(List<Tecnico> tecnicos) {
+    public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
         Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
-        //Notificar al tecnico
+        Mensaje mensaje = new Mensaje();
+        mensaje.setDestinatario(tecnicoMasCercano.getCorreoElectronico());
+        mensaje.setAsunto("Falla Tecnica");
+        mensaje.setContenido("Falla Tecnica en" + this.heladera);
+        tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
+        return tecnicoMasCercano;
     }
 
     public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado){

@@ -57,11 +57,15 @@ public class SistemaGeolocalizacion {
 
 
 
-    public Tecnico masCercanoAPunto (Punto punto) {
-        Tecnico masCercano = new Tecnico();
-        List<Tecnico> listaFiltrada = new ArrayList<>();
-        listaFiltrada = this.tecnicosRegistrados.stream().filter(f-> estaDentroDe(f.getArea(), punto)).toList();
-        double distanciaMinima = distanciaEntrePuntos(listaFiltrada.get(0).getArea().getCentro(), punto);
+    public Tecnico masCercanoAPunto(Punto punto) {
+        List<Tecnico> listaFiltrada = this.tecnicosRegistrados.stream()
+                .filter(f -> estaDentroDe(f.getArea(), punto))
+                .toList();
+        if (listaFiltrada.isEmpty()) {
+            return null; // Probablemente haya que tirar una excepcion
+        }
+        Tecnico masCercano = listaFiltrada.get(0);
+        double distanciaMinima = distanciaEntrePuntos(masCercano.getArea().getCentro(), punto);
         for (Tecnico tecnico : listaFiltrada) {
             double distancia = distanciaEntrePuntos(tecnico.getArea().getCentro(), punto);
             if (distancia < distanciaMinima) {
@@ -69,8 +73,10 @@ public class SistemaGeolocalizacion {
                 masCercano = tecnico;
             }
         }
+
         return masCercano;
     }
+
 
 }
 

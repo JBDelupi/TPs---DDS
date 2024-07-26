@@ -31,6 +31,9 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     public void save(Object ... Context){
         FactoryContribucion factoryContribucion = new FactoryContribucion((Colaborador) this.usuario);
         FormaDeContribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
+        
+        // GUARDAR BASE DE DATOS
+
 
 
     }

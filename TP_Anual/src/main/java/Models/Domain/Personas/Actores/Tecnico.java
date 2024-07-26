@@ -3,6 +3,7 @@ package Models.Domain.Personas.Actores;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
+import Service.Notificacion.Notificacion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,9 @@ public class Tecnico extends Persona {
     private TipoDeDocumento tipoDocumento;
     private String nroDocumento;
     private String cuil;
-    private String medioDeContacto; // ver si son varios o uno solo
     private AreaCobertura area;
+    private Notificacion medioDeNotificacion;
+    private String correoElectronico;
 
     public Tecnico() {
         this.setRolNegocio(TipoRolNegocio.TECNICO);

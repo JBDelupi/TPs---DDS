@@ -44,6 +44,7 @@ public class HumanoController extends Controller  {
 
     }
 
+    // @GET
     public void create(Context context){
 
         context.render("registroHumana.hbs");
