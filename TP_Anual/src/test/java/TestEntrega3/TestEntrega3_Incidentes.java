@@ -11,6 +11,7 @@ import Models.Domain.Personas.Actores.Tecnico;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import Service.Notificacion.Correo.CorreoAdapter;
+import Service.Notificacion.Telegram.TelegramAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,8 +77,8 @@ public class TestEntrega3_Incidentes {
         tecnicoBuilder2 = new TecnicoBuilder();
         tecnicoBuilder2.area(area2);
         tecnicoBuilder2.nombre("Tecnico 2");
-        tecnicoBuilder2.correoElectronico("juanchydelupi@gmail.com");
-        tecnicoBuilder2.medioDeNotificacion(new CorreoAdapter());
+        tecnicoBuilder2.correoElectronico("541161978325");
+        tecnicoBuilder2.medioDeNotificacion(new TelegramAdapter());
         tecnico2 = tecnicoBuilder2.construir();
 
         tecnicoBuilder3 = new TecnicoBuilder();

@@ -98,6 +98,12 @@
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
+        <!-- WHATSAPP -->
+        <dependency>
+            <groupId>com.green-api</groupId>
+            <artifactId>whatsapp-chatbot-java</artifactId>
+            <version>{{version}}</version>
+        </dependency>
 
     </dependencies>
 </project>

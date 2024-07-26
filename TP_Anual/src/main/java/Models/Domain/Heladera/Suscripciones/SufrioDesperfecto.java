@@ -2,9 +2,13 @@ package Models.Domain.Heladera.Suscripciones;
 
 
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Suscripciones.Sugerencia.SistemaDeRedistribucion;
+import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
+import Models.Domain.Heladera.Suscripciones.Sugerencia.SugerenciaCompuesta;
 import Models.Domain.Personas.Actores.Colaborador;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
+import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
 
 
 public class SufrioDesperfecto implements ObserverHeladera {
@@ -19,9 +23,14 @@ public class SufrioDesperfecto implements ObserverHeladera {
     public void update(TipoDePublicacion publicacion, Heladera heladera) {
         if( publicacion.equals(TipoDePublicacion.SUFRIO_DESPERFECTO) ){
             MensajeBuilder nuevaPublicacionBuilder = new MensajeBuilder();
+
+            PseudoBaseDatosHeladera base = new PseudoBaseDatosHeladera();
+            SistemaDeRedistribucion sistema = new SistemaDeRedistribucion(base.baseHeladeras);
+            Sugerencia sugerencia = sistema.generarSugerencia(heladera.getViandas().size());
+
             Mensaje unaPublicacion = nuevaPublicacionBuilder
                     .asunto(TipoDePublicacion.SUFRIO_DESPERFECTO.toString())
-                    .contenido("Se rompio")
+                    .contenido(sugerencia.mostrar())
                     .destinatario(colaborador.getCorreoElectronico())
                     .construir();
 

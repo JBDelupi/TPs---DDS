@@ -106,7 +106,12 @@ public class TestEntrega3_Suscripcion {
 
         ObserverHeladera subscriptor = new SufrioDesperfecto(lucas);
         heladera.agregarSubscriptor(subscriptor);
+        heladera.setCapacidadDeViandas(5);
 
+
+        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda(new Vianda());
+        heladera.agregarVianda(new Vianda());
 
         FallaTecnica unaFalla = new FallaTecnica(heladera,lucas);
 
