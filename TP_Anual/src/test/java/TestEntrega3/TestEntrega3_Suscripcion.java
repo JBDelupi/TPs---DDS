@@ -7,6 +7,7 @@ import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.Humano;
 import Service.Notificacion.Correo.CorreoAdapter;
+import Service.Notificacion.SMS.SmsAdapter;
 import Service.Notificacion.Telegram.TelegramAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,18 +15,36 @@ import org.junit.jupiter.api.Test;
 
 public class TestEntrega3_Suscripcion {
     Humano lucas;
+    Humano tobi;
+    Humano bauti;
     Heladera heladera;
 
     @BeforeEach
     public void init(){
-        HumanoBuilder humanoBuilder = new HumanoBuilder();
+        HumanoBuilder humanoBuilder1 = new HumanoBuilder();
 
-        lucas = humanoBuilder
+
+        lucas = humanoBuilder1
                 .nombre("Lucas")
-                .apellido("martinez")
+                .apellido("Martinez")
                 .correoElectronico("2067757786")
                 .construir();
                 lucas.setMedioDeNotificacion(new TelegramAdapter());
+
+        bauti = humanoBuilder1
+                .nombre("Bauti")
+                .apellido("Delupi")
+                .correoElectronico("1738213090")
+                .construir();
+                bauti.setMedioDeNotificacion(new TelegramAdapter());
+
+
+        tobi = humanoBuilder1
+                .nombre("Tobi")
+                .apellido("Duren")
+                .correoElectronico("541156383089")
+                .construir();
+                tobi.setMedioDeNotificacion(new SmsAdapter());
 
         heladera = new Heladera();
 

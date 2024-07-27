@@ -29,7 +29,7 @@ public class HumanoBuilder {
     }
 
     public HumanoBuilder correoElectronico(String correo){
-        this.humano.setCorreoElectronico(correo);
+        this.humano.setCodigoDeNotificacion(correo);
         return this;
     }
 

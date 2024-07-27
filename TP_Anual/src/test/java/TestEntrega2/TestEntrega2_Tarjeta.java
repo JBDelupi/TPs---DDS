@@ -1,20 +1,17 @@
 package TestEntrega2;
 
 
-import Controller.Controller;
 import Controller.ContribucionController;
 import Models.Domain.Excepciones.LimiteDeTarjetaException;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.*;
-import Models.Domain.Tarjetas.Tarjeta;
-import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
+import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Domain.Tarjetas.TipoAccion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +24,7 @@ public class TestEntrega2_Tarjeta {
     Colaborador fulano;
     Colaborador nasa;
     PersonaVulnerable persona1;
-    TarjetaPersonaVulnerable tarjeta1;
+    TarjetaAlimentar tarjeta1;
     ContribucionController controller;
 
 
@@ -51,7 +48,7 @@ public class TestEntrega2_Tarjeta {
         persona1.setMenoresACargo(0);
         persona1.setNombre("PersonaVulnerable");
 
-        tarjeta1 = new TarjetaPersonaVulnerable(persona1);
+        tarjeta1 = new TarjetaAlimentar(persona1);
         tarjeta1.setColaborador((Humano) fulano);
 
         pollo = new Vianda();
@@ -85,7 +82,7 @@ public class TestEntrega2_Tarjeta {
         // Verifica si la contribución es del tipo que tiene una tarjeta
         if (contribucion instanceof EntregaDeTarjeta) {
             EntregaDeTarjeta contribucionConTarjeta = (EntregaDeTarjeta) contribucion;
-            PersonaVulnerable persona = (PersonaVulnerable) contribucionConTarjeta.getTarjetaPersonaVulnerable().getTitular();
+            PersonaVulnerable persona = (PersonaVulnerable) contribucionConTarjeta.getTarjetaAlimentar().getTitular();
             Assertions.assertEquals("PersonaVulnerable", persona.getNombre());
         } else {
             Assertions.fail("La contribución no es del tipo ContribucionConTarjeta");

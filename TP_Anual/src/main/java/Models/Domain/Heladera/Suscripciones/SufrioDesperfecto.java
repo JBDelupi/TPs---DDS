@@ -4,7 +4,6 @@ package Models.Domain.Heladera.Suscripciones;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.SistemaDeRedistribucion;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
-import Models.Domain.Heladera.Suscripciones.Sugerencia.SugerenciaCompuesta;
 import Models.Domain.Personas.Actores.Colaborador;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
@@ -31,7 +30,7 @@ public class SufrioDesperfecto implements ObserverHeladera {
             Mensaje unaPublicacion = nuevaPublicacionBuilder
                     .asunto(TipoDePublicacion.SUFRIO_DESPERFECTO.toString())
                     .contenido(sugerencia.mostrar())
-                    .destinatario(colaborador.getCorreoElectronico())
+                    .destinatario(colaborador.getCodigoDeNotificacion())
                     .construir();
 
             colaborador.notify(unaPublicacion);

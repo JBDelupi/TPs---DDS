@@ -1,9 +1,5 @@
 package Models.Domain.Builder;
 
-import Models.Domain.Personas.Actores.Humano;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Domain.Tarjetas.TarjetaPersonaVulnerable;
-
 public class TarjetaBuilder {
  /*   private TarjetaPersonaVulnerable tarjetaPersonaVulnerable;
 

@@ -28,7 +28,7 @@ public class TecnicoBuilder {
     }
 
     public TecnicoBuilder correoElectronico(String correoElectronico){
-        tecnico.setCorreoElectronico(correoElectronico);
+        tecnico.setCodigoDeNotificacion(correoElectronico);
         return this;
     }
 

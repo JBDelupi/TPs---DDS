@@ -1,7 +1,6 @@
 package Models.Domain.Tarjetas;
 
 import Models.Domain.Excepciones.LimiteDeTarjetaException;
-import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Persona;
@@ -12,17 +11,16 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter
-public class TarjetaPersonaVulnerable extends Tarjeta {
+public class TarjetaAlimentar extends Tarjeta {
     private Humano colaborador;
     private Integer cantMaxUso;
     private Integer usosHoy;
     private LocalDate fechaUltUso;
 
-    public TarjetaPersonaVulnerable(Persona titular){
+    public TarjetaAlimentar(Persona titular){
         this.titular = titular;
         this.cantMaxUso = 4 + 2 * ((PersonaVulnerable)getTitular()).getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
@@ -45,8 +43,6 @@ public class TarjetaPersonaVulnerable extends Tarjeta {
 
 
     }
-
-
 
     public void calcularUsosHoy() {
         LocalDate hoy = LocalDate.now();

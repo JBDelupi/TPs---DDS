@@ -24,7 +24,7 @@ public class FaltanNViandasParaLlenar implements ObserverHeladera {
             Mensaje unaPublicacion = nuevaPublicacionBuilder
                     .asunto(TipoDePublicacion.FALTAN_N_VIANDAS.toString())
                     .contenido("N viandas faltan")
-                    .destinatario(colaborador.getCorreoElectronico())
+                    .destinatario(colaborador.getCodigoDeNotificacion())
                     .construir();
 
             colaborador.notify(unaPublicacion);

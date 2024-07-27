@@ -21,7 +21,7 @@ public class JuridicoBuilder {
     }
 
     public JuridicoBuilder correoElectronico(String correo){
-        this.juridico.setCorreoElectronico(correo);
+        this.juridico.setCodigoDeNotificacion(correo);
         return this;
     }
 

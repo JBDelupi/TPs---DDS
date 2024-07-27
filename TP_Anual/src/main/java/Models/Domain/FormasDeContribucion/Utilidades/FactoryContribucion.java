@@ -1,7 +1,6 @@
 package Models.Domain.FormasDeContribucion.Utilidades;
 
 import Models.Domain.Builder.ContribucionBuilder.*;
-import Models.Domain.Builder.TarjetaBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.Excepciones.Permisos;
@@ -10,7 +9,6 @@ import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFr
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Producto.Producto;
@@ -18,6 +16,7 @@ import Models.Domain.Tarjetas.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,10 +58,21 @@ public class FactoryContribucion {
         Vianda vianda = (Vianda) Context[1];
         Heladera heladera = (Heladera) Context[2];
 
+
+        TarjetaAccesos tarjeta = this.colaborador.getTarjeta();
+
+        SolicitudDeApertura solicitudDeApertura;
+        solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
+
+        if(solicitudDeApertura == null){
+            throw new NoHaySolicitudExepction("No hay solicitud o expiro");
+        }
+
+        solicitudDeApertura.setRealizada(true);
+        tarjeta.agregarNuevoUso(heladera, TipoAccion.AGREGAR);
+
         heladera.agregarVianda(vianda);
-
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
-
         FormaDeContribucion donacion = builder
                 .heladera(heladera)
                 .vianda(vianda)
@@ -85,7 +95,7 @@ public class FactoryContribucion {
         String motivo = (String) Context[4];
 
 
-        TarjetaAccesosAHeladera tarjeta = this.colaborador.getTarjeta();
+        TarjetaAccesos tarjeta = this.colaborador.getTarjeta();
 
         SolicitudDeApertura solicitudDeApertura;
         solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
@@ -94,7 +104,19 @@ public class FactoryContribucion {
             throw new NoHaySolicitudExepction("No hay solicitud o expiro");
         }
         solicitudDeApertura.setRealizada(true);
-        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.QUITAR);
+        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+
+        /* CHARLAR DESPUES TODO
+        SolicitudDeApertura nuevaSolicitud = new SolicitudDeApertura(TipoDonacion.DISTRIBUCION_VIANDAS, heladeraDestino);
+        nuevaSolicitud.setRealizada(true);
+        tarjeta.agregarNuevaSolicitud(nuevaSolicitud);
+        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+        */
+
+        for(int i = 0; i < cantidad; i++){
+            Vianda vianda = heladeraOrigen.obtenerVianda();
+            heladeraDestino.agregarVianda(vianda);
+        }
 
 
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
@@ -126,7 +148,7 @@ public class FactoryContribucion {
                         .menoresACargo(menoresACargo)
                         .construir();
 
-        TarjetaPersonaVulnerable tarjeta = new TarjetaPersonaVulnerable(persona);
+        TarjetaAlimentar tarjeta = new TarjetaAlimentar(persona);
 
         FormaDeContribucion donacion = new EntregaDeTarjeta(tarjeta);
 

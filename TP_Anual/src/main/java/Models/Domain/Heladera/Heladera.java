@@ -67,7 +67,7 @@ public class Heladera {
 
     public Vianda obtenerVianda() {
         if (this.viandas.isEmpty()) {
-            throw new SinViandasException("No ha viandas");
+            throw new SinViandasException("No hay viandas");
         }
         Vianda vianda = viandas.get(0);
         viandas.remove(vianda);
@@ -117,7 +117,7 @@ public class Heladera {
     }
 
     public void notify(Alerta incidente){
-        System.out.println("Hay un incidente el incidente es :" + incidente.getTipo());
+        System.out.println("Hay un incidente, el incidente es :" + incidente.getTipo());
     }
 
 

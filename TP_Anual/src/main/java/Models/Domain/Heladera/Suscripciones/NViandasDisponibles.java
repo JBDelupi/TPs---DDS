@@ -19,8 +19,8 @@ public class NViandasDisponibles implements ObserverHeladera {
             MensajeBuilder nuevaPublicacionBuilder = new MensajeBuilder();
             Mensaje unaPublicacion = nuevaPublicacionBuilder
                     .asunto(TipoDePublicacion.N_VIANDAS_DISPONIBLES.toString())
-                    .contenido("Hay de viandas: " + heladera.getViandas().size())
-                    .destinatario(colaborador.getCorreoElectronico())
+                    .contenido("Hay " + heladera.getViandas().size() + "viandas en la heladera: " + heladera.getDireccion())
+                    .destinatario(colaborador.getCodigoDeNotificacion())
                     .construir();
 
             colaborador.notify(unaPublicacion);

@@ -38,10 +38,7 @@ public class FallaTecnica extends Incidente {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
         Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
-        Mensaje mensaje = new Mensaje();
-        mensaje.setDestinatario(tecnicoMasCercano.getCorreoElectronico());
-        mensaje.setAsunto("Falla Tecnica");
-        mensaje.setContenido("Falla Tecnica en" + this.heladera);
+        Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla tecnica","Falla Tecnica en" + this.heladera);
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
         return tecnicoMasCercano;
     }

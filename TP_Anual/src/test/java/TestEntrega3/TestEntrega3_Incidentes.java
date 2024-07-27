@@ -3,7 +3,9 @@ package TestEntrega3;
 import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
+import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Juridico;
@@ -26,6 +28,7 @@ public class TestEntrega3_Incidentes {
     Colaborador colaboradorHumano;
     Colaborador colboradorJuridico;
     FallaTecnica fallaTecnicaHumano;
+    Alerta alertaHumano;
     FallaTecnica fallaTecnicaJuridico;
     Heladera heladera;
     TecnicoBuilder tecnicoBuilder1;
@@ -68,24 +71,28 @@ public class TestEntrega3_Incidentes {
         colaboradorHumano = new Humano();
         colboradorJuridico = new Juridico();
         heladera = new Heladera();
+
         tecnicoBuilder1 = new TecnicoBuilder();
-        tecnicoBuilder1.area(area1);
-        tecnicoBuilder1.nombre("Tecnico 1");;
-        tecnicoBuilder1.medioDeNotificacion(new CorreoAdapter());
-        tecnico1 = tecnicoBuilder1.construir();
+        tecnico1 = tecnicoBuilder1
+                .area(area1)
+                .nombre("Tecnico 1")
+                .medioDeNotificacion(new CorreoAdapter())
+                .construir();
 
         tecnicoBuilder2 = new TecnicoBuilder();
-        tecnicoBuilder2.area(area2);
-        tecnicoBuilder2.nombre("Tecnico 2");
-        tecnicoBuilder2.correoElectronico("541161978325");
-        tecnicoBuilder2.medioDeNotificacion(new TelegramAdapter());
-        tecnico2 = tecnicoBuilder2.construir();
+        tecnico2 = tecnicoBuilder2
+                .area(area2)
+                .nombre("Tecnico 2")
+                .correoElectronico("1738213090")
+                .medioDeNotificacion(new TelegramAdapter())
+                .construir();
 
         tecnicoBuilder3 = new TecnicoBuilder();
-        tecnicoBuilder3.area(area3);
-        tecnicoBuilder3.nombre("Tecnico 3");
-        tecnicoBuilder3.medioDeNotificacion(new CorreoAdapter());
-        tecnico3 = tecnicoBuilder3.construir();
+        tecnico3 = tecnicoBuilder3
+                .area(area3)
+                .nombre("Tecnico 3")
+                .medioDeNotificacion(new CorreoAdapter())
+                .construir();
 
         listaTecnicos = new ArrayList<Tecnico>();
         listaTecnicos.add(tecnico1);
@@ -123,10 +130,16 @@ public class TestEntrega3_Incidentes {
     }
 
     @Test
-    //Se debe permitir que los técnicos sean avisados cuando corresponde y registren las visitas.
     public void TecnicoRecibeAvisoFallaTecnica() throws IOException {
         fallaTecnicaHumano = new FallaTecnica(heladera, colaboradorHumano);
         Tecnico tecnicoANotificar = fallaTecnicaHumano.avisarATecnico(listaTecnicos);
+        Assertions.assertEquals("Tecnico 2",tecnicoANotificar.getNombre());
+    }
+
+    @Test
+    public void TecnicoRecibeAvisoAlerta() throws IOException {
+        alertaHumano = new Alerta(TipoAlerta.FALLA_EN_CONEXION, heladera);
+        Tecnico tecnicoANotificar = alertaHumano.avisarATecnico(listaTecnicos);
         Assertions.assertEquals("Tecnico 2",tecnicoANotificar.getNombre());
     }
 }

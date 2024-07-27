@@ -16,7 +16,7 @@ public class Tecnico extends Persona {
     private String cuil;
     private AreaCobertura area;
     private Notificacion medioDeNotificacion;
-    private String correoElectronico;
+    private String codigoDeNotificacion;
 
     public Tecnico() {
         this.setRolNegocio(TipoRolNegocio.TECNICO);

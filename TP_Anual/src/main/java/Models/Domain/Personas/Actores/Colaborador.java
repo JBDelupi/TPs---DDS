@@ -5,8 +5,7 @@ import Models.Domain.Producto.Canje;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
-import Models.Domain.Tarjetas.SolicitudDeApertura;
-import Models.Domain.Tarjetas.TarjetaAccesosAHeladera;
+import Models.Domain.Tarjetas.TarjetaAccesos;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.Notificacion;
 import lombok.Getter;
@@ -23,8 +22,8 @@ public abstract class Colaborador extends Persona {
     private List<FormaDeContribucion> formaDeContribucion;
     private List<Canje> historialCanje;
     private Double puntaje;
-    private String correoElectronico;
-    private TarjetaAccesosAHeladera tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
+    private String codigoDeNotificacion;
+    private TarjetaAccesos tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
 
     public Colaborador(){
         this.formaDeContribucion = new ArrayList<>();
