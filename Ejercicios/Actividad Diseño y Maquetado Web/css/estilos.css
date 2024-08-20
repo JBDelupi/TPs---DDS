@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(240, 227, 207);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border: none;
+}
+
+.card-title {
+    font-size: 1.75rem;
+}
+
+.form-control {
+    font-size: 1.25rem;
+    padding: 10px;
+}
+
+.btn-primary {
+    font-size: 1.25rem;
+    padding: 10px;
+}
