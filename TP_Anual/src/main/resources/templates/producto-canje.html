@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- site metas -->
+    <title>Detalles del Canje</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
+    <!-- Responsive -->
+    <link rel="stylesheet" href="../public/css/responsive.css">
+    <!-- favicon -->
+    <link rel="icon" href="../public/images/fevicon.png" type="image/png">
+    <!-- font css -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../public/css/jquery.mCustomScrollbar.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!-- Header Section -->
+<div class="header_section header_bg">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/"><img src="../public/images/logo.png" alt="Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/"><b>Inicio</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/fridge/map"><b>Mapa</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html"><b>Contacto</b></a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="login_bt">
+                        <ul>
+                            <li><a href="/login"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span><b>Login</b></a></li>
+                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Header Section End -->
+<div class="contact_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <h1 class="about_taital">CANJE</h1>
+        </div>
+    </div>
+</div>
+    <!-- Canje Details Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Imagen del Producto -->
+            <div class="col-md-6">
+                <img src="https://via.placeholder.com/600x400" class="img-fluid" alt="Imagen del Producto">
+            </div>
+            <!-- Detalles del Canje -->
+            <div class="col-md-6">
+                <h1 class="display-4">Nombre del Producto</h1>
+                <p class="lead">Descripción detallada del producto. Aquí puedes incluir información relevante sobre el producto, sus características, beneficios, etc.</p>
+
+                <h3 class="mt-4">Detalles del Canje</h3>
+                <ul class="list-unstyled">
+                    <li><strong>Valor:</strong> $1000</li>
+                    <li><strong>Cantidad Disponible:</strong> 50 unidades</li>
+                    <li><strong>Empresa Ofreciente:</strong> Nombre de la Empresa</li>
+                </ul>
+
+                <div class="form-group mt-4">
+                    <label for="cantidadCanjear">Cantidad a Canjear:</label>
+                    <input type="number" class="form-control" id="cantidadCanjear" min="1" max="50" value="1">
+                </div>
+
+                <button type="button" class="btn btn-primary btn-lg" onclick="canjearProducto()">Canjear</button>
+            </div>
+        </div>
+    </div>
+    <!-- Canje Details Section End -->
+
+    <!-- Footer Section -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer_social_icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="location_text">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">+01 1234567890</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">coffo@gmail.com</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section End -->
+
+    <!-- Copyright Section -->
+    <div class="copyright_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="copyright_text">2024 All Rights Reserved. Design by ElPereee</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright Section End -->
+
+    <!-- Javascript files -->
+    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/popper.min.js"></script>
+    <script src="../public/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/plugin.js"></script>
+    <script src="../public/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../public/js/custom.js"></script>
+
+    <script>
+        function canjearProducto() {
+            // Aquí puedes añadir la lógica para canjear el producto
+            alert('Producto canjeado!');
+        }
+    </script>
+</body>
+</html>

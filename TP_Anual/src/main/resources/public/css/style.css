@@ -36,7 +36,6 @@ body {
 }
 
 a {
-    color: #1f1f1f;
     text-decoration: none !important;
     outline: none !important;
     -webkit-transition: all .3s ease-in-out;
@@ -195,13 +194,27 @@ button {
     cursor: pointer;
 }
 
+form .send_bt #donar_bt{
+    font-size: 16px;
+    border: 0px;
+    margin-top: 14px;
+    border-radius: 40px;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    text-align: center;
+    background-color: #f01c1c;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
 .full {
     float: left;
     width: 100%;
 }
 
 .layout_padding {
-    padding-top: 100px;
+    padding-top: 30px;
     padding-bottom: 100px;
 }
 
@@ -847,7 +860,7 @@ button {
     width: 100%;
     float: left;
     font-size: 16px;
-    color: #2e2e2d;
+    color: #3b3b3b;
     border: 0px;
     background-color: #efefef;
     padding: 11px 20px;
@@ -884,20 +897,9 @@ textarea#comment.massage-bt::placeholder {
     text-align: center;
 }
 
-.send_bt a {
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-    color: #fefefd;
-    background-color: #f01c1c;
-    padding: 10px;
-    margin: 20px;
-    display: inline-block;
-    border-radius: 40px;
-}
 
-.send_bt a:hover {
-    color: #161616;
+.send_bt #donar_bt:hover {
+    color: #2e2e2d;
     background-color: #efefef;
 }
 

@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Donación de Vianda</title>
+    <title>Donación de Dinero</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- bootstrap css -->
     <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.min.css">
+    <!-- estilo personalizado para el modal -->
+    <link rel="stylesheet" type="text/css" href="../../public/css/modal.css">
     <!-- style css -->
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css">
     <!-- Responsive-->
@@ -27,12 +28,14 @@
     <link rel="stylesheet" href="../../public/css/jquery.mCustomScrollbar.min.css">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
 </head>
 <body>
 <div class="header_section header_bg">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand"href="/"><img src="../../public/images/logo.png"></a>
+            <a class="navbar-brand" href="/"><img src="../../public/images/logo.png"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,12 +64,12 @@
     </div>
 </div>
 <!-- header section end -->
-<!-- donacion section start -->
+<!-- contact section start -->
 <div class="contact_section layout_padding">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="contact_taital">Donación de Vianda</h1>
+                <h1 class="contact_taital">Donación de Dinero</h1>
             </div>
         </div>
     </div>
@@ -75,9 +78,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="mail_section_1">
-                        <input type="text" class="mail_text" placeholder="ID de Vianda" name="id_vianda" required>
-                        <input type="text" class="mail_text" placeholder="ID de Heladera" name="id_heladera" required>
-                        <div class="send_bt"><a href="#">Donar</a></div>
+                        <form onsubmit="return confirmarDonacion()" action="/submit_donation" method="POST">
+                            <input type="number" class="mail_text" placeholder="ID de Vianda" name="vianda" required>
+                            <input type="number" class="mail_text" placeholder="ID de Heladera" name="heladera" required>
+                            <div class="send_bt">
+                                <button type="submit"  id="donar_bt"><a>Donar</a></button>
+                            </div>
+                        </form>
 
                     </div>
                 </div>
@@ -85,7 +92,7 @@
         </div>
     </div>
 </div>
-<!-- donacion section end -->
+<!-- contact section end -->
 <!-- footer section start -->
 <div class="footer_section layout_padding">
     <div class="container">
@@ -138,5 +145,7 @@
 <!-- sidebar -->
 <script src="../../public/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="../../public/js/custom.js"></script>
+<!-- Tu script personalizado para el modal -->
+<script src="../../public/js/modal.js"></script>
 </body>
 </html>
