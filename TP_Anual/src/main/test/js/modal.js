@@ -1,4 +1,5 @@
-// modal.js
+
+/* REVISAR PORQUE NO CREA EL MENSAJE DE EXITO*/
 
 function mostrarModalConfirmacion() {
     // Crear la estructura del modal dinámicamente si no existe
