@@ -15,6 +15,8 @@ public class FactoryController {
           case "heladeras": controller =  new HeladeraController(); break;
           case "index": controller =  new LoginController(); break;
           case "vulnerable" : controller =  new VulnerableController(); break;
+          case "incidente" : controller =  new IncidenteController(); break;
+          case "producto": controller =  new ProductoController(); break;
         }
         return controller;
     }

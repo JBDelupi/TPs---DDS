@@ -18,7 +18,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     @Override
     public void create(Context context) {
 
-        context.render("Heladeras/createHeladera.hbs");
+        context.render("heladera/registroHeladera.hbs");
     }
 
     // POST CREATE
@@ -42,7 +42,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         PseudoBaseDatosHeladera.getInstance().agregar(heladera);
 
         // Guardar
-    //    context.redirect("/heladeras");
+        context.redirect("/heladeras");
     }
 
 
@@ -56,7 +56,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         heladeraList.forEach(heladera -> System.out.println(heladera.getID()));
 
-        context.render("/Heladeras/indexHeladera.hbs", model);
+        context.render("heladera/heladeras.hbs", model);
 
 
     }
@@ -71,7 +71,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         model.put("heladera",heladera);
 
-        context.render("Heladeras/showHeladera", model);
+        context.render("heladera/detallesHeladera", model);
 
     }
 

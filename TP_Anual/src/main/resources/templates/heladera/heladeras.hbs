@@ -1,0 +1,21 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Heladeras</title>
+</head>
+<body>
+<h1>Lista de Heladeras</h1>
+<ul>
+    {{#each heladeras}}
+        <li>
+            ID: {{this.ID}}, Dirección: {{direccion}}, Capacidad: {{capacidadDeViandas}}, Temperatura Actual: {{temperaturaActual}},
+            Temperatura : {{temperaturaMax}}, Temperatura : {{temperaturaMin}}
+            <a href="/show?id={{ID}}">Ver Detalle</a>
+        </li>
+    {{/each}}
+</ul>
+<a href="/registro/heladera">Crear Nueva Heladera</a>
+</body>
+</html>

@@ -6,8 +6,8 @@ function loadPartial(elementId, partialUrl) {
 }
 
 // Cargar el header y el footer usando la función
-loadPartial('header', '/../partials/header.html');
-loadPartial('footer', '/../partials/footer.html');
-loadPartial('tipografia', '/../partials/tipografia.html');
+loadPartial('header', '/../partials/header.hbs');
+loadPartial('footer', '/../partials/footer.hbs');
+loadPartial('tipografia', '/../partials/tipografia.hbs');
 
 

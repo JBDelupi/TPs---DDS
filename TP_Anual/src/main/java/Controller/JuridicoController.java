@@ -37,26 +37,9 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     }
 
-    public void index(Object ... Context){
 
-    }
-    public void show(Object ... Context){
-
-    }
 
     //@GET
-    public void create(Object ... Context){
-
-    }
-    public void edit(Object ... Context){
-
-    }
-    public void update(Object ... Context){
-
-    }
-    public void delete(Object ... Context){
-
-    }
 
     @Override
     public void index(Context context) {
@@ -86,13 +69,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .construir();
 
 
-      //  RepoColaboradores.getInstance().agregarColaborador(juridico);
-
-        System.out.println(
-                        "Razon social: " + razonSocial +
-                        " TipoJuridico : " + tipoJuridico +
-                        " correo: " + correo
-                        );
 
         context.redirect("/");
     }

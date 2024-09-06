@@ -1,11 +1,28 @@
 package Service.Server;
 
 import Controller.*;
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class Router {
     public static void init(){
+
+        Server.app().get("/",context -> context.render("main/index.hbs"));
+        Server.app().get("/contact",context -> context.render("main/Contacto.hbs"));
+        Server.app().get("/team",context -> context.render("main/team.hbs"));
+        Server.app().get("/about",context -> context.render("main/about.hbs"));
+
+        Server.app().get("",context -> context.render("main/about.hbs"));
+
+
+
+
+
         Server.app().get("/login", ((LoginController) FactoryController.controller("login"))::create);
-        Server.app().get("/", ((LoginController) FactoryController.controller("login"))::show);
+     //   Server.app().get("/", ((LoginController) FactoryController.controller("login"))::show);
 
 
         Server.app().get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
@@ -27,6 +44,13 @@ public class Router {
 
 
         Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
+
+        Server.app().get("/registro/incidente",((IncidenteController)FactoryController.controller("incidente"))::create);
+
+        Server.app().get("/registro/producto",((ProductoController)FactoryController.controller("producto"))::create);
+        Server.app().get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
+        Server.app().post("/registro/producto",((ProductoController)FactoryController.controller("producto"))::save);
+
 
     }
 

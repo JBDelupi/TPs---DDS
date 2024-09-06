@@ -9,10 +9,10 @@ function loadPartial(elementId, partialUrl) {
 }
 
 // Cargar el header y el footer usando la función
-loadPartial('testimonial', 'testimonial.html');
-loadPartial('header', '/../partials/header.html');
-loadPartial('footer', '/../partials/footer.html');
-loadPartial('tipografia', '/../partials/tipografia.html');
-loadPartial('about', 'about.html');
-loadPartial('services', 'services.html');
-loadPartial('team', 'team.html');
+loadPartial('testimonial', 'testimonial.hbs');
+loadPartial('header', '../partials/header.hbs');
+loadPartial('footer', '../partials/footer.hbs');
+loadPartial('tipografia', '../partials/tipografia.hbs');
+loadPartial('about', 'about.hbs');
+loadPartial('services', 'services.hbs');
+loadPartial('team', 'team.hbs');

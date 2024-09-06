@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Heladera</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/efectos.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<div id="header"></div>
+<div id="tipografia"></div>
+<main>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Nueva Heladera</h5>
+                <h1 class="mb-5">Registrar Heladera</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
+                    <h1 class="display-5 text-black-50 animated slideInLeft">Mantén las heladeras activas</h1>
+                    <p class="text-dark animated slideInLeft mb-4 pb-3">
+                        Registra una nueva heladera para asegurar que los alimentos se mantengan en buen estado y disponibles para quienes más lo necesitan.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <form method="POST" action="/registro/heladera">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="direccion" placeholder="Dirección" required>
+                                        <label for="direccion">Dirección</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <select class="form-control" id="localidad" required>
+                                            <option value="" disabled selected>Seleccionar Localidad</option>
+                                            <option value="belgrano">Belgrano</option>
+                                            <option value="palermo">Palermo</option>
+                                            <option value="recoleta">Recoleta</option>
+                                            <option value="villa-crespo">Villa Crespo</option>
+                                            <option value="caballito">Caballito</option>
+                                            <option value="almagro">Almagro</option>
+                                            <option value="flores">Flores</option>
+                                            <option value="villa-urquiza">Villa Urquiza</option>
+                                            <option value="boedo">Boedo</option>
+                                            <option value="barracas">Barracas</option>
+                                            <option value="san-telmo">San Telmo</option>
+                                            <option value="villa-devoto">Villa Devoto</option>
+                                            <option value="nunez">Núñez</option>
+                                            <option value="retiro">Retiro</option>
+                                            <option value="san-nicolas">San Nicolás</option>
+                                            <option value="monserrat">Monserrat</option>
+                                            <option value="parque-chacabuco">Parque Chacabuco</option>
+                                            <option value="constitucion">Constitución</option>
+                                            <option value="barrio-norte">Barrio Norte</option>
+                                            <option value="parque-patricios">Parque Patricios</option>
+                                            <option value="chacarita">Chacarita</option>
+                                            <option value="villa-lugano">Villa Lugano</option>
+                                            <option value="mataderos">Mataderos</option>
+                                            <option value="liniers">Liniers</option>
+                                            <option value="villa-ortuzar">Villa Ortúzar</option>
+                                            <option value="villa-santa-rita">Villa Santa Rita</option>
+                                            <option value="saavedra">Saavedra</option>
+                                            <option value="villa-real">Villa Real</option>
+                                        </select>
+                                        <label for="localidad">Localidad</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="calle" placeholder="Calle" required>
+                                        <label for="calle">Calle</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="numero" placeholder="Número" required>
+                                        <label for="numero">Número</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="coordenadas" placeholder="Coordenadas" required>
+                                        <label for="coordenadas">Coordenadas</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-control" id="estado" required>
+                                            <option value="" disabled selected>Seleccionar Estado</option>
+                                            <option value="disponible">DISPONIBLE</option>
+                                            <option value="no-disponible">NO DISPONIBLE</option>
+                                        </select>
+                                        <label for="estado">Estado Actual</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="tempMax" placeholder="Temperatura Máxima" step="0.1" required>
+                                        <label for="tempMax">Temperatura Máxima</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="temperaturaMin" placeholder="Temperatura Mínima" step="0.1" required>
+                                        <label for="tempMin">Temperatura Mínima</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="capacidad" placeholder="Capacidad heladera" step="0.1" required>
+                                        <label for="tempMin">Capacidad heladera</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Registrar Heladera</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<div id="footer"></div>
+</body>
+
+<script src="../lib/wow/wow.min.js"></script>
+<script src="../lib/easing/easing.min.js"></script>
+<script src="../lib/waypoints/waypoints.min.js"></script>
+<script src="../lib/counterup/counterup.min.js"></script>
+<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../lib/tempusdominus/js/moment.min.js"></script>
+<script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../../public/js/scripts-index.js"></script>
+<script src="../../public/js/scripts-header.js"></script>
+
+</html>

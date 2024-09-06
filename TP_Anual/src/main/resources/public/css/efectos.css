@@ -1,0 +1,25 @@
+/* FOTOS CON ZOOM */
+
+.zoom-container {
+    overflow: hidden;
+    display: inline-block;
+}
+
+
+.zoom-btn {
+    transition: transform 0.2s ease-in;
+}
+
+.zoom-btn:hover {
+    transform: scale(1.010);
+}
+
+.zoom-img {                          /*ESTE ES EL QUE SE USA*/
+    transition: transform 0.2s ease-in;
+}
+
+.zoom-img:hover {
+    transform: scale(1.025);
+}
+
+/* para usarlo     <link rel="stylesheet" href="../css/estilos.css"> */
