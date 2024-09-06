@@ -13,4 +13,6 @@ loadPartial('testimonial', 'testimonial.html');
 loadPartial('header', '/../partials/header.html');
 loadPartial('footer', '/../partials/footer.html');
 loadPartial('tipografia', '/../partials/tipografia.html');
-
+loadPartial('about', 'about.html');
+loadPartial('services', 'services.html');
+loadPartial('team', 'team.html');

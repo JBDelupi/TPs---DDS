@@ -1,5 +1,6 @@
 /*** Navbar ***/
 
+
 .navbar-dark .navbar-nav .nav-link {
     position: relative;
     margin-left: 25px;
@@ -11,7 +12,6 @@
     outline: none;
     transition: .5s;
 }
-
 .sticky-top.navbar-dark .navbar-nav .nav-link {
     padding: 20px 0;
 }
