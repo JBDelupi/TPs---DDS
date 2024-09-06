@@ -1,10 +1,9 @@
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.SistemaDeRedistribucion;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
-import Models.Domain.Reporte.CantFallasPorHeladera;
 import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 
 import java.io.IOException;
 

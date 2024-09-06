@@ -3,7 +3,7 @@ package Service.Broker.Controllers;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Personas.Actores.Humano;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 import org.json.JSONObject;
 
 public class Alerta  implements Publicacion {

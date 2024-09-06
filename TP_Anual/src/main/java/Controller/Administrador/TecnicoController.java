@@ -6,6 +6,7 @@ import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.Server.ICrudViewsHandler;
+import io.javalin.http.Context;
 
 public class TecnicoController extends Controller implements ICrudViewsHandler {
 
@@ -50,4 +51,33 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
 
     }
 
+    @Override
+    public void index(Context context) {
+
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
+
+    }
+
+    @Override
+    public void save(Context context) {
+
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
 }

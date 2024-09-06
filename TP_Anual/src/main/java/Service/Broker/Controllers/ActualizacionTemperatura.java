@@ -1,7 +1,7 @@
 package Service.Broker.Controllers;
 
 import Models.Domain.Heladera.Heladera;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 import org.json.JSONObject;
 
 public class ActualizacionTemperatura implements Publicacion {

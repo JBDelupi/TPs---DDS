@@ -51,6 +51,7 @@ public class HumanoController extends Controller  {
 
     }
 
+    // @POST
     public void save(Context context){
 
         String nombre = context.formParam("nombre") ;
@@ -72,13 +73,6 @@ public class HumanoController extends Controller  {
 
      //   RepoColaboradores.getInstance().agregarColaborador(humano);
 
-        System.out.println(
-                "Nombre: " + nombre +
-                " Apellido: " + apellido +
-                " Fecha de nacimiento: " + fechaNacimiento +
-                " Correo electronico: " + correo +
-                " Numero documento:" + nroDocumento +
-                " Tipo de documento: " + tipoDeDocumento);
 
         context.redirect("/");
     }

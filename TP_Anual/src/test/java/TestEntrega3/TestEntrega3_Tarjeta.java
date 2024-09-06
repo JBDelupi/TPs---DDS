@@ -7,7 +7,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Tarjetas.*;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

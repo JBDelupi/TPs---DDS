@@ -106,12 +106,6 @@ public class FactoryContribucion {
         solicitudDeApertura.setRealizada(true);
         tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
-        /* CHARLAR DESPUES TODO
-        SolicitudDeApertura nuevaSolicitud = new SolicitudDeApertura(TipoDonacion.DISTRIBUCION_VIANDAS, heladeraDestino);
-        nuevaSolicitud.setRealizada(true);
-        tarjeta.agregarNuevaSolicitud(nuevaSolicitud);
-        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
-        */
 
         for(int i = 0; i < cantidad; i++){
             Vianda vianda = heladeraOrigen.obtenerVianda();

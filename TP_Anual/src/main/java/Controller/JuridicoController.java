@@ -58,6 +58,16 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     }
 
+    @Override
+    public void index(Context context) {
+
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
     public void create(Context context){
         context.render("/registroJuridica.hbs");
     }
@@ -85,6 +95,16 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                         );
 
         context.redirect("/");
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
     }
 
 }

@@ -6,7 +6,7 @@ import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Tarjetas.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAccesos;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 import org.json.JSONObject;
 
 public class SolicitudApertura implements Publicacion {

@@ -7,7 +7,7 @@ import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
 import Models.Domain.Personas.Actores.Colaborador;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
-import Service.SistemaDeGeolocalizacion.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosHeladera;
 
 
 public class SufrioDesperfecto implements ObserverHeladera {

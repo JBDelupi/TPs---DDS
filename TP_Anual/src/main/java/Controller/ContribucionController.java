@@ -5,8 +5,7 @@ import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Service.Server.ICrudViewsHandler;
-
-import javax.naming.Context;
+import io.javalin.http.Context;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
@@ -47,5 +46,37 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     public void delete(Object ... Context){
 
     }
+
+
+    @Override
+    public void index(Context context) {
+
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
+
+    }
+
+    @Override
+    public void save(Context context) {
+
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
 
 }

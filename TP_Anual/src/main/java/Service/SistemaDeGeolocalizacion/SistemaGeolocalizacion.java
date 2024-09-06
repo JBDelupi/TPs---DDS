@@ -2,15 +2,13 @@ package Service.SistemaDeGeolocalizacion;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Tecnico;
+import Models.Repository.PseudoBaseDatosHeladera;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
-import Service.APIPuntos.ServicioPuntosAPI;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Setter
 @Getter

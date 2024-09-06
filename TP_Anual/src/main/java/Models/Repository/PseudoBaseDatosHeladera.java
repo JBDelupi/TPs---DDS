@@ -1,4 +1,4 @@
-package Service.SistemaDeGeolocalizacion;
+package Models.Repository;
 
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Personas.DatosPersonales.Direccion;
@@ -15,8 +15,19 @@ public class PseudoBaseDatosHeladera {
     private Heladera heladera3;
     private Heladera heladera4;
     private Heladera heladera5;
+    private static PseudoBaseDatosHeladera instacia = null;
+
 
     public List<Heladera> baseHeladeras;
+
+
+    public  static PseudoBaseDatosHeladera getInstance() {
+        if(instacia==null){
+            instacia = new PseudoBaseDatosHeladera();
+        }
+        return instacia;
+    }
+
 
     public PseudoBaseDatosHeladera() {
         heladera1 = new Heladera();
@@ -61,6 +72,10 @@ public class PseudoBaseDatosHeladera {
                 .construir();
     }
 
+
+    public Heladera getId(String id){
+       return baseHeladeras.stream().filter(f->f.getID().equals(id)).findFirst().get();
+    }
 
 }
 

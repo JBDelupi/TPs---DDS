@@ -1,0 +1,18 @@
+<!-- show.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de la Heladera</title>
+</head>
+<body>
+<h1>Heladera {{heladera.ID}}</h1>
+<p>Dirección: {{heladera.direccion}}</p>
+<p>Capacidad: {{heladera.capacidadDeViandas}}</p>
+<p>Temperatura Máxima: {{heladera.temperaturaMax}}</p>
+<p>Temperatura Mínima: {{heladera.temperaturaMin}}</p>
+<p>Estado: {{heladera.abierto ? 'Abierta' : 'Cerrada'}}</p>
+
+<a href="/edit?id={{heladera.ID}}">Editar</a>
+</body>
+</html>

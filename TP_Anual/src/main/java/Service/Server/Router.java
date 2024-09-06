@@ -1,10 +1,6 @@
 package Service.Server;
 
-import Controller.FactoryController;
-import Controller.HumanoController;
-import Controller.JuridicoController;
-import Controller.LoginController;
-import Controller.HeladeraController;
+import Controller.*;
 
 public class Router {
     public static void init(){
@@ -22,6 +18,15 @@ public class Router {
 
         Server.app().get("/fridge/map", ((HeladeraController) FactoryController.controller("heladeras"))::index);
         Server.app().get("/index/humano", ((LoginController) FactoryController.controller("index"))::index);
+
+
+        Server.app().get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create);
+        Server.app().get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
+      //  Server.app().get("/heladeras/{{id}}",((HeladeraController) FactoryController.controller("heladeras"))::show);
+        Server.app().post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
+
+
+        Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
 
     }
 
