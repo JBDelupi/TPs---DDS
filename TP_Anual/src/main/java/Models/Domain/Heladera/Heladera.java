@@ -27,12 +27,14 @@ public class Heladera {
         this.subscriptores = new ArrayList<>();
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
+        this.setEstadoActual(EstadoHeladera.DISPONIBLE);
         this.cantidadDeFallas = 0;
+        this.fechaDePuestaEnMarcha = LocalDate.now();
         this.cantidadDeviandasRetiradas = 0;
     }
 
 
-    private Integer ID;
+    private Integer id;
     private Direccion direccion;
     private Punto coordenadas;
     private int capacidadDeViandas;

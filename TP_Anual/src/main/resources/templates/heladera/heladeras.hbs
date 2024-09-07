@@ -10,11 +10,12 @@
 <ul>
     {{#each heladeras}}
         <li>
-            ID: {{this.ID}}, Dirección: {{direccion}}, Capacidad: {{capacidadDeViandas}}, Temperatura Actual: {{temperaturaActual}},
-            Temperatura : {{temperaturaMax}}, Temperatura : {{temperaturaMin}}
-            <a href="/show?id={{ID}}">Ver Detalle</a>
+            ID: {{this.id}}, Dirección: {{this.direccion}}, Capacidad: {{this.capacidadDeViandas}}, Temperatura Actual: {{this.temperaturaActual}},
+            Temperatura Máxima: {{this.temperaturaMax}}, Temperatura Mínima: {{this.temperaturaMin}}
+            <a href="/heladeras/{{this.id}}">Ver Detalle</a>
         </li>
     {{/each}}
+
 </ul>
 <a href="/registro/heladera">Crear Nueva Heladera</a>
 </body>

@@ -3,10 +3,16 @@ package Controller;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
 
+import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class HumanoController extends Controller  {
     public HumanoController() {
@@ -37,17 +43,11 @@ public class HumanoController extends Controller  {
         RepoColaboradores.getInstance().agregarColaborador(humano);
     }
 
-    public void index(Object ... Context){
-
-    }
-    public void show(Object ... Context){
-
-    }
 
     // @GET
     public void create(Context context){
 
-        context.render("registroHumana.hbs");
+        context.render("persona-humana/registroHumana.hbs");
 
     }
 
@@ -56,7 +56,7 @@ public class HumanoController extends Controller  {
 
         String nombre = context.formParam("nombre") ;
         String apellido = context.formParam("apellido") ;
-        LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
+     //   LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
         String correo = context.formParam("correo");
         String nroDocumento = context.formParam("documento");
         TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
@@ -65,23 +65,40 @@ public class HumanoController extends Controller  {
         Humano humano = humanoBuilder
                 .nombre(nombre)
                 .apellido(apellido)
-                .fechaNacimiento(fechaNacimiento)
+             //   .fechaNacimiento(fechaNacimiento)
                 .correoElectronico(correo)
                 .numeroDocumento(nroDocumento)
                 .tipoDocumento(tipoDeDocumento)
                 .construir();
 
-     //   RepoColaboradores.getInstance().agregarColaborador(humano);
+        humano.setId(RandomGenerator.getDefault().nextInt());
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
+        humano.setCredencialDeAcceso(credencialDeAcceso);
 
+        PseudoBaseDatosUsuario.getInstance().agregar(humano);
+
+        System.out.println("usuario creado: "+ humano.getId());
 
         context.redirect("/");
     }
 
     public void index(Context context){
-        context.render("/indexHumano");
+
+
+
+        context.render("persona-humana/Contribuciones_Humana.hbs");
     }
     public void show(Context context){
-        context.render("humana");
+
+        String id = context.sessionAttribute("idPersona");
+        Humano humano = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
+
+        Map<String, Object> model = new HashMap<>();
+
+        model.put("humano",humano);
+
+
+        context.render("persona-humana/perfilHumana.hbs", model);
     }
 
 

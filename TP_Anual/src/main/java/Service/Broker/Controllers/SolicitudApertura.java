@@ -18,7 +18,7 @@ public class SolicitudApertura implements Publicacion {
         String usoTarjeta = jsonMessage.getString("value");
         base = new PseudoBaseDatosHeladera();
         colaborador = new Humano();
-        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getID() == Integer.parseInt(heladeraId) ).toList().get(0);
+        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getId() == Integer.parseInt(heladeraId) ).toList().get(0);
 
         SolicitudDeApertura solicitudApertura = new SolicitudDeApertura(TipoDonacion.valueOf(usoTarjeta),heladera);
         TarjetaAccesos tarjeta = colaborador.getTarjeta();

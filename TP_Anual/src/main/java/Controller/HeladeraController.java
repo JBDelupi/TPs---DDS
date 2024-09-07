@@ -37,7 +37,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                 .temperaturaMin(temperaturaMin)
                 .construir();
 
-        heladera.setID(10);
+        heladera.setId(10);
 
         PseudoBaseDatosHeladera.getInstance().agregar(heladera);
 
@@ -50,11 +50,11 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     public void index(Context context){
         List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
 
+
         Map<String, Object> model = new HashMap<>();
 
         model.put("heladeras",heladeraList);
 
-        heladeraList.forEach(heladera -> System.out.println(heladera.getID()));
 
         context.render("heladera/heladeras.hbs", model);
 
@@ -71,7 +71,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         model.put("heladera",heladera);
 
-        context.render("heladera/detallesHeladera", model);
+        context.render("heladera/detallesHeladera.hbs", model);
 
     }
 

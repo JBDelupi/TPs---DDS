@@ -9,6 +9,6 @@ import lombok.Setter;
 public abstract class Usuario {
     private Rol rol;
     private CredencialDeAcceso credencialDeAcceso;
-
+    private Integer id;
 }
 

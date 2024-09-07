@@ -32,55 +32,60 @@
         </div>
         <div class="col-md-6">
           <div class="wow fadeInUp" data-wow-delay="0.2s">
-            <form>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
-                    <label for="name">Nombre</label>
+              <form method="POST" action="/registro/humano">
+                  <div class="col-md-6">
+                      <div class="form-floating">
+                          <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Nombre de Usuario" required>
+                          <label for="nombre_usuario">Nombre de Usuario</label>
+                      </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
-                    <label for="email">Apellido</label>
+                  <div class="row g-3">
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                              <label for="nombre">Nombre</label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
+                              <label for="apellido">Apellido</label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <select class="form-control" id="tipo_documento" name="tipo_documento" required>
+                                  <option value="" disabled selected>Seleccionar Tipo De Documento</option>
+                                  <option value="DNI">DNI</option>
+                                  <option value="LIBRETA">LIBRETA</option>
+                                  <option value="PASAPORTE">PASAPORTE</option>
+                              </select>
+                              <label for="tipo_documento">Documento</label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <input type="text" class="form-control" id="documento" name="documento" placeholder="Numero de Documento" required>
+                              <label for="documento">Numero de Documento</label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <input type="email" class="form-control" id="correo" name="correo" placeholder="Email" required>
+                              <label for="correo">Email</label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-floating">
+                              <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" required>
+                              <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                          </div>
+                      </div>
+                      <div class="col-12">
+                          <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Registrarse</button>
+                      </div>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <select class="form-control" id="tipoDocumento" required>
-                      <option value="" disabled selected>Seleccionar Tipo De Documento</option>
-                      <option value="DNI">DNI</option>
-                      <option value="LIBRETA">LIBRETA</option>
-                      <option value="PASAPORTE">PASAPORTE</option>
-                    </select>
-                    <label for="tipoDocumento">Documento</label>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="documento" placeholder="Numero de Documento" required>
-                    <label for="email">Numero de Documento</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="email" class="form-control" id="email" placeholder="Email" required>
-                    <label for="email">Email</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="date" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
-                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Registrarse</button>
-                </div>
-              </div>
-            </form>
+              </form>
           </div>
         </div>
       </div>

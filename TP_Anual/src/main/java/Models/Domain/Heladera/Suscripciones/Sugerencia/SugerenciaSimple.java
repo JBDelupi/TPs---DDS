@@ -14,6 +14,6 @@ public class SugerenciaSimple implements Sugerencia{
 
     @Override
     public String mostrar() {
-       return "Heladera: " + heladera.getID() + " Cantidad disponible: " + cantidadDisponible;
+       return "Heladera: " + heladera.getId() + " Cantidad disponible: " + cantidadDisponible;
     }
 }

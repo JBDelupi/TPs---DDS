@@ -5,6 +5,7 @@ import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 import Service.APIPuntos.Punto;
 
+import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +57,7 @@ public class PseudoBaseDatosHeladera {
             direccion.setCalle(Integer.toString(i) + 1);
             direccion.setCentro(punto);
             baseHeladeras.set(i, init(baseHeladeras.get(i), direccion));
-            baseHeladeras.get(i).setID(i+1);
+            baseHeladeras.get(i).setId(i+1);
             baseHeladeras.get(i).setTemperaturaMin(5.00);
             baseHeladeras.get(i).setTemperaturaMax(10.00);
 
@@ -74,7 +75,7 @@ public class PseudoBaseDatosHeladera {
 
 
     public Heladera getId(String id){
-       return baseHeladeras.stream().filter(f->f.getID().equals(id)).findFirst().get();
+       return baseHeladeras.stream().filter(f->f.getId() == Parser.ID).findFirst().get();
     }
 
 }

@@ -21,7 +21,7 @@ public class Alerta  implements Publicacion {
 
         System.out.println("Alerta de " + heladeraId + ": " + alerta);
         // Aquí podrías registrar la alerta en una base de datos
-        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getID() == Integer.parseInt(heladeraId) ).toList().get(0);
+        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getId() == Integer.parseInt(heladeraId) ).toList().get(0);
         FallaTecnica incidente = new FallaTecnica(heladera,new Humano());
         incidente.setDescripcion(alerta);
         System.out.println("Falla tecnica avisada " + incidente.toString() + "Falla ->" + incidente.getDescripcion());

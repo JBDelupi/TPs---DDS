@@ -15,7 +15,7 @@ public class ActualizacionTemperatura implements Publicacion {
     public void handleMessage(JSONObject jsonMessage) {
         String heladeraId = jsonMessage.getString("heladeraId");
         String temperatura = jsonMessage.getString("value");
-        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getID() == Integer.parseInt(heladeraId) ).toList().get(0);
+        Heladera heladera = base.baseHeladeras.stream().filter(f->f.getId() == Integer.parseInt(heladeraId) ).toList().get(0);
        // heladera.getSensorTemperatura().activar();
         heladera.setTemperaturaActual(Double.parseDouble(temperatura));
 
