@@ -2,11 +2,16 @@ package Controller;
 
 import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
+import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JuridicoController extends Controller implements ICrudViewsHandler {
 
@@ -37,24 +42,32 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     }
 
-
+    /*************************************** JAVALIN *****************************/
 
     //@GET
 
     @Override
     public void index(Context context) {
-
+        context.render("index-inicio/index.hbs");
     }
 
+    //@GET
     @Override
     public void show(Context context) {
+        String id = context.sessionAttribute("idPersona");
+        Juridico juridico = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(id);
 
+        Map<String, Object> model = new HashMap<>();
+
+        context.render("persona-Juridica/perfilJuridico.hbs", model);
     }
 
+    //@GET
     public void create(Context context){
-        context.render("/registroJuridica.hbs");
+        context.render("persona-Juridica/registroJuridica.hbs");
     }
 
+    //@POST
     public void save(Context context) {
 
         String razonSocial =  context.formParam("razon_social") ;

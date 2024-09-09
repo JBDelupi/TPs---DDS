@@ -22,13 +22,17 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0 pe-4">
                     <a href="/" class="nav-item nav-link active">Inicio</a>
-                    <a href="/perfil" class="nav-item nav-link">Perfil</a>
+                    {{#if esHumano}}
+                    <a href="/persona/humano/{{id}}" class="nav-item nav-link">Perfil</a>
+                    {{/if}}
                     <a href="#services" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.html" class="nav-item nav-link">Mapa</a>
-                    <a href="#team" class="nav-item nav-link">Colaborar</a>
-                    <a href="#contact" class="nav-item nav-link">Contactanos</a>
+                    <a href="/heladeras" class="nav-item nav-link">Mapa</a>
+                    <a href="/team" class="nav-item nav-link">Colaborar</a>
+                    <a href="/contact" class="nav-item nav-link">Contactanos</a>
                 </div>
-                <a href="/login" class="btn btn-primary py-2 px-4">Cerrar</a>
+                <form action="/logout" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-primary py-2 px-4">Cerrar</button>
+                </form>
             </div>
         </nav>
 </div>

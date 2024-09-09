@@ -7,40 +7,42 @@ import jakarta.servlet.http.HttpSession;
 
 public class LoginController extends Controller {
 
+    private static final String USER_SESSION_KEY = "usuario";
+    private static final String USERNAME_PARAM = "usuario";
+    private static final String PASSWORD_PARAM = "password";
 
-    public void index(Context context){
-        if (context.sessionAttribute("usuarioActual") == null) {
+    public void index(Context context) {
+        Persona usuario = context.sessionAttribute(USER_SESSION_KEY);
+
+        if (usuario == null) {
             context.render("sesion/login.hbs");
         } else {
-            context.redirect("/");
+            String rolTipo = usuario.getRol().getTipo().toString().toLowerCase();
+            context.redirect("/index/" + rolTipo);
         }
     }
 
     public void manejarInicioSesion(Context context) {
-        String nombreUsuario = context.formParam("usuario");
-        String contrasenia = context.formParam("password");
-        context.sessionAttribute("usuarioActual", nombreUsuario);
+        String nombreUsuario = context.formParam(USERNAME_PARAM);
+        String contrasenia = context.formParam(PASSWORD_PARAM);
 
         Persona usuario = PseudoBaseDatosUsuario.getInstance().searchUser(nombreUsuario);
 
-
         if (usuario != null) {
+            context.sessionAttribute(USER_SESSION_KEY, usuario);
             String idPersona = Integer.toString(usuario.getId());
             context.sessionAttribute("idPersona", idPersona);
-            context.redirect("/");
+            String rolTipo = usuario.getRol().getTipo().toString().toLowerCase();
+            context.redirect("/index/" + rolTipo);
         } else {
-            HttpSession httpSession = context.req().getSession();
-            httpSession.removeAttribute("usuarioActual");
+            context.sessionAttribute(USER_SESSION_KEY, null);
             context.redirect("/login");
         }
-
     }
-
 
     public void manejarCierreSesion(Context context) {
         HttpSession httpSession = context.req().getSession();
-        httpSession.removeAttribute("usuarioActual");
-        httpSession.removeAttribute("tipo_rol");
+        httpSession.removeAttribute(USER_SESSION_KEY);
         context.redirect("/login");
     }
 }

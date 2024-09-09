@@ -16,8 +16,9 @@ public class Rol {
 
     private Set<Permiso> permisos;
 
-    public Rol() {
+    public Rol(TipoRol rol) {
         this.permisos = new HashSet<>();
+        this.tipo = rol;
     }
 
     public void agregarPermisos(Permiso ... permisos) {

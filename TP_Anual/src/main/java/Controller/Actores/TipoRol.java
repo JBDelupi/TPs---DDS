@@ -2,5 +2,6 @@ package Controller.Actores;
 
 public enum TipoRol {
     ADMINISTRADOR,
-    NORMAL
+    JURIDICO,
+    HUMANO
 }

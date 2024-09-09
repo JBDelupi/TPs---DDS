@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Contribuciones</title>
+    <!-- Links importantes -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/efectos.css">
+    <!-- Links importantes -->
+</head>
+<body>
+
+{{> templates/partials/headerColaborador esHumano = esHumano  id=id}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+
+<div class="contact_section layout_padding">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-3 text-dark text-center">Acciones Disponibles</h1>
+            </div>
+        </div>
+        <div class="blog_section_2 mt-5">
+            <div class="row">
+                <!-- Generar Contribución -->
+                <div class="col-md-6 mb-4">
+                    <div class="blog_box border rounded p-3 h-100">
+                        <div class="blog_img mb-3">
+                            <img src="../img/team-2.jpg" class="img-fluid zoom-img card-img-bottom" alt="Generar Contribución">
+                        </div>
+                        <h4 class="prep_text">Generar Contribución</h4>
+                        <p class="lorem_text">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
+                        <div class="read_btn text-center">
+                            <a href="#" class="btn btn-primary zoom-img">Contribuir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ver Puntos Heladeras -->
+                <div class="col-md-6 mb-4">
+                    <div class="blog_box border rounded p-3 h-100">
+                        <div class="blog_img mb-3">
+                            <img src="../img/team-1.jpg" class="img-fluid zoom-img card-img-bottom" alt="Ver Puntos Heladeras">
+                        </div>
+                        <h4 class="prep_text">Ver Puntos Heladeras</h4>
+                        <p class="lorem_text">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
+                        <div class="read_btn text-center">
+                            <a href="#" class="btn btn-primary zoom-img">Ver Mapa</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canjear un Producto -->
+                <div class="col-md-6 mb-4">
+                    <div class="blog_box border rounded p-3 h-100">
+                        <div class="blog_img mb-3">
+                            <img src="../img/team-3.jpg" class="img-fluid zoom-img card-img-bottom" alt="Canjear un Producto">
+                        </div>
+                        <h4 class="prep_text">Canjear un Producto</h4>
+                        <p class="lorem_text">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
+                        <div class="read_btn text-center">
+                            <a href="#" class="btn btn-primary zoom-img">Canjear</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> templates/main/footer}}  <!-- Incluye el partial footer aquí -->
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../lib/wow/wow.min.js"></script>
+<script src="../lib/easing/easing.min.js"></script>
+<script src="../lib/waypoints/waypoints.min.js"></script>
+<script src="../lib/counterup/counterup.min.js"></script>
+<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../lib/tempusdominus/js/moment.min.js"></script>
+<script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../js/scripts-index.js"></script>
+<script src="../js/scripts-header.js"></script>
+
+</html>

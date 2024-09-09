@@ -30,41 +30,42 @@
           <h1 class="display-5 text-black-50 animated slideInLeft">¡Haz la diferencia en la vida de quienes más lo necesitan!</h1>
           <p class="text-dark animated slideInLeft mb-4 pb-3" >Únete a nuestro esfuerzo para distribuir comidas a quienes más lo necesitan. Con tu ayuda, podemos asegurar que cada persona tenga acceso a una comida caliente y un poco de esperanza. ¡Te esperamos!</p>
         </div>
-        <div class="col-md-6">
-          <div class="wow fadeInUp" data-wow-delay="0.2s">
-            <form>
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" id="razon_social" placeholder="Razon Social" required>
-                    <label for="name">Razon Social</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <select class="form-control" id="tipoDocumento" required>
-                      <option value="" disabled selected>Seleccionar Tipo Juridico</option>
-                      <option value="DNI">GUBERNAMENTAL</option>
-                      <option value="LIBRETA">ONG</option>
-                      <option value="PASAPORTE">EMPRESA</option>
-                      <option value="PASAPORTE">INSTITUCION</option>
-                    </select>
-                    <label for="tipoDocumento">Documento</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating">
-                    <input type="email" class="form-control" id="email" placeholder="Email" required>
-                    <label for="email">Email</label>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Registrarse</button>
-                </div>
+          <div class="col-md-6">
+              <div class="wow fadeInUp" data-wow-delay="0.2s">
+                  <form method="POST" action="/registro/juridica">
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" placeholder="Nombre de Usuario" required>
+                          <label for="nombre_usuario">Nombre de Usuario</label>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="razon_social" name="razon_social" placeholder="Razon Social" required>
+                          <label for="razon_social">Razon Social</label>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                          <select class="form-control" id="tipo_juridico" name="tipo_juridico" required>
+                              <option value="" disabled selected>Seleccionar Tipo Juridico</option>
+                              <option value="GUBERNAMENTAL">GUBERNAMENTAL</option>
+                              <option value="ONG">ONG</option>
+                              <option value="EMPRESA">EMPRESA</option>
+                              <option value="INSTITUCION">INSTITUCION</option>
+                          </select>
+                          <label for="tipo_juridico">Tipo Juridico</label>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                          <label for="email">Email</label>
+                      </div>
+
+                      <div class="col-12">
+                          <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Registrarse</button>
+                      </div>
+                  </form>
               </div>
-            </form>
           </div>
-        </div>
+      </div>
       </div>
     </div>
   </div>

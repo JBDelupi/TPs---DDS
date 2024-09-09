@@ -4,14 +4,17 @@ import Models.Domain.Builder.ContribucionBuilder.OfrecerProductoBuilder;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Producto.Producto;
+import Models.Domain.Producto.TipoRubro;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosProducto;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import javax.annotation.processing.Generated;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.random.RandomGenerator;
 
 public class ProductoController extends Controller implements ICrudViewsHandler {
 
@@ -21,42 +24,42 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
     }
 
     public void save(Context context) {
-        String producto = context.formParam("producto");
-        Double puntosNecesarios = Double.parseDouble(context.formParam("puntos_necesarios"));
-        Integer stock = Integer.parseInt(context.formParam("stock"));
+        String nombre = context.formParam("nombreProducto");
+      //  String imagen = context.formParam("imagenProducto");
+        String descripcion = context.formParam("descripcionProducto");
+        String rubroProducto = context.formParam("rubroProducto");
+        TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
-        OfrecerProductoBuilder productoBuilder = new OfrecerProductoBuilder();
-        OfrecerProducto ofrecerProducto = productoBuilder
-                .puntosNecesarios(puntosNecesarios)
-                .stock(stock)
-                .construir();
+        Producto producto = new Producto(tipoRubro,nombre,"");
+        producto.setDescripcion(descripcion);
+        producto.setId(RandomGenerator.getDefault().nextInt());
 
-        ofrecerProducto.setID(10);
+        System.out.println("Producto creado: "+ producto.getId() + tipoRubro);
+        PseudoBaseDatosProducto.getInstance().agregar(producto);
 
-        PseudoBaseDatosProducto.getInstance().agregar(ofrecerProducto);
 
-        context.redirect("/producto");
+        context.redirect("/productos");
     }
 
     public void index(Context context) {
-        List<OfrecerProducto> ofrecerProductosList = PseudoBaseDatosProducto.getInstance().baseProductos;
+        List<Producto> productos = PseudoBaseDatosProducto.getInstance().baseProductos;
 
         Map<String, Object> model = new HashMap<>();
 
-        model.put("productos",ofrecerProductosList);
+        model.put("productos",productos);
 
         context.render("producto/productosOfrecidos.hbs", model);
     }
 
     public void show(Context context) {
-        String id = context.queryParam("id");
-        OfrecerProducto ofrecerProducto = PseudoBaseDatosProducto.getInstance().getId(id);
+        String id = context.pathParam("id");
+        Producto producto = PseudoBaseDatosProducto.getInstance().getId(id);
 
         Map<String, Object> model = new HashMap<>();
 
-        model.put("producto",ofrecerProducto);
+        model.put("producto",producto);
 
-        context.render("producto/detallesProducto", model);
+        context.render("producto/show.hbs", model);
     }
 
     public void edit(Context context) {

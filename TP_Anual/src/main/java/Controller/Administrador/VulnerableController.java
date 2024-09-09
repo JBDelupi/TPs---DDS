@@ -1,20 +1,11 @@
-package Controller;
+package Controller.Administrador;
 
-import Models.Domain.Builder.HeladeraBuilder;
+import Controller.Controller;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosProducto;
 import Models.Repository.PseudoBaseDeDatosVulnerables;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 

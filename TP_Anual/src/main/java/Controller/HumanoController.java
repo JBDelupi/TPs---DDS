@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Actores.Rol;
+import Controller.Actores.TipoRol;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -74,8 +76,9 @@ public class HumanoController extends Controller  {
         humano.setId(RandomGenerator.getDefault().nextInt());
         CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
         humano.setCredencialDeAcceso(credencialDeAcceso);
-
+        humano.setRol(new Rol(TipoRol.HUMANO));
         PseudoBaseDatosUsuario.getInstance().agregar(humano);
+
 
         System.out.println("usuario creado: "+ humano.getId());
 
@@ -83,18 +86,22 @@ public class HumanoController extends Controller  {
     }
 
     public void index(Context context){
+        Map<String, Object> model = new HashMap<>();
+        String id = context.sessionAttribute("idPersona");
 
+        model.put("esHumano", true);
+        model.put("id", id);
 
-
-        context.render("persona-humana/Contribuciones_Humana.hbs");
+        context.render("index-inicio/index.hbs",model);
     }
+
+
     public void show(Context context){
 
         String id = context.sessionAttribute("idPersona");
         Humano humano = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
 
         Map<String, Object> model = new HashMap<>();
-
         model.put("humano",humano);
 
 
@@ -102,15 +109,7 @@ public class HumanoController extends Controller  {
     }
 
 
-    public void edit(Object ... Context){
 
-    }
-    public void update(Object ... Context){
-
-    }
-    public void delete(Object ... Context){
-
-    }
 
 
 }

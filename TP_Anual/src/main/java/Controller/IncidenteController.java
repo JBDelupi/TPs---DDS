@@ -14,12 +14,13 @@ public class IncidenteController extends Controller implements ICrudViewsHandler
     public void save(Context context) {
 
 
-        context.redirect("/");
+        context.redirect("/incidentes");
     }
 
     @Override
     public void index(Context context) {
 
+        context.render("incidentes/index.hbs");
     }
 
     @Override

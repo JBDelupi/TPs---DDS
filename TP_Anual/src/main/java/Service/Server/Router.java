@@ -1,11 +1,11 @@
 package Service.Server;
 
 import Controller.*;
-import org.apache.commons.io.IOUtils;
+import Controller.Administrador.HeladeraController;
+import Controller.Administrador.VulnerableController;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import static io.javalin.apibuilder.ApiBuilder.get;
+import static io.javalin.apibuilder.ApiBuilder.post;
 
 public class Router {
     public static void init(){
@@ -14,38 +14,59 @@ public class Router {
         Server.app().get("/contact",context -> context.render("main/Contacto.hbs"));
         Server.app().get("/team",context -> context.render("main/team.hbs"));
         Server.app().get("/about",context -> context.render("main/about.hbs"));
+        Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
 
 
+        Server.app().routes(()->{
+            post("/logout", ((LoginController)FactoryController.controller("login"))::manejarCierreSesion);
+            get("/login", ((LoginController) FactoryController.controller("login"))::index);
+            post("/login", ((LoginController) FactoryController.controller("login"))::manejarInicioSesion);
+        });
 
-        Server.app().get("/login", ((LoginController) FactoryController.controller("login"))::index);
-        Server.app().post("/login", ((LoginController) FactoryController.controller("login"))::manejarInicioSesion);
+        Server.app().routes(()->{
+            get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
+            get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
+            post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
+        });
 
+        Server.app().routes(()->{
+            get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create);
+            get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
+            get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
+            post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
+        });
 
-        Server.app().get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
-        Server.app().post("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::save);
-        // Server.app().get("/", ((HumanoController) FactoryController.controller("humano"))::show);
-        Server.app().get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
+        Server.app().routes(()->{
+            get("/index/humano",((HumanoController) FactoryController.controller("humano"))::index );
+            get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
+            post("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::save);
+            get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
+        });
 
+        Server.app().routes(()->{
+            get("/incidentes",((IncidenteController) FactoryController.controller("incidente"))::index);
+            get("/registro/incidente",((IncidenteController)FactoryController.controller("incidente"))::create);
 
+        });
 
-        Server.app().get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
-        Server.app().post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
-
-
-
-        Server.app().get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create);
-        Server.app().get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
-        Server.app().get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
-        Server.app().post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
+        Server.app().routes(()->{
+            get("/registro/producto",((ProductoController)FactoryController.controller("producto"))::create);
+            post("/registro/producto",((ProductoController)FactoryController.controller("producto"))::save);
+            get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
+            get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
+        });
 
 
         Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
 
-        Server.app().get("/registro/incidente",((IncidenteController)FactoryController.controller("incidente"))::create);
 
-        Server.app().get("/registro/producto",((ProductoController)FactoryController.controller("producto"))::create);
-        Server.app().get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
-        Server.app().post("/registro/producto",((ProductoController)FactoryController.controller("producto"))::save);
+       Server.app().routes(()->{
+           get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index);
+           get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create);
+
+       });
+
+
 
 
     }
