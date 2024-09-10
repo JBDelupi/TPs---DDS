@@ -15,8 +15,8 @@
 </head>
 
 <body>
-<div id="header"></div>
-<div id="tipografia"></div>
+{{> templates/partials/headerColaborador esHumano = esHumano  id=id}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -120,7 +120,7 @@
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="capacidad" placeholder="Capacidad heladera" step="0.1" required>
-                                        <label for="tempMin">Capacidad heladera</label>
+                                        <label for="capacidad">Capacidad heladera</label>
                                     </div>
                                 </div>
                                 <div class="col-12">

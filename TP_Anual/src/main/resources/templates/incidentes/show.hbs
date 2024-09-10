@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Canjear Producto</title>
+    <title>Detalles del fallaTecnica</title>
 
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/efectos.css">
@@ -15,71 +15,72 @@
 </head>
 
 <body>
-{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial footer aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/header estaSesion=estaSesion}}  <!-- Incluye el partial header aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial typography here -->
 <main>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Canjea tu Producto</h5>
-                <h1 class="mb-5">Canjear Producto</h1>
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Detalles de la Falla</h5>
+                <h1 class="mb-5">Falla Tecnica en heladera : {{fallaTecnica.heladera.id}}</h1>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                    <img src="../img/producto.png" alt="Producto" class="img-fluid rounded" style="box-shadow: 0 10px 8px rgba(0, 0, 0, 0.329);">
+                    <img src="{{fallaTecnica.foto}}" alt="Foto del fallaTecnica" class="img-fluid rounded" style="box-shadow: 0 10px 8px rgba(0, 0, 0, 0.329);">
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="nombreProducto" class="form-control">Nombre del Producto</p>
-                                    <label for="nombreProducto">Nombre del Producto</label>
+                                    <p id="nombreHeladera" class="form-control">{{fallaTecnica.heladera.id}}</p>
+                                    <label for="nombreHeladera">Nombre de la Heladera</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="descripcionProducto" class="form-control">Descripción del Producto</p>
-                                    <label for="descripcionProducto">Descripción</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <p id="valorProducto" class="form-control">$Valor</p>
-                                    <label for="valorProducto">Valor</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <p id="cantidadProducto" class="form-control">Cantidad disponible</p>
-                                    <label for="cantidadProducto">Cantidad</label>
+                                    <p id="descripcionfallaTecnica" class="form-control">{{fallaTecnica.descripcion}}</p>
+                                    <label for="descripcionfallaTecnica">Descripción del fallaTecnica</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="empresaOfreciente" class="form-control">Empresa Ofreciente</p>
-                                    <label for="empresaOfreciente">Empresa Ofreciente</label>
+                                    <p id="tipoFalla" class="form-control">{{fallaTecnica.tipo}}</p>
+                                    <label for="tipoFalla">Tipo de Falla</label>
                                 </div>
                             </div>
-                            <form>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <p id="estadofallaTecnica" class="form-control">{{#if fallaTecnica.solucionado}}Solucionado{{else}}No Solucionado{{/if}}</p>
+                                    <label for="estadofallaTecnica">Estado del fallaTecnica</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <p id="fechafallaTecnica" class="form-control">{{fallaTecnica.fecha}}</p>
+                                    <label for="fechafallaTecnica">Fecha del fallaTecnica</label>
+                                </div>
+                            </div>
+                            {{#if fallaTecnica.fechaSolucionado}}
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="cantidadCanjear" placeholder="Cantidad a Canjear" min="1" required>
-                                        <label for="cantidadCanjear">Cantidad a Canjear</label>
+                                        <p id="fechaSolucionado" class="form-control">{{fallaTecnica.fechaSolucionado}}</p>
+                                        <label for="fechaSolucionado">Fecha de Solución</label>
                                     </div>
-                                </div><br>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Canjear</button>
                                 </div>
-                            </form>
+                            {{/if}}
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <p id="colaborador" class="form-control">{{fallaTecnica.colaborador.nombre}}  {{fallaTecnica.colaborador.apellido}}</p>
+                                    <label for="colaborador">Reportado por</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
 <div id="footer"></div>
 </body>

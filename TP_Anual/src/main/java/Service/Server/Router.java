@@ -1,6 +1,7 @@
 package Service.Server;
 
 import Controller.*;
+import Controller.Administrador.AdministradorController;
 import Controller.Administrador.HeladeraController;
 import Controller.Administrador.VulnerableController;
 
@@ -44,9 +45,10 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/incidentes",((IncidenteController) FactoryController.controller("incidente"))::index);
-            get("/registro/incidente",((IncidenteController)FactoryController.controller("incidente"))::create);
-
+            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index);
+            get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create);
+            post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save);
+            get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show);
         });
 
         Server.app().routes(()->{
@@ -66,7 +68,13 @@ public class Router {
 
        });
 
+        Server.app().routes(()->{
+            // Pantallas de admins
+           // get("admin/login", ((AdministradorController) FactoryController.controller("admin"))::show);
+           // post("admin/login", ((AdministradorController) FactoryController.controller("admin"))::login);
+            get("admin/index", ((AdministradorController) FactoryController.controller("admin"))::index);
 
+        });
 
 
     }

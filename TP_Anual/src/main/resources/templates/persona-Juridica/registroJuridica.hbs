@@ -14,8 +14,8 @@
   <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 
-<div id="header"></div>
-<div id="tipografia"></div>
+{{> templates/partials/header estaSesion = estaSesion}}
+{{> templates/partials/tipografia}}
 
 <body>
 <main>
@@ -71,7 +71,7 @@
   </div>
 
 </main>
-<div id="footer"></div>
+{{> templates/main/footer}}
 </body>
 
 <script src="../lib/wow/wow.min.js"></script>

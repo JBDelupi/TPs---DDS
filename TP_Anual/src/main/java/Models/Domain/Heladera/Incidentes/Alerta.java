@@ -6,11 +6,14 @@ import Models.Domain.Personas.Actores.Tecnico;
 import Service.Notificacion.Mensaje;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Alerta extends Incidente {
+    private Integer id;
     private TipoAlerta tipo;
 
     public Alerta(TipoAlerta tipo, Heladera heladera) {

@@ -12,12 +12,11 @@
     <link href="../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
 </head>
 <body>
 
-<div id="header"></div>
-<div id="tipografia"></div>
+{{> templates/partials/headerColaborador esHumano=esHumano id=id}}  <!-- Incluye el partial header aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
 
 <div class="container mt-5">
     <h1 class="mb-4">Reportes de Fallos en Heladeras</h1>
@@ -42,50 +41,32 @@
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
             <tr>
+                <th>ID</th>
                 <th>Fecha del Fallo</th>
                 <th>Fecha de Cierre</th>
                 <th>Heladera</th>
-                <th>Ubicación</th>
+                <th>Descripcion</th>
                 <th>Estado</th>
             </tr>
             </thead>
             <tbody id="tablaReportes">
-            <!-- Ejemplo de fila de reporte -->
-            <tr data-estado="cerrado" data-heladera="1">
-                <td>15/08/2024</td>
-                <td>17/08/2024</td>
-                <td>Heladera 1</td>
-                <td>Sector A - Planta Baja</td>
-                <td>Cerrado</td>
-            </tr>
-            <tr data-estado="cerrado" data-heladera="3">
-                <td>15/08/2024</td>
-                <td>17/08/2024</td>
-                <td>Heladera 3</td>
-                <td>Sector A - Planta Baja</td>
-                <td>Cerrado</td>
-            </tr>
-            <tr data-estado="cerrado" data-heladera="4">
-                <td>15/08/2024</td>
-                <td>17/08/2024</td>
-                <td>Heladera 4</td>
-                <td>Sector A - Planta Baja</td>
-                <td>Cerrado</td>
-            </tr>
-            <tr data-estado="abierto" data-heladera="2">
-                <td>18/08/2024</td>
-                <td>-</td>
-                <td>Heladera 2</td>
-                <td>Sector B - Primer Piso</td>
-                <td>Abierto</td>
-            </tr>
-            <!-- Más filas de reportes -->
+            {{#each fallasTecnicas}}
+                <tr data-estado="{{#if this.solucionado}}cerrado{{else}}abierto{{/if}}" data-heladera="{{this.heladera.id}}">
+                    <td><a href="/incidentes/{{this.id}}">{{this.id}}</td>
+                    <td>{{this.fecha}}</td>
+                    <td>{{this.fechaCierre}}</td>
+                    <td>{{this.heladera.id}}</td>
+                    <td>{{this.descripcion}}</td>
+                    <td>{{#if this.solucionado}}Cerrado{{else}}Abierto{{/if}}</td>
+                </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>
 </div>
 
 <div id="footer"></div>
+
 <!-- JavaScript para el filtrado -->
 <script>
     // Función para filtrar los reportes
@@ -99,8 +80,8 @@
             var heladera = fila.getAttribute('data-heladera').toLowerCase();
 
             var mostrarPorEstado = (estadoSeleccionado === 'todos') ||
-                (estadoSeleccionado === 'abiertos' && estado === 'abierto') ||
-                (estadoSeleccionado === 'cerrados' && estado === 'cerrado');
+                    (estadoSeleccionado === 'abiertos' && estado === 'abierto') ||
+                    (estadoSeleccionado === 'cerrados' && estado === 'cerrado');
 
             var mostrarPorHeladera = heladera.includes(heladeraSeleccionada);
 
@@ -115,8 +96,8 @@
     // Eventos para activar el filtrado
     document.getElementById('filtroEstado').addEventListener('change', filtrarReportes);
     document.getElementById('filtroHeladera').addEventListener('input', filtrarReportes);
-
 </script>
+
 <script src="../../public/js/scripts-index.js"></script>
 <script src="../../public/js/scripts-header.js"></script>
 

@@ -30,13 +30,13 @@
 
     <!-- Template Stylesheet -->
     <link href="../css/estilosPerfil.css" rel="stylesheet">
-    <div id="tipografia"></div>
 </head>
 
 <body>
 
 
-<div id="header"></div>
+{{> templates/partials/headerColaborador esHumano = esHumano  id=id}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 <div class="container-fluid bg-white p-0">
 
     <div class="py-1 bg-dark hero-header mb-5">

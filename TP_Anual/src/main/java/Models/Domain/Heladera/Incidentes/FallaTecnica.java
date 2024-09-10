@@ -19,20 +19,16 @@ import java.util.List;
 @Setter
 @Getter
 public class FallaTecnica extends Incidente {
+    private Integer id;
     private Colaborador colaborador;
     private String foto;
     private String descripcion;
     private List<RegistroVisitaTecnica> visitasTecnicas;
     private TipoFallaTecnica tipo;
     private Boolean solucionado;
+    private LocalDateTime fechaSolucionado;
 
-    public FallaTecnica(Heladera heladera, Colaborador colaborador) {
-        this.heladera = heladera;
-        this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
-        this.heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
-        this.colaborador = colaborador;
-        this.visitasTecnicas = new ArrayList<>();
-    }
+    public FallaTecnica() {}
 
     public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();

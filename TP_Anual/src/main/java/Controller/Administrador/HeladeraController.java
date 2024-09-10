@@ -24,16 +24,16 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     @Override
     public void save(Context context) {
         String direccion = context.formParam("direccion") ;
-        int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
-        double temperaturaMax = Double.parseDouble(context.formParam("TemperaturaMax"));
-        double temperaturaMin = Double.parseDouble(context.formParam("TemperaturaMin"));
+//        int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
+//        double temperaturaMax = Double.parseDouble(context.formParam("TemperaturaMax"));
+//        double temperaturaMin = Double.parseDouble(context.formParam("TemperaturaMin"));
 
         HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
         Heladera heladera = heladeraBuilder
                 .abierto(true)
-                .capacidadMaxima(capacidadMaxima)
-                .temperaturaMax(temperaturaMax)
-                .temperaturaMin(temperaturaMin)
+//                .capacidadMaxima(capacidadMaxima)
+//                .temperaturaMax(temperaturaMax)
+//                .temperaturaMin(temperaturaMin)
                 .construir();
 
         heladera.setId(10);

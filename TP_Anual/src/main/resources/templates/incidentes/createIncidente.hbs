@@ -15,8 +15,8 @@
 </head>
 
 <body>
-<div id="header"></div>
-<div id="tipografia"></div>
+{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -34,20 +34,22 @@
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <form>
+                        <form action="/registro/incidente" method="POST">
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control" id="heladera" required>
+                                        <select class="form-control" id="heladera" name="heladera" required>
                                             <option value="" disabled selected>Seleccionar Heladera</option>
-                                            <!-- Aquí se agregarían las opciones de heladeras -->
+                                            {{#each heladeras}}
+                                                <option value="{{this.id}}">{{this.id}}</option>
+                                            {{/each}}
                                         </select>
                                         <label for="heladera">Heladera</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" id="descripcion" placeholder="Descripción de la falla" style="height: 150px;" required></textarea>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción de la falla" style="height: 150px;" required></textarea>
                                         <label for="descripcion">Descripción</label>
                                     </div>
                                 </div>
@@ -69,7 +71,7 @@
     </div>
 
 </main>
-<div id="footer"></div>
+{{> templates/main/footer}}
 </body>
 
 <script src="../lib/wow/wow.min.js"></script>

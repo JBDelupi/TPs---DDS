@@ -1,5 +1,5 @@
 <!-- About Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-5 wow fadeInUp" id="about" >
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
@@ -48,7 +48,11 @@
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-primary py-3 px-5 mt-2" href="">Contribuir</a>
+            {{#if estaSesion}}
+                <a class="btn btn-primary py-3 px-5 mt-2" href="/index/{{rol}}">Contribuir</a>
+            {{else}}
+                <a class="btn btn-primary py-3 px-5 mt-2" href="/login">Contribuir</a>
+            {{/if}}
             </div>
         </div>
     </div>

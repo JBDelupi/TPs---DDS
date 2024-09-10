@@ -6,11 +6,13 @@ import Models.Domain.Personas.Actores.Tecnico;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
 @Setter
 public abstract class Incidente {
     protected LocalDateTime fecha;

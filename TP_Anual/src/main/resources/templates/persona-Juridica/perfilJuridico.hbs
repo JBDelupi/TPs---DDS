@@ -30,11 +30,11 @@
 
     <!-- Template Stylesheet -->
     <link href="../css/estilosPerfil.css" rel="stylesheet">
-    <div id="tipografia"></div>
 </head>
 
 <body>
-<div id="header"></div>
+{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 <div class="container-fluid bg-white p-0">
     <div class="py-1 bg-dark hero-header mb-5">
         <div class="container text-center my-5 pt-5 pb-4">

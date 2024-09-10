@@ -60,7 +60,6 @@ public class PseudoBaseDatosHeladera {
             baseHeladeras.get(i).setId(i+1);
             baseHeladeras.get(i).setTemperaturaMin(5.00);
             baseHeladeras.get(i).setTemperaturaMax(10.00);
-
         }
     }
 
@@ -75,7 +74,7 @@ public class PseudoBaseDatosHeladera {
 
 
     public Heladera getId(String id){
-       return baseHeladeras.stream().filter(f->f.getId() == Parser.ID).findFirst().get();
+        return baseHeladeras.stream().filter(f-> f.getId() == Integer.parseInt(id)).findFirst().get();
     }
 
 }

@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Actores.Rol;
+import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.Personas.Actores.Humano;
@@ -8,10 +10,12 @@ import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
 import Service.Server.ICrudViewsHandler;
+import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.random.RandomGenerator;
 
 public class JuridicoController extends Controller implements ICrudViewsHandler {
 
@@ -81,6 +85,11 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .correoElectronico(correo)
                 .construir();
 
+        juridico.setId(RandomGenerator.getDefault().nextInt());
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
+        juridico.setCredencialDeAcceso(credencialDeAcceso);
+        juridico.setRol(new Rol(TipoRol.JURIDICO));
+        PseudoBaseDatosUsuario.getInstance().agregar(juridico);
 
 
         context.redirect("/");
