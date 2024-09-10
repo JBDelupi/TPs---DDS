@@ -49,6 +49,10 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     }
 
+    public void contribucionExitosa(Context context) {
+        context.render("contribucionExitosa.hbs");
+    }
+
     @Override
     public void create(Context context) {
         String tipoContribucion = context.queryParam("tipo");

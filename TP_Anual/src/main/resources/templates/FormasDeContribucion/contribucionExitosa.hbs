@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Contribucion realizada exitosamente</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilos.css">
@@ -13,35 +13,27 @@
     <link href="../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-
 </head>
-<body>
 
+<body>
 {{> templates/partials/headerColaborador esHumano = esHumano  id=id}}  <!-- Incluye el partial footer aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
-
-<div class="row">
-    <div class="col-md-6 mx-auto mt-5">
-        <div class="card shadow-lg">
-            <div class="card-header text-dark text-center py-3">
-                <h3 class="display-3 text-orange">Bienvenido Administrador</h3>
+<main>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="section-title ff-secondary text-center text-primary fw-normal">Constribucion realizada con éxito</h1>
             </div>
-            <div class="card-body p-4">
-                <p>Como administrador puedes:</p>
-                <ul>
-                    <li>Cargar y listar Heladeras</li>
-                    <li>Cargar y listar Tecnicos</li>
-                    <li>Verificar fallos de heladeras</li>
-
-                </ul>
-            </div>
+            <p class="text-dark animated slideInLeft mb-4 pb-3">
+                ¡Tu contribución ha sido procesada con exito! Gracias por tu ayuda.
+            </p>
+            <a href="/" class="btn btn-primary py-2 px-4">Ir al inicio</a>
         </div>
     </div>
-</div>
-<div id="footer"></div>
 
+</main>
 </body>
+
 <script src="../lib/wow/wow.min.js"></script>
 <script src="../lib/easing/easing.min.js"></script>
 <script src="../lib/waypoints/waypoints.min.js"></script>

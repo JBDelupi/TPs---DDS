@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Contacto</title>
     <!-- Links importantes -->
     <link rel="stylesheet" href="../css/estilos.css">
@@ -11,8 +12,8 @@
 </head>
 <body>
 
-<div id="header"></div>
-<div id="tipografia"></div>
+{{> templates/partials/headerColaborador}}
+{{> templates/partials/tipografia}}
 
 <!-- Formulario de contacto -->
 <div class="container mt-5">
@@ -38,7 +39,7 @@
     </form>
 </div>
 
-<div id="footer"></div>
+{{> templates/main/footer}}
 
 </body>
 

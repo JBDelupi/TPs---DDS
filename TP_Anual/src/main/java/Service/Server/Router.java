@@ -65,6 +65,7 @@ public class Router {
        Server.app().routes(()->{
            get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index);
            get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create);
+           post("/contribucionExitosa", ((ContribucionController)FactoryController.controller("Contribucion"))::contribucionExitosa);
 
        });
 

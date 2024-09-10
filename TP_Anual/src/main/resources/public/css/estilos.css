@@ -25,6 +25,18 @@
     z-index: 99;
 }
 
+.history-back{
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+    margin-bottom: 60px;
+}
+
+.galery-img{
+    width: 90px;
+}
 
 /*** Spinner ***/
 #spinner {

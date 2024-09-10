@@ -57,7 +57,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         context.render("heladera/heladeras.hbs", model);
 
-
     }
 
     // SOLO - GET

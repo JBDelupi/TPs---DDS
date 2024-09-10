@@ -60,6 +60,7 @@ public class HumanoController extends Controller  {
         String apellido = context.formParam("apellido") ;
      //   LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
         String correo = context.formParam("correo");
+        String nroTelefono = context.formParam("nroTelefono");
         String nroDocumento = context.formParam("documento");
         TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
 
@@ -82,7 +83,7 @@ public class HumanoController extends Controller  {
 
         System.out.println("usuario creado: "+ humano.getId());
 
-        context.redirect("/");
+        context.redirect("/login");
     }
 
     public void index(Context context){
@@ -92,7 +93,7 @@ public class HumanoController extends Controller  {
         model.put("esHumano", true);
         model.put("id", id);
 
-        context.render("index-inicio/index.hbs",model);
+        context.render("index-inicio/index_Humana.hbs",model);
     }
 
 

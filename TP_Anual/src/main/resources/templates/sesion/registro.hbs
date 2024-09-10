@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Personas Humanas y Jurídicas</title>
     <!-- Links importantes -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -24,10 +25,10 @@
         </div>
         <div class="blog_section_2 mt-5">
             <div class="row">
-                <div class="col-md-6 mb-4">
+                <div class="col-md-5 mb-4 mx-auto">
                     <div class="blog_box border rounded p-3 h-100 ">
                         <div class="blog_img mb-3 align-content-center">
-                            <img src="../img/humana.jpg" class="img-fluid zoom-img card-img-bottom" alt="Persona Humana">
+                            <img src="../images/registro_humana.png" class="img-fluid zoom-img galery-img card-img-bottom" alt="Persona Humana">
                         </div>
                         <h4 class="prep_text">Registro Persona Humana</h4>
                         <p class="lorem_text">Regístrate como persona humana para recibir asistencia o participar en nuestras actividades.</p>
@@ -36,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
+                <div class="col-md-5 mb-4 mx-auto">
                     <div class="blog_box border rounded p-3 h-100">
                         <div class="blog_img mb-3 align-content-center">
                             <img src="../img/juridica.jpg" class="img-fluid zoom-img card-img-bottom" alt="Persona Jurídica">
@@ -53,8 +54,8 @@
     </div>
 </div>
 
-<div id="footer"></div>
-
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

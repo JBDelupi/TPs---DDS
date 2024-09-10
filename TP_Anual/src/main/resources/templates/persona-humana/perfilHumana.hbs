@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
@@ -64,7 +65,8 @@
                         <p><strong>Nombre: </strong>{{humano.nombre}}</p>
                         <p><strong>Apellido: </strong>{{humano.apellido}}</p>
                         <p><strong>Usuario: </strong>{{humano.credencialDeAcceso.nombreUsuario}}</p>
-                        <p><strong>Medio de Contacto: </strong>{{humano.email}}</p>
+                        <p><strong>Email: </strong>{{humano.email}}</p>
+                        <p><strong>Telefono: </strong>{{humano.telefono}}</p>
                         <p><strong>Direccion: </strong>direccionEjemplo</p>
                         <p><strong>Fecha de Nacimiento: </strong>direccionEjemplo</p>
                         <p><strong>Tipo de Documento: </strong>{{humano.numeroDocumento}}</p>
@@ -84,7 +86,7 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 </div>
 
-{{> templates/main/footer}}  <!-- Incluye el partial footer aquí -->
+{{> templates/main/footer}}
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
