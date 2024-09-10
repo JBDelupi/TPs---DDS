@@ -74,11 +74,12 @@ public class HumanoController extends Controller  {
                 .tipoDocumento(tipoDeDocumento)
                 .construir();
 
-        humano.setId(RandomGenerator.getDefault().nextInt());
+        humano.setId(RandomGenerator.getDefault().nextInt(0,100));
         CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
         humano.setCredencialDeAcceso(credencialDeAcceso);
         humano.setRol(new Rol(TipoRol.HUMANO));
         PseudoBaseDatosUsuario.getInstance().agregar(humano);
+
 
 
         System.out.println("usuario creado: "+ humano.getId());

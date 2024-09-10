@@ -18,6 +18,8 @@ public class FactoryController {
           case "vulnerable" : controller =  new VulnerableController(); break;
           case "incidente" : controller =  new FallaTecnicaController(); break;
           case "producto": controller =  new ProductoController(); break;
+          case "puntos": controller =  new PuntoCercanoController(); break;
+
 
         }
         return controller;

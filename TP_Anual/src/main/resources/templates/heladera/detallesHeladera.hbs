@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Heladera</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -14,13 +13,11 @@
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
 </head>
 
 <body>
-{{> templates/partials/header}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador esHumano = esHumano id=id}}
 {{> templates/partials/tipografia}}
-
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -40,51 +37,60 @@
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="IDHeladera" value="{{heladera.id}}" readonly>
-                                    <label for="IDHeladera">Heladera ID:</label>
+                                    <input type="text" class="form-control" id="IDHeladera" value="ID de la Heladera" readonly>
+                                    <label for="IDHeladera">Heladera</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="estadoHeladera" value="{{heladera.estadoActual}}" readonly>
-                                    <label for="estadoHeladera">Estado</label>
+                                    <input type="text" class="form-control" id="estadoHeladera" value="Estado de la Heladera" readonly>
+                                    <label for="estadoHeladera">Estado de Heladera</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="direccionHeladera" value=" {{heladera.direccion.Localidad}}" readonly>
-                                    <label for="direccionHeladera">Dirección:</label>
+                                    <input type="text" class="form-control" id="direccionHeladera" value="Dirección de la Heladera" readonly>
+                                    <label for="direccionHeladera">Dirección</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="capacidadViandas" value="{{heladera.capacidadDeViandas}}" readonly>
+                                    <input type="text" class="form-control" id="capacidadViandas" value="Capacidad de Viandas" readonly>
                                     <label for="capacidadViandas">Capacidad de Viandas</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <div class="form-control">
-                                        <img src="../../images/check_green.png" alt="Check Verde" style="height: 24px; vertical-align: middle;">
-                                        {{#if heladera.estaLlena}}Llena{{else}}No Llena{{/if}}
+                                        <img src="../images/check_green.png" alt="Check Verde" style="height: 24px; vertical-align: middle;">
+                                        Llena
                                     </div>
+                                    <label for="llena">Esta Llena</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="fechaPuestaEnMarcha" value="{{heladera.fechaDePuestaEnMarcha}}" readonly>
-                                    <label for="fechaPuestaEnMarcha">Fecha de Puesta en Marcha:</label>
+                                    <input type="text" class="form-control" id="fechaPuestaEnMarcha" value="Fecha de Puesta en Marcha" readonly>
+                                    <label for="fechaPuestaEnMarcha">Fecha de Puesta en Marcha</label>
                                 </div>
                             </div>
                         </div>
+
+                        <Form class="mt-4" action="/#" method="POST">
+                            <a id="btnSuscribirse" href="javascript:void(0);" class="btn btn-primary py-2 px-4" onclick="suscribirse()">Suscribirse</a>
+
+                            <!-- Botón de Desuscribirse oculto al inicio -->
+                            <a id="btnDesuscribirse" href="javascript:void(0);" class="btn btn-danger py-2 px-4" style="display:none;" onclick="desuscribirse()">Desuscribirse</a>
+                        </Form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
-{{> templates/main/footer}}  <!-- Incluye el partial footer aquí -->
 
+</main>
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -97,8 +103,6 @@
 <script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
 <script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
 <script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>

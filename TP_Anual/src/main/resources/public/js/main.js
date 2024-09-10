@@ -116,3 +116,14 @@
     });
 
 })(jQuery);
+
+//Suscribirse y desuscribirse
+function suscribirse() {
+    document.getElementById("btnSuscribirse").style.display = "none"; // Oculta el botón de Suscribirse
+    document.getElementById("btnDesuscribirse").style.display = "inline-block"; // Muestra el botón de Desuscribirse
+}
+
+function desuscribirse() {
+    document.getElementById("btnDesuscribirse").style.display = "none"; // Oculta el botón de Desuscribirse
+    document.getElementById("btnSuscribirse").style.display = "inline-block"; // Muestra el botón de Suscribirse
+}

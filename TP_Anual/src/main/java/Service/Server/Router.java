@@ -17,6 +17,9 @@ public class Router {
         Server.app().get("/about",context -> context.render("main/about.hbs"));
         Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
 
+        Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index);
+        Server.app().post("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::cargarPuntos);
+
 
         Server.app().routes(()->{
             post("/logout", ((LoginController)FactoryController.controller("login"))::manejarCierreSesion);
@@ -77,7 +80,9 @@ public class Router {
 
         });
 
-
+        Server.app().routes(()->{
+            //post("/heladeras/{id}",((SuscipcionesController) FactoryController.controller("suscripciones"))::save);
+        });
     }
 
 }

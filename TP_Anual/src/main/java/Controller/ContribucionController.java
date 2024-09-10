@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
@@ -39,7 +40,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         Persona usuario = context.sessionAttribute("usuario");
         Map<String, Object> model = new HashMap<>();
         model.put("usuario", usuario);
-        model.put("rol",usuario.getRol());
+        model.put("esHumano", usuario.getRol().getTipo().equals(TipoRol.HUMANO));
         context.render("FormasDeContribucion/index.hbs", model);
         }
     }
@@ -50,7 +51,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     }
 
     public void contribucionExitosa(Context context) {
-        context.render("contribucionExitosa.hbs");
+        context.render("FormasDeContribucion/contribucionExitosa.hbs");
     }
 
     @Override
@@ -66,6 +67,9 @@ public class ContribucionController extends Controller implements ICrudViewsHand
                 break;
             case "distribucionViandas":
                 context.render("FormasDeContribucion/distribucionDeViandas.hbs");
+                break;
+            case "regisrarPersonaVulnerable":
+                context.render("FormasDeContribucion/registrarPersonaVulnerable.hbs");
                 break;
         }
     }

@@ -47,10 +47,12 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     // ALL - GET
     public void index(Context context){
+
         List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
 
 
         Map<String, Object> model = new HashMap<>();
+
 
         model.put("heladeras",heladeraList);
 
@@ -62,11 +64,12 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     // SOLO - GET
     @Override
     public void show(Context context) {
-        String id = context.queryParam("id");
+
+        String id = context.pathParam("id");
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
 
         Map<String, Object> model = new HashMap<>();
-
+        
         model.put("heladera",heladera);
 
         context.render("heladera/detallesHeladera.hbs", model);

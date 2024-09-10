@@ -20,6 +20,8 @@ public class SensorMovimiento implements Sensor {
         }
     }
 
+
+
     @Override
     public void activar() {
         this.estaPrendido = true;

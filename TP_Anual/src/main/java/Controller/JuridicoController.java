@@ -52,7 +52,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     @Override
     public void index(Context context) {
-        context.render("index-inicio/index.hbs");
+        context.render("index-inicio/index_Juridica.hbs");
     }
 
     //@GET
@@ -85,14 +85,14 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .correoElectronico(correo)
                 .construir();
 
-        juridico.setId(RandomGenerator.getDefault().nextInt());
+        juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
         CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
         juridico.setCredencialDeAcceso(credencialDeAcceso);
         juridico.setRol(new Rol(TipoRol.JURIDICO));
         PseudoBaseDatosUsuario.getInstance().agregar(juridico);
 
 
-        context.redirect("/");
+        context.redirect("/login");
     }
 
     @Override

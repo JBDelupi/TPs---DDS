@@ -1,7 +1,9 @@
 package Models.Repository;
 
 
+import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 
 import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
@@ -40,6 +42,14 @@ public class PseudoBaseDatosUsuario {
                 .orElse(null);
     }
 
-
+    public Humano searchUserTarjeta(String user) {
+        List<Humano> humanos = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.getRolNegocio().equals(TipoRolNegocio.HUMANO)){
+                humanos.add((Humano) persona);
+            }
+        }
+      return   humanos.stream().filter(f->f.getTarjeta().getCodigo().equals(user)).findAny().orElse(null);
+    }
 
 }

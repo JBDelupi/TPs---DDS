@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Búsqueda de Puntos</title>
+</head>
+<body>
+<h1>Buscar Puntos Estratégicos Cercanos</h1>
+
+<!-- Formulario para ingresar latitud, longitud y radio -->
+<form action="/registro/puntos" method="post">
+    <label for="latitud">Latitud:</label>
+    <input type="text" id="latitud" name="latitud" placeholder="Ej: -34.6037" required><br><br>
+
+    <label for="longitud">Longitud:</label>
+    <input type="text" id="longitud" name="longitud" placeholder="Ej: -58.3816" required><br><br>
+
+    <label for="radio">Radio (en km):</label>
+    <input type="text" id="radio" name="radio" placeholder="Ej: 5" required><br><br>
+
+    <button type="submit">Buscar</button>
+</form>
+</body>
+</html>

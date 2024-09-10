@@ -4,11 +4,15 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
+import Models.Repository.PseudoBaseDatosAlerta;
+import Models.Repository.PseudoBaseDatosHeladera;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.random.RandomGenerator;
 
 
 @Getter
@@ -37,6 +41,8 @@ public class SensorTemperatura implements Sensor {
        {
            Alerta incidente = new Alerta(TipoAlerta.TEMPERATURA, heladera);
            heladera.notify(incidente);
+           incidente.setId(RandomGenerator.getDefault().nextInt(0,100));
+           PseudoBaseDatosAlerta.getInstance().agregar(incidente); //BORRAR CUANDO EXISTA PERSISTENCIA
            this.tareaProgramada.pausarTarea();
        }
     }
