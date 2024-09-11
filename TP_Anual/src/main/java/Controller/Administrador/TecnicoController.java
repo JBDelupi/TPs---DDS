@@ -10,46 +10,29 @@ import io.javalin.http.Context;
 
 public class TecnicoController extends Controller implements ICrudViewsHandler {
 
-    public void create(Object ... Context) {
+    @Override
+    public void save(Context context) {
 
-        String nombre = (String) Context[0];
-        String apellido = (String) Context[1];
-        TipoDeDocumento tipo = (TipoDeDocumento) Context[2];
-        String numeroDocumento = (String) Context[3];
-        String cuil = (String) Context[4];
-        AreaCobertura areaCobertura = (AreaCobertura) Context[5];
+        String nombre = context.formParam("nombre");
+        String apellido = context.formParam("apellido");
+        TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipoDocumento"));
+        String numeroDocumento = context.formParam("documento");
+        String cuil = context.formParam("cuil");
+        String areaCobertura = context.formParam("areaCobertura");
 
         TecnicoBuilder builder = new TecnicoBuilder();
-        Tecnico tecnico = builder
+        Tecnico tecnico = TecnicoBuilder
                 .nombre(nombre)
                 .apellido(apellido)
-                .tipoDeDocumento(tipo)
+                .tipoDeDocumento(tipoDeDocumento)
                 .numeroDeDocumento(numeroDocumento)
                 .cuil(cuil)
-                .area(areaCobertura)
                 .construir();
 
+        context.redirect("Administrador/index_admin.hbs");
     }
 
-    public void index(Object ... Context){
 
-    }
-    public void show(Object ... Context){
-
-    }
-
-    public void save(Object ... Context){
-
-    }
-    public void edit(Object ... Context){
-
-    }
-    public void update(Object ... Context){
-
-    }
-    public void delete(Object ... Context){
-
-    }
 
     @Override
     public void index(Context context) {
@@ -63,15 +46,9 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
 
     @Override
     public void create(Context context) {
-
+        context.render("Tecnico/registroTecnico.hbs");
     }
 
-    @Override
-    public void save(Context context) {
-
-    }
-
-    @Override
     public void edit(Context context) {
 
     }

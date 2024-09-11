@@ -24,10 +24,12 @@
                     <a href="/" class="nav-item nav-link active">Inicio</a>
                     {{#if esHumano}}
                     <a href="/persona/humano/{{id}}" class="nav-item nav-link">Perfil</a>
+                    <a href="/index/humano" class="nav-item nav-link">Servicios</a>
+                    {{else}}
+                    <a href="/index/juridico" class="nav-item nav-link">Servicios</a>
                     {{/if}}
-                    <a href="#services" class="nav-item nav-link">Servicios</a>
+                    <a href="/contribuciones" class="nav-item nav-link">Contribuir</a>
                     <a href="/heladeras" class="nav-item nav-link">Mapa</a>
-                    <a href="/index/humano" class="nav-item nav-link">Colaborar</a>
                     <a href="/contact" class="nav-item nav-link">Contactanos</a>
                 </div>
                 <form action="/logout" method="post" style="display: inline;">

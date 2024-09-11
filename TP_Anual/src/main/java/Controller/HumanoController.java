@@ -22,7 +22,6 @@ public class HumanoController extends Controller  {
     }
 
 
-
     public void save(Object ... Args) {
 
         String nombre = (String) Args[0];

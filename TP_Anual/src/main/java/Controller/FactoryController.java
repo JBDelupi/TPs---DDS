@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.Administrador.AdministradorController;
 import Controller.Administrador.HeladeraController;
+import Controller.Administrador.TecnicoController;
 import Controller.Administrador.VulnerableController;
 
 
@@ -20,6 +21,8 @@ public class FactoryController {
           case "producto": controller =  new ProductoController(); break;
           case "puntos": controller =  new PuntoCercanoController(); break;
           case "admin": controller = new AdministradorController(); break;
+          case "tecnico": controller = new TecnicoController(); break;
+          case "canjes": controller = new CanjeProductoController(); break;
 
         }
         return controller;

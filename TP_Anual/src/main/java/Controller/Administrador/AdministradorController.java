@@ -17,7 +17,7 @@ public class AdministradorController  extends Controller {
 
 
     public void index(Context context) {
-        context.render("Adnministrador/Index_Admin.hbs");
+        context.render("Administrador/index_Admin.hbs");
     }
 
     public void getImportarColaborador(Context context){

@@ -68,8 +68,8 @@ public class ContribucionController extends Controller implements ICrudViewsHand
             case "distribucionViandas":
                 context.render("FormasDeContribucion/distribucionDeViandas.hbs");
                 break;
-            case "regisrarPersonaVulnerable":
-                context.render("FormasDeContribucion/registrarPersonaVulnerable.hbs");
+            case "registrarPersonaVulnerable":
+                context.render("FormasDeContribucion/registroVulnerable.hbs");
                 break;
         }
     }

@@ -10,6 +10,9 @@
 <!-- LOGO -->
 <link href="../../images/favicon.ico" rel="icon">
 
+{{#if estaSesion}}
+    {{> templates/partials/headerColaborador}}
+{{else}}
 <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
             <a href="" class="navbar-brand p-0">
@@ -21,18 +24,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0 pe-4">
-                    {{#if estaSesion}}
-                    <a href="/index/{{rol}}" class="nav-item nav-link active">Inicio</a>
-                    {{else}}
-                    <a href="#index" class="nav-item nav-link active">Inicio</a>
-                    {{/if}}
+                    <a href="/" class="nav-item nav-link active">Inicio</a>
                     <a href="#about" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="#services" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.html" class="nav-item nav-link">Mapa</a>
+                    <a href="/heladeras" class="nav-item nav-link">Mapa</a>
                     <a href="#team" class="nav-item nav-link">Nuestro Equipo</a>
-                    <a href="#contact" class="nav-item nav-link">Contactanos</a>
+                    <a href="/contact" class="nav-item nav-link">Contactanos</a>
                 </div>
                 <a href="/login" class="btn btn-primary py-2 px-4">Ingresar</a>
             </div>
         </nav>
 </div>
+{{/if}}

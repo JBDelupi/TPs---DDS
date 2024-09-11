@@ -2,7 +2,9 @@ package Controller;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Producto.Canje;
+import Models.Domain.Producto.Producto;
 import Models.Repository.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosProducto;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -14,15 +16,13 @@ public class CanjeProductoController extends Controller implements ICrudViewsHan
 
     @Override
     public void index(Context context) {
-        //List<Canje> heladeraList = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
-
+        List<Producto> productoList = PseudoBaseDatosProducto.getInstance().baseProductos;
 
         Map<String, Object> model = new HashMap<>();
 
-        //model.put("heladeras", heladeraList);
+        model.put("canjes", productoList);
 
-
-        context.render("heladera/heladeras.hbs", model);
+        context.render("producto/canjearProducto.hbs", model);
     }
     @Override
     public void save(Context context){}

@@ -16,26 +16,20 @@
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style>
 </head>
 
 <body>
-{{> templates/partials/headerColaborador esHumano = esHumano id=id}} <!-- Incluye el partial header -->
+{{> templates/partials/header esHumano=esHumano id=id}} <!-- Incluye el partial header -->
 {{> templates/partials/tipografia}}
 
-<main class="container">
+<main class="container my-5">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Heladeras</h5>
         <h1 class="mb-5">Heladeras</h1>
     </div>
 
     <!-- Mapa de Heladeras -->
-    <div id="map"></div>
+    <div id="map"  style = "height: 500px; width: 100%;"></div>
 
     <!-- Lista de Heladeras -->
     <div class="my-5">
@@ -55,7 +49,8 @@
     </div>
 </main>
 
-{{> templates/main/footer}} <!-- Incluye el partial footer -->
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
 
 <!-- Leaflet JS para el mapa -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>

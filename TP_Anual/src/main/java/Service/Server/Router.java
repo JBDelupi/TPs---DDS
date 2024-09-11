@@ -3,6 +3,7 @@ package Service.Server;
 import Controller.*;
 import Controller.Administrador.AdministradorController;
 import Controller.Administrador.HeladeraController;
+import Controller.Administrador.TecnicoController;
 import Controller.Administrador.VulnerableController;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
@@ -61,6 +62,9 @@ public class Router {
             get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
         });
 
+        Server.app().routes(()-> {
+            get("/canjes",((CanjeProductoController)FactoryController.controller("canjes"))::index);
+        });
 
         Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
 
@@ -81,8 +85,14 @@ public class Router {
         });
 
         Server.app().routes(()->{
+            get("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::create);
+            post("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::save);
+        });
+
+        Server.app().routes(()->{
             //post("/heladeras/{id}",((SuscipcionesController) FactoryController.controller("suscripciones"))::save);
         });
+
     }
 
 }
