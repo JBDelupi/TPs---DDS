@@ -14,7 +14,4 @@ import java.util.Map;
 public abstract class Controller {
     Usuario usuario;
 
-
-
-
 }

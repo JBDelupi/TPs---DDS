@@ -74,10 +74,10 @@ public class Router {
 
         Server.app().routes(()->{
             // Pantallas de admins
-           // get("admin/login", ((AdministradorController) FactoryController.controller("admin"))::show);
-           // post("admin/login", ((AdministradorController) FactoryController.controller("admin"))::login);
-            get("admin/index", ((AdministradorController) FactoryController.controller("admin"))::index);
-
+            get("/registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::getImportarColaborador);
+            post("registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::saveImportarColaborador);
+            get("/index/admin", ((AdministradorController) FactoryController.controller("admin"))::index);
+            get("persona/admin/{id}",  ((AdministradorController) FactoryController.controller("admin"))::show);
         });
 
         Server.app().routes(()->{

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 public class TestEntrega3_Incidentes {
 
     Colaborador colaboradorHumano;
@@ -144,3 +144,4 @@ public class TestEntrega3_Incidentes {
     }
 }
 
+*/

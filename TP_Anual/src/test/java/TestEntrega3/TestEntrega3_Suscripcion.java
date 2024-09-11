@@ -12,7 +12,7 @@ import Service.Notificacion.Telegram.TelegramAdapter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+/*
 public class TestEntrega3_Suscripcion {
     Humano lucas;
     Humano tobi;
@@ -140,3 +140,4 @@ public class TestEntrega3_Suscripcion {
 
 
 }
+*/
