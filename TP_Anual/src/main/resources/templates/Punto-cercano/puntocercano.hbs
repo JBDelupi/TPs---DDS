@@ -48,6 +48,7 @@
 
 <!-- Footer desde tu archivo de plantillas -->
 {{> templates/main/footer}}
+{{> templates/partials/tipografia}}
 
 <!-- Scripts necesarios -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -68,52 +69,29 @@
 <script src="../../js/main.js"></script>
 
 <!-- Script de Leaflet para cargar el mapa -->
-<!-- Código relevante actualizado dentro del script -->
-<!-- Código relevante actualizado dentro del script -->
 <script>
-    // Inicializa el mapa centrado en Buenos Aires
-    var map = L.map('map').setView([-34.6037, -58.3816], 12);
+    var map = L.map('map').setView([-34.6037, -58.3816], 13);
 
-    // Añadir capa de mapa de OpenStreetMap
+    // Cargar los tiles de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Definir un array de puntos con las coordenadas de las heladeras
+    // Puntos estratégicos recibidos desde el backend
     var puntos = [
-        {{#each heladeras}}
-            {
-                id: {{this.id}},
-                latitud: {{this.coordenadas.latitud}},
-                longitud: {{this.coordenadas.longitud}},
-                direccion: "{{this.direccion.calle}} {{this.direccion.numero}}",
-                capacidad: {{this.capacidadDeViandas}},
-                temperatura: {{this.temperaturaActual}}
-            },
+        {{#each puntos}}
+            { latitud: {{this.latitud}}, longitud: {{this.longitud}} },
         {{/each}}
     ];
 
     // Colocar marcadores en el mapa
     puntos.forEach(function(punto) {
-        var lat = parseFloat(punto.latitud);
-        var lng = parseFloat(punto.longitud);
-
-        // Verifica que los puntos tengan coordenadas válidas antes de añadir el marcador
-        if (!isNaN(lat) && !isNaN(lng)) {
-            var marker = L.marker([lat, lng]).addTo(map);
-
-            // Añadir popup con detalles y enlace a la página de la heladera
-            marker.bindPopup(`<b>ID: ${punto.id}</b><br>Dirección: ${punto.longitud}<br>Capacidad: ${punto.capacidad} viandas<br>Temperatura: ${punto.temperatura}°C<br><a href="/heladeras/${punto.id}">Ver Detalle</a>`);
-
-            // Redirigir al hacer click en el marcador
-            marker.on('click', function() {
-                window.location.href = "/heladeras/" + punto.id;
-            });
-        } else {
-            console.error("Coordenadas inválidas para el punto ID: " + punto.id);
-        }
+        var lat = punto.latitud;
+        var lng = punto.longitud;
+        L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup('Punto estratégico en [' + lat + ', ' + lng + ']');
     });
 </script>
-
 </body>
 </html>
