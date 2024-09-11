@@ -3,6 +3,7 @@ package Controller.Administrador;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
+import Models.Repository.PseudoBaseDatosAlerta;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -48,7 +49,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     // ALL - GET
     public void index(Context context){
 
-        List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
+        List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().getBaseHeladeras();
 
 
         Map<String, Object> model = new HashMap<>();
