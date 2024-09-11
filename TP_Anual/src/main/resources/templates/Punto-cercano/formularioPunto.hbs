@@ -1,25 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario de Búsqueda de Puntos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Puntos Estratégicos</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
+
 <body>
-<h1>Buscar Puntos Estratégicos Cercanos</h1>
+{{> templates/partials/headerColaborador esHumano = esHumano  id=id}}
+{{> templates/partials/tipografia}}
 
-<!-- Formulario para ingresar latitud, longitud y radio -->
-<form action="/registro/puntos" method="post">
-    <label for="latitud">Latitud:</label>
-    <input type="text" id="latitud" name="latitud" placeholder="Ej: -34.6037" required><br><br>
+<main>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Encuentra Lugares</h5>
+                <h1 class="mb-5">Buscar Puntos Estratégicos</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
+                    <h1 class="display-5 text-black-50 animated slideInLeft">Encuentra los puntos cercanos</h1>
+                    <p class="text-dark animated slideInLeft mb-4 pb-3">
+                        Ingresa las coordenadas y el radio de búsqueda para encontrar los puntos estratégicos más cercanos.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <form action="/registro/puntos" method="POST">
+                            <div class="row g-3">
+                                <!-- Campo Latitud -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="latitud" name="latitud" placeholder="Latitud" required>
+                                        <label for="latitud">Latitud</label>
+                                    </div>
+                                </div>
 
-    <label for="longitud">Longitud:</label>
-    <input type="text" id="longitud" name="longitud" placeholder="Ej: -58.3816" required><br><br>
+                                <!-- Campo Longitud -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="longitud" name="longitud" placeholder="Longitud" required>
+                                        <label for="longitud">Longitud</label>
+                                    </div>
+                                </div>
 
-    <label for="radio">Radio (en km):</label>
-    <input type="text" id="radio" name="radio" placeholder="Ej: 5" required><br><br>
+                                <!-- Campo Radio -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="radio" name="radio" placeholder="Radio en km" required>
+                                        <label for="radio">Radio (en km)</label>
+                                    </div>
+                                </div>
 
-    <button type="submit">Buscar</button>
-</form>
+                                <!-- Botón de Búsqueda -->
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 py-3 zoom-btn">Buscar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
 </body>
 </html>
