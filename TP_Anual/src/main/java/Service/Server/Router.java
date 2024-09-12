@@ -60,6 +60,11 @@ public class Router {
         });
 
         Server.app().routes(()->{
+            get("/tecnico/visita",((VisitaFallaTecnicaController)FactoryController.controller("visitaTecnica"))::create);
+            post("/tecnico/visita",((VisitaFallaTecnicaController)FactoryController.controller("visitaTecnica"))::save);
+        });
+
+        Server.app().routes(()->{
             get("/registro/producto",((ProductoController)FactoryController.controller("producto"))::create);
             post("/registro/producto",((ProductoController)FactoryController.controller("producto"))::save);
             get("/productos",((ProductoController)FactoryController.controller("producto"))::index);

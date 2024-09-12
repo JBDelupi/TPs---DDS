@@ -21,8 +21,9 @@ public class AdministradorController  extends Controller {
     }
 
     public void getImportarColaborador(Context context){
+        this.estaLogueado(context);
 
-        context.render("Administrador/cargar-colaboradores.hbs");
+        context.render("Administrador/cargar-colaboradores.hbs",this.basicModel(context));
     }
 
     public void saveImportarColaborador(Context context) throws CsvValidationException, IOException {
@@ -42,8 +43,8 @@ public class AdministradorController  extends Controller {
     }
 
     public void show(Context context){
-
-        context.render("Administrador/perfilAdministrador.hbs");
+        this.estaLogueado(context);
+        context.render("Administrador/perfilAdministrador.hbs",this.basicModel(context));
     }
 
 }

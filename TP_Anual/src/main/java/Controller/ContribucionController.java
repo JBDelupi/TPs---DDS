@@ -36,13 +36,14 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     @Override
     public void index(Context context) {
-        if(context.sessionAttribute("usuario") != null){
+        this.estaLogueado(context);
+
         Persona usuario = context.sessionAttribute("usuario");
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = this.basicModel(context);
         model.put("usuario", usuario);
         model.put("esHumano", usuario.getRol().getTipo().equals(TipoRol.HUMANO));
         context.render("FormasDeContribucion/index.hbs", model);
-        }
+
     }
 
     @Override
@@ -51,26 +52,34 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     }
 
     public void contribucionExitosa(Context context) {
-        context.render("FormasDeContribucion/contribucionExitosa.hbs");
+        this.estaLogueado(context);
+
+        context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
     }
 
     @Override
     public void create(Context context) {
+        this.estaLogueado(context);
+
         String tipoContribucion = context.queryParam("tipo");
 
         switch (tipoContribucion) {
             case "donarViandas":
-                context.render("FormasDeContribucion/donacionDeViandas.hbs");
+                context.render("FormasDeContribucion/donacionDeViandas.hbs", this.basicModel(context));
                 break;
             case "donarDinero":
-                context.render("FormasDeContribucion/donacionDeDinero.hbs");
+                context.render("FormasDeContribucion/donacionDeDinero.hbs", this.basicModel(context));
                 break;
             case "distribucionViandas":
-                context.render("FormasDeContribucion/distribucionDeViandas.hbs");
+                context.render("FormasDeContribucion/distribucionDeViandas.hbs", this.basicModel(context));
                 break;
             case "registrarPersonaVulnerable":
-                context.render("FormasDeContribucion/registroVulnerable.hbs");
+                context.render("FormasDeContribucion/registroVulnerable.hbs", this.basicModel(context));
                 break;
+            case "hacerseCargoHeladera":
+                context.render("FormasDeContribucion/hacerseCargoHeladera.hbs", this.basicModel(context));
+            case "ofrecerProducto":
+                context.render("FormasDeContribucion/ofrecerProducto.hbs", this.basicModel(context));
         }
     }
 

@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Contribuciones</title>
-    <!-- Links importantes -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="stylesheet" href="../css/efectos.css">
-    <!-- Links importantes -->
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 <body>
-{{> templates/partials/header esJuridica = esJuridica  id=id}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador esHumano=esHumano id=id}}  <!-- Incluye el partial footer aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 
 <div class="contact_section layout_padding">
@@ -22,47 +27,70 @@
             </div>
         </div>
         <div class="blog_section_2 mt-5">
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- Generar Contribución -->
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-2.jpg" class="img-fluid zoom-img card-img-bottom" alt="Generar Contribución">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                    <a href="/contribuciones" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-hand-holding-heart text-primary mb-4"></i>
+                                <h5 class="text-dark">Generar Contribución</h5>
+                                <p class="text-dark">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Generar Contribución</h4>
-                        <p class="lorem_text">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
-                        <div class="read_btn text-center">
-                            <a href="/contribuciones" class="btn btn-primary zoom-img">Contribuir</a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Ver Puntos Heladeras -->
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-1.jpg" class="img-fluid zoom-img card-img-bottom" alt="Ver Puntos Heladeras">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                    <a href="/heladeras" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
+                                <h5 class="text-dark">Ver Puntos Heladeras</h5>
+                                <p class="text-dark">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Ver Puntos Heladeras</h4>
-                        <p class="lorem_text">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
-                        <div class="read_btn text-center">
-                            <a href="#" class="btn btn-primary zoom-img">Ver Mapa</a>
+                    </a>
+                </div>
+
+                <!-- Registrar un Producto -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                    <a href="/registro/producto" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-box text-primary mb-4"></i> <!-- Cambiado a icono de caja -->
+                                <h5 class="text-dark">Registrar un Producto</h5>
+                                <p class="text-dark">Añade un nuevo producto a nuestra plataforma y gestiona sus detalles fácilmente.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- Canjear un Producto -->
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-3.jpg" class="img-fluid zoom-img card-img-bottom" alt="Canjear un Producto">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                    <a href="/canjes" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-exchange-alt text-primary mb-4"></i> <!-- Cambiado a icono de intercambio -->
+                                <h5 class="text-dark">Canjear un Producto</h5>
+                                <p class="text-dark">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Canjear un Producto</h4>
-                        <p class="lorem_text">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
-                        <div class="read_btn text-center">
-                            <a href="/productos" class="btn btn-primary zoom-img">Canjear</a>
+                    </a>
+                </div>
+
+                <!-- Puntos de recomendacion -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                    <a href="/registro/puntos" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i> <!-- Cambiado a icono de marcador de mapa -->
+                                <h5 class="text-dark">Puntos de Recomendación</h5>
+                                <p class="text-dark">Obtén puntos al sugerir nuevos lugares para instalar nuestras heladeras comunitarias y contribuye a ampliar nuestra red de ayuda.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -76,15 +104,17 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../lib/wow/wow.min.js"></script>
-<script src="../lib/easing/easing.min.js"></script>
-<script src="../lib/waypoints/waypoints.min.js"></script>
-<script src="../lib/counterup/counterup.min.js"></script>
-<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="../lib/tempusdominus/js/moment.min.js"></script>
-<script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="../js/scripts-index.js"></script>
-<script src="../js/scripts-header.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
 
 </html>

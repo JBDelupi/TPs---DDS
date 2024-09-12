@@ -496,3 +496,11 @@
     padding-right: 0;
     border-right: none;
 }
+
+.auto-resize {
+    overflow-y: auto; /* Permite el scroll si es necesario */
+    height: auto; /* Ajusta la altura automáticamente */
+    min-height: 100px; /* Establece una altura mínima */
+    max-height: 400px; /* Establece una altura máxima si lo deseas */
+    resize: none; /* Evita que el usuario pueda cambiar el tamaño manualmente */
+}

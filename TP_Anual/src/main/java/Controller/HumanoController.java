@@ -87,23 +87,20 @@ public class HumanoController extends Controller  {
     }
 
     public void index(Context context){
-        Map<String, Object> model = new HashMap<>();
-        String id = context.sessionAttribute("idPersona");
+        this.estaLogueado(context);
 
-        model.put("esHumano", true);
-        model.put("id", id);
+        context.render("index-inicio/index_Humana.hbs", this.basicModel(context));
 
-        context.render("index-inicio/index_Humana.hbs",model);
     }
 
 
     public void show(Context context){
+        this.estaLogueado(context);
 
         String id = context.sessionAttribute("idPersona");
         Humano humano = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("humano",humano);
+        Map<String, Object> model = this.basicModel(context);
+        model.put("humano", humano);
 
 
         context.render("persona-humana/perfilHumana.hbs", model);

@@ -7,100 +7,47 @@
     <!-- Enlaces CSS -->
     <link rel="stylesheet" href="../css/estilos.css">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../lib/animate/animate.min.css" rel="stylesheet">
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
 
-    <!-- Carrusel -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
-{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial footer aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial header aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
 
-<section class="contact-section py-5">
+<!-- Productos Ofrecidos Start -->
+<section class="container-xxl py-5">
     <div class="container">
-        <!-- Título de la sección -->
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="section-title">Tus productos ofrecidos</h2>
-            </div>
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Ofertas</h5>
+            <h1 class="mb-5">Últimos Agregados</h1>
         </div>
-
-        <!-- Carrusel de productos -->
-        <div id="productosCarrusel" class="carousel slide mt-4" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#productosCarrusel" data-slide-to="0" class="active"></li>
-                <li data-target="#productosCarrusel" data-slide-to="1"></li>
-                <li data-target="#productosCarrusel" data-slide-to="2"></li>
-            </ol>
-
-            <div class="carousel-inner">
-                {{#each productos}} <!-- Lista dinámica de productos -->
-                    <div class="carousel-item {{#if @first}}active{{/if}}">
-                        <img src="{{this.imagen}}" class="d-block w-100" alt="Producto {{this.id}}">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Producto: {{this.id}}</h5>
-                            <p>{{this.detalle}}</p>
-                            <a href="/producto-detalle.html" class="btn btn-primary">Ver Detalle</a>
+        <div class="row g-4">
+            {{#each productos}}
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-center">
+                        <img class="flex-shrink-0 img-fluid rounded" src="{{this.imagen}}" alt="" style="width: 80px;">
+                        <div class="w-100 d-flex flex-column text-start ps-4">
+                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                <span>{{this.nombre}}</span>
+                                <a href="/productos/{{this.id}}" class="btn btn-primary">Ver Detalles</a>
+                            </h5>
+                            <small class="fst-italic">{{this.descripcion}}</small>
                         </div>
                     </div>
-                {{/each}}
-            </div>
-
-            <a class="carousel-control-prev" href="#productosCarrusel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#productosCarrusel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-            </a>
-        </div>
-
-        <!-- Modal para detalles del producto -->
-        <div class="modal fade" id="productoDetalleModal" tabindex="-1" role="dialog" aria-labelledby="productoDetalleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalNombre">Nombre del Producto</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img id="modalImagen" src="" alt="Imagen del Producto" class="img-fluid mb-3">
-                        <p id="modalDescripcion">Descripción del Producto.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Lista de Productos Disponibles -->
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <h2 class="text-center">Productos Disponibles</h2>
-                <div class="list-group">
-                    {{#each productos}} <!-- Lista dinámica de productos -->
-                        <a href="/productos/{{id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                            {{nombre}}
-                            <span class="badge badge-primary badge-pill">Ver Detalles</span>
-                        </a>
-                    {{/each}}
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 </section>
+<!-- Productos Ofrecidos End -->
 
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}

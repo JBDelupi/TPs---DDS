@@ -16,9 +16,11 @@ public class CanjeProductoController extends Controller implements ICrudViewsHan
 
     @Override
     public void index(Context context) {
+        this.estaLogueado(context);
+
         List<Producto> productoList = PseudoBaseDatosProducto.getInstance().baseProductos;
 
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = this.basicModel(context);
 
         model.put("canjes", productoList);
 

@@ -16,8 +16,9 @@
 </head>
 
 <body>
-{{> templates/partials/header esHumano = esHumano id=id}}
+{{> templates/partials/headerColaborador esHumano=esHumano id=id}}
 {{> templates/partials/tipografia}}
+
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -37,58 +38,61 @@
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="IDHeladera" value="ID de la Heladera" readonly>
+                                    <p id="IDHeladera" class="form-control">{{heladera.id}}</p>
                                     <label for="IDHeladera">Heladera</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="estadoHeladera" value="Estado de la Heladera" readonly>
+                                    <p id="estadoHeladera" class="form-control">
+                                        {{#if heladera.abierto}}Abierta{{else}}Cerrada{{/if}}
+                                    </p>
                                     <label for="estadoHeladera">Estado de Heladera</label>
                                 </div>
                             </div>
+
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="direccionHeladera" value="Dirección de la Heladera" readonly>
+                                    <p id="direccionHeladera" class="form-control">{{heladera.direccion}}</p>
                                     <label for="direccionHeladera">Dirección</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="capacidadViandas" value="Capacidad de Viandas" readonly>
+                                    <p id="capacidadViandas" class="form-control">{{heladera.capacidadDeViandas}}</p>
                                     <label for="capacidadViandas">Capacidad de Viandas</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <div class="form-control">
-                                        <img src="../images/check_green.png" alt="Check Verde" style="height: 24px; vertical-align: middle;">
-                                        Llena
+                                    <div id="llena" class="form-control">
+                                        <i class="fas {{#if heladera.estaLlena}}fa-check-circle text-success{{else}}fa-times-circle text-danger{{/if}}" style="font-size: 1.5em;"></i>
+                                        {{#if heladera.llena}}Llena{{else}}No Llena{{/if}}
                                     </div>
                                     <label for="llena">Esta Llena</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="fechaPuestaEnMarcha" value="Fecha de Puesta en Marcha" readonly>
+                                    <p id="fechaPuestaEnMarcha" class="form-control">{{heladera.fechaDePuestaEnMarcha}}</p>
                                     <label for="fechaPuestaEnMarcha">Fecha de Puesta en Marcha</label>
                                 </div>
                             </div>
                         </div>
 
-                        <Form class="mt-4" action="/#" method="POST">
+                        <form class="mt-4" action="/#" method="POST">
                             <a id="btnSuscribirse" href="javascript:void(0);" class="btn btn-primary py-2 px-4" onclick="suscribirse()">Suscribirse</a>
 
                             <!-- Botón de Desuscribirse oculto al inicio -->
                             <a id="btnDesuscribirse" href="javascript:void(0);" class="btn btn-danger py-2 px-4" style="display:none;" onclick="desuscribirse()">Desuscribirse</a>
-                        </Form>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
+
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 </body>

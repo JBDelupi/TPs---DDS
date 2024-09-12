@@ -18,7 +18,7 @@
 </head>
 <body>
 
-{{> templates/partials/header esHumano = esHumano  id=id}}
+{{> templates/partials/headerColaborador esHumano=esHumano id=id}}
 {{> templates/partials/tipografia}}
 
 <div class="contact_section layout_padding">
@@ -29,61 +29,63 @@
             </div>
         </div>
         <div class="blog_section_2 mt-5">
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-2.jpg" class="img-fluid zoom-img card-img-bottom" alt="Cargar heladeras">
+            <div class="row justify-content-center">
+                <!-- Cargar y listar Heladeras -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mb-4" data-wow-delay="0.1s">
+                    <a href="/registro/heladera" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fas fa-3x fa-snowflake text-primary mb-4"></i>
+                                <h5 class="text-dark">Cargar y listar Heladeras</h5>
+                                <p class="text-dark">De de alta y consulte las heladeras disponibles.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Cargar y listar Heladeras</h4>
-                        <p class="lorem_text">De de alta y consulte las heladeras disponibles.</p>
-                        <div class="read_btn text-center">
-                            <a href="/registro/heladera" class="btn btn-primary zoom-img">Cargar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-1.jpg" class="img-fluid zoom-img card-img-bottom" alt="Cargar tecnicos">
-                        </div>
-                        <h4 class="prep_text">Cargar y listar Tecnicos</h4>
-                        <p class="lorem_text">De de alta y consulte los tecnicos que brindan servicio a la organizacion.</p>
-                        <div class="read_btn text-center">
-                            <a href="/registro/tecnico" class="btn btn-primary zoom-img">Cargar</a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-3.jpg" class="img-fluid zoom-img card-img-bottom" alt="Ver fallos de heladera">
+                <!-- Cargar y listar Técnicos -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mb-4" data-wow-delay="0.2s">
+                    <a href="/registro/tecnico" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fas fa-3x fa-user-cog text-primary mb-4"></i>
+                                <h5 class="text-dark">Cargar y listar Técnicos</h5>
+                                <p class="text-dark">De de alta y consulte los técnicos que brindan servicio a la organización.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Consultar fallos de heladeras</h4>
-                        <p class="lorem_text">Consulte el funcionamiento y fallos de las heladeras.</p>
-                        <div class="read_btn text-center">
-                            <a href="/incidentes" class="btn btn-primary zoom-img">Consultar</a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../img/team-3.jpg" class="img-fluid zoom-img card-img-bottom" alt="Cargar colaboradores">
+                <!-- Consultar fallos de heladeras -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mb-4" data-wow-delay="0.3s">
+                    <a href="/incidentes" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fas fa-3x fa-exclamation-triangle text-primary mb-4"></i>
+                                <h5 class="text-dark">Consultar fallos de heladeras</h5>
+                                <p class="text-dark">Consulte el funcionamiento y fallos de las heladeras.</p>
+                            </div>
                         </div>
-                        <h4 class="prep_text">Cargar colaboradores</h4>
-                        <p class="lorem_text">Cargue colaboradores mediante un archivo CSV.</p>
-                        <div class="read_btn text-center">
-                            <a href="/registro/colaboradores" class="btn btn-primary zoom-img">cargar</a>
+                    </a>
+                </div>
+
+                <!-- Cargar colaboradores -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mb-4" data-wow-delay="0.4s">
+                    <a href="/registro/colaboradores" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fas fa-3x fa-users text-primary mb-4"></i>
+                                <h5 class="text-dark">Cargar colaboradores</h5>
+                                <p class="text-dark">Cargue colaboradores mediante un archivo CSV.</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 

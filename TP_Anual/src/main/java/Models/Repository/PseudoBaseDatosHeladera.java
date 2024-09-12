@@ -6,6 +6,8 @@ import Models.Domain.Heladera.Heladera;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -55,7 +57,16 @@ public class PseudoBaseDatosHeladera {
             heladera.setDireccion(direccion);
             heladera.setId(i + 1);
             heladera.setTemperaturaMin(5.00);
-            heladera.setTemperaturaMax(10.00);
+            heladera.setTemperaturaMax(100.00);
+            heladera.setAbierto(Math.random() < 0.5);
+            heladera.setCapacidadDeViandas((int)(Math.random()*10));
+            // Generar una fecha random dentro de los últimos 365 días
+            LocalDate startDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
+            LocalDate endDate = LocalDate.now();
+            long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+            LocalDate randomDate = startDate.plusDays((long) (Math.random() * daysBetween));
+
+            heladera.setFechaDePuestaEnMarcha(randomDate);
         }
     }
 

@@ -19,19 +19,19 @@ import java.util.random.RandomGenerator;
 public class ProductoController extends Controller implements ICrudViewsHandler {
 
     public void create(Context context) {
+        this.basicModel(context);
 
-        context.render("producto/registroProducto.hbs");
+        context.render("producto/registroProducto.hbs",this.basicModel(context));
     }
 
     public void save(Context context) {
         String nombre = context.formParam("nombreProducto");
-      //  String imagen = context.formParam("imagenProducto");
+        String imagen = context.formParam("imagenProducto");
         String descripcion = context.formParam("descripcionProducto");
         String rubroProducto = context.formParam("rubroProducto");
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
-        Producto producto = new Producto(tipoRubro,nombre,"");
-        producto.setDescripcion(descripcion);
+        Producto producto = new Producto(tipoRubro,nombre,imagen,descripcion);
         producto.setId(RandomGenerator.getDefault().nextInt());
 
         System.out.println("Producto creado: "+ producto.getId() + tipoRubro);
@@ -42,9 +42,11 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
     }
 
     public void index(Context context) {
+        this.estaLogueado(context);
+
         List<Producto> productos = PseudoBaseDatosProducto.getInstance().baseProductos;
 
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = this.basicModel(context);
 
         model.put("productos",productos);
 
@@ -52,10 +54,12 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
     }
 
     public void show(Context context) {
+        this.estaLogueado(context);
+
+        Map<String, Object> model = this.basicModel(context);
+
         String id = context.pathParam("id");
         Producto producto = PseudoBaseDatosProducto.getInstance().getId(id);
-
-        Map<String, Object> model = new HashMap<>();
 
         model.put("producto",producto);
 

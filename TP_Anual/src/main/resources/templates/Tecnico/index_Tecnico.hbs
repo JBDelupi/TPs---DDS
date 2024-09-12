@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Contribuciones</title>
+    <title>Acciones Tecnico</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-{{> templates/partials/headerColaborador esHumano=esHumano id=id}}
+{{> templates/partials/header esHumano = esHumano  id=id}}
 {{> templates/partials/tipografia}}
 
 <div class="contact_section layout_padding">
@@ -30,44 +30,33 @@
         </div>
         <div class="blog_section_2 mt-5">
             <div class="row justify-content-center">
-                <!-- Generar Contribución -->
+                <!-- Generar visita tecnica -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
                     <a href="/contribuciones" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                             <div class="p-4">
-                                <i class="fa fa-3x fa-hand-holding-heart text-primary mb-4"></i>
-                                <h5 class="text-dark">Generar Contribución</h5>
-                                <p class="text-dark">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
+                                <i class="fa fa-3x fa fa-wrench text-primary mb-4"></i>
+                                <h5 class="text-dark">Generar visita técnica</h5>
+                                <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <!-- Ver Puntos Heladeras -->
+                <!-- Consultar fallas -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
                     <a href="/heladeras" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                             <div class="p-4">
-                                <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
-                                <h5 class="text-dark">Ver Puntos Heladeras</h5>
-                                <p class="text-dark">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
+                                <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
+                                <h5 class="text-dark">Consultar estado de fallas</h5>
+                                <p class="text-dark">Visualize las fallas asignadas y consulte su estado.</p>
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <!-- Canjear un Producto -->
-                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
-                    <a href="/canjes" class="text-decoration-none w-100">
-                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-gift text-primary mb-4"></i>
-                                <h5 class="text-dark">Canjear un Producto</h5>
-                                <p class="text-dark">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+
             </div>
         </div>
     </div>

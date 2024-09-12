@@ -17,7 +17,7 @@
 </head>
 
 <body>
-{{> templates/partials/header estaSesion = estaSesion}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador esHumano=esHumano id=id}}  <!-- Incluye el partial footer aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 <main>
     <div class="container-xxl py-5">
@@ -45,8 +45,11 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <label for="solucionado">¿Se solucionó el problema?</label>
-                                        <input type="checkbox" id="solcionado" name="solcionado">
+                                        <select class="form-control w-100" id="solucionado" required>
+                                            <option value="" disabled selected>¿Se solucionó el problema?</option>
+                                            <option value="si">Sí</option>
+                                            <option value="no">No</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">

@@ -52,18 +52,17 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     @Override
     public void index(Context context) {
+        this.estaLogueado(context);
+
         context.render("index-inicio/index_Juridica.hbs");
     }
 
     //@GET
     @Override
     public void show(Context context) {
-        String id = context.sessionAttribute("idPersona");
-        Juridico juridico = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(id);
+        this.estaLogueado(context);
 
-        Map<String, Object> model = new HashMap<>();
-
-        context.render("persona-Juridica/perfilJuridico.hbs", model);
+        context.render("persona-Juridica/perfilJuridico.hbs", this.basicModel(context));
     }
 
     //@GET
@@ -104,5 +103,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     public void update(Context context) {
 
     }
+
+
 
 }

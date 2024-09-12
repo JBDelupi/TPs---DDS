@@ -1,5 +1,6 @@
 package Models.Domain.Heladera.Incidentes;
 
+import Models.Domain.Builder.IncidentesBuilder.VisitaTecnicaBuilder;
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
@@ -40,7 +41,12 @@ public class FallaTecnica extends Incidente {
     }
 
     public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado){
-        RegistroVisitaTecnica registroVisita = new RegistroVisitaTecnica(tecnico, fecha, solucionado);
+        VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
+        RegistroVisitaTecnica registroVisita = visitaTecnicaBuilder
+                .tecnico(tecnico)
+                .fecha(fecha)
+                .visitaExitosa(solucionado)
+                .construir();
         visitasTecnicas.add(registroVisita);
         if (registroVisita.getVisitaExitosa()){
             this.solucionado = true;

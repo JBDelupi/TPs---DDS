@@ -15,11 +15,6 @@ public class RegistroVisitaTecnica {
     private String foto;
     private Boolean visitaExitosa; //Se soluciono el problema
 
-    public RegistroVisitaTecnica(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado) {
-        this.tecnico = tecnico;
-        this.fecha = fecha;
-        this.foto = "";
-        this.visitaExitosa = solucionado;
-    }
+    public RegistroVisitaTecnica() {}
 
 }
