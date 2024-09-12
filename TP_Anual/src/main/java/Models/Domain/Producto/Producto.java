@@ -13,6 +13,7 @@ public class Producto
     private String imagen;
     private String descripcion;
 
+
     public Producto(TipoRubro rubro, String nombre, String imagen, String descripcion){
         this.rubro = rubro;
         this.nombre = nombre;
