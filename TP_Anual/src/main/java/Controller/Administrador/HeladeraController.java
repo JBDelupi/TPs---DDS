@@ -67,6 +67,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     // SOLO - GET
     @Override
     public void show(Context context) {
+        this.estaLogueado(context);
 
         String id = context.pathParam("id");
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
