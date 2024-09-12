@@ -3,6 +3,8 @@ package Controller;
 import Controller.Actores.Rol;
 import Controller.Actores.TipoRol;
 import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
+import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -12,6 +14,7 @@ import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -93,6 +96,17 @@ public class HumanoController extends Controller  {
 
     }
 
+    public void consultarContribuciones(Context context){
+        this.estaLogueado(context);
+
+        Humano usuario = (Humano) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona"));
+        List<FormaDeContribucion> contribuciones = usuario.getFormaDeContribucion();
+
+        Map<String, Object> model = this.basicModel(context);
+        model.put("contribuciones",contribuciones);
+
+        context.render("FormasDeContribucion/misContribuciones.hbs",model);
+    }
 
     public void show(Context context){
         this.estaLogueado(context);

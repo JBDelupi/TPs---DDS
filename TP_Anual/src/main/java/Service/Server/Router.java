@@ -37,7 +37,7 @@ public class Router {
             get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
             get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
-
+            get("/persona/juridico/contribuciones/{id}", ((JuridicoController) FactoryController.controller("juridico"))::consultarContribuciones);
         });
 
         Server.app().routes(()->{
@@ -52,6 +52,7 @@ public class Router {
             get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
             post("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::save);
             get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
+            get("/persona/humano/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
         });
 
         Server.app().routes(()->{
@@ -73,7 +74,8 @@ public class Router {
             get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
         });
 
-        Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
+        Server.app().get("/canjeExitoso",((CanjeController)FactoryController.controller("canje"))::canjeExitoso);
+
 
 
        Server.app().routes(()->{
@@ -88,7 +90,7 @@ public class Router {
             get("/registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::getImportarColaborador);
             post("registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::saveImportarColaborador);
             get("/index/admin", ((AdministradorController) FactoryController.controller("admin"))::index);
-            get("persona/admin/{id}",  ((AdministradorController) FactoryController.controller("admin"))::show);
+            get("/persona/admin/{id}",  ((AdministradorController) FactoryController.controller("admin"))::show);
         });
 
         Server.app().routes(()->{

@@ -2,14 +2,18 @@ package Controller;
 
 import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Repository.PseudoBaseDatosProductosOfrecidos;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
@@ -77,9 +81,11 @@ public class ContribucionController extends Controller implements ICrudViewsHand
                 context.render("FormasDeContribucion/registroVulnerable.hbs", this.basicModel(context));
                 break;
             case "hacerseCargoHeladera":
-                context.render("FormasDeContribucion/hacerseCargoHeladera.hbs", this.basicModel(context));
+                context.render("FormasDeContribucion/hacerseCargoDeHeladera.hbs", this.basicModel(context));
+                break;
             case "ofrecerProducto":
                 context.render("FormasDeContribucion/ofrecerProducto.hbs", this.basicModel(context));
+                break;
         }
     }
 

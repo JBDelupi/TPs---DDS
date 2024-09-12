@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas de Productos</title>
+    <title>Mis contribuciones</title>
 
+    <!-- Verificar si las rutas relativas están correctas -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
     <link rel="stylesheet" href="../../css/efectos.css">
@@ -18,8 +19,9 @@
 </head>
 <body>
 
-{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial header aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
+<!-- Verificar que las plantillas parciales se carguen correctamente -->
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
 
 <!-- Productos Ofrecidos Start -->
 <section class="container-xxl py-5">
@@ -29,16 +31,15 @@
             <h1 class="mb-5">Últimos Agregados</h1>
         </div>
         <div class="row g-4">
-            {{#each productos}}
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center">
-                        <img class="flex-shrink-0 img-fluid rounded" src="{{this.producto.imagen}}" alt="" style="width: 80px;">
+            {{#each contribuciones}}
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-center border p-3 shadow-sm rounded">
                         <div class="w-100 d-flex flex-column text-start ps-4">
                             <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                <span>{{this.producto.nombre}}</span>
-                                <a href="/productos/{{this.producto.id}}" class="btn btn-primary">Ver Detalles</a>
+                                <span>{{this.nombre}}</span>
+                                <a href="/persona/{{rol}}/mis-contribuciones/{{rol}}.{{id}}/{{this.id}}" class="btn btn-primary btn-sm">Ver Detalles</a>
                             </h5>
-                            <small class="fst-italic">{{this.producto.descripcion}}</small>
+                            <small class="fst-italic">{{this.descripcion}}</small>
                         </div>
                     </div>
                 </div>
@@ -50,6 +51,7 @@
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 
+<!-- Archivos JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../css/lib/wow/wow.min.js"></script>

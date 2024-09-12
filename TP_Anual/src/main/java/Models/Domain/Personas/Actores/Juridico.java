@@ -3,12 +3,13 @@ package Models.Domain.Personas.Actores;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
+@Setter @Getter
 public class Juridico extends Colaborador {
     private String razonSocial;
     private TipoJuridico tipoJuridico;

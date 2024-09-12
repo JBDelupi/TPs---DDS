@@ -4,6 +4,8 @@ import Controller.Actores.Rol;
 import Controller.Actores.TipoRol;
 import Controller.Actores.Usuario;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
+import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
@@ -14,6 +16,7 @@ import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.random.RandomGenerator;
 
@@ -62,7 +65,13 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     public void show(Context context) {
         this.estaLogueado(context);
 
-        context.render("persona-Juridica/perfilJuridico.hbs", this.basicModel(context));
+
+        String id = context.sessionAttribute("idPersona");
+        Juridico juridico = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Map<String, Object> model = this.basicModel(context);
+        model.put("juridico",juridico);
+
+        context.render("persona-Juridica/perfilJuridico.hbs", model);
     }
 
     //@GET
@@ -104,6 +113,17 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     }
 
+    public void consultarContribuciones(Context context){
+        this.estaLogueado(context);
+
+        Juridico usuario = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona"));
+        List<FormaDeContribucion> contribuciones = usuario.getFormaDeContribucion();
+
+        Map<String, Object> model = this.basicModel(context);
+        model.put("contribuciones",contribuciones);
+
+        context.render("FormasDeContribucion/misContribuciones.hbs", model);
+    }
 
 
 }

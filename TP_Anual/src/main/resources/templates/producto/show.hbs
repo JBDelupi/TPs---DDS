@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canjear Producto</title>
 
-    <link rel="stylesheet" href="../css/estilos.css">
-    <link rel="stylesheet" href="../css/efectos.css">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="../lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="../../css/efectos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 
 <body>
 {{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial header aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
 <main>
-    <div class="container-xxl py-5">
+    <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Canjea tu Producto</h5>
@@ -71,7 +73,7 @@
                                     <label for="empresaOfreciente">Rubro</label>
                                 </div>
                             </div>
-                            <form action="/canjear-producto" method="POST">
+                            <form action="/canjeExitoso" method="GET">
                                 <div class="col-md-12">
                                     <div class="form-floating">
                                         <input type="number" class="form-control" id="cantidadCanjear" name="cantidadCanjear" placeholder="Cantidad a Canjear" min="1" max="{{producto.stock}}" required>
@@ -79,7 +81,7 @@
                                     </div>
                                 </div><br>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Canjear</button>
+                                    <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Canjear</button>
                                 </div>
                             </form>
                         </div>
@@ -94,15 +96,18 @@
 {{> templates/partials/botonBack}}
 </body>
 
-<script src="../lib/wow/wow.min.js"></script>
-<script src="../lib/easing/easing.min.js"></script>
-<script src="../lib/waypoints/waypoints.min.js"></script>
-<script src="../lib/counterup/counterup.min.js"></script>
-<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="../lib/tempusdominus/js/moment.min.js"></script>
-<script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="../../public/js/scripts-index.js"></script>
-<script src="../../public/js/scripts-header.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
 
 </html>

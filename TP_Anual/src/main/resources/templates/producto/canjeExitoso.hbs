@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ofertas de Productos</title>
+    <title>Canje exitoso</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
@@ -15,40 +15,31 @@
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
 </head>
+
 <body>
-
-{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial header aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
-
-<!-- Productos Ofrecidos Start -->
-<section class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Ofertas</h5>
-            <h1 class="mb-5">Últimos Agregados</h1>
-        </div>
-        <div class="row g-4">
-            {{#each productos}}
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center">
-                        <img class="flex-shrink-0 img-fluid rounded" src="{{this.producto.imagen}}" alt="" style="width: 80px;">
-                        <div class="w-100 d-flex flex-column text-start ps-4">
-                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                <span>{{this.producto.nombre}}</span>
-                                <a href="/productos/{{this.producto.id}}" class="btn btn-primary">Ver Detalles</a>
-                            </h5>
-                            <small class="fst-italic">{{this.producto.descripcion}}</small>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
+{{> templates/partials/headerColaborador rol=rol id=id}} <!-- Incluye el partial header -->
+{{> templates/partials/tipografia}} <!-- Incluye el partial tipografía -->
+<main>
+    <div class="container-xxl py-5">
+        <div class="container d-flex flex-column align-items-center justify-content-center">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="section-title ff-secondary text-primary fw-normal">Canje realizado con éxito</h1>
+            </div>
+            <img src="../../images/check_green.png" class="text-center my-4" style="width: 50px; height: 50px;">
+            <p class="text-dark animated slideInLeft mb-4 pb-3 text-center">
+                ¡Tu canje ha sido procesado con éxito!
+            </p>
+            <a href="/" class="btn btn-primary py-2 px-4">Ir al inicio</a>
         </div>
     </div>
-</section>
+</main>
+</body>
 
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -64,5 +55,5 @@
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
 
-</body>
+
 </html>
