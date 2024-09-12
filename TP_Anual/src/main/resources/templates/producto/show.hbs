@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Producto</title>
+    <title>Canjear Producto</title>
 
     <link rel="stylesheet" href="../css/estilos.css">
     <link rel="stylesheet" href="../css/efectos.css">
@@ -16,46 +16,79 @@
 </head>
 
 <body>
-{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial footer aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial header aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
 <main>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Detalles del Producto</h5>
-                <h1 class="mb-5">Producto: {{producto.nombre}}</h1>
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Canjea tu Producto</h5>
+                <h1 class="mb-5">Canjear Producto: {{producto.producto.nombre}}</h1>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                    <img src="{{producto.imagen}}" alt="Producto" class="img-fluid rounded" style="box-shadow: 0 10px 8px rgba(0, 0, 0, 0.329);">
+                    <img src="{{producto.producto.imagen}}" alt="Producto" class="img-fluid rounded" style="box-shadow: 0 10px 8px rgba(0, 0, 0, 0.329);">
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="nombreProducto" class="form-control">{{producto.nombre}}</p>
+                                    <p id="nombreProducto" class="form-control">{{producto.producto.nombre}}</p>
                                     <label for="nombreProducto">Nombre del Producto</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="descripcionProducto" class="form-control auto-resize">{{producto.descripcion}}</p>
+                                    <p id="descripcionProducto" class="form-control auto-resize">{{producto.producto.descripcion}}</p>
                                     <label for="descripcionProducto">Descripción</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-floating">
-                                    <p id="rubro" class="form-control">{{producto.rubro}}</p>
-                                    <label for="rubro">rubro</label>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input type="text" class="form-control" id="valorProducto" value="{{producto.puntosNecesarios}}" readonly>
+                                        <label for="valorProducto">Valor</label>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <p id="cantidadProducto" class="form-control">{{producto.stock}}</p>
+                                    <label for="cantidadProducto">Cantidad Disponible</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <p id="empresaOfreciente" class="form-control">{{producto.empresaOfreciente}}</p>
+                                    <label for="empresaOfreciente">Empresa Ofreciente</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <p id="empresaOfreciente" class="form-control">{{producto.producto.rubro}}</p>
+                                    <label for="empresaOfreciente">Rubro</label>
+                                </div>
+                            </div>
+                            <form action="/canjear-producto" method="POST">
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="cantidadCanjear" name="cantidadCanjear" placeholder="Cantidad a Canjear" min="1" max="{{producto.stock}}" required>
+                                        <label for="cantidadCanjear">Cantidad a Canjear</label>
+                                    </div>
+                                </div><br>
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Canjear</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </main>
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}

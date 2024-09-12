@@ -22,7 +22,6 @@ public class FactoryController {
           case "puntos": controller =  new PuntoCercanoController(); break;
           case "admin": controller = new AdministradorController(); break;
           case "tecnico": controller = new TecnicoController(); break;
-          case "canjes": controller = new CanjeProductoController(); break;
           case "recuperar": controller = new RecuperarController(); break;
           case "visitaTecnica": controller = new VisitaFallaTecnicaController(); break;
         }

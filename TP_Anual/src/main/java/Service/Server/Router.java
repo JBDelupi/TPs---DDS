@@ -71,10 +71,6 @@ public class Router {
             get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
         });
 
-        Server.app().routes(()-> {
-            get("/canjes",((CanjeProductoController)FactoryController.controller("canjes"))::index);
-        });
-
         Server.app().get("/registro/vulnerable",((VulnerableController)FactoryController.controller("vulnerable"))::create);
 
 

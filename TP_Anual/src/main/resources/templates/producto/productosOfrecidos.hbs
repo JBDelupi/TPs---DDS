@@ -33,13 +33,13 @@
             {{#each productos}}
                 <div class="col-lg-6">
                     <div class="d-flex align-items-center">
-                        <img class="flex-shrink-0 img-fluid rounded" src="{{this.imagen}}" alt="" style="width: 80px;">
+                        <img class="flex-shrink-0 img-fluid rounded" src="{{this.producto.imagen}}" alt="" style="width: 80px;">
                         <div class="w-100 d-flex flex-column text-start ps-4">
                             <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                <span>{{this.nombre}}</span>
-                                <a href="/productos/{{this.id}}" class="btn btn-primary">Ver Detalles</a>
+                                <span>{{this.producto.nombre}}</span>
+                                <a href="/productos/{{this.producto.id}}" class="btn btn-primary">Ver Detalles</a>
                             </h5>
-                            <small class="fst-italic">{{this.descripcion}}</small>
+                            <small class="fst-italic">{{this.producto.descripcion}}</small>
                         </div>
                     </div>
                 </div>

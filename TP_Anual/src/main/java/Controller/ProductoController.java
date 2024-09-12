@@ -7,10 +7,12 @@ import Models.Domain.Producto.Producto;
 import Models.Domain.Producto.TipoRubro;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosProducto;
+import Models.Repository.PseudoBaseDatosProductosOfrecidos;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 import javax.annotation.processing.Generated;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,10 +34,16 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
         Producto producto = new Producto(tipoRubro,nombre,imagen,descripcion);
+        OfrecerProducto productoOfrecido = new OfrecerProducto();
         producto.setId(RandomGenerator.getDefault().nextInt());
+        productoOfrecido.setProducto(producto);
+        productoOfrecido.setID(RandomGenerator.getDefault().nextInt());
+        productoOfrecido.setStock(RandomGenerator.getDefault().nextInt());
+        productoOfrecido.setFechaDeDonacion(LocalDate.now());
 
         System.out.println("Producto creado: "+ producto.getId() + tipoRubro);
         PseudoBaseDatosProducto.getInstance().agregar(producto);
+        PseudoBaseDatosProductosOfrecidos.getInstance().agregar(productoOfrecido);
 
 
         context.redirect("/productos");
@@ -44,7 +52,7 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
     public void index(Context context) {
         this.estaLogueado(context);
 
-        List<Producto> productos = PseudoBaseDatosProducto.getInstance().baseProductos;
+        List<OfrecerProducto> productos = PseudoBaseDatosProductosOfrecidos.getInstance().getBaseProductosOfrecidos();
 
         Map<String, Object> model = this.basicModel(context);
 
@@ -59,7 +67,7 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
         Map<String, Object> model = this.basicModel(context);
 
         String id = context.pathParam("id");
-        Producto producto = PseudoBaseDatosProducto.getInstance().getId(id);
+        OfrecerProducto producto = PseudoBaseDatosProductosOfrecidos.getInstance().getOfrecerProductoById(id);
 
         model.put("producto",producto);
 
