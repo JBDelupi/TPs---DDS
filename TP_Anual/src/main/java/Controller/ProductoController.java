@@ -23,7 +23,7 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
     public void create(Context context) {
         this.basicModel(context);
 
-        context.render("producto/registroProducto.hbs",this.basicModel(context));
+        context.render("FormasDeContribucion/ofrecerProducto.hbs",this.basicModel(context));
     }
 
     public void save(Context context) {
@@ -31,17 +31,24 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
         String imagen = context.formParam("imagenProducto");
         String descripcion = context.formParam("descripcionProducto");
         String rubroProducto = context.formParam("rubroProducto");
+        Double precio = Double.parseDouble(context.formParam("precioProducto"));
+        Integer stock = Integer.parseInt(context.formParam("stock"));
+
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
-        Producto producto = new Producto(tipoRubro,nombre,imagen,descripcion);
-        OfrecerProducto productoOfrecido = new OfrecerProducto();
+        if(imagen.isEmpty()){imagen = "/images/producto-test.png";}
+        Producto producto = new Producto(tipoRubro, nombre, imagen, descripcion);
         producto.setId(RandomGenerator.getDefault().nextInt());
+
+        OfrecerProducto productoOfrecido = new OfrecerProducto();
+        productoOfrecido.setID(producto.getId());
         productoOfrecido.setProducto(producto);
-        productoOfrecido.setID(RandomGenerator.getDefault().nextInt());
-        productoOfrecido.setStock(RandomGenerator.getDefault().nextInt());
+        productoOfrecido.setPuntosNecesarios(precio);
+        productoOfrecido.setStock(stock);
         productoOfrecido.setFechaDeDonacion(LocalDate.now());
 
         System.out.println("Producto creado: "+ producto.getId() + tipoRubro);
+
         PseudoBaseDatosProducto.getInstance().agregar(producto);
         PseudoBaseDatosProductosOfrecidos.getInstance().agregar(productoOfrecido);
 
