@@ -19,7 +19,7 @@
 </head>
 
 <body>
-{{> templates/partials/headerColaborador esHumano=esHumano id=id}} <!-- Incluye el partial header -->
+{{> templates/partials/headerColaborador rol=rol id=id}} <!-- Incluye el partial header -->
 {{> templates/partials/tipografia}}
 
 <main class="container my-5">
@@ -47,9 +47,11 @@
                 </li>
             {{/each}}
         </ul>
+        {{#unless esHumano}}
         <div class="text-center mt-3">
             <a href="/registro/heladera" class="btn btn-success">Crear Nueva Heladera</a>
         </div>
+        {{/unless}}
     </div>
 </main>
 

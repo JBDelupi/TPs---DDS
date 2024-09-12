@@ -1,5 +1,6 @@
 package Controller.Administrador;
 
+import Controller.Actores.TipoRol;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
@@ -17,8 +18,9 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     // GET
     @Override
     public void create(Context context) {
+        this.estaLogueado(context);
 
-        context.render("heladera/registroHeladera.hbs");
+        context.render("heladera/registroHeladera.hbs",this.basicModel(context));
     }
 
     // POST CREATE
@@ -48,15 +50,15 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     // ALL - GET
     public void index(Context context){
+        this.estaLogueado(context);
+
 
         List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().getBaseHeladeras();
 
-
-        Map<String, Object> model = new HashMap<>();
-
+        Map<String, Object> model = this.basicModel(context);
 
         model.put("heladeras",heladeraList);
-
+        model.put("esHumano",this.getUsuario().getRol().getTipo().equals(TipoRol.HUMANO));
 
         context.render("heladera/heladeras.hbs", model);
 
@@ -69,7 +71,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         String id = context.pathParam("id");
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
 
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = this.basicModel(context);
         
         model.put("heladera",heladera);
 
