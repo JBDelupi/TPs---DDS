@@ -23,7 +23,7 @@ public class FactoryController {
           case "admin": controller = new AdministradorController(); break;
           case "tecnico": controller = new TecnicoController(); break;
           case "canjes": controller = new CanjeProductoController(); break;
-
+          case "recuperar": controller = new RecuperarController(); break;
         }
         return controller;
     }

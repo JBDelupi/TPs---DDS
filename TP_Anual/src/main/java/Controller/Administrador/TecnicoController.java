@@ -21,13 +21,13 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
         String areaCobertura = context.formParam("areaCobertura");
 
         TecnicoBuilder builder = new TecnicoBuilder();
-        Tecnico tecnico = TecnicoBuilder
-                .nombre(nombre)
-                .apellido(apellido)
-                .tipoDeDocumento(tipoDeDocumento)
-                .numeroDeDocumento(numeroDocumento)
-                .cuil(cuil)
-                .construir();
+//        Tecnico tecnico = TecnicoBuilder
+//                .nombre(nombre)
+//                .apellido(apellido)
+//                .tipoDeDocumento(tipoDeDocumento)
+//                .numeroDeDocumento(numeroDocumento)
+//                .cuil(cuil)
+//                .construir();
 
         context.redirect("Administrador/index_admin.hbs");
     }

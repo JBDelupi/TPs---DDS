@@ -25,27 +25,31 @@
 <main class="container my-5">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Heladeras</h5>
-        <h1 class="mb-5">Heladeras</h1>
+        <h1 class="mb-5">Heladeras Disponibles</h1>
     </div>
 
     <!-- Mapa de Heladeras -->
-    <div id="map"  style = "height: 500px; width: 100%;"></div>
+    <div id="map" class="rounded shadow" style="height: 500px; width: 100%;"></div>
 
     <!-- Lista de Heladeras -->
     <div class="my-5">
-        <h2>Lista de Heladeras</h2>
+        <h2 class="text-center">Lista de Heladeras</h2>
         <ul class="list-group">
             {{#each heladeras}}
-                <li class="list-group-item">
-                    <strong>ID:</strong> {{this.id}},
-                    <strong>Dirección:</strong> {{this.direccion.calle}} {{this.direccion.numero}},
-                    <strong>Capacidad:</strong> {{this.capacidadDeViandas}} viandas,
-                    <strong>Temperatura Actual:</strong> {{this.temperaturaActual}}°C
-                    <a href="/heladeras/{{this.id}}" class="btn btn-primary float-end">Ver Detalle</a>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>ID:</strong> {{this.id}},
+                        <strong>Dirección:</strong> {{this.direccion.calle}} {{this.direccion.numero}},
+                        <strong>Capacidad:</strong> {{this.capacidadDeViandas}} viandas,
+                        <strong>Temperatura Actual:</strong> {{this.temperaturaActual}}°C
+                    </div>
+                    <a href="/heladeras/{{this.id}}" class="btn btn-primary btn-sm">Ver Detalle</a>
                 </li>
             {{/each}}
         </ul>
-        <a href="/registro/heladera" class="btn btn-success mt-3">Crear Nueva Heladera</a>
+        <div class="text-center mt-3">
+            <a href="/registro/heladera" class="btn btn-success">Crear Nueva Heladera</a>
+        </div>
     </div>
 </main>
 
@@ -76,7 +80,6 @@
         });
         {{/each}}
 </script>
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

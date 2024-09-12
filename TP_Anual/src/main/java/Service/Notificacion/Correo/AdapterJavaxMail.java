@@ -17,8 +17,8 @@ public class AdapterJavaxMail {
     public AdapterJavaxMail() {
         host = "smtp.gmail.com";
         port = 587;
-        username = "nazaan01@gmail.com";
-        password = "mkpvvsowicjnpbos"; // Asegúrate de usar una contraseña de aplicación de Gmail.
+        username = "deccocolaboraciones@gmail.com";
+        password = "deccocolaboraciones2024"; // Asegúrate de usar una contraseña de aplicación de Gmail.
     }
 
 

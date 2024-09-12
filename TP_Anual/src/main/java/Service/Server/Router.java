@@ -29,6 +29,10 @@ public class Router {
         });
 
         Server.app().routes(()->{
+            get("/recuperar", ((RecuperarController) FactoryController.controller("recuperar"))::index); //para el olvide mi contrasena
+        });
+
+        Server.app().routes(()->{
             get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
             get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);

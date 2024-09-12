@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>Página de Contribuciones</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
 
@@ -19,100 +19,98 @@
 {{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
 
 <div class="contact_section layout_padding">
-        <div class="container mt-5">
+    <div class="container mt-5">
         <div class="row">
-        <div class="col-md-12">
-        <h1 class="display-3 text-dark text-center">Contribuciones</h1>
-    </div>
-    </div>
+            <div class="col-md-12">
+                <h1 class="display-3 text-dark text-center">Contribuciones</h1>
+            </div>
+        </div>
 
         <div class="blog_section_2 mt-5">
-            <div class="row">
+            <div class="row justify-content-center">
                 {{#if esHumano}}
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3 align-content-center">
-                            <img src="../images/team-2.jpg" class="img-fluid zoom-img card-img-bottom">
-                        </div>
-                        <h4 class="prep_text">Donación de Dinero</h4>
-                        <p class="lorem_text">Puede donar un monto por una sola vez o periódicamente.</p>
-                        <div class="read_btn text-center">
-                            <a href="/contribuciones/create?tipo=donarDinero" class="btn btn-primary zoom-img">Donar</a>
-                        </div>
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                        <a href="/contribuciones/create?tipo=donarDinero" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-hand-holding-usd text-primary mb-4"></i>
+                                    <h4 class="text-dark">Donación de Dinero</h4>
+                                    <p class="text-dark">Puede donar un monto por una sola vez o periódicamente.</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../images/team-1.jpg" class="img-fluid zoom-img card-img-bottom">
-                        </div>
-                        <h4 class="prep_text">Donacion de Vianda</h4>
-                        <p class="lorem_text">Puede donar viandas para ser colocadas en las heladeras.</p>
-                        <div class="read_btn text-center">
-                            <a href="/contribuciones/create?tipo=donarViandas" class="btn btn-primary zoom-img">Sumarse</a>
-                        </div>
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                        <a href="/contribuciones/create?tipo=donarViandas" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-utensils text-primary mb-4"></i>
+                                    <h4 class="text-dark">Donación de Vianda</h4>
+                                    <p class="text-dark">Puede donar viandas para ser colocadas en las heladeras.</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3 align-content-center">
-                            <img src="../images/team-3.jpg" class="img-fluid zoom-img card-img-bottom">
-                        </div>
-                        <h4 class="prep_text">Distribucion de Viandas</h4>
-                        <p class="lorem_text">Puede sumarse al sistema de distribucion de viandas entre heladeras.</p>
-                        <div class="read_btn text-center">
-                            <a href="/contribuciones/create?tipo=distribucionViandas" class="btn btn-primary zoom-img">Sumarse</a>
-                        </div>
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                        <a href="/contribuciones/create?tipo=distribucionViandas" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-shipping-fast text-primary mb-4"></i>
+                                    <h4 class="text-dark">Distribución de Viandas</h4>
+                                    <p class="text-dark">Puede sumarse al sistema de distribución de viandas entre heladeras.</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="blog_box border rounded p-3 h-100">
-                        <div class="blog_img mb-3">
-                            <img src="../images/team-1.jpg" class="img-fluid zoom-img card-img-bottom">
-                        </div>
-                        <h4 class="prep_text">Registrar a personas vulnerabes</h4>
-                        <p class="lorem_text">Puede contribuir recibiendo tarjetas y entregandoselas a personas vulnerables.</p>
-                        <div class="read_btn text-center">
-                            <a href="/contribuciones/create?tipo=registrarPersonaVulnerable" class="btn btn-primary zoom-img">Sumarse</a>
-                        </div>
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.4s">
+                        <a href="/contribuciones/create?tipo=registrarPersonaVulnerable" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-user-plus text-primary mb-4"></i>
+                                    <h4 class="text-dark">Registrar a Personas Vulnerables</h4>
+                                    <p class="text-dark">Puede contribuir recibiendo tarjetas y entregándoselas a personas vulnerables.</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
                 {{else}}
-                    <div class="col-md-6 mb-4">
-                        <div class="blog_box border rounded p-3 h-100">
-                            <div class="blog_img mb-3 align-content-center">
-                                <img src="../images/team-2.jpg" class="img-fluid zoom-img card-img-bottom">
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                        <a href="/contribuciones/create?tipo=donarDinero" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-hand-holding-usd text-primary mb-4"></i>
+                                    <h4 class="text-dark">Donación de Dinero</h4>
+                                    <p class="text-dark">Puede donar un monto por una sola vez o periódicamente.</p>
+                                </div>
                             </div>
-                            <h4 class="prep_text">Donación de Dinero</h4>
-                            <p class="lorem_text">Puede donar un monto por una sola vez o periódicamente.</p>
-                            <div class="read_btn text-center">
-                                <a href="/contribuciones/create?tipo=donarDinero" class="btn btn-primary zoom-img">Donar</a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="blog_box border rounded p-3 h-100">
-                            <div class="blog_img mb-3">
-                                <img src="../images/team-1.jpg" class="img-fluid zoom-img card-img-bottom">
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                        <a href="/contribuciones/create?tipo=hacerseCargoHeladera" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-snowflake text-primary mb-4"></i>
+                                    <h4 class="text-dark">Hacerse Cargo de Heladera</h4>
+                                    <p class="text-dark">Puede contribuir haciéndose cargo de una heladera y manejar su funcionamiento.</p>
+                                </div>
                             </div>
-                            <h4 class="prep_text">Hacerse cargo de heladera</h4>
-                            <p class="lorem_text">Puede contribuir haciendose cargo de una heladera y manejar su funcionamiento.</p>
-                            <div class="read_btn text-center">
-                                <a href="/contribuciones/create?tipo=hacerseCargoHeladera" class="btn btn-primary zoom-img">Sumarse</a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="blog_box border rounded p-3 h-100">
-                            <div class="blog_img mb-3">
-                                <img src="../images/team-3.jpg" class="img-fluid zoom-img card-img-bottom">
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                        <a href="/contribuciones/create?tipo=ofrecerProducto" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-gift text-primary mb-4"></i>
+                                    <h4 class="text-dark">Ofrecer Producto</h4>
+                                    <p class="text-dark">Puede ofrecer productos vinculados a su organización para que los colaboradores canjeen por puntos.</p>
+                                </div>
                             </div>
-                            <h4 class="prep_text">Ofrecer producto</h4>
-                            <p class="lorem_text">Puede ofrecer productos vinculados a su organizacion para que los colaboradores canjeen por puntos.</p>
-                            <div class="read_btn text-center">
-                                <a href="/contribuciones/create?tipo=ofrecerProducto" class="btn btn-primary zoom-img">Ofrecer</a>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 {{/if}}
             </div>

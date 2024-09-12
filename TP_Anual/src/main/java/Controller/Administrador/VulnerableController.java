@@ -31,15 +31,15 @@ public class VulnerableController extends Controller implements ICrudViewsHandle
 
         VulnerableBuilder vulenrableBuilder = new VulnerableBuilder();
 
-        PersonaVulnerable vulenrableNuevo = vulenrableBuilder
+        PersonaVulnerable vulnerableNuevo = vulenrableBuilder
 
                 .nombre(nombre)
                 .menoresACargo(tieneMenores)
                 .construir();
 
-        vulenrableNuevo.setNumeroDocumento(numeroDocumento);
+        vulnerableNuevo.setNumeroDocumento(numeroDocumento);
 
-        PseudoBaseDeDatosVulnerables.getInstance().agregar(vulenrableNuevo);
+        PseudoBaseDeDatosVulnerables.getInstance().agregar(vulnerableNuevo);
 
 
         context.redirect("/");
