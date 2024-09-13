@@ -1,0 +1,66 @@
+@startuml GenerarDistribucionDeViandas
+actor PersonaHumana
+boundary Interfaz_De_Usuario
+control ContribucionController
+
+
+entity FactoryContribucion
+entity DistribucionDeViandasBuilder
+entity Colaborador
+database BaseDeDatosContribucion
+entity Permisos
+
+activate Persona
+activate Interfaz_De_Usuario
+activate ContribucionController
+Persona->Interfaz_De_Usuario: distribucionDeViandas
+
+Interfaz_De_Usuario->ContribucionController: create(Context context)
+ContribucionController->ContribucionController: estaLogueado(Context context)
+
+
+alt No logeado
+    ContribucionController->Interfaz_De_Usuario: AccessDeniedException()
+    Interfaz_De_Usuario->Persona: Error 401
+end
+
+ContribucionController -> Interfaz_De_Usuario: context.render("distribucionDeViandas.hbs", model)
+Interfaz_De_Usuario -> Persona: context.render("distribucionDeViandas.hbs", model)
+
+Persona -> Interfaz_De_Usuario: save(Context context)
+Interfaz_De_Usuario -> ContribucionController: save(Context context)
+deactivate Interfaz_De_Usuario
+ContribucionController -> FactoryContribucion: factoryMethod(Context context)
+
+activate FactoryContribucion
+FactoryContribucion -> FactoryContribucion: distribucionDeViandas(Context)
+deactivate ContribucionController
+activate DistribucionDeViandasBuilder
+FactoryContribucion -> Permisos: checkUserRoleAndProceed(TipoRolNegocio.HUMANO)
+activate Permisos
+deactivate Permisos
+FactoryContribucion -> Colaborador: getTarjeta()
+activate Colaborador
+Colaborador -> FactoryContribucion: TarjetaDeAcceso
+deactivate Colaborador
+FactoryContribucion -> DistribucionDeViandasBuilder: construir()
+DistribucionDeViandasBuilder -> FactoryContribucion: distribucionDeViandas
+deactivate DistribucionDeViandasBuilder
+FactoryContribucion -> Colaborador: generarNuevaDonacion(distribucionDeViandas)
+activate Colaborador
+Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
+Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
+FactoryContribucion -> ContribucionController: distribucionDeViandas
+deactivate Colaborador
+deactivate FactoryContribucion
+activate ContribucionController
+ContribucionController -> BaseDeDatosContribucion: guardar(distribucionDeViandas)
+activate BaseDeDatosContribucion
+deactivate BaseDeDatosContribucion
+ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
+activate Interfaz_De_Usuario
+deactivate ContribucionController
+
+Interfaz_De_Usuario -> Persona: context.redirect("/contribucionExitosa")
+
+@enduml

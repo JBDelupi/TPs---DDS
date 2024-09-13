@@ -1,0 +1,58 @@
+@startuml GenerarHacerseCargoDeHeladera
+
+actor PersonaJuridica
+boundary Interfaz_De_Usuario
+control ContribucionController
+
+
+entity FactoryContribucion
+entity HacerseCargoDeHeladeraBuilder
+entity Colaborador
+database BaseDeDatosContribucion
+
+activate PersonaJuridica
+activate Interfaz_De_Usuario
+activate ContribucionController
+PersonaJuridica->Interfaz_De_Usuario: HacerseCargoDeHeladera
+Interfaz_De_Usuario->ContribucionController: create(Context context)
+ContribucionController->ContribucionController: estaLogueado(Context context)
+
+
+alt No logeado
+    ContribucionController->Interfaz_De_Usuario: AccessDeniedException()
+    Interfaz_De_Usuario->PersonaJuridica: Error 401
+end
+
+ContribucionController -> Interfaz_De_Usuario: context.render("HacerseCargoDeHeladera.hbs", model)
+Interfaz_De_Usuario -> PersonaJuridica: context.render("HacerseCargoDeHeladera.hbs", model)
+
+PersonaJuridica -> Interfaz_De_Usuario: save(Context context)
+Interfaz_De_Usuario -> ContribucionController: save(Context context)
+deactivate Interfaz_De_Usuario
+ContribucionController -> FactoryContribucion: factoryMethod(Context context)
+
+activate FactoryContribucion
+FactoryContribucion -> FactoryContribucion: HacerseCargoDeHeladera(Context)
+deactivate ContribucionController
+activate HacerseCargoDeHeladeraBuilder
+FactoryContribucion -> HacerseCargoDeHeladeraBuilder: construir()
+HacerseCargoDeHeladeraBuilder -> FactoryContribucion: HacerseCargoDeHeladera
+deactivate HacerseCargoDeHeladeraBuilder
+FactoryContribucion -> Colaborador: generarNuevaDonacion(HacerseCargoDeHeladera)
+activate Colaborador
+Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
+Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
+FactoryContribucion -> ContribucionController: HacerseCargoDeHeladera
+deactivate Colaborador
+deactivate FactoryContribucion
+activate ContribucionController
+ContribucionController -> BaseDeDatosContribucion: guardar(HacerseCargoDeHeladera)
+activate BaseDeDatosContribucion
+deactivate BaseDeDatosContribucion
+ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
+activate Interfaz_De_Usuario
+deactivate ContribucionController
+
+Interfaz_De_Usuario -> PersonaJuridica: context.redirect("/contribucionExitosa")
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml GenerarregistrarTarjeta
+actor PersonaHumana
+boundary Interfaz_De_Usuario
+control ContribucionController
+
+
+entity FactoryContribucion
+entity vulnerableBuilder
+entity Colaborador
+database BaseDeDatosContribucion
+
+activate PersonaHumana
+activate Interfaz_De_Usuario
+activate ContribucionController
+
+PersonaHumana->Interfaz_De_Usuario: registrarTarjeta
+Interfaz_De_Usuario->ContribucionController: create(Context context)
+ContribucionController->ContribucionController: estaLogueado(Context context)
+
+
+alt No logeado
+    ContribucionController->Interfaz_De_Usuario: AccessDeniedException()
+    Interfaz_De_Usuario->PersonaHumana: Error 401
+end
+
+ContribucionController -> Interfaz_De_Usuario: context.render("hacerseCargoDeHeladera.hbs", model)
+Interfaz_De_Usuario -> PersonaHumana: context.render("hacerseCargoDeHeladera.hbs", model)
+
+PersonaHumana -> Interfaz_De_Usuario: save(Context context)
+Interfaz_De_Usuario -> ContribucionController: save(Context context)
+deactivate Interfaz_De_Usuario
+ContribucionController -> FactoryContribucion: factoryMethod(Context context)
+
+activate FactoryContribucion
+FactoryContribucion -> FactoryContribucion: registrarTarjeta(Context)
+deactivate ContribucionController
+activate vulnerableBuilder
+FactoryContribucion -> vulnerableBuilder: construir()
+vulnerableBuilder -> FactoryContribucion: registrarTarjeta
+deactivate vulnerableBuilder
+FactoryContribucion -> Colaborador: generarNuevaDonacion(registrarTarjeta)
+activate Colaborador
+Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
+Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
+FactoryContribucion -> ContribucionController: registrarTarjeta
+deactivate Colaborador
+deactivate FactoryContribucion
+activate ContribucionController
+ContribucionController -> BaseDeDatosContribucion: guardar(registrarTarjeta)
+activate BaseDeDatosContribucion
+deactivate BaseDeDatosContribucion
+ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
+activate Interfaz_De_Usuario
+deactivate ContribucionController
+
+Interfaz_De_Usuario -> PersonaHumana: context.redirect("/contribucionExitosa")
+
+@enduml

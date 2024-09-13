@@ -1,0 +1,58 @@
+@startuml GenerarDonacionDeDinero
+actor Persona
+boundary Interfaz_De_Usuario
+control ContribucionController
+
+
+entity FactoryContribucion
+entity DonacionDeDineroBuilder
+entity Colaborador
+database BaseDeDatosContribucion
+
+activate Persona
+activate Interfaz_De_Usuario
+activate ContribucionController
+Persona->Interfaz_De_Usuario: donacionDeDinero
+
+Interfaz_De_Usuario->ContribucionController: create(Context context)
+ContribucionController->ContribucionController: estaLogueado(Context context)
+
+
+alt No logeado
+    ContribucionController->Interfaz_De_Usuario: AccessDeniedException()
+    Interfaz_De_Usuario->Persona: Error 401
+end
+
+ContribucionController -> Interfaz_De_Usuario: context.render("donacionDeDinero.hbs", model)
+Interfaz_De_Usuario -> Persona: context.render("donacionDeDinero.hbs", model)
+
+Persona -> Interfaz_De_Usuario: save(Context context)
+Interfaz_De_Usuario -> ContribucionController: save(Context context)
+deactivate Interfaz_De_Usuario
+ContribucionController -> FactoryContribucion: factoryMethod(Context context)
+
+activate FactoryContribucion
+FactoryContribucion -> FactoryContribucion: donacionDeDinero(Context)
+deactivate ContribucionController
+activate DonacionDeDineroBuilder
+FactoryContribucion -> DonacionDeDineroBuilder: construir()
+DonacionDeDineroBuilder -> FactoryContribucion: donacionDeDinero
+deactivate DonacionDeDineroBuilder
+FactoryContribucion -> Colaborador: generarNuevaDonacion(donacionDeDinero)
+activate Colaborador
+Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
+Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
+FactoryContribucion -> ContribucionController: donacionDeDinero
+deactivate Colaborador
+deactivate FactoryContribucion
+activate ContribucionController
+ContribucionController -> BaseDeDatosContribucion: guardar(donacionDeDinero)
+activate BaseDeDatosContribucion
+deactivate BaseDeDatosContribucion
+ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
+activate Interfaz_De_Usuario
+deactivate ContribucionController
+
+Interfaz_De_Usuario -> Persona: context.redirect("/contribucionExitosa")
+
+@enduml

@@ -1,23 +1,25 @@
 @startuml GenerarRegistroDeVisita
+
 actor Tecnico
 boundary Interfaz_De_Usuario
-control Controlador_De_Rol
+control TecnicoController
 entity Registro_De_Visita
 entity Heladera
 
-Tecnico->Interfaz_De_Usuario: Generar reporte de visita
+Tecnico->Interfaz_De_Usuario: Generar registro de visita
 activate Interfaz_De_Usuario
 
-Interfaz_De_Usuario->Controlador_De_Rol: Controlar Rol
-activate Controlador_De_Rol
+Interfaz_De_Usuario->TecnicoController: create(Context)
+activate TecnicoController
+TecnicoController -> TecnicoController: estaLogueado(Context context)
 
 alt Sin permisos
-    Controlador_De_Rol->Interfaz_De_Usuario: Sin permisos
+    TecnicoController->Interfaz_De_Usuario: Sin permisos
     Interfaz_De_Usuario->Tecnico: Acceso denegado
 else Con permisos
-    Controlador_De_Rol->Registro_De_Visita: Crear registro de visita
+    TecnicoController->Registro_De_Visita: Crear registro de visita
     activate Registro_De_Visita
-deactivate Controlador_De_Rol
+deactivate TecnicoController
 deactivate Interfaz_De_Usuario
 end
 

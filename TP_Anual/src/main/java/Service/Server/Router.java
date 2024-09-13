@@ -36,8 +36,8 @@ public class Router {
             get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
             get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
-            get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
             get("/persona/juridico/contribuciones/{id}", ((JuridicoController) FactoryController.controller("juridico"))::consultarContribuciones);
+            get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
         });
 
         Server.app().routes(()->{
