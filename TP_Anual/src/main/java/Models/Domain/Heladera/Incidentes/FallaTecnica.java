@@ -29,7 +29,10 @@ public class FallaTecnica extends Incidente {
     private Boolean solucionado;
     private LocalDateTime fechaSolucionado;
 
-    public FallaTecnica() {}
+    public FallaTecnica() {
+        this.setSolucionado(false);
+
+    }
 
     public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
@@ -40,7 +43,7 @@ public class FallaTecnica extends Incidente {
         return tecnicoMasCercano;
     }
 
-    public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado){
+    public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado) {
         VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
         RegistroVisitaTecnica registroVisita = visitaTecnicaBuilder
                 .tecnico(tecnico)
@@ -48,10 +51,9 @@ public class FallaTecnica extends Incidente {
                 .visitaExitosa(solucionado)
                 .construir();
         visitasTecnicas.add(registroVisita);
-        if (registroVisita.getVisitaExitosa()){
+        if (registroVisita.getVisitaExitosa()) {
             this.solucionado = true;
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);
         }
     }
-
 }

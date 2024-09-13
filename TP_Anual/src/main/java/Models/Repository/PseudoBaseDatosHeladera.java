@@ -61,7 +61,7 @@ public class PseudoBaseDatosHeladera {
             heladera.setTemperaturaMin(5.00);
             heladera.setTemperaturaMax(100.00);
             heladera.setAbierto(Math.random() < 0.5);
-            heladera.setCapacidadDeViandas((int)(Math.random()*10));
+            heladera.setCapacidadDeViandas((int)(Math.random()*100));
             // Generar una fecha random dentro de los últimos 365 días
             LocalDate startDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
             LocalDate endDate = LocalDate.now();

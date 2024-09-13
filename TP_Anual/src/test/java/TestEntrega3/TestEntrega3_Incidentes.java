@@ -108,6 +108,7 @@ public class TestEntrega3_Incidentes {
     public void humanoReportaIncidente() throws IOException {
         fallaTecnicaHumano = new FallaTecnica();
         fallaTecnicaHumano.setHeladera(heladera);
+        this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         fallaTecnicaHumano.setColaborador(colaboradorHumano);
         fallaTecnicaHumano.setVisitasTecnicas(new ArrayList<>());
 
@@ -126,7 +127,7 @@ public class TestEntrega3_Incidentes {
         fallaTecnicaJuridico.setHeladera(heladera);
         fallaTecnicaJuridico.setColaborador(colaboradorJuridico);
         fallaTecnicaJuridico.setVisitasTecnicas(new ArrayList<>());
-
+        this.heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         fallaTecnicaJuridico.crearRegistroDeVisita(tecnico1, LocalDateTime.now(), false);
         Assertions.assertEquals(heladera.getEstadoActual(), EstadoHeladera.NO_DISPONIBLE);
         fallaTecnicaJuridico.crearRegistroDeVisita(tecnico1, LocalDateTime.now(), true);

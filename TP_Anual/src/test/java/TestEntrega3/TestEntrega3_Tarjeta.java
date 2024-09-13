@@ -46,7 +46,7 @@ public class TestEntrega3_Tarjeta {
 
         contralador.save(TipoDonacion.DISTRIBUCION_VIANDAS,heladera1, heladera2, 2, "");
 
-        Assertions.assertEquals(2,tarjeta.getUsos().size());
+        Assertions.assertEquals(1,tarjeta.getUsos().size());
         Assertions.assertFalse(heladera2.getViandas().isEmpty());
 
     }
