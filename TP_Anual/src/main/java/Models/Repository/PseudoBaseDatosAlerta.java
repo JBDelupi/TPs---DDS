@@ -28,4 +28,8 @@ public class PseudoBaseDatosAlerta {
     }
 
 
+    public Alerta ultimaAlerta(String id_heladera){
+      return  base.stream().filter(f->f.getHeladera().getId().equals(Integer.parseInt(id_heladera)) && !f.getSolucionado() ).findFirst().orElse(null);
+    }
+
 }

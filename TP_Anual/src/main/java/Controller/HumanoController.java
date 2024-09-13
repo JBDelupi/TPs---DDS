@@ -78,7 +78,7 @@ public class HumanoController extends Controller  {
                 .construir();
 
         humano.setId(RandomGenerator.getDefault().nextInt(0,100));
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"),context.formParam("contrasenia"));
         humano.setCredencialDeAcceso(credencialDeAcceso);
         humano.setRol(new Rol(TipoRol.HUMANO));
         PseudoBaseDatosUsuario.getInstance().agregar(humano);

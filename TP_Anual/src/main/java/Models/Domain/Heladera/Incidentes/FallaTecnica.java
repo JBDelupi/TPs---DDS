@@ -31,13 +31,13 @@ public class FallaTecnica extends Incidente {
 
     public FallaTecnica() {}
 
-    public void avisarATecnico(List<Tecnico> tecnicos) {
+    public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
         Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
         Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla tecnica","Falla Tecnica en" + this.heladera);
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
-
+        return tecnicoMasCercano;
     }
 
     public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado){

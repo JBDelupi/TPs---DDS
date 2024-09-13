@@ -15,7 +15,7 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
 
         String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido");
-        TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipoDocumento"));
+      //  TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipoDocumento"));
         String numeroDocumento = context.formParam("documento");
         String cuil = context.formParam("cuil");
         String areaCobertura = context.formParam("areaCobertura");
@@ -29,7 +29,7 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
 //                .cuil(cuil)
 //                .construir();
 
-        context.redirect("Administrador/index_admin.hbs");
+        context.redirect("/index/administrador");
     }
 
 

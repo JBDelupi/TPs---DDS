@@ -9,6 +9,7 @@ import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FallaTecnicaBuilder {
@@ -56,5 +57,7 @@ public class FallaTecnicaBuilder {
         return this;
     }
 
-    public FallaTecnica construir() { return this.fallaTecnica; }
+    public FallaTecnica construir() {
+        return this.fallaTecnica;
+    }
 }

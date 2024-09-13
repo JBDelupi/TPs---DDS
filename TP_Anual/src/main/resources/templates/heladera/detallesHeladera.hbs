@@ -54,8 +54,22 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <p id="direccionHeladera" class="form-control">{{heladera.direccion}}</p>
-                                    <label for="direccionHeladera">Dirección</label>
+                                    <input type="text" class="form-control" id="calle" placeholder="Calle">
+                                    <label for="domicilioActual">Calle</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="numero" placeholder="Numero">
+                                    <label for="domicilioActual">Numero</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+                                    <label for="domicilioActual">Localidad</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -73,10 +87,18 @@
                                     <label for="llena">Esta Llena</label>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-floating">
                                     <p id="fechaPuestaEnMarcha" class="form-control">{{heladera.fechaDePuestaEnMarcha}}</p>
                                     <label for="fechaPuestaEnMarcha">Fecha de Puesta en Marcha</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    {{#if hayAlerta}}
+                                    <p id="fallas" class="form-control">{{alerta.tipo}}</p>
+                                    <label for="fallas">Alerta actual</label>
+                                    {{/if}}
                                 </div>
                             </div>
                         </div>

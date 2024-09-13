@@ -31,9 +31,9 @@ public class TestEntrega2_Canje {
     public void init() {
         colaborador1 = new Juridico();
         colaborador2 = new Humano();
-        notebook = new Producto(TipoRubro.ELECTRONICA,"Laptop","Pic");
-        lampara = new Producto(TipoRubro.ELECTRONICA, "Lucid", "Pic");
-        tv = new Producto(TipoRubro.ELECTRONICA, "smartTV", "Pic");
+        notebook = new Producto(TipoRubro.ELECTRONICA,"Laptop","Pic", "descripcionnnn");
+        lampara = new Producto(TipoRubro.ELECTRONICA, "Lucid", "Pic", "descripcionnnn");
+        tv = new Producto(TipoRubro.ELECTRONICA, "smartTV", "Pic", "descripcionnnn");
     }
 
     // Persona humana canjea un producto

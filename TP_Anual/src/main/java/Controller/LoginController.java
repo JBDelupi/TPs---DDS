@@ -28,6 +28,10 @@ public class LoginController extends Controller {
 
         Persona usuario = PseudoBaseDatosUsuario.getInstance().searchUser(nombreUsuario);
 
+        //Para validar tambien la contraseña es esta linea comentada, en los controllers de registro
+        //ya  se guarda la contraseña solo hay que validarla aca
+
+        //if (usuario != null && usuario.getCredencialDeAcceso().getContrasenia().equals(contrasenia)) {
         if (usuario != null) {
             context.sessionAttribute(USER_SESSION_KEY, usuario);
             String idPersona = Integer.toString(usuario.getId());

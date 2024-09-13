@@ -1,5 +1,7 @@
 package Models.Repository;
 
+import java.util.ArrayList;
+
 public class PseudoBaseDatosAdmins {
 
     public static class AdminDePlataforma {
@@ -19,6 +21,7 @@ public class PseudoBaseDatosAdmins {
             return contrasenia;
         }
     }
+
 
     private AdminDePlataforma[] admins = {
             new AdminDePlataforma("admin1", "1"),

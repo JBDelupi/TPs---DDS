@@ -1,6 +1,8 @@
 package Controller.Administrador;
 
 import Controller.Controller;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Service.DTO.HumanoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
@@ -17,7 +19,7 @@ public class AdministradorController  extends Controller {
 
 
     public void index(Context context) {
-        context.render("Administrador/index_Admin.hbs");
+        context.render("Administrador/index_Admin.hbs", this.basicModel(context));
     }
 
     public void getImportarColaborador(Context context){
@@ -31,9 +33,9 @@ public class AdministradorController  extends Controller {
         String token = context.formParam("token");
 
         String filename = file.filename();
-        String ruta = "C:\\Facultad 2024\\Back up 2024\\Diseño de sistemas\\TPs---DDS\\TP_Anual\\";
+       // String ruta = "C:\\Facultad 2024\\Back up 2024\\Diseño de sistemas\\TPs---DDS\\TP_Anual\\";
 
-        Set<HumanoDTO> importadosCSV = ImportadorCSV.getInstance(ruta + filename, token).getColaboradoresDTO();
+        Set<HumanoDTO> importadosCSV = ImportadorCSV.getInstance( filename, token).getColaboradoresDTO();
 
         Map<String, Object> model = new HashMap<>();
 
@@ -44,7 +46,14 @@ public class AdministradorController  extends Controller {
 
     public void show(Context context){
         this.estaLogueado(context);
-        context.render("Administrador/perfilAdministrador.hbs",this.basicModel(context));
+
+        String id = context.pathParam("id");
+        Humano usuario = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Map<String, Object> model = this.basicModel(context);
+        model.put("usuario",usuario);
+        System.out.println(usuario.getId());
+
+        context.render("Administrador/perfilAdministrador.hbs",model);
     }
 
 }

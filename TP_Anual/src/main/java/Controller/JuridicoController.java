@@ -94,7 +94,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .construir();
 
         juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"), "1");
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"),context.formParam("contrasenia"));
         juridico.setCredencialDeAcceso(credencialDeAcceso);
         juridico.setRol(new Rol(TipoRol.JURIDICO));
         PseudoBaseDatosUsuario.getInstance().agregar(juridico);

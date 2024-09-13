@@ -4,6 +4,7 @@ import Controller.Actores.TipoRol;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Repository.PseudoBaseDatosAlerta;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Service.Server.ICrudViewsHandler;
@@ -12,6 +13,7 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.random.RandomGenerator;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {
 
@@ -26,20 +28,25 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     // POST CREATE
     @Override
     public void save(Context context) {
-        String direccion = context.formParam("direccion") ;
-//        int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
-//        double temperaturaMax = Double.parseDouble(context.formParam("TemperaturaMax"));
-//        double temperaturaMin = Double.parseDouble(context.formParam("TemperaturaMin"));
+        String calle = context.formParam("calle");
+        String numero = context.formParam("numero");
+        String localidad = context.formParam("localidad");
+        int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
+        double temperaturaMax = Double.parseDouble(context.formParam("TemperaturaMax"));
+        double temperaturaMin = Double.parseDouble(context.formParam("TemperaturaMin"));
 
         HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
         Heladera heladera = heladeraBuilder
                 .abierto(true)
-//                .capacidadMaxima(capacidadMaxima)
-//                .temperaturaMax(temperaturaMax)
-//                .temperaturaMin(temperaturaMin)
+                .capacidadMaxima(capacidadMaxima)
+                .temperaturaMax(temperaturaMax)
+                .temperaturaMin(temperaturaMin)
+                .calle(calle)
+                .localidad(localidad)
+                .numero(numero)
                 .construir();
 
-        heladera.setId(10);
+        heladera.setId(RandomGenerator.getDefault().nextInt(0,1));
 
         PseudoBaseDatosHeladera.getInstance().agregar(heladera);
 
@@ -71,10 +78,13 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         String id = context.pathParam("id");
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+        Alerta alerta = PseudoBaseDatosAlerta.getInstance().ultimaAlerta(id);
 
         Map<String, Object> model = this.basicModel(context);
-        
+
         model.put("heladera",heladera);
+        model.put("alerta",alerta);
+        model.put("hayAlerta", alerta != null);
 
         context.render("heladera/detallesHeladera.hbs", model);
 

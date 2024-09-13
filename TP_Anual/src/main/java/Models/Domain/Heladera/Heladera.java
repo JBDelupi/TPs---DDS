@@ -79,6 +79,9 @@ public class Heladera {
 
     }
 
+    public void registrarAlerta(){
+        this.cantidadDeFallas++;
+    }
 
 
     //  Registrar una falla
@@ -96,10 +99,6 @@ public class Heladera {
     public void registrarVianda(){ this.cantidadDeviandasRetiradas++; }
 
     public void reestablecerViandas(){ this.cantidadDeviandasRetiradas = 0; }
-
-
-
-
 
 
     public void agregarSubscriptor(ObserverHeladera observer) {

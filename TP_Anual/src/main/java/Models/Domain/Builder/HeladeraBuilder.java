@@ -35,6 +35,20 @@ public class HeladeraBuilder {
         return this;
     }
 
+    public HeladeraBuilder calle(String calle){
+        heladera.getDireccion().setCalle(calle);
+        return this;
+    }
+
+    public HeladeraBuilder numero(String num){
+        heladera.getDireccion().setNumero(num);
+        return this;
+    }
+
+    public HeladeraBuilder localidad(String localidad){
+        heladera.getDireccion().setLocalidad(localidad);
+        return this;
+    }
 
 
     public Heladera construir(){

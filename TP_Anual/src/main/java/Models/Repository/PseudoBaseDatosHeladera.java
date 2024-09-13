@@ -52,7 +52,9 @@ public class PseudoBaseDatosHeladera {
     public void ejecutar() {
         for (int i = 0; i < baseHeladeras.size(); i++) {
             Direccion direccion = new Direccion();
-            direccion.setCalle(Integer.toString(i + 1));
+            direccion.setCalle("Av. Medrano");
+            direccion.setLocalidad("Almagro");
+            direccion.setNumero("951");
             Heladera heladera = baseHeladeras.get(i);
             heladera.setDireccion(direccion);
             heladera.setId(i + 1);

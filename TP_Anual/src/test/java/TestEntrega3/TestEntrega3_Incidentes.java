@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-/*
+
 public class TestEntrega3_Incidentes {
 
     Colaborador colaboradorHumano;
-    Colaborador colboradorJuridico;
+    Colaborador colaboradorJuridico;
     FallaTecnica fallaTecnicaHumano;
     Alerta alertaHumano;
     FallaTecnica fallaTecnicaJuridico;
@@ -69,7 +69,7 @@ public class TestEntrega3_Incidentes {
 
 
         colaboradorHumano = new Humano();
-        colboradorJuridico = new Juridico();
+        colaboradorJuridico = new Juridico();
         heladera = new Heladera();
 
         tecnicoBuilder1 = new TecnicoBuilder();
@@ -106,7 +106,10 @@ public class TestEntrega3_Incidentes {
     // Un colaborador humano reporta una falla tecnica
     @Test
     public void humanoReportaIncidente() throws IOException {
-        fallaTecnicaHumano = new FallaTecnica(heladera, colaboradorHumano);
+        fallaTecnicaHumano = new FallaTecnica();
+        fallaTecnicaHumano.setHeladera(heladera);
+        fallaTecnicaHumano.setColaborador(colaboradorHumano);
+        fallaTecnicaHumano.setVisitasTecnicas(new ArrayList<>());
 
         fallaTecnicaHumano.crearRegistroDeVisita(tecnico1, LocalDateTime.now(), false);
         Assertions.assertEquals(heladera.getEstadoActual(), EstadoHeladera.NO_DISPONIBLE);
@@ -119,7 +122,10 @@ public class TestEntrega3_Incidentes {
     // Un colaborador juridico reporta una falla tecnica
     @Test
     public void JuridicoReportaIncidente() throws IOException {
-        fallaTecnicaJuridico = new FallaTecnica(heladera, colboradorJuridico);
+        fallaTecnicaJuridico = new FallaTecnica();
+        fallaTecnicaJuridico.setHeladera(heladera);
+        fallaTecnicaJuridico.setColaborador(colaboradorJuridico);
+        fallaTecnicaJuridico.setVisitasTecnicas(new ArrayList<>());
 
         fallaTecnicaJuridico.crearRegistroDeVisita(tecnico1, LocalDateTime.now(), false);
         Assertions.assertEquals(heladera.getEstadoActual(), EstadoHeladera.NO_DISPONIBLE);
@@ -131,7 +137,9 @@ public class TestEntrega3_Incidentes {
 
     @Test
     public void TecnicoRecibeAvisoFallaTecnica() throws IOException {
-        fallaTecnicaHumano = new FallaTecnica(heladera, colaboradorHumano);
+        fallaTecnicaHumano = new FallaTecnica();
+        fallaTecnicaHumano.setHeladera(heladera);
+        fallaTecnicaHumano.setColaborador(colaboradorHumano);
         Tecnico tecnicoANotificar = fallaTecnicaHumano.avisarATecnico(listaTecnicos);
         Assertions.assertEquals("Tecnico 2",tecnicoANotificar.getNombre());
     }
@@ -144,4 +152,3 @@ public class TestEntrega3_Incidentes {
     }
 }
 
-*/

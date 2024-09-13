@@ -19,6 +19,7 @@ public class Alerta extends Incidente {
     public Alerta(TipoAlerta tipo, Heladera heladera) {
         this.tipo = tipo;
         this.heladera = heladera;
+        this.solucionado = false;
     }
 
     public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
