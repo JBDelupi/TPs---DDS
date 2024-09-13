@@ -13,7 +13,7 @@ public class ActualizacionTemperaturaController implements Publicacion {
         String temperatura = jsonMessage.getString("value");
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(heladeraId);
         heladera.setTemperaturaActual(Double.parseDouble(temperatura));
-
+        heladera.getSensorTemperatura().activar();
 
     }
 }

@@ -51,15 +51,18 @@ public class Router {
             get("/index/humano",((HumanoController) FactoryController.controller("humano"))::index );
             get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
             post("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::save);
-            get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
             get("/persona/humano/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
+            get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
         });
 
         Server.app().routes(()->{
             get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index);
             get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create);
             post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save);
+            get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento);
             get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show);
+
+
         });
 
         Server.app().routes(()->{

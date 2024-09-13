@@ -4,6 +4,8 @@ import Models.Domain.Builder.IncidentesBuilder.FallaTecnicaBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Tecnico;
 import Models.Repository.PseudoBaseDatosFallaTecnica;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -19,6 +21,7 @@ import java.util.random.RandomGenerator;
 public class FallaTecnicaController extends Controller implements ICrudViewsHandler {
     @Override
     public void create(Context context) {
+        this.estaLogueado(context);
         List<Heladera> heladeras = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
 
         Map<String, Object> model = new HashMap<>();
@@ -44,7 +47,10 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         fallaTecnica.setId(RandomGenerator.getDefault().nextInt());
         fallaTecnica.setColaborador((Colaborador) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona")));
+     //   fallaTecnica.avisarATecnico(PseudoBaseDatosUsuario.getInstance().getTecnicos());
+
         System.out.println("Falla Tecnica creada en heladera: " + heladera);
+
         PseudoBaseDatosFallaTecnica.getInstance().agregar(fallaTecnica);
 
         context.redirect("/incidentes");
@@ -63,7 +69,11 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
     @Override
     public void show(Context context) {
+        this.estaLogueado(context);
+
         String id = context.pathParam("id");
+
+
         FallaTecnica fallaTecnica = PseudoBaseDatosFallaTecnica.getInstance().getId(id);
 
         Map<String, Object> model = new HashMap<>();
@@ -81,5 +91,17 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
     @Override
     public void update(Context context) {
 
+    }
+
+    public void verSeguimiento(Context context){
+        this.estaLogueado(context);
+
+        String id = context.sessionAttribute("idPersona");
+        Humano humano = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Map<String, Object> model = this.basicModel(context);
+        model.put("humano", humano);
+
+
+        context.render("incidentes/seguimientoIncidente.hbs", model);
     }
 }

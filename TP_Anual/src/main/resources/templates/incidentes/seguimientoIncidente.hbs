@@ -3,75 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Seguimiento de Incidente</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
-    <link rel="stylesheet" href="../../css/efectos.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 
 <body>
-{{> templates/partials/header estaSesion = estaSesion}}
-{{> templates/partials/tipografia}}
+{{> templates/partials/headerColaborador rol=rol id=id}} <!-- Incluye el partial header -->
+{{> templates/partials/tipografia}} <!-- Incluye el partial tipografía -->
+
 <main>
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Bienvenido de nuevo</h5>
-                <h1 class="mb-5">Iniciar Sesión</h1>
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Seguimiento de Incidente</h5>
+                <h1 class="mb-5">Ingresar Código de Seguimiento</h1> <!-- Cambiado -->
             </div>
             <div class="row g-4">
                 <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                    <h1 class="display-5 text-black-50 animated slideInLeft">Accede a tu cuenta</h1>
+                    <h1 class="display-5 text-black-50 animated slideInLeft">Consulta el estado de tu incidente</h1>
                     <p class="text-dark animated slideInLeft mb-4 pb-3">
-                        Ingresa tus credenciales para continuar. Si aún no tienes una cuenta, regístrate para unirte a nuestra comunidad.
+                        Ingresa el código de seguimiento de tu incidente para conocer su estado actual. <!-- Cambiado -->
                     </p>
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
 
-                        <form method="POST" action="/login">
+                        <form id="formIncidente" method="GET" onsubmit="handleSubmit(event)">
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de usuario" required>
-                                        <label for="usuario">Nombre de usuario</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
-                                        <label for="password">Contraseña</label>
+                                        <input type="text" name="codigoSeguimiento" class="form-control" id="id" placeholder="Código de Seguimiento" required>
+                                        <label for="id">Código de Seguimiento</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button class="btn btn-secondary w-100 py-3" type="button" onclick="window.location.href='/registro';">Registrarse</button>
+                                    <button type="submit" class="btn btn-primary w-100 py-3 zoom-btn">Consultar</button>
                                 </div>
                             </div>
                         </form>
 
-                        <div class="text-center mt-3">
-                            <a href="/recuperar" class="text-primary">¿Olvidó su contraseña?</a>
-                        </div>
+
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </main>
-{{> templates/main/footer}}
-{{> templates/partials/botonBack}}
+
+{{> templates/main/footer}} <!-- Incluye el partial footer -->
+{{> templates/partials/botonBack}} <!-- Incluye el botón de retroceso -->
+
 </body>
+<script>
+    function handleSubmit(event) {
+        event.preventDefault(); // Prevenir el envío del formulario por defecto
+        var form = event.target;
+        var id = encodeURIComponent(form.codigoSeguimiento.value);
+        window.location.href = '/incidentes/' + id; // Redirigir a la nueva URL
+    }
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -85,11 +85,7 @@
 <script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
 <script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-
-<!-- Template Javascript -->
-<script src="../../js/main.js"></script>
-<script src="../../js/scripts-index.js"></script>
 <script src="../../js/scripts-header.js"></script>
-
+<script src="../../js/main.js"></script>
 
 </html>

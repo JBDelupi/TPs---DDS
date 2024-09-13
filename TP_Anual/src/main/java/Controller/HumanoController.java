@@ -6,6 +6,7 @@ import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
 import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
@@ -88,6 +89,8 @@ public class HumanoController extends Controller  {
 
         context.redirect("/login");
     }
+
+
 
     public void index(Context context){
         this.estaLogueado(context);

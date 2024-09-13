@@ -1,6 +1,7 @@
 package Service.Broker;
 
 
+import Service.Server.Server;
 import io.javalin.Javalin;
 import com.rabbitmq.client.*;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ public class TestMain {
 
         adapter.init();
 
+        Server.init();
         // Crear servidor Javalin
       //  Javalin app = Javalin.create().start(7000);
 

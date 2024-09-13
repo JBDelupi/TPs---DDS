@@ -6,6 +6,7 @@ import Controller.Actores.TipoRol;
 import Models.Domain.Personas.Actores.Humano;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
@@ -83,4 +84,13 @@ public class PseudoBaseDatosUsuario {
       return   humanos.stream().filter(f->f.getTarjeta().getCodigo().equals(user)).findAny().orElse(null);
     }
 
+    public List<Tecnico> getTecnicos() {
+        List<Tecnico> tecnicos = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.getRolNegocio().equals(TipoRolNegocio.TECNICO)){
+                tecnicos.add((Tecnico) persona);
+            }
+        }
+        return  tecnicos;
+    }
 }
