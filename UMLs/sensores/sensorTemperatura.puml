@@ -1,34 +1,42 @@
 @startuml Sensor de Temperatura - Actualizacion de Temperatura
 
+actor RabbitMQ
+
 entity RabbitMQAdapter
 entity FactoryPublicacion
-entity Publicacion
+control ActualizacionTemperaturaController
 entity Heladera
 entity Incidente
+entity SensorDeTemperatura
+entity ChromeTask
 
-database BaseDeDatosAlerta
-
+RabbitMQ -> RabbitMQAdapter: jsonMessage
+activate RabbitMQ
+deactivate RabbitMQ
 activate RabbitMQAdapter
 RabbitMQAdapter -> FactoryPublicacion: Publicacion(type)
 activate FactoryPublicacion
 FactoryPublicacion -> RabbitMQAdapter: Publicacion
 deactivate FactoryPublicacion
-RabbitMQAdapter -> Publicacion: handleMessage(jsonMessage)
+RabbitMQAdapter -> ActualizacionTemperaturaController: handleMessage(jsonMessage)
 deactivate RabbitMQAdapter
-activate Publicacion
+activate ActualizacionTemperaturaController
+ActualizacionTemperaturaController -> SensorDeTemperatura: activar()
+activate SensorDeTemperatura
 activate Heladera
-Publicacion -> Heladera: setTemperaturaActual(Double.parseDouble(temperatura))
-Publicacion -> Heladera: getSensorTemperatura().activar()
-deactivate Publicacion
-Heladera -> Heladera: tareaProgramada.ejecutarTareaPrograma(5,this,"chequear")
-Heladera -> Heladera: notify()
-Heladera -> Incidente: setId()
+ActualizacionTemperaturaController -> Heladera: setTemperaturaActual(Double.parseDouble(temperatura))
+deactivate ActualizacionTemperaturaController
+SensorDeTemperatura -> ChromeTask: ejecutarTareaPrograma(5,this,"chequear")
+activate ChromeTask
+deactivate ChromeTask
+SensorDeTemperatura -> Heladera: notify()
+deactivate Heladera
+SensorDeTemperatura -> Incidente: setId()
 activate Incidente
 deactivate Incidente
-Heladera -> BaseDeDatosAlerta: getInstance().agregar(incidente)
-activate BaseDeDatosAlerta
-deactivate BaseDeDatosAlerta
-Heladera -> Heladera: tareaProgramada.pausarTarea();
-deactivate Heladera
+SensorDeTemperatura -> ChromeTask: pausarTarea();
+activate ChromeTask
+deactivate ChromeTask
+deactivate SensorDeTemperatura
 
 @enduml
