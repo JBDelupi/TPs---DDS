@@ -1,6 +1,6 @@
 package Service.ImportadorCSV;
 
-import Service.DTO.HumanoDTO;
+import Service.DTO.FisicoDTO;
 import Service.DTO.FormaColaboracionDTO;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 public class ImportadorCSV {
     private AdapterImportadorCSV adapterImportadorCSV;
-    private Set<HumanoDTO> colaboradoresDTO;
+    private Set<FisicoDTO> colaboradoresDTO;
     private String URL;
     private static ImportadorCSV instacia;
 
@@ -53,7 +53,7 @@ public class ImportadorCSV {
         return colaboradoresDTO.stream().anyMatch( unColaborador -> this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento()));
     }
 
-    private HumanoDTO getColaboradorDTO(String TipoDocumento, String numeroDocumento){
+    private FisicoDTO getColaboradorDTO(String TipoDocumento, String numeroDocumento){
         return  colaboradoresDTO.stream().filter(unColaborador ->this.esElMismoDocumento(unColaborador.getNumDocumento(), numeroDocumento) &&  this.esElMismoTipoDocumento(TipoDocumento, unColaborador.getTipoDocumento())).findFirst().get();
     }
 
@@ -63,10 +63,10 @@ public class ImportadorCSV {
         for (String[] linea : list) {
 
             FormaColaboracionDTO unaColaboracion = new FormaColaboracionDTO();
-            HumanoDTO unColaborador = null;
+            FisicoDTO unColaborador = null;
 
             if(! this.esColaboradorRepetido(linea[0],linea[1]) ) {
-                unColaborador = new HumanoDTO();
+                unColaborador = new FisicoDTO();
                 unColaborador.setTipoDocumento(linea[0]);
                 unColaborador.setNumDocumento(linea[1]);
                 unColaborador.setNombre(linea[2]);

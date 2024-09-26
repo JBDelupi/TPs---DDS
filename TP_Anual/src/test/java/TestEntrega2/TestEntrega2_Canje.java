@@ -5,7 +5,7 @@ import Models.Domain.Excepciones.NoTienePuntosCanjeException;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Producto.Producto;
 import Models.Domain.Producto.TipoRubro;
@@ -30,7 +30,7 @@ public class TestEntrega2_Canje {
     @BeforeEach
     public void init() {
         colaborador1 = new Juridico();
-        colaborador2 = new Humano();
+        colaborador2 = new Fisico();
         notebook = new Producto(TipoRubro.ELECTRONICA,"Laptop","Pic", "descripcionnnn");
         lampara = new Producto(TipoRubro.ELECTRONICA, "Lucid", "Pic", "descripcionnnn");
         tv = new Producto(TipoRubro.ELECTRONICA, "smartTV", "Pic", "descripcionnnn");
@@ -53,7 +53,7 @@ public class TestEntrega2_Canje {
         controller.save(TipoDonacion.DISTRIBUCION_VIANDAS, null, null, 10, "");
         // 10 puntos
 
-        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+        List<OfrecerProducto> productos = colaborador1.getContribucion().stream()
                 .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
                 .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
                 .toList();
@@ -70,7 +70,7 @@ public class TestEntrega2_Canje {
         controller = new ContribucionController(colaborador1);
         controller.save(TipoDonacion.OFRECER_PRODUCTO,notebook,30.00,1);
 
-        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+        List<OfrecerProducto> productos = colaborador1.getContribucion().stream()
                 .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
                 .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
                 .toList();
@@ -96,7 +96,7 @@ public class TestEntrega2_Canje {
         controller.save(TipoDonacion.DISTRIBUCION_VIANDAS, null, null, 10, "");
         // 10 puntos
 
-        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+        List<OfrecerProducto> productos = colaborador1.getContribucion().stream()
                 .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
                 .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
                 .toList();
@@ -117,7 +117,7 @@ public class TestEntrega2_Canje {
 
         controller.save(TipoDonacion.DONACION_DINERO,140.00, TipoFrecuencia.DIARIO);
 
-        List<OfrecerProducto> productos = colaborador1.getFormaDeContribucion().stream()
+        List<OfrecerProducto> productos = colaborador1.getContribucion().stream()
                 .filter(f -> f instanceof OfrecerProducto) // Filtrar objetos de tipo Producto
                 .map(f -> (OfrecerProducto) f) // Convertir a tipo Producto
                 .toList();

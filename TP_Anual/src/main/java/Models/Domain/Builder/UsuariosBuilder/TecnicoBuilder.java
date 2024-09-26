@@ -12,15 +12,6 @@ public class TecnicoBuilder {
         this.tecnico = new Tecnico();
     }
 
-    public TecnicoBuilder nombre(String nombre){
-        tecnico.setNombre(nombre);
-        return this;
-    }
-
-    public TecnicoBuilder apellido(String apellido){
-        tecnico.setApellido(apellido);
-        return this;
-    }
 
     public TecnicoBuilder cuil(String cuil){
         tecnico.setCuil(cuil);
@@ -32,23 +23,8 @@ public class TecnicoBuilder {
         return this;
     }
 
-    public TecnicoBuilder medioDeNotificacion(Notificacion medioDeNotificacion){
-        tecnico.setMedioDeNotificacion(medioDeNotificacion);
-        return this;
-    }
-
     public TecnicoBuilder area(AreaCobertura areaCobertura){
         tecnico.setArea(areaCobertura);
-        return this;
-    }
-
-    public TecnicoBuilder tipoDeDocumento(TipoDeDocumento tipoDeDocumento){
-        tecnico.setTipoDocumento(tipoDeDocumento);
-        return this;
-    }
-
-    public TecnicoBuilder numeroDeDocumento(String numeroDeDocumento){
-        tecnico.setNroDocumento(numeroDeDocumento);
         return this;
     }
 

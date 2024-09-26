@@ -1,17 +1,5 @@
 package TestEntrega3;
 
-import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Heladera.Suscripciones.*;
-import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.Humano;
-import Service.Notificacion.Correo.CorreoAdapter;
-import Service.Notificacion.SMS.SmsAdapter;
-import Service.Notificacion.Telegram.TelegramAdapter;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 /*
 public class TestEntrega3_Suscripcion {
     Humano lucas;

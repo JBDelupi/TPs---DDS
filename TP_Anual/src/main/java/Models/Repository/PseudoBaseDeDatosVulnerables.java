@@ -29,7 +29,7 @@ public class PseudoBaseDeDatosVulnerables {
         }
         return instacia;
     }
-    public PersonaVulnerable getId(String documento){
+    public PersonaVulnerable getId(String documento, ){
         return baseVulnerable.stream().filter(f->f.getTipoDeDocumento().equals(documento)).findFirst().get();
     }
 }

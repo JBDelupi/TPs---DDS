@@ -1,38 +1,44 @@
 package Service.Mappers;
 
-import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
+import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.FormasDeContribucion.ContribucionesGenerales.DonacionDeDinero;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.DistribucionDeViandas;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.DonacionDeVianda;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
-import Service.DTO.HumanoDTO;
+import Service.DTO.FisicoDTO;
 import Service.DTO.FormaColaboracionDTO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class HumanoMapper {
+public class FisicoMapper {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-    public Humano toEntity(HumanoDTO dto) {
+    public Fisico toEntity(FisicoDTO dto) {
 
-        HumanoBuilder humanoBuilder = new HumanoBuilder();
+        FisicoBuilder fisicoBuilder = new FisicoBuilder();
 
-        Humano colaborador = humanoBuilder
+        Fisico fisico = fisicoBuilder
                 .nombre(dto.getNombre())
                 .apellido(dto.getApellido())
                 .numeroDocumento(dto.getNumDocumento())
                 .tipoDocumento( this.TipoSeleccionado(dto.getTipoDocumento() ) )
                 .construir();
 
+        ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
+        Colaborador colaborador = colaboradorBuilder
+                .construir(fisico);
+
         Double puntaje = 0.0;
 
         for(FormaColaboracionDTO colaboracionDTO : dto.getColaboracionDTOS() ){
-            FormaDeContribucion unaColaboracion = this.FactoryContribucion(colaboracionDTO.getFormaDeColaboracion());
+            Contribucion unaColaboracion = this.FactoryContribucion(colaboracionDTO.getFormaDeColaboracion());
 
             LocalDate fechaDonacion = LocalDate.parse(colaboracionDTO.getFechaColaboracion(), formatter);
             unaColaboracion.setFechaDeDonacion(fechaDonacion);
@@ -41,17 +47,16 @@ public class HumanoMapper {
             puntaje += Double.parseDouble(colaboracionDTO.getCantidad());
         }
 
-
         colaborador.setPuntaje(puntaje);
 
-        return colaborador;
+        return fisico;
 
 
     }
 
 
 
-    public HumanoDTO toDTO(Humano humano) {
+    public FisicoDTO toDTO(Fisico fisico) {
 
         return null;
     }
@@ -71,8 +76,8 @@ public class HumanoMapper {
         return tipoDeDocumento;
     }
 
-    public FormaDeContribucion FactoryContribucion(String nombre) {
-            FormaDeContribucion controller = null;
+    public Contribucion FactoryContribucion(String nombre) {
+            Contribucion controller = null;
             switch (nombre) {
                 case "DINERO":
                     controller = new DonacionDeDinero();

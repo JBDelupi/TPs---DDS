@@ -1,6 +1,6 @@
 package Controller.Administrador;
 
-import Controller.Actores.TipoRol;
+import Models.Domain.Personas.Actores.TipoRol;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
@@ -10,7 +10,6 @@ import Models.Repository.PseudoBaseDatosHeladera;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.random.RandomGenerator;

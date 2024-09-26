@@ -1,6 +1,7 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 
 public class JuridicoBuilder {
@@ -20,8 +21,14 @@ public class JuridicoBuilder {
         return this;
     }
 
-    public JuridicoBuilder correoElectronico(String correo){
-        this.juridico.setCodigoDeNotificacion(correo);
+    public JuridicoBuilder correoElectronico(String correoElectronico) {
+        this.juridico.setCorreElectronico(correoElectronico);
+        return this;
+    }
+
+
+    public JuridicoBuilder rol(Rol rol){
+        this.juridico.agregarRol(rol);
         return this;
     }
 

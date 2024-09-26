@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public abstract class FormaDeContribucion {
+public abstract class Contribucion {
 
     protected LocalDate fechaDeDonacion = LocalDate.now();
 

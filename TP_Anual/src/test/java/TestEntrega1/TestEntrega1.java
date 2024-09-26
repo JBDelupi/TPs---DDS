@@ -1,11 +1,12 @@
 package TestEntrega1;
 
 import Controller.ContribucionController;
+import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 import Models.Domain.Heladera.Vianda;
@@ -22,14 +23,17 @@ public class TestEntrega1 {
     // TEST UNA PERSONA JURIDICA HACE UNA DONACION
     // TEST UNA PERSONA JURIDICA TRATANDO DE HACER UNA DONACION HUMANA Y TIRA 403
 
-    Colaborador nahu ;
-    Colaborador unicef;
+    Fisico nahu ;
+    Juridico unicef;
     ContribucionController controllerNahu;
     ContribucionController controllerUnicef;
     @BeforeEach
     public void init(){
-        nahu = new Humano();
+        nahu = new Fisico();
+
         unicef = new Juridico();
+
+
         controllerNahu = new ContribucionController(nahu);
         controllerUnicef = new ContribucionController(unicef);
 
@@ -43,14 +47,14 @@ public class TestEntrega1 {
         Vianda vianda = new Vianda();
         controllerNahu.save(TipoDonacion.DONACION_DE_VIANDA, vianda, heladera);
 
-        Assertions.assertEquals( 2 ,nahu.getFormaDeContribucion().size());
+        Assertions.assertEquals( 2 ,nahu.getRol().getContribuciones().size());
     }
 
     @Test
     public void unaPersonaJuridicaHaceUnaDonacion() throws IOException{
         controllerUnicef.save(TipoDonacion.DONACION_DINERO, 15.00, TipoFrecuencia.ANUAL);
 
-        Assertions.assertEquals( 1 ,unicef.getFormaDeContribucion().size());
+        Assertions.assertEquals( 1 ,unicef.getRol().getContribuciones().size());
     }
 
     @Test

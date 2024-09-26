@@ -1,9 +1,9 @@
 package Models.Repository;
 
 
-import Controller.Actores.Rol;
-import Controller.Actores.TipoRol;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Rol;
+import Models.Domain.Personas.Actores.TipoRol;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
@@ -14,7 +14,6 @@ import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import Service.Validador.CredencialDeAcceso;
 
-import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,17 +33,17 @@ public class PseudoBaseDatosUsuario {
         base = new ArrayList<>();
 
         // USUARIO HUMANO PARA TESTS
-        Humano humano = new Humano();
-        humano.setNombre("nombre");
-        humano.setApellido("apellido");
-        humano.setNumeroDocumento("123456789");
-        humano.setTipoDeDocumento(TipoDeDocumento.DNI);
+        Fisico fisico = new Fisico();
+        fisico.setNombre("nombre");
+        fisico.setApellido("apellido");
+        fisico.setNumeroDocumento("123456789");
+        fisico.setTipoDeDocumento(TipoDeDocumento.DNI);
 
         CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso("h", "1");
-        humano.setCredencialDeAcceso(credencialDeAcceso);
-        humano.setId(RandomGenerator.getDefault().nextInt(0,100));
-        humano.setRol(new Rol(TipoRol.HUMANO));
-        agregar(humano);
+        fisico.setCredencialDeAcceso(credencialDeAcceso);
+        fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
+        fisico.setRol(new Rol(TipoRol.HUMANO));
+        agregar(fisico);
 
         // USUARIO JURIDICO PARA TESTS
         Juridico juridico = new Juridico();
@@ -58,7 +57,7 @@ public class PseudoBaseDatosUsuario {
         agregar(juridico);
 
         // USUARIO TECNICO 1 PARA TEST
-        Tecnico tecnico1 = new Tecnico();
+        Tecnico tecnico1 = Tecnico.createTecnico();
         tecnico1.setNombre("Carlos");
         tecnico1.setApellido("Gomez");
         tecnico1.setTipoDocumento(TipoDeDocumento.DNI);
@@ -83,7 +82,7 @@ public class PseudoBaseDatosUsuario {
         //agregar(tecnico1);
 
         // USUARIO TECNICO 2 PARA TEST
-        Tecnico tecnico2 = new Tecnico();
+        Tecnico tecnico2 = Tecnico.createTecnico();
         tecnico2.setNombre("Mariana");
         tecnico2.setApellido("Lopez");
         tecnico2.setTipoDocumento(TipoDeDocumento.DNI);
@@ -103,17 +102,17 @@ public class PseudoBaseDatosUsuario {
         tecnico2.setArea(areaCobertura2);
 
         //USUARIO ADMIN
-        Humano humano11 = new Humano();
-        humano11.setNombre("nombre");
-        humano11.setApellido("apellido");
-        humano11.setNumeroDocumento("123456789");
-        humano11.setTipoDeDocumento(TipoDeDocumento.DNI);
+        Fisico fisico11 = new Fisico();
+        fisico11.setNombre("nombre");
+        fisico11.setApellido("apellido");
+        fisico11.setNumeroDocumento("123456789");
+        fisico11.setTipoDeDocumento(TipoDeDocumento.DNI);
 
         CredencialDeAcceso credencialDeAcceso3 = new CredencialDeAcceso("admin", "1");
-        humano11.setCredencialDeAcceso(credencialDeAcceso3);
-        humano11.setId(999);
-        humano11.setRol(new Rol(TipoRol.ADMINISTRADOR));
-        agregar(humano11);
+        fisico11.setCredencialDeAcceso(credencialDeAcceso3);
+        fisico11.setId(999);
+        fisico11.setRol(new Rol(TipoRol.ADMINISTRADOR));
+        agregar(fisico11);
 
     }
 
@@ -135,14 +134,14 @@ public class PseudoBaseDatosUsuario {
                 .orElse(null);
     }
 
-    public Humano searchUserTarjeta(String user) {
-        List<Humano> humanos = new ArrayList<>();
+    public Fisico searchUserTarjeta(String user) {
+        List<Fisico> fisicos = new ArrayList<>();
         for(Persona persona : base){
             if(persona.getRolNegocio().equals(TipoRolNegocio.HUMANO)){
-                humanos.add((Humano) persona);
+                fisicos.add((Fisico) persona);
             }
         }
-      return   humanos.stream().filter(f->f.getTarjeta().getCodigo().equals(user)).findAny().orElse(null);
+      return   fisicos.stream().filter(f->f.getTarjeta().getCodigo().equals(user)).findAny().orElse(null);
     }
 
     public List<Tecnico> getTecnicos() {

@@ -1,5 +1,6 @@
 package Models.Domain.Tarjetas;
 
+import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import lombok.Getter;
 import lombok.Setter;

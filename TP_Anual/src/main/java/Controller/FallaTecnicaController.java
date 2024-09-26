@@ -4,8 +4,7 @@ import Models.Domain.Builder.IncidentesBuilder.FallaTecnicaBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
-import Models.Domain.Personas.Actores.Tecnico;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.PseudoBaseDatosFallaTecnica;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -97,9 +96,9 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         this.estaLogueado(context);
 
         String id = context.sessionAttribute("idPersona");
-        Humano humano = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Fisico fisico = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
         Map<String, Object> model = this.basicModel(context);
-        model.put("humano", humano);
+        model.put("humano", fisico);
 
 
         context.render("incidentes/seguimientoIncidente.hbs", model);

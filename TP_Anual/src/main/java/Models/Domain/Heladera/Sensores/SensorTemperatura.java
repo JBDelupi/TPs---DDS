@@ -39,10 +39,7 @@ public class SensorTemperatura implements Sensor {
     public void chequear(){
        if ( this.superaTemperaturaMax() || this.superaTemperaturaMin() )
        {
-           Alerta incidente = new Alerta(TipoAlerta.TEMPERATURA, heladera);
-           heladera.notify(incidente);
-           incidente.setId(RandomGenerator.getDefault().nextInt(0,100));
-           PseudoBaseDatosAlerta.getInstance().agregar(incidente); //BORRAR CUANDO EXISTA PERSISTENCIA
+           heladera.generarIncidente(TipoAlerta.TEMPERATURA);
            this.tareaProgramada.pausarTarea();
        }
     }

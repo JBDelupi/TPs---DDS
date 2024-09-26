@@ -4,11 +4,14 @@ import Models.Domain.Excepciones.HeladeraLlenaException;
 import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.Incidente;
+import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Heladera.Suscripciones.*;
+import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
+import Models.Repository.PseudoBaseDatosAlerta;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 @Getter
 @Setter
@@ -117,11 +121,19 @@ public class Heladera {
         return cantidad < (capacidadDeViandas - viandas.size());
     }
 
-    public void notify(Alerta incidente){
-        System.out.println("Hay un incidente, el incidente es :" + incidente.getTipo());
+
+    public void notificar(Alerta incidente){
+    //   Juridico personaACargo;
+    //   personaACargo.notify("Nuevo Incidente en la heladera "+ id + ": " + incidente.getTipo());
     }
 
+    public void generarIncidente (TipoAlerta tipo){
+        Alerta nuevaAlerta = new Alerta(tipo, this);
+        nuevaAlerta.setId(RandomGenerator.getDefault().nextInt(0,100)); //DEJAR HASTA USAR EL AUTO-INCREMENTAL DEL ORM
+        this.notificar(nuevaAlerta);
 
+        PseudoBaseDatosAlerta.getInstance().agregar(nuevaAlerta);
+    }
 
 
 }

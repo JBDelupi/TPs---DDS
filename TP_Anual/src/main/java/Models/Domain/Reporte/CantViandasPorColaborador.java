@@ -1,24 +1,23 @@
 package Models.Domain.Reporte;
 
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CantViandasPorColaborador extends TemplateReporte<Humano> {
+public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
 
     @Override
-    protected List<Object[]> obtenerListado(List<Humano> humanos) {
+    protected List<Object[]> obtenerListado(List<Fisico> fisicos) {
         List<Object[]> listadoDeViandas = new ArrayList<>();
-        for (Humano humano : humanos) {
-            String nombre = humano.getNombre();
-            int cantidadDeViandas = humano.getCantidadViandasDonadas();
+        for (Fisico fisico : fisicos) {
+            String nombre = fisico.getNombre();
+            int cantidadDeViandas = fisico.getCantidadViandasDonadas();
             listadoDeViandas.add(new Object[]{nombre, cantidadDeViandas});
-            humano.reestablecerViandas();
+            fisico.reestablecerViandas();
         }
         return listadoDeViandas;
     }

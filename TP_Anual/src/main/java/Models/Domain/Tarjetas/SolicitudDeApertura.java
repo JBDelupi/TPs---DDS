@@ -1,6 +1,5 @@
 package Models.Domain.Tarjetas;
 
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import lombok.Getter;

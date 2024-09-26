@@ -1,6 +1,6 @@
 package Service.Server.middlewares;
 
-import Controller.Actores.TipoRol;
+import Models.Domain.Personas.Actores.TipoRol;
 import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;

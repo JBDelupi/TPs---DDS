@@ -1,0 +1,51 @@
+@startuml Registro Visita Tecnica
+
+actor Tecnico
+boundary Interfaz_De_Usuario
+control VisitaFallaTecnicaController
+entity VisitaTecnicaBuilder
+entity FallaTecnica
+database BaseDeDatos
+
+
+activate Tecnico
+Tecnico->Interfaz_De_Usuario: crearRegistroVisitaTecnia
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario -> VisitaFallaTecnicaController: create(Context)
+activate VisitaFallaTecnicaController
+VisitaFallaTecnicaController->VisitaFallaTecnicaController: estaLogueado(Context context)
+
+
+alt No logeado
+    VisitaFallaTecnicaController->Interfaz_De_Usuario: AccessDeniedException()
+    Interfaz_De_Usuario->Tecnico: Error 401
+end
+
+VisitaFallaTecnicaController -> Interfaz_De_Usuario: context.render("VisitaFallaTecnica.hbs")
+Interfaz_De_Usuario -> Tecnico: context.render("VisitaFallaTecnica.hbs")
+
+Tecnico -> Interfaz_De_Usuario: save(Context) 
+Interfaz_De_Usuario -> VisitaFallaTecnicaController: save(Context)
+VisitaFallaTecnicaController -> Interfaz_De_Usuario: context.redirect("/incidente/" + context.queryParam("incidenteId")) 
+Interfaz_De_Usuario -> Tecnico : /incidente/id
+deactivate Interfaz_De_Usuario
+deactivate Tecnico
+
+VisitaFallaTecnicaController->FallaTecnica: crearRegistroDeVisita(Tecnico tecnico, LocalDate fecha,Boolean solucionado)
+activate FallaTecnica
+deactivate VisitaFallaTecnicaController
+FallaTecnica->VisitaTecnicaBuilder: construir()
+activate VisitaTecnicaBuilder
+VisitaTecnicaBuilder-> FallaTecnica: RegistroVisita
+deactivate VisitaTecnicaBuilder
+FallaTecnica->FallaTecnica: visitasTecnicas.add(registroVisita)
+FallaTecnica -> BaseDeDatos: guardar(RegistroVisita)
+activate BaseDeDatos
+
+
+
+
+
+
+
+@enduml

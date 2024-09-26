@@ -5,7 +5,7 @@ import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Tarjetas.*;
 import Models.Repository.PseudoBaseDatosHeladera;
 import org.junit.jupiter.api.Assertions;
@@ -16,13 +16,13 @@ import java.io.IOException;
 
 public class TestEntrega3_Tarjeta {
 
-    Humano h;
+    Fisico h;
     TarjetaAccesos tarjeta;
     ContribucionController contralador;
     PseudoBaseDatosHeladera base;
     @BeforeEach
     public void init(){
-        h = new Humano();
+        h = new Fisico();
         tarjeta = new TarjetaAccesos(h);
         contralador = new ContribucionController(h);
         h.setTarjeta(tarjeta);

@@ -1,10 +1,8 @@
 package Service.Broker.Controllers;
 
-import Controller.HumanoController;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Tarjetas.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.PseudoBaseDatosHeladera;
@@ -13,7 +11,7 @@ import org.json.JSONObject;
 
 public class SolicitudAperturaController implements Publicacion {
 
-    private Humano colaborador;
+    private Fisico colaborador;
     public void handleMessage(JSONObject jsonMessage) {
         String heladeraId = jsonMessage.getString("heladeraId");
         String usoTarjeta = jsonMessage.getString("value");

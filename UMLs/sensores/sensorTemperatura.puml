@@ -5,6 +5,7 @@ actor RabbitMQ
 entity RabbitMQAdapter
 entity FactoryPublicacion
 control ActualizacionTemperaturaController
+actor PersonaJuridica
 entity Heladera
 entity Incidente
 entity SensorDeTemperatura
@@ -28,13 +29,23 @@ ActualizacionTemperaturaController -> Heladera: setTemperaturaActual(Double.pars
 deactivate ActualizacionTemperaturaController
 SensorDeTemperatura -> ChromeTask: ejecutarTareaPrograma(5,this,"chequear")
 activate ChromeTask
+ChromeTask -> SensorDeTemperatura: chequear()
 deactivate ChromeTask
-SensorDeTemperatura -> Heladera: notify()
-deactivate Heladera
-SensorDeTemperatura -> Incidente: setId()
-activate Incidente
-deactivate Incidente
-SensorDeTemperatura -> ChromeTask: pausarTarea();
+
+alt superaTemperaturaMax() || superaTemperaturaMin()
+
+    SensorDeTemperatura -> Heladera: generarIncidente(TipoAlerta.TEMPERATURA)
+    Heladera -> Incidente: setId()
+    activate Incidente
+    deactivate Incidente
+    Heladera -> Heladera: notify(nuevaAlerta)
+    Heladera -> PersonaJuridica: notify()
+    activate PersonaJuridica
+    deactivate PersonaJuridica
+    SensorDeTemperatura -> ChromeTask: pausarTarea();
+    deactivate Heladera
+end
+
 activate ChromeTask
 deactivate ChromeTask
 deactivate SensorDeTemperatura

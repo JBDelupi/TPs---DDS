@@ -2,9 +2,6 @@ package Models.Repository;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

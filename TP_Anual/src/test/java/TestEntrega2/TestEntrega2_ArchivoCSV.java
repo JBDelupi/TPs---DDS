@@ -1,9 +1,9 @@
 package TestEntrega2;
 
-import Models.Domain.Personas.Actores.Humano;
-import Service.DTO.HumanoDTO;
+import Models.Domain.Personas.Actores.Fisico;
+import Service.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
-import Service.Mappers.HumanoMapper;
+import Service.Mappers.FisicoMapper;
 import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
@@ -20,16 +20,16 @@ public class TestEntrega2_ArchivoCSV {
 
     @Test
     public void importarCSVConPuntoYComa() throws CsvValidationException, IOException {
-        Set<HumanoDTO> importados = ImportadorCSV.getInstance("test.csv", ";").getColaboradoresDTO();
+        Set<FisicoDTO> importados = ImportadorCSV.getInstance("test.csv", ";").getColaboradoresDTO();
         Assertions.assertFalse(importados.isEmpty());
 
     }
 
     @Test
     public void importarCSVConGuion() throws CsvValidationException, IOException {
-        Set<HumanoDTO> importadosCSV = ImportadorCSV.getInstance("test2.csv", "-").getColaboradoresDTO();
+        Set<FisicoDTO> importadosCSV = ImportadorCSV.getInstance("test2.csv", "-").getColaboradoresDTO();
 
-        for( HumanoDTO colaborador : importadosCSV ){
+        for( FisicoDTO colaborador : importadosCSV ){
             System.out.println("Tipo Documento:" + colaborador.getTipoDocumento());
             System.out.println("Documento:" + colaborador.getNumDocumento());
             System.out.println("Nombre:" + colaborador.getNombre());
@@ -55,26 +55,26 @@ public class TestEntrega2_ArchivoCSV {
 
     @Test
     public void importarCSVConPuntoYComaMapper() throws CsvValidationException, IOException {
-        Set<HumanoDTO> importados = ImportadorCSV.getInstance("test.csv", ";").getColaboradoresDTO();
+        Set<FisicoDTO> importados = ImportadorCSV.getInstance("test.csv", ";").getColaboradoresDTO();
 
-        HumanoMapper mapper = new HumanoMapper();
-        List<Humano> humanoList = new ArrayList<>();
-
-
+        FisicoMapper mapper = new FisicoMapper();
+        List<Fisico> fisicoList = new ArrayList<>();
 
 
-        for(HumanoDTO humanoDTO : importados){
+
+
+        for(FisicoDTO fisicoDTO : importados){
             MensajeBuilder notificacion = new MensajeBuilder();
             Mensaje mensaje = notificacion.asunto("Nuevo colaborador")
                                           .contenido("Datos de usuario")
-                                                  .destinatario(humanoDTO.getMail())
+                                                  .destinatario(fisicoDTO.getMail())
                                                           .construir();
 
-            Humano humano = mapper.toEntity(humanoDTO);
+            Fisico fisico = mapper.toEntity(fisicoDTO);
 
-            humano.setMedioDeNotificacion(new CorreoAdapter());
+            fisico.setMedioDeNotificacion(new CorreoAdapter());
 
-            humano.getMedioDeNotificacion().Notificar(mensaje);
+            fisico.getMedioDeNotificacion().Notificar(mensaje);
 
 
         }

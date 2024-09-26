@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Setter @Getter
-public class Juridico extends Colaborador {
+public class Juridico extends Persona {
     private String razonSocial;
     private TipoJuridico tipoJuridico;
     private List<OfrecerProducto> productosOfrecidos;
 
     public Juridico(){
-        this.setRolNegocio(TipoRolNegocio.JURIDICO);
         this.productosOfrecidos = new ArrayList<>();
     }
 

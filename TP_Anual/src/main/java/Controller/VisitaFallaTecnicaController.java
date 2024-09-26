@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Domain.Builder.IncidentesBuilder.FallaTecnicaBuilder;
 import Models.Domain.Builder.IncidentesBuilder.VisitaTecnicaBuilder;
 import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Service.Server.ICrudViewsHandler;
@@ -31,6 +32,8 @@ public class VisitaFallaTecnicaController extends Controller implements ICrudVie
         String solucionadoStr = context.formParam("solucionado");
         Boolean solucionado = solucionadoStr.equals("si") ? true : false;
 
+        // Hay que crear el registro dentro de FallaTecnica.
+        // Ver como
         VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
         RegistroVisitaTecnica registroVisitaTecnica = visitaTecnicaBuilder
                 .visitaExitosa(solucionado)

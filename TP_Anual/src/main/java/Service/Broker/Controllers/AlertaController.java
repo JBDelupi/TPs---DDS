@@ -15,9 +15,8 @@ public class AlertaController implements Publicacion {
         String alerta = jsonMessage.getString("value");
 
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(heladeraId);
-        Alerta incidente = new Alerta(TipoAlerta.valueOf(alerta), heladera);
-        heladera.notify(incidente);
+        heladera.generarIncidente(TipoAlerta.valueOf(alerta));
 
-        PseudoBaseDatosAlerta.getInstance().agregar(incidente);
+
     }
 }

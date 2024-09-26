@@ -1,6 +1,7 @@
 package Models.Repository;
 
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
 import lombok.Getter;
 
 import java.util.ArrayList;

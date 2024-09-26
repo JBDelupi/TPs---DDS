@@ -1,6 +1,8 @@
 package Models.Domain.FormasDeContribucion.Utilidades;
 
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Builder.ContribucionBuilder.*;
+import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.Excepciones.Permisos;
@@ -8,58 +10,63 @@ import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Domain.Personas.Utilidades.TipoRolNegocio;
+import Models.Domain.Personas.Actores.*;
 import Models.Domain.Producto.Producto;
 import Models.Domain.Tarjetas.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Getter
 public class FactoryContribucion {
-    FormaDeContribucion nuevaDonacion;
+    private Persona persona;
 
+    public FactoryContribucion(Persona persona) {
+        this.persona = persona;
 
-    Permisos permisos;
-    Colaborador colaborador;
-    public FactoryContribucion(Colaborador colaborador) {
-       this.colaborador = colaborador;
-       this.permisos = new Permisos(colaborador);
     }
 
     // ------------------- LO HACEN TODOS ----------------------------------------//
-    private FormaDeContribucion donacionDeDinero(Object ... Context){
+    private Contribucion donacionDeDinero(Object ... Context){
+
+        if(this.persona.checkRol(TipoRol.COLABORADOR)){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+
 
         Double monto = (Double) Context[1];
         TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) Context[2];
 
         DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
 
-        FormaDeContribucion donacion = builder
+        Contribucion donacion = builder
                 .monto(monto)
                 .frecuencia(tipoFrecuencia)
                 .construir();
 
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return  donacion;
     }
 
 
-    private FormaDeContribucion donacionDeVianda(Object ... Context){
+    private Contribucion donacionDeVianda(Object ... Context){
 
-        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
+        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+
 
         Vianda vianda = (Vianda) Context[1];
         Heladera heladera = (Heladera) Context[2];
 
 
-        TarjetaAccesos tarjeta = this.colaborador.getTarjeta();
+        TarjetaAccesos tarjeta = colaborador.getTarjeta();
 
         SolicitudDeApertura solicitudDeApertura;
         solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
@@ -73,21 +80,26 @@ public class FactoryContribucion {
 
         heladera.agregarVianda(vianda);
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
-        FormaDeContribucion donacion = builder
+        Contribucion donacion = builder
                 .heladera(heladera)
                 .vianda(vianda)
                 .construir();
 
 
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
 
     }
 
-    private FormaDeContribucion distribucionDeVianda(Object ... Context){
+    private Contribucion distribucionDeVianda(Object ... Context){
 
-        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
+        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+
 
         Heladera heladeraOrigen = (Heladera) Context[1];
         Heladera heladeraDestino = (Heladera) Context[2];
@@ -95,7 +107,7 @@ public class FactoryContribucion {
         String motivo = (String) Context[4];
 
 
-        TarjetaAccesos tarjeta = this.colaborador.getTarjeta();
+        TarjetaAccesos tarjeta = colaborador.getTarjeta();
 
         SolicitudDeApertura solicitudDeApertura;
         solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
@@ -103,6 +115,7 @@ public class FactoryContribucion {
         if(solicitudDeApertura == null){
             throw new NoHaySolicitudExepction("No hay solicitud o expiro");
         }
+
         solicitudDeApertura.setRealizada(true);
         tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
@@ -115,67 +128,81 @@ public class FactoryContribucion {
 
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
 
-        FormaDeContribucion donacion = builder
+        Contribucion donacion = builder
                 .heladeraOrigen(heladeraOrigen)
                 .heladeraDestino(heladeraDestino)
                 .cantidadDeViandasAMover(cantidad)
                 .motivos(motivo)
                 .construir();
 
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
     }
 
-    private FormaDeContribucion registrarTarjeta(Object ... Context){
+    private Contribucion registrarTarjeta(Object ... Context){
 
-        permisos.checkUserRoleAndProceed(TipoRolNegocio.HUMANO);
+        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+
 
         String nombre = (String) Context[1];
         Integer menoresACargo = (Integer) Context[2];
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
 
-        PersonaVulnerable persona =
+        PersonaVulnerable vulnerable =
                 vulnerableBuilder
-                        .nombre(nombre)
                         .menoresACargo(menoresACargo)
                         .construir();
 
+        FisicoBuilder personaVulnerable = new FisicoBuilder();
+        Fisico persona = personaVulnerable.nombre(nombre).rol(vulnerable).construir();
+
         TarjetaAlimentar tarjeta = new TarjetaAlimentar(persona);
 
-        FormaDeContribucion donacion = new EntregaDeTarjeta(tarjeta);
+        Contribucion donacion = new EntregaDeTarjeta(tarjeta);
 
-
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
     }
 
 
 
-    private FormaDeContribucion hacerceCargoDeHeladera(Object ... Context){
+    private Contribucion hacerceCargoDeHeladera(Object ... Context){
 
-        permisos.checkUserRoleAndProceed( TipoRolNegocio.JURIDICO );
+        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Juridico){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
 
         String nombreCaracteristico = (String) Context[1];
         Heladera heladera = (Heladera) Context[3];
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
 
-        FormaDeContribucion donacion = builder
+        Contribucion donacion = builder
                 .nombreCaracteristico(nombreCaracteristico)
                 .heladera(heladera)
                 .construir();
 
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
     }
 
-    private  FormaDeContribucion ofrecerProducto(Object ... Context){
+    private Contribucion ofrecerProducto(Object ... Context){
 
-        permisos.checkUserRoleAndProceed(TipoRolNegocio.JURIDICO);
+        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Juridico){
+            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
+        }
+
+        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
 
         Producto producto = (Producto) Context[1];
         Double puntosNecesarios = (Double) Context[2];
@@ -184,20 +211,20 @@ public class FactoryContribucion {
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
 
-        FormaDeContribucion donacion = builder
+        Contribucion donacion = builder
                 .producto(producto)
                 .stock(stock)
                 .puntosNecesarios(puntosNecesarios)
                 .construir();
 
-        this.colaborador.generarNuevaDonacion(donacion);
+        colaborador.agregarNuevaDonacion(donacion);
 
         return donacion;
     }
 
 
-    public FormaDeContribucion factoryMethod(Object ... Context){
-        FormaDeContribucion contribucion = null;
+    public Contribucion factoryMethod(Object ... Context){
+        Contribucion contribucion = null;
         switch( (TipoDonacion) Context[0] ){
             case DONACION_DINERO: contribucion = this.donacionDeDinero( Context ); break;
             case DONACION_DE_VIANDA: contribucion = this.donacionDeVianda( Context ); break;

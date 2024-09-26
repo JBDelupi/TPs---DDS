@@ -7,7 +7,7 @@ import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.APIPuntos.AreaCobertura;
@@ -68,7 +68,7 @@ public class TestEntrega3_Incidentes {
         area3.setRadio("6");
 
 
-        colaboradorHumano = new Humano();
+        colaboradorHumano = new Fisico();
         colaboradorJuridico = new Juridico();
         heladera = new Heladera();
 

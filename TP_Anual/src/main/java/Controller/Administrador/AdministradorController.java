@@ -1,9 +1,9 @@
 package Controller.Administrador;
 
 import Controller.Controller;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.PseudoBaseDatosUsuario;
-import Service.DTO.HumanoDTO;
+import Service.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
 import io.javalin.http.Context;
@@ -35,7 +35,7 @@ public class AdministradorController  extends Controller {
         String filename = file.filename();
        // String ruta = "C:\\Facultad 2024\\Back up 2024\\Diseño de sistemas\\TPs---DDS\\TP_Anual\\";
 
-        Set<HumanoDTO> importadosCSV = ImportadorCSV.getInstance( filename, token).getColaboradoresDTO();
+        Set<FisicoDTO> importadosCSV = ImportadorCSV.getInstance( filename, token).getColaboradoresDTO();
 
         Map<String, Object> model = new HashMap<>();
 
@@ -48,7 +48,7 @@ public class AdministradorController  extends Controller {
         this.estaLogueado(context);
 
         String id = context.pathParam("id");
-        Humano usuario = (Humano) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Fisico usuario = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
         Map<String, Object> model = this.basicModel(context);
         model.put("usuario",usuario);
         System.out.println(usuario.getId());

@@ -1,8 +1,5 @@
 package Controller;
 
-import Controller.Actores.TipoRol;
-import Controller.Actores.Usuario;
-import Models.Domain.Personas.Actores.Humano;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.http.Context;

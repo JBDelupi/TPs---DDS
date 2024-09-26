@@ -6,7 +6,7 @@ import Models.Domain.Excepciones.LimiteDeTarjetaException;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
@@ -41,7 +41,7 @@ public class TestEntrega2_Tarjeta {
 
     @BeforeEach
     public void init(){
-        fulano = new Humano();
+        fulano = new Fisico();
         nasa = new Juridico();
 
         persona1 = new PersonaVulnerable();
@@ -49,7 +49,7 @@ public class TestEntrega2_Tarjeta {
         persona1.setNombre("PersonaVulnerable");
 
         tarjeta1 = new TarjetaAlimentar(persona1);
-        tarjeta1.setColaborador((Humano) fulano);
+        tarjeta1.setColaborador((Fisico) fulano);
 
         pollo = new Vianda();
         galletita = new Vianda();
@@ -67,7 +67,7 @@ public class TestEntrega2_Tarjeta {
     public void creacionDeEntregaTarjetas()throws IOException {
         controller = new ContribucionController(fulano);
         controller.save(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
-        Assertions.assertEquals(1, fulano.getFormaDeContribucion().size());
+        Assertions.assertEquals(1, fulano.getContribucion().size());
     }
 
 
@@ -77,7 +77,7 @@ public class TestEntrega2_Tarjeta {
         controller = new ContribucionController(fulano);
         controller.save(TipoDonacion.ENTREGA_TARJETAS, "PersonaVulnerable", 3);
 
-        FormaDeContribucion contribucion = fulano.getFormaDeContribucion().get(0);
+        Contribucion contribucion = fulano.getContribucion().get(0);
 
         // Verifica si la contribución es del tipo que tiene una tarjeta
         if (contribucion instanceof EntregaDeTarjeta) {

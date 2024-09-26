@@ -2,6 +2,7 @@ package Models.Domain.Tarjetas;
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
+import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import lombok.Getter;
 

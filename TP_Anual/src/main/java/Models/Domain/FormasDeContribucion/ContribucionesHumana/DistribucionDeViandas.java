@@ -1,11 +1,11 @@
 package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import lombok.Setter;
 
 @Setter
-public class DistribucionDeViandas extends FormaDeContribucion {
+public class DistribucionDeViandas extends Contribucion {
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;
     private Integer cantidadDeViandasAMover;

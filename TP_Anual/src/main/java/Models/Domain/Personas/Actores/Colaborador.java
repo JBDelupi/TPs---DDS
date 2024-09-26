@@ -2,52 +2,34 @@ package Models.Domain.Personas.Actores;
 
 import Models.Domain.Excepciones.NoTienePuntosCanjeException;
 import Models.Domain.Producto.Canje;
-import Models.Domain.Personas.DatosPersonales.Direccion;
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Tarjetas.TarjetaAccesos;
-import Service.Notificacion.Mensaje;
-import Service.Notificacion.Notificacion;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-public abstract class Colaborador extends Persona {
-    private Notificacion medioDeNotificacion;
-    private Direccion direccion;
-    private List<FormaDeContribucion> formaDeContribucion;
+public class Colaborador extends Rol {
+    private List<Contribucion> contribuciones;
     private List<Canje> historialCanje;
     private Double puntaje;
     private String codigoDeNotificacion;
     private TarjetaAccesos tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
 
-    public Colaborador(){
-        this.formaDeContribucion = new ArrayList<>();
-        this.puntaje = 0.0;
-        this.historialCanje = new ArrayList<>();
+
+    public void agregarNuevaDonacion(Contribucion unaDonacion){
+        this.contribuciones.add(unaDonacion);
+        this.sumarPuntaje(unaDonacion);
+
     }
 
-    public void agregarNuevaDonacion(FormaDeContribucion unaDonacion){
-        this.formaDeContribucion.add(unaDonacion);
-    }
-
-
-    public void generarNuevaDonacion(FormaDeContribucion unaDonacion) {
-        this.agregarNuevaDonacion(unaDonacion);
-        sumarPuntaje(unaDonacion);
-    }
-
-    public void sumarPuntaje(FormaDeContribucion unaDonacion){
+    private void sumarPuntaje(Contribucion unaDonacion){
         puntaje += unaDonacion.generarPuntaje();
     }
 
-    public void notify(Mensaje publicacion){
-       medioDeNotificacion.Notificar(publicacion);
-    }
 
 
     public void realizarCanje(OfrecerProducto producto, Integer cantidad){

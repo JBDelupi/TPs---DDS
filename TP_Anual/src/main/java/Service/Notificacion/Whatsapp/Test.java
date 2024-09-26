@@ -1,20 +1,13 @@
 package Service.Notificacion.Whatsapp;
 
-import Models.Domain.Builder.UsuariosBuilder.HumanoBuilder;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Heladera.Suscripciones.*;
-import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.Humano;
+import Models.Domain.Personas.Actores.Fisico;
 import Service.Notificacion.Mensaje;
-import Service.Notificacion.Whatsapp.WhatsappAdapter;
-
 
 
 public class Test {
     public static void main(String[] args) {
 
-        Humano pepito = new Humano();
+        Fisico pepito = new Fisico();
 
         pepito.setCodigoDeNotificacion("5491121619445");
         pepito.setNombre("Pepito");

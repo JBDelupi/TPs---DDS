@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class HumanoDTO {
+public class FisicoDTO {
     String TipoDocumento;
     String numDocumento;
     String nombre;
@@ -16,7 +16,7 @@ public class HumanoDTO {
     String mail;
     List<FormaColaboracionDTO> colaboracionDTOS;
 
-    public HumanoDTO(){
+    public FisicoDTO(){
         this.colaboracionDTOS = new ArrayList<>();
     }
 

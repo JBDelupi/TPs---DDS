@@ -1,0 +1,38 @@
+@startuml Reporte Visita Tecnica
+
+actor Colaborador
+boundary Interfaz_De_Usuario
+control FallaTecnicaController
+entity FallaTecnicaBuilder
+entity FallaTecnica
+database PaseudoBaseDeDatosUsuario
+database PseudoBaseDatosFallaTecnica
+
+Colaborador -> Interfaz_De_Usuario: registrar nueva falla tecnica
+activate Colaborador
+activate Interfaz_De_Usuario
+Interfaz_De_Usuario -> FallaTecnicaController: save(Context context)
+activate FallaTecnicaController
+FallaTecnicaController -> FallaTecnicaBuilder: construir()
+activate FallaTecnicaBuilder
+FallaTecnicaBuilder -> FallaTecnicaController: fallaTecnica
+deactivate FallaTecnicaBuilder
+FallaTecnicaController -> FallaTecnica: setId()
+activate FallaTecnica
+deactivate FallaTecnica
+FallaTecnicaController -> PaseudoBaseDeDatosUsuario: getId()
+activate PaseudoBaseDeDatosUsuario
+PaseudoBaseDeDatosUsuario -> FallaTecnicaController: id
+deactivate PaseudoBaseDeDatosUsuario
+activate FallaTecnica
+FallaTecnicaController -> FallaTecnica: setColaborador(id)
+FallaTecnicaController -> FallaTecnica: avisarATecnico()
+deactivate FallaTecnica
+FallaTecnicaController -> PseudoBaseDatosFallaTecnica: agregar(fallaTecnica)
+activate PseudoBaseDatosFallaTecnica
+deactivate PseudoBaseDatosFallaTecnica
+FallaTecnicaController -> Interfaz_De_Usuario: redirect("/incidentes")
+deactivate FallaTecnicaController
+Interfaz_De_Usuario -> Colaborador: falla tecnica registrada
+
+@enduml

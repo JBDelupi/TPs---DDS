@@ -1,19 +1,13 @@
 package Controller;
 
-import Controller.Actores.TipoRol;
-import Controller.Actores.Usuario;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
-import Models.Domain.FormasDeContribucion.Utilidades.FormaDeContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Repository.PseudoBaseDatosProductosOfrecidos;
-import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
@@ -29,7 +23,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     public void save(Object ... Context){
         FactoryContribucion factoryContribucion = new FactoryContribucion((Colaborador) this.usuario);
-        FormaDeContribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
+        Contribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
         
         // GUARDAR BASE DE DATOS
 
