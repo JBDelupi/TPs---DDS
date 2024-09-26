@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.http.Context;
@@ -12,7 +13,7 @@ import java.util.Map;
 @Setter
 @Getter
 public abstract class Controller {
-    Usuario usuario;
+    Persona usuario;
 
     public void estaLogueado(Context context){
         if (context.sessionAttribute("usuario") == null) {
@@ -25,7 +26,7 @@ public abstract class Controller {
         this.usuario =  PseudoBaseDatosUsuario.getInstance().getId(id);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("rol", usuario.getRol().getTipo().toString().toLowerCase());
+        model.put("rol", usuario.getTipoUsuario().toString().toLowerCase());
         model.put("id", id);
         return model;
     }

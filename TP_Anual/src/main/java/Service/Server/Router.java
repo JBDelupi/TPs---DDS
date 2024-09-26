@@ -34,8 +34,8 @@ public class Router {
 
         Server.app().routes(()->{
             get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
-            get("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::create);
-            post("/registro/juridica", ((JuridicoController) FactoryController.controller("juridico"))::save);
+            get("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::create);
+            post("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::save);
             get("/juridico/contribuciones/{id}", ((JuridicoController) FactoryController.controller("juridico"))::consultarContribuciones);
             get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
         });
@@ -48,11 +48,11 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/index/humano",((HumanoController) FactoryController.controller("humano"))::index );
-            get("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::create);
-            post("/registro/humano", ((HumanoController) FactoryController.controller("humano"))::save);
+            get("/index/fisico",((HumanoController) FactoryController.controller("humano"))::index );
+            get("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::create);
+            post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
             get("/humano/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
-            get("/persona/humano/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
+            get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
         });
 
         Server.app().routes(()->{

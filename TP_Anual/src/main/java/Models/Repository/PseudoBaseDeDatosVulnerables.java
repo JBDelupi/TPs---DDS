@@ -10,6 +10,8 @@ import Models.Domain.Personas.Actores.PersonaVulnerable;
 
 
 public class PseudoBaseDeDatosVulnerables {
+
+   /*
     private PersonaVulnerable vulnerable1;
     private PersonaVulnerable vulnerable2;
     private PersonaVulnerable vulnerable3;
@@ -32,6 +34,8 @@ public class PseudoBaseDeDatosVulnerables {
     public PersonaVulnerable getId(String documento, ){
         return baseVulnerable.stream().filter(f->f.getTipoDeDocumento().equals(documento)).findFirst().get();
     }
+
+    */
 }
 
 

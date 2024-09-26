@@ -17,7 +17,7 @@ public class LoginController extends Controller {
         if (usuario == null) {
             context.render("sesion/login.hbs");
         } else {
-            String rolTipo = usuario.getRol().getTipo().toString().toLowerCase();
+            String rolTipo = usuario.getTipoUsuario().toString().toLowerCase();
             context.redirect("/index/" + rolTipo);
         }
     }
@@ -36,7 +36,7 @@ public class LoginController extends Controller {
             context.sessionAttribute(USER_SESSION_KEY, usuario);
             String idPersona = Integer.toString(usuario.getId());
             context.sessionAttribute("idPersona", idPersona);
-            String rolTipo = usuario.getRol().getTipo().toString().toLowerCase();
+            String rolTipo = usuario.getTipoUsuario().toString().toLowerCase();
             context.redirect("/index/" + rolTipo);
         } else {
             context.sessionAttribute(USER_SESSION_KEY, null);

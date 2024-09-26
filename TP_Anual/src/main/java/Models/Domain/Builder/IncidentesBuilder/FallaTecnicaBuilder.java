@@ -7,6 +7,8 @@ import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,8 +24,8 @@ public class FallaTecnicaBuilder {
         return this;
     }
 
-    public FallaTecnicaBuilder colaborador(Colaborador colaborador){
-        fallaTecnica.setColaborador(colaborador);
+    public FallaTecnicaBuilder colaborador(Persona colaborador){
+        fallaTecnica.setColaborador((Colaborador)colaborador.getRol(TipoRol.COLABORADOR));
         return this;
     }
 

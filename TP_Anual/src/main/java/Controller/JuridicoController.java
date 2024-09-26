@@ -1,10 +1,14 @@
 package Controller;
 
+import Controller.Actores.RolUsuario;
+import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
@@ -14,10 +18,11 @@ import io.javalin.http.Context;
 
 import java.util.List;
 import java.util.Map;
+import java.util.random.RandomGenerator;
 
 public class JuridicoController extends Controller implements ICrudViewsHandler {
 
-    public JuridicoController(Usuario usuario) {
+    public JuridicoController(Persona usuario) {
         this.usuario = usuario;
     }
 
@@ -40,7 +45,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .construir();
 
 
-        RepoColaboradores.getInstance().agregarColaborador(juridico);
+       // RepoColaboradores.getInstance().agregarColaborador(juridico);
 
     }
 
@@ -81,27 +86,26 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         TipoJuridico tipoJuridico = TipoJuridico.valueOf(context.formParam("tipo_juridico"));
         String correo = context.formParam("correo");
 
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(context.formParam("nombre_usuario"),context.formParam("contrasenia"));
-
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
+                .contrasenia(context.formParam("contrasenia"))
+                .nombreUsuario(context.formParam("nombre_usuario"))
+                .construir();
 
         JuridicoBuilder juridicoBuilder = new JuridicoBuilder();
         Juridico juridico = juridicoBuilder
                 .razonSocial(razonSocial)
                 .tipoJuridico(tipoJuridico)
                 .correoElectronico(correo)
+                .credencialDeAcceso(credencialDeAcceso)
                 .construir();
 
-        juridico.setCredencialDeAcceso(credencialDeAcceso);
-
-
+        juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
 
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
-        Colaborador colaborador = colaboradorBuilder
-                .construir(juridico);
+        Colaborador colaborador = colaboradorBuilder.construir(juridico);
 
         juridico.agregarRol(colaborador);
-
-
 
         PseudoBaseDatosUsuario.getInstance().agregar(juridico);
 
@@ -122,7 +126,8 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         this.estaLogueado(context);
 
         Juridico usuario = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona"));
-        List<Contribucion> contribuciones = usuario.getFormaDeContribucion();
+
+        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
 
         Map<String, Object> model = this.basicModel(context);
         model.put("contribuciones",contribuciones);

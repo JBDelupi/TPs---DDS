@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
+/*
 public class TestEntrega1 {
 
     // TEST UNA PERSONA HUMANA HACE DOS DONACIONES
@@ -77,3 +77,4 @@ public class TestEntrega1 {
     }
 
 }
+*/

@@ -30,7 +30,7 @@ public class ColaboradorBuilder {
             colaborador.setTarjeta(tarjetaAccesos);
             Mensaje mensaje = new Mensaje();
             mensaje.setContenido("BIENVENIDO NUEVO CONTRIBUYENTE TU TARJETA ES: " + tarjetaAccesos.getCodigo());
-            mensaje.setDestinatario(colaborador.getCodigoDeNotificacion());
+            mensaje.setDestinatario(persona.getCorreElectronico());
             mensaje.setAsunto("BIENVENIDO A DECCO CONTRIBUCIONES");
             Notificacion correo = new CorreoAdapter();
             correo.Notificar(mensaje);

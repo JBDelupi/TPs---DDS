@@ -23,12 +23,15 @@ public class Alerta extends Incidente {
     }
 
     public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
-        SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
+       /* SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
         Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
         Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCodigoDeNotificacion(), tipo.name(),tipo.name() + this.heladera);
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
         return tecnicoMasCercano;
+
+        */
+        return null;
     }
 
 }

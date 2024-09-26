@@ -18,235 +18,167 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Getter
 public class FactoryContribucion {
-    private Persona persona;
+    private final Persona persona;
 
     public FactoryContribucion(Persona persona) {
         this.persona = persona;
+    }
 
+    // ------------------- MÉTODOS AUXILIARES -------------------------------------//
+    private Colaborador obtenerColaborador() {
+        if (!this.persona.checkRol(TipoRol.COLABORADOR)) {
+            throw new Permisos.UnauthorizedAccessException("No tienes acceso");
+        }
+        return (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+    }
+
+    private void validarPermisos(Class<?> tipoPersona, String mensaje) {
+        if (persona.getClass().isAssignableFrom(tipoPersona)) {
+            throw new Permisos.UnauthorizedAccessException(mensaje);
+        }
+    }
+
+    private SolicitudDeApertura validarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion tipoDonacion) {
+        SolicitudDeApertura solicitudDeApertura = procesarSolicitud(solicitudes, tipoDonacion);
+        if (solicitudDeApertura == null) {
+            throw new NoHaySolicitudExepction("No hay solicitud o expiró");
+        }
+        solicitudDeApertura.setRealizada(true);
+        return solicitudDeApertura;
     }
 
     // ------------------- LO HACEN TODOS ----------------------------------------//
-    private Contribucion donacionDeDinero(Object ... Context){
-
-        if(this.persona.checkRol(TipoRol.COLABORADOR)){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
-
-
-        Double monto = (Double) Context[1];
-        TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) Context[2];
+    private Contribucion donacionDeDinero(Object... context) {
+        Colaborador colaborador = obtenerColaborador();
+        Double monto = (Double) context[1];
+        TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) context[2];
 
         DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
-
-        Contribucion donacion = builder
-                .monto(monto)
-                .frecuencia(tipoFrecuencia)
-                .construir();
+        Contribucion donacion = builder.monto(monto).frecuencia(tipoFrecuencia).construir();
 
         colaborador.agregarNuevaDonacion(donacion);
-
-        return  donacion;
-    }
-
-
-    private Contribucion donacionDeVianda(Object ... Context){
-
-        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
-
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
-
-
-        Vianda vianda = (Vianda) Context[1];
-        Heladera heladera = (Heladera) Context[2];
-
-
-        TarjetaAccesos tarjeta = colaborador.getTarjeta();
-
-        SolicitudDeApertura solicitudDeApertura;
-        solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
-
-        if(solicitudDeApertura == null){
-            throw new NoHaySolicitudExepction("No hay solicitud o expiro");
-        }
-
-        solicitudDeApertura.setRealizada(true);
-        tarjeta.agregarNuevoUso(heladera, TipoAccion.AGREGAR);
-
-        heladera.agregarVianda(vianda);
-        DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
-        Contribucion donacion = builder
-                .heladera(heladera)
-                .vianda(vianda)
-                .construir();
-
-
-        colaborador.agregarNuevaDonacion(donacion);
-
         return donacion;
-
     }
 
-    private Contribucion distribucionDeVianda(Object ... Context){
+    private Contribucion donacionDeVianda(Object... context) {
+        validarPermisos(Fisico.class, "No tienes acceso");
+        Colaborador colaborador = obtenerColaborador();
+        Vianda vianda = (Vianda) context[1];
+        Heladera heladera = (Heladera) context[2];
 
-        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
+        SolicitudDeApertura solicitud = validarSolicitud(colaborador.getTarjeta().getSolicitudesDeApertura(), (TipoDonacion) context[0]);
+        colaborador.getTarjeta().agregarNuevoUso(heladera, TipoAccion.AGREGAR);
+        heladera.agregarVianda(vianda);
 
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
+        DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
+        Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
 
+        colaborador.agregarNuevaDonacion(donacion);
+        return donacion;
+    }
 
-        Heladera heladeraOrigen = (Heladera) Context[1];
-        Heladera heladeraDestino = (Heladera) Context[2];
-        Integer cantidad = (Integer) Context[3];
-        String motivo = (String) Context[4];
+    private Contribucion distribucionDeVianda(Object... context) {
+        validarPermisos(Fisico.class, "No tienes acceso");
+        Colaborador colaborador = obtenerColaborador();
 
+        Heladera heladeraOrigen = (Heladera) context[1];
+        Heladera heladeraDestino = (Heladera) context[2];
+        Integer cantidad = (Integer) context[3];
+        String motivo = (String) context[4];
 
-        TarjetaAccesos tarjeta = colaborador.getTarjeta();
+        validarSolicitud(colaborador.getTarjeta().getSolicitudesDeApertura(), (TipoDonacion) context[0]);
+        colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
-        SolicitudDeApertura solicitudDeApertura;
-        solicitudDeApertura = this.procesarSolicitud(tarjeta.getSolicitudesDeApertura(), (TipoDonacion) Context[0]);
-
-        if(solicitudDeApertura == null){
-            throw new NoHaySolicitudExepction("No hay solicitud o expiro");
-        }
-
-        solicitudDeApertura.setRealizada(true);
-        tarjeta.agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
-
-
-        for(int i = 0; i < cantidad; i++){
+        for (int i = 0; i < cantidad; i++) {
             Vianda vianda = heladeraOrigen.obtenerVianda();
             heladeraDestino.agregarVianda(vianda);
         }
 
-
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
-
-        Contribucion donacion = builder
-                .heladeraOrigen(heladeraOrigen)
-                .heladeraDestino(heladeraDestino)
-                .cantidadDeViandasAMover(cantidad)
-                .motivos(motivo)
-                .construir();
+        Contribucion donacion = builder.heladeraOrigen(heladeraOrigen).heladeraDestino(heladeraDestino).cantidadDeViandasAMover(cantidad).motivos(motivo).construir();
 
         colaborador.agregarNuevaDonacion(donacion);
-
         return donacion;
     }
 
-    private Contribucion registrarTarjeta(Object ... Context){
+    private Contribucion registrarTarjeta(Object... context) {
+        validarPermisos(Fisico.class, "No tienes acceso");
+        Colaborador colaborador = obtenerColaborador();
 
-        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
-
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
-
-
-        String nombre = (String) Context[1];
-        Integer menoresACargo = (Integer) Context[2];
+        String nombre = (String) context[1];
+        Integer menoresACargo = (Integer) context[2];
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
+        PersonaVulnerable vulnerable = vulnerableBuilder.menoresACargo(menoresACargo).construir();
 
-        PersonaVulnerable vulnerable =
-                vulnerableBuilder
-                        .menoresACargo(menoresACargo)
-                        .construir();
+        FisicoBuilder personaVulnerableBuilder = new FisicoBuilder();
+        Fisico personaVulnerable = personaVulnerableBuilder.nombre(nombre).rol(vulnerable).construir();
 
-        FisicoBuilder personaVulnerable = new FisicoBuilder();
-        Fisico persona = personaVulnerable.nombre(nombre).rol(vulnerable).construir();
-
-        TarjetaAlimentar tarjeta = new TarjetaAlimentar(persona);
-
+        TarjetaAlimentar tarjeta = new TarjetaAlimentar(personaVulnerable);
         Contribucion donacion = new EntregaDeTarjeta(tarjeta);
 
         colaborador.agregarNuevaDonacion(donacion);
-
         return donacion;
     }
 
+    private Contribucion hacerceCargoDeHeladera(Object... context) {
+        validarPermisos(Juridico.class, "No tienes acceso");
+        Colaborador colaborador = obtenerColaborador();
 
-
-    private Contribucion hacerceCargoDeHeladera(Object ... Context){
-
-        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Juridico){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
-
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
-
-        String nombreCaracteristico = (String) Context[1];
-        Heladera heladera = (Heladera) Context[3];
+        String nombreCaracteristico = (String) context[1];
+        Heladera heladera = (Heladera) context[3];
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
-
-        Contribucion donacion = builder
-                .nombreCaracteristico(nombreCaracteristico)
-                .heladera(heladera)
-                .construir();
+        Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
 
         colaborador.agregarNuevaDonacion(donacion);
-
         return donacion;
     }
 
-    private Contribucion ofrecerProducto(Object ... Context){
+    private Contribucion ofrecerProducto(Object... context) {
+        validarPermisos(Juridico.class, "No tienes acceso");
+        Colaborador colaborador = obtenerColaborador();
 
-        if(this.persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Juridico){
-            throw new Permisos.UnauthorizedAccessException("No tienes Acceso");
-        }
-
-        Colaborador colaborador = (Colaborador) persona.getRol(TipoRol.COLABORADOR);
-
-        Producto producto = (Producto) Context[1];
-        Double puntosNecesarios = (Double) Context[2];
-        Integer stock = (Integer) Context[3];
-
+        Producto producto = (Producto) context[1];
+        Double puntosNecesarios = (Double) context[2];
+        Integer stock = (Integer) context[3];
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
-
-        Contribucion donacion = builder
-                .producto(producto)
-                .stock(stock)
-                .puntosNecesarios(puntosNecesarios)
-                .construir();
+        Contribucion donacion = builder.producto(producto).stock(stock).puntosNecesarios(puntosNecesarios).construir();
 
         colaborador.agregarNuevaDonacion(donacion);
-
         return donacion;
     }
 
-
-    public Contribucion factoryMethod(Object ... Context){
-        Contribucion contribucion = null;
-        switch( (TipoDonacion) Context[0] ){
-            case DONACION_DINERO: contribucion = this.donacionDeDinero( Context ); break;
-            case DONACION_DE_VIANDA: contribucion = this.donacionDeVianda( Context ); break;
-            case HACERSE_CARGO_DE_HELADERA: contribucion = this.hacerceCargoDeHeladera( Context ); break;
-            case DISTRIBUCION_VIANDAS: contribucion = this.distribucionDeVianda( Context ); break;
-            case ENTREGA_TARJETAS : contribucion = this.registrarTarjeta( Context ); break;
-            case OFRECER_PRODUCTO: contribucion = this.ofrecerProducto( Context ); break;
+    // ------------------- FACTORY METHOD ----------------------------------------//
+    public Contribucion factoryMethod(Object... context) {
+        TipoDonacion tipo = (TipoDonacion) context[0];
+        switch (tipo) {
+            case DONACION_DINERO:
+                return donacionDeDinero(context);
+            case DONACION_DE_VIANDA:
+                return donacionDeVianda(context);
+            case HACERSE_CARGO_DE_HELADERA:
+                return hacerceCargoDeHeladera(context);
+            case DISTRIBUCION_VIANDAS:
+                return distribucionDeVianda(context);
+            case ENTREGA_TARJETAS:
+                return registrarTarjeta(context);
+            case OFRECER_PRODUCTO:
+                return ofrecerProducto(context);
+            default:
+                throw new IllegalArgumentException("Tipo de donación no soportado");
         }
-        return contribucion;
     }
 
-    public SolicitudDeApertura procesarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion contexto) {
+    // ------------------- PROCESAR SOLICITUD -------------------------------------//
+    public SolicitudDeApertura procesarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion tipoDonacion) {
         LocalDateTime ahora = LocalDateTime.now();
-        SolicitudDeApertura solicitudDeApertura = null;
-
-        for (SolicitudDeApertura solicitud : solicitudes) {
-            if (solicitud.getAccion().equals(contexto) && !solicitud.getFechaLimite().isBefore(ahora) && !solicitud.getRealizada()) {
-                solicitudDeApertura = solicitud;
-                break;
-            }
-        }
-        return  solicitudDeApertura;
+        return solicitudes.stream()
+                .filter(solicitud -> solicitud.getAccion().equals(tipoDonacion) && !solicitud.getFechaLimite().isBefore(ahora) && !solicitud.getRealizada())
+                .findFirst()
+                .orElse(null);
     }
-
 }

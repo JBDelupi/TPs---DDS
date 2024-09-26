@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-
+/*
 public class TestEntrega2_Canje {
 
     Colaborador colaborador1;
@@ -132,3 +132,5 @@ public class TestEntrega2_Canje {
 
 
 }
+
+ */

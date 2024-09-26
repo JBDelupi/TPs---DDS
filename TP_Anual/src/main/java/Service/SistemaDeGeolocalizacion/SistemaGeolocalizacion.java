@@ -1,7 +1,9 @@
 package Service.SistemaDeGeolocalizacion;
 
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
@@ -14,7 +16,7 @@ import java.util.List;
 @Getter
 public class SistemaGeolocalizacion {
     private List<Heladera> heladerasDisponibles;
-    private List<Tecnico> tecnicosRegistrados;
+    private List<Persona> tecnicosRegistrados;
     private static SistemaGeolocalizacion instacia = null;
 
     private SistemaGeolocalizacion(){
@@ -55,17 +57,17 @@ public class SistemaGeolocalizacion {
 
 
 
-    public Tecnico masCercanoAPunto(Punto punto) {
-        List<Tecnico> listaFiltrada = this.tecnicosRegistrados.stream()
-                .filter(f -> estaDentroDe(f.getArea(), punto))
+    public Persona masCercanoAPunto(Punto punto) {
+        List<Persona> listaFiltrada = this.tecnicosRegistrados.stream()
+                .filter(f -> estaDentroDe(((Tecnico)f.getRol(TipoRol.TECNICO)).getArea(), punto))
                 .toList();
         if (listaFiltrada.isEmpty()) {
             return null; // Probablemente haya que tirar una excepcion
         }
-        Tecnico masCercano = listaFiltrada.get(0);
-        double distanciaMinima = distanciaEntrePuntos(masCercano.getArea().getCentro(), punto);
-        for (Tecnico tecnico : listaFiltrada) {
-            double distancia = distanciaEntrePuntos(tecnico.getArea().getCentro(), punto);
+        Persona masCercano = listaFiltrada.get(0);
+        double distanciaMinima = distanciaEntrePuntos(((Tecnico)masCercano.getRol(TipoRol.TECNICO)).getArea().getCentro(), punto);
+        for (Persona tecnico : listaFiltrada) {
+            double distancia = distanciaEntrePuntos(((Tecnico)tecnico.getRol(TipoRol.TECNICO)).getArea().getCentro(), punto);
             if (distancia < distanciaMinima) {
                 distanciaMinima = distancia;
                 masCercano = tecnico;

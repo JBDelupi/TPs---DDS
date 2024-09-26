@@ -16,8 +16,8 @@ public class Colaborador extends Rol {
     private List<Contribucion> contribuciones;
     private List<Canje> historialCanje;
     private Double puntaje;
-    private String codigoDeNotificacion;
     private TarjetaAccesos tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
+    private int cantidadViandasDonadas;
 
 
     public void agregarNuevaDonacion(Contribucion unaDonacion){
@@ -42,6 +42,9 @@ public class Colaborador extends Rol {
         historialCanje.add(canje);
 
     }
+
+    public void reestablecerViandas(){this.cantidadViandasDonadas = 0;}
+    public void agregarVianda(){this.cantidadViandasDonadas++;}
 
 
 }

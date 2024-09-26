@@ -1,14 +1,15 @@
 package Models.Domain.Heladera.Suscripciones;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 
 public class NViandasDisponibles implements ObserverHeladera {
-    private Colaborador colaborador;
+    private Persona colaborador;
     private int n;
 
-    public NViandasDisponibles(Colaborador colaborador, int n) {
+    public NViandasDisponibles(Persona colaborador, int n) {
         this.colaborador = colaborador;
         this.n = n;
     }

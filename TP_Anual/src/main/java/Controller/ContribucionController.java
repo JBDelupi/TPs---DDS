@@ -1,5 +1,6 @@
 package Controller;
 
+import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
-    public ContribucionController(Usuario usuario) {
+    public ContribucionController(Persona usuario) {
         this.usuario = usuario;
     }
     public ContribucionController( ) {
@@ -22,7 +23,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
 
     public void save(Object ... Context){
-        FactoryContribucion factoryContribucion = new FactoryContribucion((Colaborador) this.usuario);
+        FactoryContribucion factoryContribucion = new FactoryContribucion(this.usuario);
         Contribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
         
         // GUARDAR BASE DE DATOS
@@ -39,7 +40,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         Persona usuario = context.sessionAttribute("usuario");
         Map<String, Object> model = this.basicModel(context);
         model.put("usuario", usuario);
-        model.put("esHumano", usuario.getRol().getTipo().equals(TipoRol.HUMANO));
+        model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
         context.render("FormasDeContribucion/index.hbs", model);
 
     }

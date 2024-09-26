@@ -1,9 +1,11 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 
+import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Service.Validador.CredencialDeAcceso;
 
 import java.time.LocalDate;
 
@@ -44,12 +46,19 @@ public class FisicoBuilder {
         return this;
     }
 
+    public FisicoBuilder credencialDeAcceso(CredencialDeAcceso credencialDeAcceso){
+        this.fisico.setCredencialDeAcceso(credencialDeAcceso);
+        return this;
+    }
+
     public FisicoBuilder rol(Rol rol){
         this.fisico.agregarRol(rol);
         return this;
     }
 
     public Fisico construir(){
+        fisico.setTipoUsuario(RolUsuario.FISICO);
+        fisico.setCodigoDeNotificacion(fisico.getCorreElectronico());
         return this.fisico;
     }
 

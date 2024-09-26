@@ -18,6 +18,8 @@ public class VulnerableController extends Controller implements ICrudViewsHandle
     @Override
     public void save(Context context) {
         // TODA LA INFO
+
+       /*
             String direccion = context.formParam("direccion");
             String nombre = context.formParam("nombre");
             String apellido = context.formParam("apellido");
@@ -41,7 +43,7 @@ public class VulnerableController extends Controller implements ICrudViewsHandle
 
         PseudoBaseDeDatosVulnerables.getInstance().agregar(vulnerableNuevo);
 
-
+        */
         context.redirect("/");
     }
 

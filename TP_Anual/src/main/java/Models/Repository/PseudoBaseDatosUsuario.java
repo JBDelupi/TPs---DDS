@@ -1,12 +1,7 @@
 package Models.Repository;
 
 
-import Models.Domain.Personas.Actores.Rol;
-import Models.Domain.Personas.Actores.TipoRol;
-import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Juridico;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.Tecnico;
+import Models.Domain.Personas.Actores.*;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
@@ -31,7 +26,7 @@ public class PseudoBaseDatosUsuario {
 
     private PseudoBaseDatosUsuario() {
         base = new ArrayList<>();
-
+    /*
         // USUARIO HUMANO PARA TESTS
         Fisico fisico = new Fisico();
         fisico.setNombre("nombre");
@@ -114,6 +109,8 @@ public class PseudoBaseDatosUsuario {
         fisico11.setRol(new Rol(TipoRol.ADMINISTRADOR));
         agregar(fisico11);
 
+     */
+
     }
 
     public static PseudoBaseDatosUsuario getInstance() {
@@ -134,23 +131,34 @@ public class PseudoBaseDatosUsuario {
                 .orElse(null);
     }
 
-    public Fisico searchUserTarjeta(String user) {
+    public Fisico searchUserTarjeta(String tarjeta) {
         List<Fisico> fisicos = new ArrayList<>();
         for(Persona persona : base){
-            if(persona.getRolNegocio().equals(TipoRolNegocio.HUMANO)){
+            if(persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico){
                 fisicos.add((Fisico) persona);
             }
         }
-      return   fisicos.stream().filter(f->f.getTarjeta().getCodigo().equals(user)).findAny().orElse(null);
+      return   fisicos.stream().filter(f-> ((Colaborador)f.getRol(TipoRol.COLABORADOR)).getTarjeta().getCodigo().equals(tarjeta)).findAny().orElse(null);
     }
 
     public List<Tecnico> getTecnicos() {
         List<Tecnico> tecnicos = new ArrayList<>();
         for(Persona persona : base){
-            if(persona.getRolNegocio().equals(TipoRolNegocio.TECNICO)){
-                tecnicos.add((Tecnico) persona);
+            if(persona.checkRol(TipoRol.TECNICO)){
+                tecnicos.add((Tecnico) persona.getRol(TipoRol.TECNICO));
             }
         }
         return  tecnicos;
     }
+
+    public List<PersonaVulnerable> getPersonasVulnerables() {
+        List<PersonaVulnerable> personaVulnerables = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.checkRol(TipoRol.VULNERABLE)){
+                personaVulnerables.add((PersonaVulnerable) persona.getRol(TipoRol.VULNERABLE));
+            }
+        }
+        return  personaVulnerables;
+    }
+
 }

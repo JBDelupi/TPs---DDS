@@ -7,6 +7,7 @@ import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
 import Service.Notificacion.Mensaje;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
@@ -34,16 +35,16 @@ public class FallaTecnica extends Incidente {
 
     }
 
-    public Tecnico avisarATecnico(List<Tecnico> tecnicos) {
+    public Persona avisarATecnico(List<Persona> tecnicos) {
         SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
         sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
-        Tecnico tecnicoMasCercano = sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
-        Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla tecnica","Falla Tecnica en" + this.heladera);
+        Persona tecnicoMasCercano =  sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
+        Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCorreElectronico(), "Falla tecnica","Falla Tecnica en" + this.heladera);
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
         return tecnicoMasCercano;
     }
 
-    public void crearRegistroDeVisita(Tecnico tecnico, LocalDateTime fecha, Boolean solucionado) {
+    public void crearRegistroDeVisita(Persona tecnico, LocalDateTime fecha, Boolean solucionado) {
         VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
         RegistroVisitaTecnica registroVisita = visitaTecnicaBuilder
                 .tecnico(tecnico)

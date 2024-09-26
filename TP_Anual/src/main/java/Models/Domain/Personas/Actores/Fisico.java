@@ -20,9 +20,5 @@ public class Fisico extends Persona {
 
     }
 
-// ponerlo  en colaborador
-//    public void reestablecerViandas(){this.cantidadViandasDonadas = 0;}
-//    public void agregarVianda(){this.cantidadViandasDonadas++;}
-//
 
 }

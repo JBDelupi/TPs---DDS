@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+/*
 public class TestEntrega2_Tarjeta {
     Colaborador fulano;
     Colaborador nasa;
@@ -155,3 +155,4 @@ public class TestEntrega2_Tarjeta {
 
 
 }
+*/

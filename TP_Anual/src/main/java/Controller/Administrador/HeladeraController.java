@@ -1,5 +1,6 @@
 package Controller.Administrador;
 
+import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.TipoRol;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
@@ -64,7 +65,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         Map<String, Object> model = this.basicModel(context);
 
         model.put("heladeras",heladeraList);
-        model.put("esHumano",this.getUsuario().getRol().getTipo().equals(TipoRol.HUMANO));
+        model.put("esHumano",this.getUsuario().getTipoUsuario().equals(RolUsuario.FISICO));
 
         context.render("heladera/heladeras.hbs", model);
 

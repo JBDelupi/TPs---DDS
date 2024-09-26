@@ -1,6 +1,7 @@
 package Models.Domain.Personas.Actores;
 
 
+import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.Notificacion;
@@ -18,8 +19,10 @@ public abstract class Persona  {
     private Integer id;
     private Direccion direccion;
     private Notificacion medioDeNotificacion;
+    private String codigoDeNotificacion; // DONDE SE VA A NOTIFICAR, MISMO CORREO, EL MISMO NUMERO TELEFONO, O USUARIO DE TELEGRAM
     private String correElectronico;
     private List<Rol> roles;
+    private RolUsuario tipoUsuario;
 
     public Persona() {
         this.roles = new ArrayList<>();

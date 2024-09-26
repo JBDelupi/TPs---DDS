@@ -5,15 +5,17 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.SistemaDeRedistribucion;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 import Models.Repository.PseudoBaseDatosHeladera;
 
 
 public class SufrioDesperfecto implements ObserverHeladera {
-    private Colaborador colaborador;
+    private Persona colaborador;
 
-    public SufrioDesperfecto(Colaborador colaborador){
+    public SufrioDesperfecto(Persona colaborador){
         this.colaborador = colaborador;
     }
 

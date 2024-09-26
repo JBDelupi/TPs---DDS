@@ -1,6 +1,8 @@
 package Models.Domain.Reporte;
 
+import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.TipoRol;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,9 +17,9 @@ public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
         List<Object[]> listadoDeViandas = new ArrayList<>();
         for (Fisico fisico : fisicos) {
             String nombre = fisico.getNombre();
-            int cantidadDeViandas = fisico.getCantidadViandasDonadas();
+            int cantidadDeViandas = ((Colaborador)fisico.getRol(TipoRol.COLABORADOR)).getCantidadViandasDonadas();
             listadoDeViandas.add(new Object[]{nombre, cantidadDeViandas});
-            fisico.reestablecerViandas();
+            ((Colaborador)fisico.getRol(TipoRol.COLABORADOR)).reestablecerViandas();
         }
         return listadoDeViandas;
     }

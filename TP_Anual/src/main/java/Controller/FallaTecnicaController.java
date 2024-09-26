@@ -5,6 +5,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.PseudoBaseDatosFallaTecnica;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -39,14 +40,13 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         FallaTecnicaBuilder fallaTecnicaBuilder = new FallaTecnicaBuilder();
         FallaTecnica fallaTecnica = fallaTecnicaBuilder
                 .heladera(PseudoBaseDatosHeladera.getInstance().getId(heladera))
+                .colaborador( (Fisico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona")))
                 .descripcion(descripcion)
                 .foto(imagenAdjunta)
                 .fecha(LocalDateTime.now())
                 .construir();
 
         fallaTecnica.setId(RandomGenerator.getDefault().nextInt());
-        fallaTecnica.setColaborador((Colaborador) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona")));
-     //   fallaTecnica.avisarATecnico(PseudoBaseDatosUsuario.getInstance().getTecnicos());
 
         System.out.println("Falla Tecnica creada en heladera: " + heladera);
 
