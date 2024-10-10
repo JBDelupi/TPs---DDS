@@ -15,10 +15,12 @@ public class MovimientoViandasPorHeladera  extends TemplateReporte<Heladera> {
 
 
     @Override
-    protected List<Object[]> obtenerListado(List<Heladera> heladeras) {
+    public List<Object[]> obtenerListado(List<Heladera> heladeras) {
         List<Object[]> listadoDeMovimientos = new ArrayList<>();
         for (Heladera heladera : heladeras) {
-            String direccion = heladera.getDireccion().toString();
+            String direccion = heladera.getDireccion().getCalle() + " " +
+                    heladera.getDireccion().getNumero()+ ", " +
+                    heladera.getDireccion().getLocalidad();
             int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
             int cantidadDeViandasDepositadas = heladera.getViandas().size();
             listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasRetiradas, cantidadDeViandasDepositadas});

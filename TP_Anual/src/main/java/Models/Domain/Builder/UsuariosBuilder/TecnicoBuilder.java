@@ -1,5 +1,6 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
+import Models.Domain.Personas.Actores.TipoRol;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -25,6 +26,8 @@ public class TecnicoBuilder {
     }
 
     public Tecnico construir(){
+        tecnico.setTipo(TipoRol.TECNICO);
+
         return this.tecnico;
     }
 

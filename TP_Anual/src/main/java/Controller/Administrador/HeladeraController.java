@@ -1,6 +1,9 @@
 package Controller.Administrador;
 
 import Controller.Actores.RolUsuario;
+import Models.Domain.Heladera.Suscripciones.FaltanNViandasParaLlenar;
+import Models.Domain.Heladera.Suscripciones.NViandasDisponibles;
+import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
 import Models.Domain.Personas.Actores.TipoRol;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantidad de Viandas por Colaborador</title>
+
+    <!-- Enlaces a CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="../../css/efectos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Incluir partials -->
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<!-- Reporte de Fallas por Heladera Start -->
+<section class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Reportes</h5>
+            <h1 class="mb-5">Reporte de Viandas por Colaborador</h1>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {{#if FallasHeladeras.length}}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-primary">
+                            <tr>
+                                <th>Dirección</th>
+                                <th>Cantidad de Fallas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each FallasHeladeras}}
+                                <tr>
+                                    <td>{{direccion}}</td>
+                                    <td>{{cantidadDeFallas}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                {{else}}
+                    <p class="text-center">No hay fallas registradas por heladera.</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Reporte de Fallas por Heladera End -->
+
+<!-- Incluir footer y botón back -->
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<!-- Scripts JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
+</body>
+</html>

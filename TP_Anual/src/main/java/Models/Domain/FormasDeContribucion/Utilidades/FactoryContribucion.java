@@ -1,29 +1,31 @@
 package Models.Domain.FormasDeContribucion.Utilidades;
 
-import Models.Domain.Personas.Actores.TipoRol;
-import Models.Domain.Builder.ContribucionBuilder.*;
+import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
-import Models.Domain.Excepciones.NoHaySolicitudExepction;
+import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Builder.ContribucionBuilder.*;
 import Models.Domain.Excepciones.Permisos;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.*;
 import Models.Domain.Producto.Producto;
-import Models.Domain.Tarjetas.*;
+import Models.Domain.Tarjetas.TarjetaAlimentar;
+import Models.Repository.Dao;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 public class FactoryContribucion {
     private final Persona persona;
+    private final Dao viandaRepository;
+    private final Dao heladeraRepository;
 
-    public FactoryContribucion(Persona persona) {
+    public FactoryContribucion(Persona persona, Dao viandaRepository, Dao heladeraRepository) {
         this.persona = persona;
+        this.viandaRepository = viandaRepository;
+        this.heladeraRepository = heladeraRepository;
     }
 
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//
@@ -34,82 +36,48 @@ public class FactoryContribucion {
         return (Colaborador) persona.getRol(TipoRol.COLABORADOR);
     }
 
-    private void validarPermisos(Class<?> tipoPersona, String mensaje) {
-        if (persona.getClass().isAssignableFrom(tipoPersona)) {
-            throw new Permisos.UnauthorizedAccessException(mensaje);
-        }
+    // ------------------- CREAR CONTRIBUCIONES -----------------------------------//
+
+    public void generarDonacion(CrearContribucionDTO crearContribucionDTO) {
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(this.factoryMethod(crearContribucionDTO));
+        // agregar base de datos
     }
 
-    private SolicitudDeApertura validarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion tipoDonacion) {
-        SolicitudDeApertura solicitudDeApertura = procesarSolicitud(solicitudes, tipoDonacion);
-        if (solicitudDeApertura == null) {
-            throw new NoHaySolicitudExepction("No hay solicitud o expiró");
-        }
-        solicitudDeApertura.setRealizada(true);
-        return solicitudDeApertura;
-    }
 
-    // ------------------- LO HACEN TODOS ----------------------------------------//
-    private Contribucion donacionDeDinero(Object... context) {
-        Colaborador colaborador = obtenerColaborador();
-        Double monto = (Double) context[1];
-        TipoFrecuencia tipoFrecuencia = (TipoFrecuencia) context[2];
+    // Donación de Vianda
+    private Contribucion DonacionDeVianda(CrearContribucionDTO dto) {
+        int viandaId = Integer.parseInt(dto.getParams().get("viandaId"));
+        Vianda vianda = (Vianda) viandaRepository.buscar(viandaId);
 
-        DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
-        Contribucion donacion = builder.monto(monto).frecuencia(tipoFrecuencia).construir();
-
-        colaborador.agregarNuevaDonacion(donacion);
-        return donacion;
-    }
-
-    private Contribucion donacionDeVianda(Object... context) {
-        validarPermisos(Fisico.class, "No tienes acceso");
-
-        Colaborador colaborador = obtenerColaborador();
-        Vianda vianda = (Vianda) context[1];
-        Heladera heladera = (Heladera) context[2];
-
-        SolicitudDeApertura solicitud = validarSolicitud(colaborador.getTarjeta().getSolicitudesDeApertura(), (TipoDonacion) context[0]);
-        colaborador.getTarjeta().agregarNuevoUso(heladera, TipoAccion.AGREGAR);
-        heladera.agregarVianda(vianda);
+        int heladeraId = Integer.parseInt(dto.getParams().get("heladeraId"));
+        Heladera heladera = (Heladera) heladeraRepository.buscar(heladeraId);
 
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
 
-        colaborador.agregarNuevaDonacion(donacion);
+        obtenerColaborador().agregarNuevaDonacion(donacion);
         return donacion;
     }
 
-    private Contribucion distribucionDeVianda(Object... context) {
-        validarPermisos(Fisico.class, "No tienes acceso");
-        Colaborador colaborador = obtenerColaborador();
+    // Donación de Dinero
+    private Contribucion DonacionDeDinero(CrearContribucionDTO dto) {
+        double monto = Double.parseDouble(dto.getParams().get("monto"));
+        TipoFrecuencia frecuencia = TipoFrecuencia.valueOf(dto.getParams().get("frecuencia"));
 
-        Heladera heladeraOrigen = (Heladera) context[1];
-        Heladera heladeraDestino = (Heladera) context[2];
-        Integer cantidad = (Integer) context[3];
-        String motivo = (String) context[4];
+       // int donanteId = Integer.parseInt(dto.getParams().get("donanteId"));
 
-        validarSolicitud(colaborador.getTarjeta().getSolicitudesDeApertura(), (TipoDonacion) context[0]);
-        colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+        DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
+        Contribucion donacion = builder.monto(monto).frecuencia(frecuencia).construir();
 
-        for (int i = 0; i < cantidad; i++) {
-            Vianda vianda = heladeraOrigen.obtenerVianda();
-            heladeraDestino.agregarVianda(vianda);
-        }
-
-        DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
-        Contribucion donacion = builder.heladeraOrigen(heladeraOrigen).heladeraDestino(heladeraDestino).cantidadDeViandasAMover(cantidad).motivos(motivo).construir();
-
-        colaborador.agregarNuevaDonacion(donacion);
         return donacion;
     }
 
-    private Contribucion registrarTarjeta(Object... context) {
-        validarPermisos(Fisico.class, "No tienes acceso");
-        Colaborador colaborador = obtenerColaborador();
 
-        String nombre = (String) context[1];
-        Integer menoresACargo = (Integer) context[2];
+    // Registro de Tarjeta
+    private Contribucion registrarTarjeta(CrearContribucionDTO dto) {
+        String nombre = dto.getParams().get("nombreBeneficiario");
+        int menoresACargo = Integer.parseInt(dto.getParams().get("menoresACargo"));
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
         PersonaVulnerable vulnerable = vulnerableBuilder.menoresACargo(menoresACargo).construir();
@@ -120,67 +88,75 @@ public class FactoryContribucion {
         TarjetaAlimentar tarjeta = new TarjetaAlimentar(personaVulnerable);
         Contribucion donacion = new EntregaDeTarjeta(tarjeta);
 
-        colaborador.agregarNuevaDonacion(donacion);
+        obtenerColaborador().agregarNuevaDonacion(donacion);
         return donacion;
     }
 
-    private Contribucion hacerceCargoDeHeladera(Object... context) {
-        validarPermisos(Juridico.class, "No tienes acceso");
-        Colaborador colaborador = obtenerColaborador();
+    // Distribución de Viandas
+    private Contribucion crearDistribucionDeViandas(CrearContribucionDTO dto) {
+        int heladeraOrigenId = Integer.parseInt(dto.getParams().get("heladeraOrigenId"));
+        Heladera heladeraOrigen = (Heladera) heladeraRepository.buscar(heladeraOrigenId);
 
-        String nombreCaracteristico = (String) context[1];
-        Heladera heladera = (Heladera) context[3];
+        int heladeraDestinoId = Integer.parseInt(dto.getParams().get("heladeraDestinoId"));
+        Heladera heladeraDestino = (Heladera) heladeraRepository.buscar(heladeraDestinoId);
+
+        int cantidad = Integer.parseInt(dto.getParams().get("cantidadViandas"));
+        String motivo = dto.getParams().get("motivo");
+
+        DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
+        Contribucion donacion = builder.heladeraOrigen(heladeraOrigen)
+                .heladeraDestino(heladeraDestino)
+                .cantidadDeViandasAMover(cantidad)
+                .motivos(motivo)
+                .construir();
+
+        obtenerColaborador().agregarNuevaDonacion(donacion);
+        return donacion;
+    }
+
+    // Hacerse Cargo de una Heladera
+    private Contribucion hacerseCargoDeHeladera(CrearContribucionDTO dto) {
+        String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
+
+        int heladeraId = Integer.parseInt(dto.getParams().get("heladeraId"));
+        Heladera heladera = (Heladera) heladeraRepository.buscar(heladeraId);
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
         Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
 
-        colaborador.agregarNuevaDonacion(donacion);
+        obtenerColaborador().agregarNuevaDonacion(donacion);
         return donacion;
     }
 
-    private Contribucion ofrecerProducto(Object... context) {
-        validarPermisos(Juridico.class, "No tienes acceso");
+    // Ofrecer Producto
+    private Contribucion ofrecerProducto(CrearContribucionDTO dto) {
+        int productoId = Integer.parseInt(dto.getParams().get("productoId"));
+        Producto producto = (Producto) viandaRepository.buscar(productoId);
 
-        Colaborador colaborador = obtenerColaborador();
-
-        Producto producto = (Producto) context[1];
-        Double puntosNecesarios = (Double) context[2];
-        Integer stock = (Integer) context[3];
+        double puntosNecesarios = Double.parseDouble(dto.getParams().get("puntosNecesarios"));
+        int stock = Integer.parseInt(dto.getParams().get("stock"));
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
-        Contribucion donacion = builder.producto(producto).stock(stock).puntosNecesarios(puntosNecesarios).construir();
+        Contribucion donacion = builder.producto(producto)
+                .puntosNecesarios(puntosNecesarios)
+                .stock(stock)
+                .construir();
 
-        colaborador.agregarNuevaDonacion(donacion);
+        obtenerColaborador().agregarNuevaDonacion(donacion);
         return donacion;
     }
 
     // ------------------- FACTORY METHOD ----------------------------------------//
-    public Contribucion factoryMethod(Object... context) {
-        TipoDonacion tipo = (TipoDonacion) context[0];
-        switch (tipo) {
-            case DONACION_DINERO:
-                return donacionDeDinero(context);
-            case DONACION_DE_VIANDA:
-                return donacionDeVianda(context);
-            case HACERSE_CARGO_DE_HELADERA:
-                return hacerceCargoDeHeladera(context);
-            case DISTRIBUCION_VIANDAS:
-                return distribucionDeVianda(context);
-            case ENTREGA_TARJETAS:
-                return registrarTarjeta(context);
-            case OFRECER_PRODUCTO:
-                return ofrecerProducto(context);
-            default:
-                throw new IllegalArgumentException("Tipo de donación no soportado");
-        }
-    }
-
-    // ------------------- PROCESAR SOLICITUD -------------------------------------//
-    public SolicitudDeApertura procesarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion tipoDonacion) {
-        LocalDateTime ahora = LocalDateTime.now();
-        return solicitudes.stream()
-                .filter(solicitud -> solicitud.getAccion().equals(tipoDonacion) && !solicitud.getFechaLimite().isBefore(ahora) && !solicitud.getRealizada())
-                .findFirst()
-                .orElse(null);
+    public Contribucion factoryMethod(CrearContribucionDTO dto) {
+        TipoDonacion tipo = TipoDonacion.valueOf(dto.getTipoDonacion());
+        return switch (tipo) {
+            case DONACION_DINERO -> DonacionDeDinero(dto);
+            case DONACION_DE_VIANDA -> DonacionDeVianda(dto);
+            case HACERSE_CARGO_DE_HELADERA -> hacerseCargoDeHeladera(dto);
+            case DISTRIBUCION_VIANDAS -> crearDistribucionDeViandas(dto);
+            case ENTREGA_TARJETAS -> registrarTarjeta(dto);
+            case OFRECER_PRODUCTO -> ofrecerProducto(dto);
+            default -> throw new IllegalArgumentException("Tipo de donación no soportado");
+        };
     }
 }

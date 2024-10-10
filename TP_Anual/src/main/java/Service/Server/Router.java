@@ -61,8 +61,10 @@ public class Router {
             post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save);
             get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento);
             get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show);
+        });
 
-
+        Server.app().routes(()->{
+            get("/deccosalud",((DeccoSaludController)FactoryController.controller("deccosalud"))::index);
         });
 
         Server.app().routes(()->{
@@ -84,8 +86,7 @@ public class Router {
        Server.app().routes(()->{
            get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index);
            get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create);
-           post("/contribucionExitosa", ((ContribucionController)FactoryController.controller("Contribucion"))::contribucionExitosa);
-
+           post("/contribucionExitosa", ((ContribucionController)FactoryController.controller("Contribucion"))::save);
        });
 
         Server.app().routes(()->{
@@ -103,10 +104,11 @@ public class Router {
 
         Server.app().routes(()->{
             get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
+            get("/reportes/{id}",((ReporteController)FactoryController.controller("reporte"))::create);
         });
 
         Server.app().routes(()->{
-            //post("/heladeras/{id}",((SuscipcionesController) FactoryController.controller("suscripciones"))::save);
+            post("/heladeras/{id}",((SuscripcionesController) FactoryController.controller("suscripciones"))::save);
         });
 
     }

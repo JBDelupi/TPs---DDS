@@ -13,7 +13,7 @@ import java.util.List;
 public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
 
     @Override
-    protected List<Object[]> obtenerListado(List<Fisico> fisicos) {
+    public List<Object[]> obtenerListado(List<Fisico> fisicos) {
         List<Object[]> listadoDeViandas = new ArrayList<>();
         for (Fisico fisico : fisicos) {
             String nombre = fisico.getNombre();

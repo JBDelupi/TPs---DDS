@@ -1,15 +1,20 @@
 package Controller;
 
 import Controller.Actores.RolUsuario;
+import Controller.DTO.CrearContribucionDTO;
+import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Repository.Dao;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
@@ -19,17 +24,6 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     public ContribucionController( ) {
 
     }
-
-
-
-    public void save(Object ... Context){
-        FactoryContribucion factoryContribucion = new FactoryContribucion(this.usuario);
-        Contribucion nuevaContribucion = factoryContribucion.factoryMethod(Context);
-        
-        // GUARDAR BASE DE DATOS
-
-    }
-
 
 
 
@@ -52,42 +46,33 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     public void contribucionExitosa(Context context) {
         this.estaLogueado(context);
-
         context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
     }
 
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
-
         String tipoContribucion = context.queryParam("tipo");
+        context.render("FormasDeContribucion/"+tipoContribucion+".hbs", this.basicModel(context));
 
-        switch (tipoContribucion) {
-            case "donarViandas":
-                context.render("FormasDeContribucion/donacionDeViandas.hbs", this.basicModel(context));
-                break;
-            case "donarDinero":
-                context.render("FormasDeContribucion/donacionDeDinero.hbs", this.basicModel(context));
-                break;
-            case "distribucionViandas":
-                context.render("FormasDeContribucion/distribucionDeViandas.hbs", this.basicModel(context));
-                break;
-            case "registrarPersonaVulnerable":
-                context.render("FormasDeContribucion/registroVulnerable.hbs", this.basicModel(context));
-                break;
-            case "hacerseCargoHeladera":
-                context.render("FormasDeContribucion/hacerseCargoDeHeladera.hbs", this.basicModel(context));
-                break;
-            case "ofrecerProducto":
-                context.render("FormasDeContribucion/ofrecerProducto.hbs", this.basicModel(context));
-                break;
-        }
     }
+
 
     @Override
     public void save(Context context) {
+        Map<String, String> singleValueParams = context.formParamMap().entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().get(0) // Toma el primer valor de la lista
+                ));
 
-        
+        CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
+
+
+        FactoryContribucion factoryContribucion = new FactoryContribucion(PseudoBaseDatosUsuario.getInstance().getId("1"), null,null);
+        factoryContribucion.generarDonacion(dto);
+
+        context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
     }
 
     @Override
@@ -99,6 +84,8 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     public void update(Context context) {
 
     }
+
+
 
 
 }

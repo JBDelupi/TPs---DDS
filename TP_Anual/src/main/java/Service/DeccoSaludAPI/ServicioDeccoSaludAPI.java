@@ -1,10 +1,14 @@
 package Service.DeccoSaludAPI;
 
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
+import Models.Domain.Tarjetas.Tarjeta;
 import Service.APIPuntos.Punto;
 import Service.APIPuntos.ServicioPuntosAPI;
 import Service.APIPuntos.ServicioPuntosAPIAdapter;
+import Service.DeccoSaludAPI.DTO.PersonaVulnerableDTO;
+import Service.DeccoSaludAPI.DTO.RespuestaDTO;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -32,9 +36,9 @@ public class ServicioDeccoSaludAPI {
         return instacia;
     }
 
-//    public List<Persona> obtenerPersonasVulnerables(Punto punto, String radio ) throws IOException {
-//        ServicioDeccoSaludAPIAdapter servicioPokeAPIAdapter = this.retrofit.create(ServicioDeccoSaludAPIAdapter.class);
-//        Call<List<Persona>> request = servicioPokeAPIAdapter.puntos(punto.getLatitud(), punto.getLongitud(),radio);
-//        return  request.execute().body();
-//    }
+        public List<RespuestaDTO> obtenerPersonasVulnerables(List<PersonaVulnerableDTO> lista) throws IOException {
+        ServicioDeccoSaludAPIAdapter servicioDeccoSaludAPIAdapter = this.retrofit.create(ServicioDeccoSaludAPIAdapter.class);
+        Call<List<RespuestaDTO>> request = servicioDeccoSaludAPIAdapter.personas(lista);
+        return  request.execute().body();
+    }
 }

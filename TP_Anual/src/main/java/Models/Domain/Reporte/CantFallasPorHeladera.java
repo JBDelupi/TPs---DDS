@@ -13,12 +13,13 @@ import java.util.List;
 
 public class CantFallasPorHeladera extends TemplateReporte<Heladera>{
 
-
     @Override
-    protected List<Object[]> obtenerListado(List<Heladera> heladeras) {
+    public List<Object[]> obtenerListado(List<Heladera> heladeras) {
         List<Object[]> listadoDeFallas = new ArrayList<>();
         for (Heladera heladera : heladeras) {
-            String direccion = heladera.getDireccion().toString();
+            String direccion = heladera.getDireccion().getCalle() + " " +
+                    heladera.getDireccion().getNumero()+ ", " +
+                    heladera.getDireccion().getLocalidad();
             int cantidadDeFallas = heladera.getCantidadDeFallas();
             listadoDeFallas.add(new Object[]{direccion, cantidadDeFallas});
         }

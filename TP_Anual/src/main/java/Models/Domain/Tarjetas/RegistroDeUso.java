@@ -21,4 +21,8 @@ public class RegistroDeUso {
         this.accion = accion;
     }
 
+
+
+
+
 }

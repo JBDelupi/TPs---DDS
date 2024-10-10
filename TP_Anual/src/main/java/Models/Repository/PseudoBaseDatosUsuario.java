@@ -109,6 +109,7 @@ public class PseudoBaseDatosUsuario {
                 .area(areaCobertura1)
                 .cuil("8478123")
                 .construir();
+        tecnico1.setTipo(TipoRol.TECNICO);
 
         fisicoT.agregarRol(tecnico1);
 
@@ -190,21 +191,43 @@ public class PseudoBaseDatosUsuario {
       return   fisicos.stream().filter(f-> ((Colaborador)f.getRol(TipoRol.COLABORADOR)).getTarjeta().getCodigo().equals(tarjeta)).findAny().orElse(null);
     }
 
-    public List<Tecnico> getTecnicos() {
-        List<Tecnico> tecnicos = new ArrayList<>();
+    public List<Persona> getTecnicos() {
+        List<Persona> tecnicos = new ArrayList<>();
         for(Persona persona : base){
             if(persona.checkRol(TipoRol.TECNICO)){
-                tecnicos.add((Tecnico) persona.getRol(TipoRol.TECNICO));
+                tecnicos.add(persona);
             }
         }
         return  tecnicos;
     }
 
-    public List<PersonaVulnerable> getPersonasVulnerables() {
-        List<PersonaVulnerable> personaVulnerables = new ArrayList<>();
+    public List<Persona> getColaboradores() {
+        List<Persona> colaboradores = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.checkRol(TipoRol.COLABORADOR)){
+                colaboradores.add(persona);
+            }
+        }
+        return colaboradores;
+    }
+
+    public List<Fisico> getColaboradoresYFisicos() {
+        List<Fisico> colaboradores = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.checkRol(TipoRol.COLABORADOR) && persona instanceof Fisico ){
+                colaboradores.add( (Fisico) persona);
+            }
+        }
+        return colaboradores;
+    }
+
+
+
+    public List<Persona> getPersonasVulnerables() {
+        List<Persona> personaVulnerables = new ArrayList<>();
         for(Persona persona : base){
             if(persona.checkRol(TipoRol.VULNERABLE)){
-                personaVulnerables.add((PersonaVulnerable) persona.getRol(TipoRol.VULNERABLE));
+                personaVulnerables.add(persona);
             }
         }
         return  personaVulnerables;

@@ -1,6 +1,7 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 import Models.Domain.Personas.Actores.PersonaVulnerable;
+import Models.Domain.Personas.Actores.TipoRol;
 
 import java.time.LocalDate;
 
@@ -24,5 +25,8 @@ public class VulnerableBuilder {
         return this;
     }
 
-    public PersonaVulnerable construir() {return this.personaVulnerable;}
+    public PersonaVulnerable construir() {
+        personaVulnerable.setTipo(TipoRol.VULNERABLE);
+
+        return this.personaVulnerable;}
 }

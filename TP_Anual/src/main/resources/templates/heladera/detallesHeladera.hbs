@@ -54,21 +54,21 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="calle" placeholder="Calle">
+                                    <p id="IDHeladera" class="form-control">{{heladera.direccion.calle}}</p>
                                     <label for="domicilioActual">Calle</label>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="numero" placeholder="Numero">
+                                    <p id="IDHeladera" class="form-control">{{heladera.direccion.numero}}</p>
                                     <label for="domicilioActual">Numero</label>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+                                    <p id="IDHeladera" class="form-control">{{heladera.direccion.localidad}}</p>
                                     <label for="domicilioActual">Localidad</label>
                                 </div>
                             </div>
@@ -103,11 +103,34 @@
                             </div>
                         </div>
 
-                        <form class="mt-4" action="/#" method="POST">
-                            <a id="btnSuscribirse" href="javascript:void(0);" class="btn btn-primary py-2 px-4" onclick="suscribirse()">Suscribirse</a>
+                        <form class="mt-4" action="/heladeras/{{id}}" method="POST">
+                            <div class="row g-3">
+                                <!-- Selector desplegable para las opciones de suscripción -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <select id="opcionSuscripcion" name="opcionSuscripcion" class="form-select">
+                                            <option value="" disabled selected>Seleccione una opción para suscribirse</option>
+                                            <option value="faltanNViandas">Faltan N viandas para que esté llena</option>
+                                            <option value="quedanNViandas">Quedan N viandas disponibles</option>
+                                            <option value="desperfecto">Suscribirse a desperfectos</option>
+                                        </select>
+                                        <label for="opcionSuscripcion">Opciones de Suscripción</label>
+                                    </div>
+                                </div>
 
-                            <!-- Botón de Desuscribirse oculto al inicio -->
-                            <a id="btnDesuscribirse" href="javascript:void(0);" class="btn btn-danger py-2 px-4" style="display:none;" onclick="desuscribirse()">Desuscribirse</a>
+                                <!-- Campo de número para ingresar el valor N, que se muestra solo si es necesario -->
+                                <div class="col-md-12" id="inputNViandas" style="display: none;">
+                                    <div class="form-floating">
+                                        <input type="number" id="numeroViandas" name="numeroViandas" class="form-control" placeholder="Ingrese el número de viandas" min="1" required>
+                                        <label for="numeroViandas">Número de Viandas</label>
+                                    </div>
+                                </div>
+
+                                <!-- Botón de suscribirse -->
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary py-2 px-4">Suscribirse</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -133,5 +156,16 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+
+<script>
+    document.getElementById('opcionSuscripcion').addEventListener('change', function() {
+        var inputNViandas = document.getElementById('inputNViandas');
+        if (this.value === 'faltanNViandas' || this.value === 'quedanNViandas') {
+            inputNViandas.style.display = 'block'; // Mostrar el campo de N viandas si es necesario
+        } else {
+            inputNViandas.style.display = 'none'; // Ocultar el campo de N viandas si no se necesita
+        }
+    });
+</script>
 
 </html>
