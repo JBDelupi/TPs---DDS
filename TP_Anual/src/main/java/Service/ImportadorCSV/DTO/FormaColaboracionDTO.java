@@ -1,4 +1,4 @@
-package Service.DTO;
+package Service.ImportadorCSV.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -64,6 +64,7 @@ public class FactoryContribucion {
 
     private Contribucion donacionDeVianda(Object... context) {
         validarPermisos(Fisico.class, "No tienes acceso");
+
         Colaborador colaborador = obtenerColaborador();
         Vianda vianda = (Vianda) context[1];
         Heladera heladera = (Heladera) context[2];
@@ -139,6 +140,7 @@ public class FactoryContribucion {
 
     private Contribucion ofrecerProducto(Object... context) {
         validarPermisos(Juridico.class, "No tienes acceso");
+
         Colaborador colaborador = obtenerColaborador();
 
         Producto producto = (Producto) context[1];

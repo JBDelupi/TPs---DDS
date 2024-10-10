@@ -1,9 +1,9 @@
 package TestEntrega2;
 
 import Models.Domain.Personas.Actores.Fisico;
-import Service.DTO.FisicoDTO;
+import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
-import Service.Mappers.FisicoMapper;
+import Service.ImportadorCSV.Mappers.FisicoMapper;
 import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;

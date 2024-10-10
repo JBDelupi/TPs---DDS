@@ -1,7 +1,7 @@
 package Service.ImportadorCSV;
 
-import Service.DTO.FisicoDTO;
-import Service.DTO.FormaColaboracionDTO;
+import Service.ImportadorCSV.DTO.FisicoDTO;
+import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Getter;
 

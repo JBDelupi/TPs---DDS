@@ -1,6 +1,11 @@
 package Models.Repository;
 
 
+import Controller.Actores.RolUsuario;
+import Models.Domain.Builder.CredencialDeAccesoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
+import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Personas.Actores.*;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
@@ -26,90 +31,134 @@ public class PseudoBaseDatosUsuario {
 
     private PseudoBaseDatosUsuario() {
         base = new ArrayList<>();
-    /*
-        // USUARIO HUMANO PARA TESTS
-        Fisico fisico = new Fisico();
-        fisico.setNombre("nombre");
-        fisico.setApellido("apellido");
-        fisico.setNumeroDocumento("123456789");
-        fisico.setTipoDeDocumento(TipoDeDocumento.DNI);
 
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso("h", "1");
+        // USUARIO FISICO COLABORADOR PARA TESTS
+        Fisico fisico = new Fisico();
+        fisico.setNombre("Juan");
+        fisico.setApellido("Garcia");
+        fisico.setNumeroDocumento("847872313");
+        fisico.setTipoDeDocumento(TipoDeDocumento.DNI);
+        fisico.setTipoUsuario(RolUsuario.FISICO);
+        fisico.setCorreElectronico("unbuenmail@gmail.com");
+
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
+                .nombreUsuario("f")
+                .contrasenia("f")
+                .construir();
+
         fisico.setCredencialDeAcceso(credencialDeAcceso);
-        fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
-        fisico.setRol(new Rol(TipoRol.HUMANO));
+        fisico.setId(1);
+        ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
+        Colaborador colaborador = colaboradorBuilder
+                .construir(fisico);
+        fisico.agregarRol(colaborador);
         agregar(fisico);
 
-        // USUARIO JURIDICO PARA TESTS
+        // USUARIO JURIDICO COLABORADOR PARA TESTS
         Juridico juridico = new Juridico();
-        juridico.setRazonSocial("razonSocial");
+        juridico.setRazonSocial("unaBuenaRazon");
         juridico.setTipoJuridico(TipoJuridico.ONG);
+        juridico.setCorreElectronico("mailpiola@gmail.com");
+        juridico.setTipoUsuario(RolUsuario.JURIDICO);
 
-        CredencialDeAcceso credencialDeAcceso2 = new CredencialDeAcceso("j", "1");
-        juridico.setCredencialDeAcceso(credencialDeAcceso2);
-        juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
-        juridico.setRol(new Rol(TipoRol.JURIDICO));
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder2 = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso2 = credencialDeAccesoBuilder2
+                .nombreUsuario("j")
+                .contrasenia("j")
+                .construir();
+
+        juridico.setCredencialDeAcceso(credencialDeAcceso);
+        juridico.setId(2);
+        ColaboradorBuilder colaboradorBuilder2 = new ColaboradorBuilder();
+        Colaborador colaborador2 = colaboradorBuilder2
+                .construir(juridico);
+        juridico.agregarRol(colaborador2);
         agregar(juridico);
 
-        // USUARIO TECNICO 1 PARA TEST
-        Tecnico tecnico1 = Tecnico.createTecnico();
-        tecnico1.setNombre("Carlos");
-        tecnico1.setApellido("Gomez");
-        tecnico1.setTipoDocumento(TipoDeDocumento.DNI);
-        tecnico1.setNroDocumento("123456789");
-        tecnico1.setCuil("20123456789");
+        // USUARIO FISICO TECNICO 1 PARA TEST
+
+        Fisico fisicoT = new Fisico();
+        fisicoT.setNombre("Pedro");
+        fisicoT.setApellido("Garcia");
+        fisicoT.setNumeroDocumento("54631223");
+        fisicoT.setTipoDeDocumento(TipoDeDocumento.DNI);
+        fisicoT.setTipoUsuario(RolUsuario.FISICO);
+        fisicoT.setCorreElectronico("quemailmalo@gmail.com");
+
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder3 = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso3 = credencialDeAccesoBuilder3
+                .nombreUsuario("t")
+                .contrasenia("t")
+                .construir();
+
+        fisicoT.setCredencialDeAcceso(credencialDeAcceso3);
+        fisicoT.setId(3);
+
+        TecnicoBuilder tecnicoBuilder = new TecnicoBuilder();
 
         // Creo puntos y áreas de cobertura para tecnico1
         Punto centro1 = new Punto();
         centro1.setLatitud("1");
         centro1.setLongitud("2");
-
         AreaCobertura areaCobertura1 = new AreaCobertura();
         areaCobertura1.setCentro(centro1);
         areaCobertura1.setRadio("15");
 
-        // Asigno a tecnico1 el área
-        tecnico1.setArea(areaCobertura1);
-        CredencialDeAcceso credencialDeAcceso4 = new CredencialDeAcceso("tecnico1", "1");
-        tecnico1.setCredencialDeAcceso(credencialDeAcceso4);
-        tecnico1.setId(20);
-       // tecnico1.setRol(new Rol(TipoRol.TECNICO));
-        //agregar(tecnico1);
+        Tecnico tecnico1 = tecnicoBuilder
+                .area(areaCobertura1)
+                .cuil("8478123")
+                .construir();
 
-        // USUARIO TECNICO 2 PARA TEST
-        Tecnico tecnico2 = Tecnico.createTecnico();
-        tecnico2.setNombre("Mariana");
-        tecnico2.setApellido("Lopez");
-        tecnico2.setTipoDocumento(TipoDeDocumento.DNI);
-        tecnico2.setNroDocumento("987654321");
-        tecnico2.setCuil("20987654321");
+        fisicoT.agregarRol(tecnico1);
 
-        // Creo puntos y áreas de cobertura para tecnico2
-        Punto centro2 = new Punto();
-        centro2.setLatitud("-2");
-        centro2.setLongitud("-1");
+        agregar(fisicoT);
 
-        AreaCobertura areaCobertura2 = new AreaCobertura();
-        areaCobertura2.setCentro(centro2);
-        areaCobertura2.setRadio("20");
-
-        // Asigno a tecnico2 el área
-        tecnico2.setArea(areaCobertura2);
 
         //USUARIO ADMIN
         Fisico fisico11 = new Fisico();
-        fisico11.setNombre("nombre");
-        fisico11.setApellido("apellido");
-        fisico11.setNumeroDocumento("123456789");
+        fisico11.setNombre("Lucas");
+        fisico11.setApellido("Garcia");
+        fisico11.setNumeroDocumento("6456234235");
         fisico11.setTipoDeDocumento(TipoDeDocumento.DNI);
 
-        CredencialDeAcceso credencialDeAcceso3 = new CredencialDeAcceso("admin", "1");
-        fisico11.setCredencialDeAcceso(credencialDeAcceso3);
-        fisico11.setId(999);
-        fisico11.setRol(new Rol(TipoRol.ADMINISTRADOR));
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder4 = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso4 = credencialDeAccesoBuilder4
+                .nombreUsuario("a")
+                .contrasenia("a")
+                .construir();
+
+        fisico11.setCredencialDeAcceso(credencialDeAcceso4);
+        fisico11.setId(4);
+
+        fisico11.setTipoUsuario(RolUsuario.ADMINISTRADOR);
         agregar(fisico11);
 
-     */
+
+        // USUARIO FISICO VULNERABLE PARA TESTS
+        Fisico fisicoV = new Fisico();
+        fisicoV.setNombre("Bauti");
+        fisicoV.setApellido("De las Cuevas");
+        fisicoV.setNumeroDocumento("847872313");
+        fisicoV.setTipoDeDocumento(TipoDeDocumento.DNI);
+        fisicoV.setTipoUsuario(RolUsuario.FISICO);
+        fisicoV.setCorreElectronico("unbuenmail@gmail.com");
+
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder5 = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso5 = credencialDeAccesoBuilder5
+                .nombreUsuario("v")
+                .contrasenia("v")
+                .construir();
+
+        fisicoV.setCredencialDeAcceso(credencialDeAcceso5);
+        fisicoV.setId(5);
+        VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
+        PersonaVulnerable personaVulnerable = vulnerableBuilder
+                .menoresACargo(4)
+                .flagSituacionDeCalle(true)
+                .construir();
+        fisicoV.agregarRol(personaVulnerable);
+        agregar(fisicoV);
 
     }
 

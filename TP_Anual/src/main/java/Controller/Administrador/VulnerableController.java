@@ -1,9 +1,6 @@
 package Controller.Administrador;
 
 import Controller.Controller;
-import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Repository.PseudoBaseDeDatosVulnerables;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 

@@ -51,7 +51,7 @@ public class Router {
             get("/index/fisico",((HumanoController) FactoryController.controller("humano"))::index );
             get("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::create);
             post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
-            get("/humano/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
+            get("/fisico/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
             get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
         });
 
@@ -99,6 +99,10 @@ public class Router {
         Server.app().routes(()->{
             get("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::create);
             post("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::save);
+        });
+
+        Server.app().routes(()->{
+            get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
         });
 
         Server.app().routes(()->{

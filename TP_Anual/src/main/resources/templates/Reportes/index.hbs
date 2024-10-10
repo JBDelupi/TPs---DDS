@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Reportes</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+
+<div class="contact_section layout_padding">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-3 text-dark text-center">Reportes</h1>
+            </div>
+        </div>
+
+        <div class="blog_section_2 mt-5">
+            <div class="row justify-content-center">
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                        <a href="/contribuciones/create?tipo=movimientoDeViandasPorHeladera" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-exchange-alt text-primary mb-4"></i>
+                                    <h4 class="text-dark">Movimientos de vianda en heladera</h4>
+                                    <p class="text-dark">Consulta la cantidad de viandas retiradas/colocadas por heladera en la semana.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                        <a href="/contribuciones/create?tipo=cantidadDeFallasPorHeladera" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
+                                    <h4 class="text-dark">Cantidad de fallas en heladera</h4>
+                                    <p class="text-dark">Consulta la cantidad de fallas ocurridas en una heladera en la semana.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6 mb-4 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                        <a href="/contribuciones/create?tipo=cantidadDeViandasPorColaborador" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-user-friends text-primary mb-4"></i>
+                                    <h4 class="text-dark">Cantidad de viandas por colaborador</h4>
+                                    <p class="text-dark">Consulta la cantidad de viandas donadas por colaborador en la semana.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+</html>

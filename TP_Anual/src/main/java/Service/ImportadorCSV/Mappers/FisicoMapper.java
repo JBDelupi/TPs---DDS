@@ -1,4 +1,4 @@
-package Service.Mappers;
+package Service.ImportadorCSV.Mappers;
 
 import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
@@ -10,8 +10,8 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
-import Service.DTO.FisicoDTO;
-import Service.DTO.FormaColaboracionDTO;
+import Service.ImportadorCSV.DTO.FisicoDTO;
+import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

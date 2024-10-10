@@ -8,8 +8,5 @@ import lombok.Setter;
 public class Tecnico extends Rol {
     private String cuil;
     private AreaCobertura area;
-    private String codigoDeNotificacion;
-
-
 
 }

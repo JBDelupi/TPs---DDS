@@ -18,10 +18,6 @@ public class TecnicoBuilder {
         return this;
     }
 
-    public TecnicoBuilder correoElectronico(String correoElectronico){
-        tecnico.setCodigoDeNotificacion(correoElectronico);
-        return this;
-    }
 
     public TecnicoBuilder area(AreaCobertura areaCobertura){
         tecnico.setArea(areaCobertura);

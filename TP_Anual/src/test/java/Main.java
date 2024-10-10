@@ -4,23 +4,14 @@ import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
 import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
 import Models.Repository.PseudoBaseDatosHeladera;
+import Service.APIPuntos.Punto;
+import Service.APIPuntos.ServicioPuntosAPI;
 
 import java.io.IOException;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        TemplateReporte<Heladera> unReporte = new MovimientoViandasPorHeladera();
-        PseudoBaseDatosHeladera heladera = new PseudoBaseDatosHeladera();
-
-        unReporte.cargarItems(heladera.baseHeladeras);
-        unReporte.generarReporte();
-
-        PseudoBaseDatosHeladera base = new PseudoBaseDatosHeladera();
-        SistemaDeRedistribucion sistema = new SistemaDeRedistribucion(base.baseHeladeras);
-        Sugerencia sugerencia = sistema.generarSugerencia(5);
-
-        sugerencia.mostrar();
+        List<Punto> puntosList = ServicioPuntosAPI.getInstance().obtenerPuntosEstrategicos(new Punto(),"2");
     }
 }

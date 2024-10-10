@@ -1,10 +1,7 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
+import Models.Domain.Personas.Actores.*;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Notificacion.Mensaje;
@@ -23,6 +20,7 @@ public class ColaboradorBuilder {
         colaborador.setContribuciones(new ArrayList<>());
         colaborador.setPuntaje(0.0);
         colaborador.setHistorialCanje(new ArrayList<>());
+        colaborador.setTipo(TipoRol.COLABORADOR);
 
         if (persona instanceof Fisico) {
             TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(persona);

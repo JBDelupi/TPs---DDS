@@ -3,7 +3,7 @@ package Controller.Administrador;
 import Controller.Controller;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.PseudoBaseDatosUsuario;
-import Service.DTO.FisicoDTO;
+import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
 import io.javalin.http.Context;
