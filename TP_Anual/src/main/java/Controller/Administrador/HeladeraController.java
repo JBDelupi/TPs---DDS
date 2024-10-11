@@ -1,6 +1,7 @@
 package Controller.Administrador;
 
 import Controller.Actores.RolUsuario;
+import Controller.DTO.SuscripcionDTO;
 import Models.Domain.Heladera.Suscripciones.FaltanNViandasParaLlenar;
 import Models.Domain.Heladera.Suscripciones.NViandasDisponibles;
 import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
@@ -64,7 +65,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     public void index(Context context){
         this.estaLogueado(context);
 
-
         List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().getBaseHeladeras();
 
         Map<String, Object> model = this.basicModel(context);
@@ -94,17 +94,12 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         // <-- SUSCRIPCIONES -->
         List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
-                .filter(s -> s.getColaborador().getId().equals(getUsuario().getId()))
-                .toList();
+                .filter(s -> s.getColaborador().getId().equals(getUsuario().getId())).toList();
 
-        List<Map<String, Object>> suscriptoresConClase = suscriptores.stream().map(s -> {
-            Map<String, Object> suscriptorMap = new HashMap<>();
-            suscriptorMap.put("suscriptor", s);
-            suscriptorMap.put("className", s.getClass().getSimpleName());
-            return suscriptorMap;
-        }).collect(Collectors.toList());
+        new SuscripcionDTO()
 
-        model.put("suscripciones",suscriptoresConClase);
+        System.out.println(suscriptores.getClass());
+        model.put("suscripciones",);
 
 
         context.render("heladera/detallesHeladera.hbs", model);
