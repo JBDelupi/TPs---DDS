@@ -21,9 +21,9 @@ public class MovimientoViandasPorHeladera  extends TemplateReporte<Heladera> {
             String direccion = heladera.getDireccion().getCalle() + " " +
                     heladera.getDireccion().getNumero()+ ", " +
                     heladera.getDireccion().getLocalidad();
-            int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
             int cantidadDeViandasDepositadas = heladera.getViandas().size();
-            listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasRetiradas, cantidadDeViandasDepositadas});
+            int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
+            listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas });
         }
         return listadoDeMovimientos;
     }

@@ -45,6 +45,7 @@ public class Router {
             get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
             get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
             post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
+            post("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::update);
         });
 
         Server.app().routes(()->{
@@ -107,9 +108,6 @@ public class Router {
             get("/reportes/{id}",((ReporteController)FactoryController.controller("reporte"))::create);
         });
 
-        Server.app().routes(()->{
-            post("/heladeras/{id}",((SuscripcionesController) FactoryController.controller("suscripciones"))::save);
-        });
 
     }
 

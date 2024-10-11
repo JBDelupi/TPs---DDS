@@ -27,4 +27,9 @@ public class NViandasDisponibles implements ObserverHeladera {
             colaborador.notify(unaPublicacion);
         }
     }
+
+    @Override
+    public Persona getColaborador(){
+        return colaborador;
+    }
 }

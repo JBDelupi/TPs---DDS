@@ -11,7 +11,6 @@ import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 import Models.Repository.PseudoBaseDatosHeladera;
 
-
 public class SufrioDesperfecto implements ObserverHeladera {
     private Persona colaborador;
 
@@ -41,6 +40,11 @@ public class SufrioDesperfecto implements ObserverHeladera {
     public String armarDescripcion(Heladera heladera){
 
         return null;
+    }
+
+    @Override
+    public Persona getColaborador(){
+        return colaborador;
     }
 
 

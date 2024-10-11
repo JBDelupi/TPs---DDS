@@ -3,10 +3,8 @@ package Models.Domain.Heladera;
 import Models.Domain.Excepciones.HeladeraLlenaException;
 import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.Heladera.Incidentes.Alerta;
-import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Heladera.Suscripciones.*;
-import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
@@ -28,7 +26,7 @@ public class Heladera {
 
     public Heladera() {
         this.viandas = new ArrayList<>();
-        this.subscriptores = new ArrayList<>();
+        this.suscriptores = new ArrayList<>();
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
         this.setEstadoActual(EstadoHeladera.DISPONIBLE);
@@ -54,7 +52,7 @@ public class Heladera {
     private Double temperaturaActual;
     private Integer cantidadDeFallas;
     private Integer cantidadDeviandasRetiradas;
-    private List<ObserverHeladera> subscriptores;
+    private List<ObserverHeladera> suscriptores;
 
 
     public void agregarVianda(Vianda ... vianda) {
@@ -106,15 +104,15 @@ public class Heladera {
 
 
     public void agregarSubscriptor(ObserverHeladera observer) {
-        this.subscriptores.add(observer);
+        this.suscriptores.add(observer);
     }
 
     public void quitarSubscriptor(ObserverHeladera observer) {
-        this.subscriptores.remove(observer);
+        this.suscriptores.remove(observer);
     }
 
     public void generarNuevaPublicacion(TipoDePublicacion publicacion) {
-        this.subscriptores.forEach(f->f.update(publicacion, this));
+        this.suscriptores.forEach(f->f.update(publicacion, this));
     }
 
     public Boolean tieneCantidadDisponible(Integer cantidad){

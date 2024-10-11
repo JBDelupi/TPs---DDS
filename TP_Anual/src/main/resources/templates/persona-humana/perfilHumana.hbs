@@ -74,7 +74,47 @@
                         <p><strong>Cantidad de Viandas Donadas: </strong>{{fisico.cantidadViandasDonadas}}</p>
                         <p><strong>Puntaje: </strong>{{fisico.puntaje}}</p>
 
-                        <a href="#" class="btn btn-primary mt-3">Edit Profile</a>
+                        <!-- Medio de Notificación -->
+                        <div class="form-group mt-4">
+                            <label for="medioNotificacion"><strong>Medio de Notificación</strong></label>
+                            <select class="form-control" id="medioNotificacion" name="medioNotificacion">
+                                <option value="" disabled selected>Seleccionar medio</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="telegram">Telegram</option>
+                                <option value="sms">SMS</option>
+                                <option value="correo">Correo Electrónico</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo adicional para código de WhatsApp -->
+                        <div class="form-group mt-3" id="campoWhatsApp" style="display:none;">
+                            <label for="codigoWhatsApp"><strong>Código de WhatsApp</strong></label>
+                            <input type="text" class="form-control" id="codigoWhatsApp" placeholder="Ingrese su código de WhatsApp">
+                        </div>
+
+                        <!-- Campo adicional para código de Telegram -->
+                        <div class="form-group mt-3" id="campoTelegram" style="display:none;">
+                            <label for="codigoTelegram"><strong>Código de Telegram</strong></label>
+                            <input type="text" class="form-control" id="codigoTelegram" placeholder="Ingrese su código de Telegram">
+                        </div>
+
+                        <!-- Campo adicional para número de teléfono (SMS) -->
+                        <div class="form-group mt-3" id="campoSms" style="display:none;">
+                            <label for="numeroSms"><strong>Número de Teléfono</strong></label>
+                            <input type="tel" class="form-control" id="numeroSms" placeholder="Ingrese su número de teléfono">
+                        </div>
+
+                        <!-- Campo adicional para correo -->
+                        <div class="form-group mt-3" id="campoCorreo" style="display:none;">
+                            <label for="correo"><strong>Correo Electronico</strong></label>
+                            <input type="correo" class="form-control" id="correo" placeholder="Ingrese su número correo electronico">
+                        </div>
+
+                        <!-- Botones de acción -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="#" class="btn btn-primary">Edit Profile</a>
+                            <button type="submit" class="btn btn-success">Guardar Medio de Notificación</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,6 +146,33 @@
 <script src="../../js/main.js"></script>
 <script src="../../js/scripts-index.js"></script>
 <script src="../../js/scripts-header.js"></script>
+
+<!-- Script para manejar el selector de medio de notificación -->
+<script>
+    document.getElementById('medioNotificacion').addEventListener('change', function() {
+        var whatsappField = document.getElementById('campoWhatsApp');
+        var telegramField = document.getElementById('campoTelegram');
+        var smsField = document.getElementById('campoSms');
+        var correoField = document.getElementById('campoCorreo');
+
+        // Ocultar todos los campos adicionales
+        whatsappField.style.display = 'none';
+        telegramField.style.display = 'none';
+        smsField.style.display = 'none';
+
+        // Mostrar campo correspondiente según el medio de notificación seleccionado
+        if (this.value === 'whatsapp') {
+            whatsappField.style.display = 'block';
+        } else if (this.value === 'telegram') {
+            telegramField.style.display = 'block';
+        } else if (this.value === 'sms') {
+            smsField.style.display = 'block';
+        } else if (this.value === 'correo') {
+            correoField.style.display = 'block';
+        }
+    });
+</script>
+
 </body>
 
 </html>

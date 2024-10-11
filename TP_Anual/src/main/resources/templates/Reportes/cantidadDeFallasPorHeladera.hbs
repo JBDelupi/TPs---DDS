@@ -30,21 +30,20 @@
         </div>
         <div class="row">
             <div class="col-12">
-                {{#if CantidadDeViandasPorColaborador}}
+                {{#if FallasHeladeras}}
                         <div class="table-responsive mt-5">
-                            <h2>Cantidad de Viandas por Colaborador</h2>
                             <table class="table table-bordered table-hover">
-                                <thead class="thead-dark">
+                                <thead class="table-primary">
                                 <tr>
-                                    <th>Colaborador</th>
-                                    <th>Cantidad de Viandas Donadas</th>
+                                    <th>Direccion</th>
+                                    <th>Cantidad de Fallas</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{#each CantidadDeViandasPorColaborador}}
+                                {{#each FallasHeladeras}}
                                     <tr>
-                                        <td>{{this.[0]}}</td> <!-- Nombre del Colaborador -->
-                                        <td>{{this.[1]}}</td> <!-- Cantidad de Viandas Donadas -->
+                                        <td>{{this.[0]}}</td> <!-- Direccion -->
+                                        <td>{{this.[1]}}</td> <!-- Cantidad de Fallas -->
                                     </tr>
                                 {{/each}}
                                 </tbody>
@@ -57,9 +56,7 @@
         </div>
     </div>
 </section>
-<!-- Reporte de Fallas por Heladera End -->
 
-<!-- Incluir footer y botón back -->
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 

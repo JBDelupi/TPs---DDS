@@ -3,12 +3,14 @@ package Controller;
 import Controller.Actores.RolUsuario;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Reporte.CantFallasPorHeladera;
 import Models.Domain.Reporte.CantViandasPorColaborador;
 import Models.Domain.Reporte.MovimientoViandasPorHeladera;
+import Models.Repository.PseudoBaseDatosFallaTecnica;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosProductosOfrecidos;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -44,7 +46,6 @@ public class ReporteController extends Controller implements ICrudViewsHandler {
         this.estaLogueado(context);
         List<Heladera> heladeras = PseudoBaseDatosHeladera.getInstance().getBaseHeladeras();
         List<Fisico> colaboradores = PseudoBaseDatosUsuario.getInstance().getColaboradoresYFisicos();
-
 
 
         String tipoReporte = context.queryParam("tipo");

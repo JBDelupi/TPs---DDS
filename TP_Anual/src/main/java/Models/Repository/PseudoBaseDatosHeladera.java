@@ -58,6 +58,8 @@ public class PseudoBaseDatosHeladera {
             Heladera heladera = baseHeladeras.get(i);
             heladera.setDireccion(direccion);
             heladera.setId(i + 1);
+            heladera.setCantidadDeFallas(20);
+            heladera.setCantidadDeviandasRetiradas(3);
             heladera.setTemperaturaMin(5.00);
             heladera.setTemperaturaMax(100.00);
             heladera.setAbierto(Math.random() < 0.5);

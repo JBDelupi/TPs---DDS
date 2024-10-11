@@ -31,4 +31,9 @@ public class FaltanNViandasParaLlenar implements ObserverHeladera {
             colaborador.notify(unaPublicacion);
         }
     }
+
+    @Override
+    public Persona getColaborador(){
+        return colaborador;
+    }
 }

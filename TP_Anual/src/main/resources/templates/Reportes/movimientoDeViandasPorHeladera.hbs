@@ -33,7 +33,7 @@
                 {{#if MovimientoDeViandasHeladeras}}
                         <div class="table-responsive mt-5">
                             <table class="table table-bordered table-hover">
-                                <thead class="thead-dark">
+                                <thead class="table-primary">
                                 <tr>
                                     <th>Dirección de la Heladera</th> <!-- Asumimos que el ID es la dirección -->
                                     <th>Viandas Colocadas</th>
@@ -44,8 +44,8 @@
                                 {{#each MovimientoDeViandasHeladeras}}
                                     <tr>
                                         <td>{{this.[0]}}</td> <!-- Dirección de la Heladera -->
-                                        <td>{{this.[1]}}</td> <!-- Viandas Retiradas -->
-                                        <td>{{this.[2]}}</td> <!-- Viandas Colocadas -->
+                                        <td>{{this.[1]}}</td> <!-- Viandas Colocadas -->
+                                        <td>{{this.[2]}}</td> <!-- Viandas Retiradas -->
                                     </tr>
                                 {{/each}}
                                 </tbody>
@@ -58,9 +58,7 @@
         </div>
     </div>
 </section>
-<!-- Reporte de Fallas por Heladera End -->
 
-<!-- Incluir footer y botón back -->
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 
