@@ -43,10 +43,6 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     }
 
-    public void contribucionExitosa(Context context) {
-        this.estaLogueado(context);
-        context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
-    }
 
     @Override
     public void create(Context context) {
@@ -65,6 +61,8 @@ public class ContribucionController extends Controller implements ICrudViewsHand
                         Map.Entry::getKey,
                         entry -> entry.getValue().get(0) // Toma el primer valor de la lista
                 ));
+
+
 
         CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
 

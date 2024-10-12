@@ -1,6 +1,7 @@
 package Service.Server;
 
 import Service.Server.handlers.AppHandlers;
+import Service.Server.middlewares.AuthMiddleware;
 import io.javalin.Javalin;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -38,7 +39,7 @@ public class Server {
                 staticFiles.hostedPath = "/";
                 staticFiles.directory = "/public";  // Con esto sabe el navegador donde buscar los css, js, etc
             });
-        //    AuthMiddleware.apply(config);
+           AuthMiddleware.apply(config);
         };
     }
 

@@ -34,6 +34,7 @@ public class LoginController extends Controller {
             String idPersona = Integer.toString(usuario.getId());
             context.sessionAttribute("idPersona", idPersona);
             String rolTipo = usuario.getTipoUsuario().toString().toLowerCase();
+            context.sessionAttribute("rolTipo", usuario.getTipoUsuario().toString());
             context.redirect("/index/" + rolTipo);
         } else {
             context.sessionAttribute(USER_SESSION_KEY, null);

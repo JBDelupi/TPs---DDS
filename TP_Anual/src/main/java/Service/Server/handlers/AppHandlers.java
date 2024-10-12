@@ -1,4 +1,5 @@
 package Service.Server.handlers;
+import Service.Server.exceptions.UnauthorizedResponseException;
 import io.javalin.Javalin;
 import java.util.Arrays;
 
@@ -6,6 +7,7 @@ public class AppHandlers {
     private IHandler[] handlers = new IHandler[]{
             new AccessDeniedHandler(),
             new InvalidPasswordHandler(),
+            new UnauthorizeHandler(),
     };
 
     public static void applyHandlers(Javalin app) {

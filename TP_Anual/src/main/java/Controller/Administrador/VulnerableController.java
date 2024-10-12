@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 public class VulnerableController extends Controller implements ICrudViewsHandler {
     @Override
     public void create(Context context) {
-        context.render("persona-vulnerable/registroVulnerable.hbs");
+        context.render("persona-vulnerable/registrarPersonaVulnerable.hbs");
     }
 
     @Override

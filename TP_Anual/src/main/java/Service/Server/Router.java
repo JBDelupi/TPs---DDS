@@ -1,10 +1,10 @@
 package Service.Server;
 
 import Controller.*;
+import Controller.Actores.RolUsuario;
 import Controller.Administrador.AdministradorController;
 import Controller.Administrador.HeladeraController;
 import Controller.Administrador.TecnicoController;
-import Controller.Administrador.VulnerableController;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.post;
@@ -94,7 +94,7 @@ public class Router {
             // Pantallas de admins
             get("/registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::getImportarColaborador);
             post("registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::saveImportarColaborador);
-            get("/index/administrador", ((AdministradorController) FactoryController.controller("admin"))::index);
+            get("/index/administrador", ((AdministradorController) FactoryController.controller("admin"))::index, RolUsuario.ADMINISTRADOR);
             get("/persona/administrador/{id}", ((AdministradorController) FactoryController.controller("admin"))::show);
         });
 

@@ -109,10 +109,9 @@ public class HumanoController extends Controller  {
     public void consultarContribuciones(Context context){
         this.estaLogueado(context);
 
-        Fisico usuario = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona"));
-        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
-
         Map<String, Object> model = this.basicModel(context);
+
+        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
         model.put("contribuciones",contribuciones);
 
         context.render("FormasDeContribucion/misContribuciones.hbs",model);

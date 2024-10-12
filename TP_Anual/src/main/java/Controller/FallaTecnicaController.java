@@ -22,6 +22,7 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
+
         List<Heladera> heladeras = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
 
         Map<String, Object> model = new HashMap<>();
