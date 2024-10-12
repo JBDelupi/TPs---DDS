@@ -92,10 +92,7 @@ public class HumanoController extends Controller  {
         fisico.agregarRol(colaborador);
         fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
 
-
         PseudoBaseDatosUsuario.getInstance().agregar(fisico);
-
-        System.out.println("usuario creado: "+ fisico.getId());
 
         context.redirect("/login");
     }
@@ -124,10 +121,8 @@ public class HumanoController extends Controller  {
     public void show(Context context){
         this.estaLogueado(context);
 
-        String id = context.sessionAttribute("idPersona");
-        Fisico fisico = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
         Map<String, Object> model = this.basicModel(context);
-        model.put("humano", fisico);
+        model.put("humano", model);
 
 
         context.render("persona-humana/perfilHumana.hbs", model);

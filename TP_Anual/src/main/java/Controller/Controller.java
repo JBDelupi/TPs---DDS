@@ -15,6 +15,11 @@ import java.util.Map;
 public abstract class Controller {
     Persona usuario;
 
+    public Controller(){
+
+    }
+
+
     public void estaLogueado(Context context){
         if (context.sessionAttribute("usuario") == null) {
             throw new AccessDeniedException();
@@ -22,13 +27,17 @@ public abstract class Controller {
     }
 
     public Map<String, Object> basicModel(Context context){
-        String id = context.sessionAttribute("idPersona");
-        this.usuario =  PseudoBaseDatosUsuario.getInstance().getId(id);
-
         Map<String, Object> model = new HashMap<>();
+        this.setPersona(context);
         model.put("rol", usuario.getTipoUsuario().toString().toLowerCase());
-        model.put("id", id);
+        model.put("id", this.usuario.getId());
+        model.put("usuario", this.usuario);
         return model;
+    }
+
+    public void setPersona(Context context){
+        String id = context.sessionAttribute("idPersona");
+        this.usuario = PseudoBaseDatosUsuario.getInstance().getId(id);
     }
 
 

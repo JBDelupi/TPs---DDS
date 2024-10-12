@@ -132,10 +132,10 @@
                                 </div>
                             </div>
                         </form>
-                        {{#each suscripciones}}
+                        {{#each suscriptores}}
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between align-items-center form-floating">
-                                    <p id="suscripcion" class="form-control">{{className}}</p>
+                                    <p id="suscripcion" class="form-control">{{this.n}}</p>
                                     <label for="suscripcion">Suscripción</label>
                                     <form action="" method="POST">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>

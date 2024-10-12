@@ -31,10 +31,9 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     public void index(Context context) {
         this.estaLogueado(context);
 
-        Persona usuario = context.sessionAttribute("usuario");
         Map<String, Object> model = this.basicModel(context);
-        model.put("usuario", usuario);
         model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
+
         context.render("FormasDeContribucion/index.hbs", model);
 
     }

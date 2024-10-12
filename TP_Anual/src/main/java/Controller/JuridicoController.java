@@ -65,11 +65,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     public void show(Context context) {
         this.estaLogueado(context);
 
-
-        String id = context.sessionAttribute("idPersona");
-        Juridico juridico = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(id);
         Map<String, Object> model = this.basicModel(context);
-        model.put("juridico",juridico);
 
         context.render("persona-Juridica/perfilJuridico.hbs", model);
     }
@@ -124,12 +120,10 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     public void consultarContribuciones(Context context){
         this.estaLogueado(context);
-
-        Juridico usuario = (Juridico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona"));
+        Map<String, Object> model = this.basicModel(context);
 
         List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
 
-        Map<String, Object> model = this.basicModel(context);
         model.put("contribuciones",contribuciones);
 
         context.render("FormasDeContribucion/misContribuciones.hbs", model);

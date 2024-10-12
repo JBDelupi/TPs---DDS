@@ -12,6 +12,7 @@ import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
 import Models.Repository.PseudoBaseDatosAlerta;
 import Models.Repository.PseudoBaseDatosHeladera;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -93,13 +94,16 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         model.put("hayAlerta", alerta != null);
 
         // <-- SUSCRIPCIONES -->
-        List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
-                .filter(s -> s.getColaborador().getId().equals(getUsuario().getId())).toList();
+        String idPersona = context.sessionAttribute("idPersona");
 
-        new SuscripcionDTO()
 
-        System.out.println(suscriptores.getClass());
-        model.put("suscripciones",);
+            List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
+                    .filter(f -> f.getColaborador().equals(PseudoBaseDatosUsuario.getInstance().getId(idPersona)))
+                    .toList();
+
+            model.put("suscriptores",suscriptores);
+            System.out.println("entre" + suscriptores.size() + heladera.getSuscriptores().size());
+
 
 
         context.render("heladera/detallesHeladera.hbs", model);
@@ -126,17 +130,20 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         int numeroViandas = numeroViandasStr != null && !numeroViandasStr.isEmpty() ? Integer.parseInt(numeroViandasStr) : 0;
 
+        String idPersona = context.sessionAttribute("idPersona");
+
         switch (opcionSuscripcion) {
             case "faltanNViandas":
-                FaltanNViandasParaLlenar suscripcion = new FaltanNViandasParaLlenar(this.getUsuario(),numeroViandas);
+                FaltanNViandasParaLlenar suscripcion = new FaltanNViandasParaLlenar(PseudoBaseDatosUsuario.getInstance().getId(idPersona), numeroViandas);
                 heladera.agregarSubscriptor(suscripcion);
+
                 break;
             case "quedanNViandas":
-                NViandasDisponibles suscripcion2 = new NViandasDisponibles(this.getUsuario(),numeroViandas);
+                NViandasDisponibles suscripcion2 = new NViandasDisponibles(PseudoBaseDatosUsuario.getInstance().getId(idPersona),numeroViandas);
                 heladera.agregarSubscriptor(suscripcion2);
                 break;
             case "desperfecto":
-                SufrioDesperfecto suscripcion3 = new SufrioDesperfecto(this.getUsuario());
+                SufrioDesperfecto suscripcion3 = new SufrioDesperfecto(PseudoBaseDatosUsuario.getInstance().getId(idPersona));
                 heladera.agregarSubscriptor(suscripcion3);
                 break;
         }
