@@ -7,15 +7,20 @@ import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 
+import java.util.random.RandomGenerator;
+
 public class FaltanNViandasParaLlenar implements ObserverHeladera {
+    int id;
     private Persona colaborador;
     private int n;
+    private String nombre;
 
 
     public FaltanNViandasParaLlenar(Persona colaborador, int n) {
+        this.id = RandomGenerator.getDefault().nextInt(0,1000);
         this.colaborador = colaborador;
         this.n = n;
-
+        this.nombre = "Faltan N viandas para llenar";
     }
 
     @Override
@@ -35,5 +40,18 @@ public class FaltanNViandasParaLlenar implements ObserverHeladera {
     @Override
     public Persona getColaborador(){
         return colaborador;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getN() {
+        return n;
+    }
+    @Override
+    public int getId() {
+        return id;
     }
 }

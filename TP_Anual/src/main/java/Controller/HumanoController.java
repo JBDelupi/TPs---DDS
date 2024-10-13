@@ -20,45 +20,14 @@ import java.util.Map;
 import java.util.random.RandomGenerator;
 
 public class HumanoController extends Controller  {
-    public HumanoController() {
-
-    }
 
 
-    public void save(Object ... Args) {
-/*
-        String nombre = (String) Args[0];
-        String apellido = (String) Args[1];
-        LocalDate fechaNacimiento = (LocalDate) Args[2];
-        String correo = (String) Args[3];
-        String nroDocumento = (String) Args[4];
-        TipoDeDocumento tipoDeDocumento = (TipoDeDocumento) Args[5];
-
-        FisicoBuilder fisicoBuilder = new FisicoBuilder();
-        Fisico fisico = fisicoBuilder
-                .nombre(nombre)
-                .apellido(apellido)
-                .fechaNacimiento(fechaNacimiento)
-                .correoElectronico(correo)
-                .numeroDocumento(nroDocumento)
-                .tipoDocumento(tipoDeDocumento)
-                .construir();
-
-
-        RepoColaboradores.getInstance().agregarColaborador(fisico);
-
- */
-    }
-
-
-    // @GET
     public void create(Context context){
 
         context.render("persona-humana/registroHumana.hbs");
 
     }
 
-    // @POST
     public void save(Context context){
 
         String nombre = context.formParam("nombre") ;

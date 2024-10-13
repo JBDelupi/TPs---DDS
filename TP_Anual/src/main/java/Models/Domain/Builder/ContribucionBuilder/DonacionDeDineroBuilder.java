@@ -22,7 +22,6 @@ public class DonacionDeDineroBuilder {
 
 
 
-
     public DonacionDeDinero construir(){
         return this.donacionDeDinero;
     }

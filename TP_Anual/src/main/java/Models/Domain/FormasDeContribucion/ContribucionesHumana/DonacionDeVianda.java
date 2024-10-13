@@ -10,9 +10,13 @@ public class DonacionDeVianda extends Contribucion {
     private Vianda vianda;
     private Heladera heladera;
 
-
     @Override
     public Double generarPuntaje() {
         return 1 * 1.5;
     }
+
+    public DonacionDeVianda(){
+        this.nombre = "Donacion de vianda";
+    }
+
 }

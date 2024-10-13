@@ -14,4 +14,7 @@ public class OfrecerProducto extends Contribucion {
     private Double puntosNecesarios;
     private Integer stock;
 
+    public OfrecerProducto() {
+        this.nombre = "Ofrecer producto";
+    }
 }

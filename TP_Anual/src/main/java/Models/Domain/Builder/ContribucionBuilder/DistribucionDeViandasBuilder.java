@@ -31,8 +31,6 @@ public class DistribucionDeViandasBuilder {
         return this;
     }
 
-
-
     public DistribucionDeViandas construir() {
         return this.distribucionDeViandas;
     }

@@ -21,7 +21,6 @@ public class DonacionDeViandaBuilder {
         return this;
     }
 
-
     public DonacionDeVianda construir() {
         return this.donacionDeVianda;
     }

@@ -10,12 +10,20 @@ import Models.Domain.Personas.Actores.TipoRol;
 import Service.Notificacion.Mensaje;
 import Service.Notificacion.MensajeBuilder;
 import Models.Repository.PseudoBaseDatosHeladera;
+import lombok.Getter;
+import retrofit2.http.GET;
 
+import java.util.random.RandomGenerator;
+@Getter
 public class SufrioDesperfecto implements ObserverHeladera {
+    int id;
     private Persona colaborador;
+    private String nombre;
 
     public SufrioDesperfecto(Persona colaborador){
+        this.id = RandomGenerator.getDefault().nextInt(0,1000);
         this.colaborador = colaborador;
+        this.nombre = "Sufrio un desperfecto";
     }
 
 
@@ -47,6 +55,10 @@ public class SufrioDesperfecto implements ObserverHeladera {
         return colaborador;
     }
 
+    @Override
+    public String getNombre(){
+        return nombre;
+    }
 
 }
 

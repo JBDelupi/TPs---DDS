@@ -36,7 +36,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
         Map<String, Object> model = this.basicModel(context);
 
-        model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
+        model.put("esHumano", usuario.getTipoUsuario().equals(RolUsuario.FISICO));
 
         context.render("FormasDeContribucion/index.hbs", model);
 
@@ -101,7 +101,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
         Map<String,Object> model = this.basicModel(context);
-        if (tipoContribucion.equals("hacerseCargoHeladera")) {
+        if (tipoContribucion.equals("hacerseCargoHeladera") ||tipoContribucion.equals("donarViandas") ) {
             model.put("heladeras", PseudoBaseDatosHeladera.getInstance().baseHeladeras);
             return model;
         }

@@ -10,6 +10,7 @@ import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.PseudoBaseDatosAlerta;
 import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosUsuario;
@@ -112,13 +113,27 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     // GET
     @Override
-    public void edit(Context context) {
-        context.render("edit");
+    public void update(Context context) {
+        this.estaLogueado(context);
+
+        String id = context.formParam("heladeraId");
+        System.out.println("Id de heladera: "+id);
+        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+
+        String idSuscripcion = context.formParam("idSuscripcion");
+
+        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(f->f.getId() == Integer.parseInt(idSuscripcion) ).toList();
+
+        ObserverHeladera suscripcion = observerHeladeras.get(0);
+
+        heladera.quitarSubscriptor(suscripcion);
+
+        context.redirect("/heladeras/" + id);
     }
 
     // POST
     @Override
-    public void update(Context context) {
+    public void edit(Context context) {
         this.estaLogueado(context);
 
         String id = context.pathParam("id");

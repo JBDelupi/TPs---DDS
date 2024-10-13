@@ -15,4 +15,9 @@ public class DonacionDeDinero extends Contribucion {
         return monto * 0.5;
     }
 
+    public DonacionDeDinero(){
+        this.nombre = "Donacion de Dinero";
+    }
+
+
 }

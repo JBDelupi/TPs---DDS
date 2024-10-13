@@ -96,14 +96,14 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     {{#if hayAlerta}}
-                                    <p id="fallas" class="form-control">{{alerta.tipo}}</p>
-                                    <label for="fallas">Alerta actual</label>
+                                        <p id="fallas" class="form-control">{{alerta.tipo}}</p>
+                                        <label for="fallas">Alerta actual</label>
                                     {{/if}}
                                 </div>
                             </div>
                         </div>
 
-                        <form class="mt-4" action="/heladeras/{{id}}" method="POST">
+                        <form class="mt-4" action="/heladeras/{{id}}/suscribir" method="POST">
                             <div class="row g-3">
                                 <!-- Selector desplegable para las opciones de suscripción -->
                                 <div class="col-md-12">
@@ -135,14 +135,21 @@
                         {{#each suscriptores}}
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between align-items-center form-floating">
-                                    <p id="suscripcion" class="form-control">{{this.n}}</p>
+                                    <p id="suscripcion" class="form-control">
+                                        {{this.nombre}}
+                                        <span class="n-viandas" data-suscripcion="{{this.nombre}}" data-n="{{this.n}}" style="display:none;"> - {{this.n}} viandas</span>
+                                    </p>
                                     <label for="suscripcion">Suscripción</label>
-                                    <form action="" method="POST">
+                                    <form action="/heladeras/{{id}}/desuscribir" method="POST">
+                                        <input type="hidden" name="heladeraId" value="{{heladera.id}}">
+                                        <input type="hidden" name="idSuscripcion" value="{{this.id}}">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>
                                     </form>
                                 </div>
                             </div>
                         {{/each}}
+
+
                     </div>
                 </div>
             </div>
@@ -171,11 +178,29 @@
 <script>
     document.getElementById('opcionSuscripcion').addEventListener('change', function() {
         var inputNViandas = document.getElementById('inputNViandas');
+        var numeroViandas = document.getElementById('numeroViandas');
+
         if (this.value === 'faltanNViandas' || this.value === 'quedanNViandas') {
             inputNViandas.style.display = 'block'; // Mostrar el campo de N viandas si es necesario
+            numeroViandas.setAttribute('required', 'required'); // Añadir required si es necesario
         } else {
             inputNViandas.style.display = 'none'; // Ocultar el campo de N viandas si no se necesita
+            numeroViandas.removeAttribute('required'); // Quitar required si no es necesario
         }
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Iterar sobre cada elemento que tenga la clase .n-viandas
+        document.querySelectorAll('.n-viandas').forEach(function(element) {
+            var suscripcion = element.getAttribute('data-suscripcion');
+            var viandasElement = element;
+
+            // Mostrar si es NViandasDisponibles o FaltanNViandasParaLlenar
+            if (suscripcion === 'Quedan N viandas disponibles' || suscripcion === 'Faltan N viandas para llenar') {
+                viandasElement.style.display = 'inline';
+            }
+        });
     });
 </script>
 

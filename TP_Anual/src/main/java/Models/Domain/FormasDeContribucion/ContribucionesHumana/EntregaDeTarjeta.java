@@ -13,10 +13,12 @@ public class EntregaDeTarjeta extends Contribucion {
     public EntregaDeTarjeta(TarjetaAlimentar tarjetaAlimentar){
         this.tarjetaAlimentar = tarjetaAlimentar;
         this.fechaDeDonacion = LocalDate.now();
+        this.nombre = "Entrega de Tarjeta";
     }
 
     public EntregaDeTarjeta(){
         this.fechaDeDonacion = LocalDate.now();
+        this.nombre = "Entrega de Tarjeta";
     }
 
 
@@ -24,4 +26,5 @@ public class EntregaDeTarjeta extends Contribucion {
     public Double generarPuntaje() {
         return 1 * 2.0;
     }
+
 }

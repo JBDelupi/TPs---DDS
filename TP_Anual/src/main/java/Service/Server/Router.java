@@ -44,7 +44,9 @@ public class Router {
             get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
             get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
             post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
-            post("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::update);
+            post("/heladeras/{id}/suscribir",((HeladeraController) FactoryController.controller("heladeras"))::edit);
+            post("/heladeras/{id}/desuscribir",((HeladeraController) FactoryController.controller("heladeras"))::update);
+
         });
 
         Server.app().routes(()->{

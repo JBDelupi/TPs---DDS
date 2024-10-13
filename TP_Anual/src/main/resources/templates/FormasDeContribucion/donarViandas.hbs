@@ -42,16 +42,40 @@
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="id_vianda" placeholder="ID de Vianda" required>
-                                        <label for="id_vianda">ID de Vianda</label>
+                                        <textarea class="form-control" id="nombreAlimento"  name="nombre" placeholder="Nombre de alimento" style="height: 100px;" required></textarea>
+                                        <label for="nombreAlimento">Nombre de alimento</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="id_heladera" placeholder="ID de Heladera" required>
-                                        <label for="id_heladera">ID de Heladera</label>
+                                        <input type="date" class="form-control" name="fechaDeCaducidad" id="fechaDeCaducidad" placeholder="Fecha de caducidad" required>
+                                        <label for="fechaDeCaducidad">Fecha de caducidad</label>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="calorias" name="calorias" placeholder="Calorias (opcional)" min="0" >
+                                        <label for="calorias">Calorias (opcional)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="peso" name="peso" placeholder="Peso en kg (opcional)" min="0" >
+                                        <label for="peso">Peso en kg (opcional)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <select class="form-control" id="heladera" name="heladera" required>
+                                            <option value="" disabled selected>Seleccionar Heladera</option>
+                                            {{#each heladeras}}
+                                                <option value="{{this.id}}">{{this.id}}</option>
+                                            {{/each}}
+                                        </select>
+                                        <label for="heladera">Heladera</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="tipo" value="DONACION_DE_VIANDA">
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Donar</button>
                                 </div>

@@ -24,7 +24,10 @@ import Models.Repository.PseudoBaseDatosProducto;
 import Models.Repository.PseudoBaseDatosProductosOfrecidos;
 import lombok.Getter;
 
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -80,17 +83,26 @@ public class FactoryContribucion {
 
 
     // Donación de Vianda
-    private Contribucion DonacionDeVianda(CrearContribucionDTO dto) {
-        validarPermisos(Fisico.class, "No tienes acceso");
+    private Contribucion DonacionDeVianda(CrearContribucionDTO dto){
+       // validarPermisos(Fisico.class, "No tienes acceso");
 
-        int viandaId = Integer.parseInt(dto.getParams().get("viandaId"));
-        Vianda vianda = (Vianda) viandaRepository.buscar(viandaId);
+        String nombre = dto.getParams().get("nombre");
+      //  DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+      //  LocalDate fechaCaducidad = LocalDate.parse(dto.getParams().get("fechaDeCaducidad"), formato);
+        int calorias = Integer.parseInt(dto.getParams().get("calorias"));
+        int peso = Integer.parseInt(dto.getParams().get("peso"));
 
-        int heladeraId = Integer.parseInt(dto.getParams().get("heladeraId"));
-        Heladera heladera = (Heladera) heladeraRepository.buscar(heladeraId);
+        String heladeraId = dto.getParams().get("heladera");
+        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(heladeraId);
 
-        validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(),TipoDonacion.DONACION_DE_VIANDA);
+        //validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(),TipoDonacion.DONACION_DE_VIANDA);
 
+        Vianda vianda = new Vianda();
+        vianda.setNombre(nombre);
+      //  vianda.setFechaDeCaducidad(fechaCaducidad);
+        vianda.setCalorias(calorias);
+        vianda.setPeso(peso);
+        vianda.setId(1);
 
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
@@ -112,11 +124,14 @@ public class FactoryContribucion {
 
     // Registro de Tarjeta
     private Contribucion registrarTarjeta(CrearContribucionDTO dto) {
-        validarPermisos(Fisico.class, "No tienes acceso");
+     //   validarPermisos(Fisico.class, "No tienes acceso");
 
 
         String nombre = dto.getParams().get("nombreBeneficiario");
-        int menoresACargo = Integer.parseInt(dto.getParams().get("menoresACargo"));
+        int menoresACargo = 0;
+        if(dto.getParams().get("menoresACargo") != null){
+            menoresACargo = Integer.parseInt(dto.getParams().get("menoresACargo"));
+        }
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
         PersonaVulnerable vulnerable = vulnerableBuilder.menoresACargo(menoresACargo).construir();
@@ -165,7 +180,7 @@ public class FactoryContribucion {
 
     // Hacerse Cargo de una Heladera
     private Contribucion hacerseCargoDeHeladera(CrearContribucionDTO dto) {
-        validarPermisos(Juridico.class, "No tienes acceso");
+        //validarPermisos(Juridico.class, "No tienes acceso");
 
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
 
@@ -181,7 +196,7 @@ public class FactoryContribucion {
 
     // Ofrecer Producto
     private Contribucion ofrecerProducto(CrearContribucionDTO dto) {
-        validarPermisos(Juridico.class, "No tienes acceso");
+      //  validarPermisos(Juridico.class, "No tienes acceso");
 
         String nombre = dto.getParams().get("nombreProducto");
         String imagen = dto.getParams().get("imagenProducto");

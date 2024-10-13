@@ -11,10 +11,13 @@ public class DistribucionDeViandas extends Contribucion {
     private Integer cantidadDeViandasAMover;
     private String motivo;
 
-
-
     @Override
     public Double generarPuntaje() {
         return (double)cantidadDeViandasAMover * 1;
     }
+
+    public DistribucionDeViandas(){
+        this.nombre = "Distribucion de viandas";
+    }
+
 }

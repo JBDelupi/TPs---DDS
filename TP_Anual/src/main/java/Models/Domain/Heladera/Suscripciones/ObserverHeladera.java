@@ -8,4 +8,7 @@ public interface ObserverHeladera {
      void update(TipoDePublicacion tipoDePublicacion,Heladera heladera);
 
      public Persona getColaborador();
+     public String getNombre();
+     public int getId();
+
 }
