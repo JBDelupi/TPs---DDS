@@ -36,7 +36,6 @@ public class Router {
             get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
             get("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::save);
-            get("/juridico/contribuciones/{id}", ((JuridicoController) FactoryController.controller("juridico"))::consultarContribuciones);
             get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
         });
 
@@ -52,7 +51,6 @@ public class Router {
             get("/index/fisico",((HumanoController) FactoryController.controller("humano"))::index );
             get("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::create);
             post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
-            get("/fisico/contribuciones/{id}", ((HumanoController) FactoryController.controller("humano"))::consultarContribuciones);
             get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
         });
 
@@ -74,17 +72,15 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/registro/producto",((ProductoController)FactoryController.controller("producto"))::create);
-            post("/registro/producto",((ProductoController)FactoryController.controller("producto"))::save);
             get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
             get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
+            get("/canjeExitoso",((ProductoController)FactoryController.controller("producto"))::canjeExitoso);
+
         });
-
-        Server.app().get("/canjeExitoso",((CanjeController)FactoryController.controller("canje"))::canjeExitoso);
-
 
 
        Server.app().routes(()->{
+           get("{rol}/{userId}/contribuciones", ((ContribucionController) FactoryController.controller("Contribucion"))::consultarContribuciones);
            get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index);
            get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create);
            post("/contribucionExitosa", ((ContribucionController)FactoryController.controller("Contribucion"))::save);

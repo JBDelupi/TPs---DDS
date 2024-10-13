@@ -1,6 +1,8 @@
 package Models.Domain.Reporte;
 
 import Service.TareaDiferida.ChromeTask;
+import lombok.Getter;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+@Getter
 public abstract class TemplateReporte<T> {
 
     protected List<T> items;
@@ -19,6 +21,8 @@ public abstract class TemplateReporte<T> {
         items = new ArrayList<>();
         this.chromeTask = new ChromeTask();
     }
+
+
 
     public void activar() {
         chromeTask.ejecutarTareaPrograma(4000, this, "generarReporte");
@@ -47,7 +51,7 @@ public abstract class TemplateReporte<T> {
         }
     }
 
-    protected abstract List<Object[]> obtenerListado(List<T> items);
+    public abstract List<Object[]> obtenerListado(List<T> items);
     protected abstract String getFilePath();
     protected abstract void armarReporte(List<Object[]> listado, String filePath) throws IOException;
 

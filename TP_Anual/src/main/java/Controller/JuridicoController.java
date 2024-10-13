@@ -22,36 +22,6 @@ import java.util.random.RandomGenerator;
 
 public class JuridicoController extends Controller implements ICrudViewsHandler {
 
-    public JuridicoController(Persona usuario) {
-        this.usuario = usuario;
-    }
-
-    public JuridicoController() {
-
-    }
-
-    //  @POST
-    public void save(Object ... Context) {
-
-        String razonSocial = (String) Context[0];
-        TipoJuridico tipoJuridico = (TipoJuridico) Context[1];
-        String correo = (String) Context[2];
-
-        JuridicoBuilder juridicoBuilder = new JuridicoBuilder();
-        Juridico juridico = juridicoBuilder
-                .razonSocial(razonSocial)
-                .tipoJuridico(tipoJuridico)
-                .correoElectronico(correo)
-                .construir();
-
-
-       // RepoColaboradores.getInstance().agregarColaborador(juridico);
-
-    }
-
-    /*************************************** JAVALIN *****************************/
-
-    //@GET
 
     @Override
     public void index(Context context) {
@@ -60,7 +30,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         context.render("index-inicio/index_Juridica.hbs", basicModel(context));
     }
 
-    //@GET
     @Override
     public void show(Context context) {
         this.estaLogueado(context);
@@ -70,12 +39,10 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         context.render("persona-Juridica/perfilJuridico.hbs", model);
     }
 
-    //@GET
     public void create(Context context){
         context.render("persona-Juridica/registroJuridica.hbs");
     }
 
-    //@POST
     public void save(Context context) {
 
         String razonSocial =  context.formParam("razon_social") ;
@@ -116,17 +83,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     @Override
     public void update(Context context) {
 
-    }
-
-    public void consultarContribuciones(Context context){
-        this.estaLogueado(context);
-        Map<String, Object> model = this.basicModel(context);
-
-        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
-
-        model.put("contribuciones",contribuciones);
-
-        context.render("FormasDeContribucion/misContribuciones.hbs", model);
     }
 
 

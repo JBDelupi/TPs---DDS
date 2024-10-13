@@ -9,10 +9,13 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.Dao;
+import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -32,6 +35,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         this.estaLogueado(context);
 
         Map<String, Object> model = this.basicModel(context);
+
         model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
 
         context.render("FormasDeContribucion/index.hbs", model);
@@ -47,8 +51,10 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
+
         String tipoContribucion = context.queryParam("tipo");
-        context.render("FormasDeContribucion/"+tipoContribucion+".hbs", this.basicModel(context));
+
+        context.render("FormasDeContribucion/"+tipoContribucion+".hbs", this.obtenerModeloContribucion(tipoContribucion,context));
 
     }
 
@@ -62,10 +68,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
                         entry -> entry.getValue().get(0) // Toma el primer valor de la lista
                 ));
 
-
-
         CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
-
 
         FactoryContribucion factoryContribucion = new FactoryContribucion(PseudoBaseDatosUsuario.getInstance().getId("1"), null,null);
         factoryContribucion.generarDonacion(dto);
@@ -83,7 +86,27 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     }
 
+    public void consultarContribuciones(Context context){
+        this.estaLogueado(context);
 
+        Map<String, Object> model = this.basicModel(context);
+
+        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
+        model.put("contribuciones",contribuciones);
+
+        context.render("FormasDeContribucion/misContribuciones.hbs",model);
+    }
+
+
+
+    private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
+        Map<String,Object> model = this.basicModel(context);
+        if (tipoContribucion.equals("hacerseCargoHeladera")) {
+            model.put("heladeras", PseudoBaseDatosHeladera.getInstance().baseHeladeras);
+            return model;
+        }
+        return model;
+    }
 
 
 }

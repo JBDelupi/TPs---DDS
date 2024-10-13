@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +18,8 @@
 </head>
 
 <body>
-{{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial footer aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador rol=rol id=id}} <!-- Incluye el partial header aquí -->
+{{> templates/partials/tipografia}} <!-- Incluye el partial tipografía aquí -->
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -38,21 +39,31 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <form action="/contribucionExitosa" method="POST">
                             <div class="row g-3">
+                                <!-- Selector de Heladera -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control" id="heladera" required>
+                                        <select class="form-control" id="heladera" name="heladeraId" required>
                                             <option value="" disabled selected>Seleccionar Heladera</option>
-                                            <!-- Aquí se agregarían las opciones de heladeras -->
+                                            {{#each heladeras}}
+                                                <option value="{{this.id}}">{{this.id}} - {{this.direccion.calle}} - {{this.direccion.numero}}</option>
+                                            {{/each}}
                                         </select>
                                         <label for="heladera">Heladera</label>
                                     </div>
                                 </div>
+
+                                <!-- Input Nombre Característico -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="nombreCaracteristico" placeholder="Nombre Característico" required>
+                                        <input type="text" class="form-control" id="nombreCaracteristico" name="nombreCaracteristico" placeholder="Nombre Característico" required>
                                         <label for="nombreCaracteristico">Nombre Característico</label>
                                     </div>
                                 </div>
+
+                                <!-- Campo Oculto para Tipo de Contribución -->
+                                <input type="hidden" name="tipo" value="HACERSE_CARGO_DE_HELADERA">
+
+                                <!-- Botón de Envío -->
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Hacerse Cargo</button>
                                 </div>
@@ -63,12 +74,11 @@
             </div>
         </div>
     </div>
-
 </main>
-{{> templates/main/footer}}
-{{> templates/partials/botonBack}}
-</body>
+{{> templates/main/footer}} <!-- Incluye el partial footer aquí -->
+{{> templates/partials/botonBack}} <!-- Incluye el botón para volver atrás -->
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../css/lib/wow/wow.min.js"></script>
@@ -82,5 +92,6 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+</body>
 
 </html>

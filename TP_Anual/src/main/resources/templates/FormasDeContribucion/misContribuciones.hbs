@@ -28,8 +28,8 @@
 <section class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Ofertas</h5>
-            <h1 class="mb-5">Últimos Agregados</h1>
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Contribuciones</h5>
+            <h1 class="mb-5">Tus contribuciones</h1>
         </div>
         <div class="row g-4">
             {{#each contribuciones}}
@@ -38,7 +38,7 @@
                         <div class="w-100 d-flex flex-column text-start ps-4">
                             <h5 class="d-flex justify-content-between border-bottom pb-2">
                                 <span>{{this.nombre}}</span>
-                                <a href="{{rol}}/contribuciones/{{rol}}.{{id}}/{{this.id}}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                                <a href="{{rol}}/{{usuario.id}}/contribuciones/{{this.id}}" class="btn btn-primary btn-sm">Ver Detalles</a>
                             </h5>
                             <small class="fst-italic">{{this.descripcion}}</small>
                         </div>

@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                {{#if FallasHeladeras}}
+                {{#if reporte}}
                         <div class="table-responsive mt-5">
                             <table class="table table-bordered table-hover">
                                 <thead class="table-primary">
@@ -40,7 +40,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{#each FallasHeladeras}}
+                                {{#each reporte}}
                                     <tr>
                                         <td>{{this.[0]}}</td> <!-- Direccion -->
                                         <td>{{this.[1]}}</td> <!-- Cantidad de Fallas -->

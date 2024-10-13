@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                {{#if MovimientoDeViandasHeladeras}}
+                {{#if reporte}}
                         <div class="table-responsive mt-5">
                             <table class="table table-bordered table-hover">
                                 <thead class="table-primary">
@@ -41,7 +41,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{#each MovimientoDeViandasHeladeras}}
+                                {{#each reporte}}
                                     <tr>
                                         <td>{{this.[0]}}</td> <!-- Dirección de la Heladera -->
                                         <td>{{this.[1]}}</td> <!-- Viandas Colocadas -->

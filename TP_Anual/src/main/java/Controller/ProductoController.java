@@ -18,43 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.random.RandomGenerator;
 
-public class ProductoController extends Controller implements ICrudViewsHandler {
-
-    public void create(Context context) {
-        this.basicModel(context);
-
-        context.render("FormasDeContribucion/ofrecerProducto.hbs",this.basicModel(context));
-    }
-
-    public void save(Context context) {
-        String nombre = context.formParam("nombreProducto");
-        String imagen = context.formParam("imagenProducto");
-        String descripcion = context.formParam("descripcionProducto");
-        String rubroProducto = context.formParam("rubroProducto");
-        Double precio = Double.parseDouble(context.formParam("precioProducto"));
-        Integer stock = Integer.parseInt(context.formParam("stock"));
-
-        TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
-
-        if(imagen.isEmpty()){imagen = "/images/producto-test.png";}
-        Producto producto = new Producto(tipoRubro, nombre, imagen, descripcion);
-        producto.setId(RandomGenerator.getDefault().nextInt());
-
-        OfrecerProducto productoOfrecido = new OfrecerProducto();
-        productoOfrecido.setID(producto.getId());
-        productoOfrecido.setProducto(producto);
-        productoOfrecido.setPuntosNecesarios(precio);
-        productoOfrecido.setStock(stock);
-        productoOfrecido.setFechaDeDonacion(LocalDate.now());
-
-        System.out.println("Producto creado: "+ producto.getId() + tipoRubro);
-
-        PseudoBaseDatosProducto.getInstance().agregar(producto);
-        PseudoBaseDatosProductosOfrecidos.getInstance().agregar(productoOfrecido);
-
-
-        context.redirect("/productos");
-    }
+public class ProductoController extends Controller {
 
     public void index(Context context) {
         this.estaLogueado(context);
@@ -81,13 +45,11 @@ public class ProductoController extends Controller implements ICrudViewsHandler 
         context.render("producto/show.hbs", model);
     }
 
-    public void edit(Context context) {
-        context.render("edit");
+    public void canjeExitoso(Context context) {
+        this.estaLogueado(context);
+
+        context.render("producto/canjeExitoso.hbs", this.basicModel(context));
     }
 
-
-    public void update(Context context) {
-
-    }
 
 }

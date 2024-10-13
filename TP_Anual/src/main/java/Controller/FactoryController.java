@@ -24,7 +24,6 @@ public class FactoryController {
           case "tecnico": controller = new TecnicoController(); break;
           case "recuperar": controller = new RecuperarController(); break;
           case "visitaTecnica": controller = new VisitaFallaTecnicaController(); break;
-          case "canje": controller = new CanjeController(); break;
           case "reporte": controller = new ReporteController(); break;
           case "deccosalud": controller = new DeccoSaludController(); break;
           case "suscripciones": controller = new SuscripcionesController(); break;

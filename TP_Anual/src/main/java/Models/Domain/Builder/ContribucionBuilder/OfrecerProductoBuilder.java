@@ -27,6 +27,9 @@ public class OfrecerProductoBuilder {
 
 
     public OfrecerProducto construir(){
+        if(ofrecerProducto.getProducto().getImagen() == null){
+            ofrecerProducto.getProducto().setImagen("/images/producto-test.png");
+        }
         return this.ofrecerProducto;
     }
 }

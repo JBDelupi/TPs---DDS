@@ -5,6 +5,7 @@ import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.ContribucionBuilder.*;
 import Models.Domain.Excepciones.Permisos;
@@ -18,7 +19,9 @@ import Models.Domain.Tarjetas.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Domain.Tarjetas.TipoAccion;
 import Models.Repository.Dao;
+import Models.Repository.PseudoBaseDatosHeladera;
 import Models.Repository.PseudoBaseDatosProducto;
+import Models.Repository.PseudoBaseDatosProductosOfrecidos;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -166,13 +169,13 @@ public class FactoryContribucion {
 
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
 
-        int heladeraId = Integer.parseInt(dto.getParams().get("heladeraId"));
-        Heladera heladera = (Heladera) heladeraRepository.buscar(heladeraId);
+        String id = dto.getParams().get("heladeraId");
+
+        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
         Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
 
-        obtenerColaborador().agregarNuevaDonacion(donacion);
         return donacion;
     }
 
@@ -200,7 +203,7 @@ public class FactoryContribucion {
                 .stock(stock)
                 .construir();
 
-        PseudoBaseDatosProducto.getInstance().agregar(producto);
+        PseudoBaseDatosProductosOfrecidos.getInstance().agregar((OfrecerProducto) donacion);
 
         return donacion;
     }
