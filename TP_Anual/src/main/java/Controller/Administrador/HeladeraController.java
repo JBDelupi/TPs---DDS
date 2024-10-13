@@ -102,7 +102,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                     .toList();
 
             model.put("suscriptores",suscriptores);
-            System.out.println("entre" + suscriptores.size() + heladera.getSuscriptores().size());
 
 
 
