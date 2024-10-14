@@ -14,7 +14,7 @@ public class RabbitMQAdapter implements BrokerAdapter {
 
     private RabbitMQAdapter() throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost"); // Cambia esto según tu configuración
+        factory.setUri("amqps://ucxjlgia:XUEu7C4ny55dCIJPExpKETg7k-F30Yd5@prawn.rmq.cloudamqp.com/ucxjlgia"); // Usa setUri para CloudAMQP
         Connection connection = factory.newConnection();
         this.channel = connection.createChannel();
         this.exchangeName = "heladera_exchange";
