@@ -10,6 +10,8 @@ import Models.Domain.Personas.Actores.*;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
+import Models.Domain.Tarjetas.Tarjeta;
+import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import Service.Validador.CredencialDeAcceso;
@@ -34,12 +36,12 @@ public class PseudoBaseDatosUsuario {
 
         // USUARIO FISICO COLABORADOR PARA TESTS
         Fisico fisico = new Fisico();
-        fisico.setNombre("Lucas");
-        fisico.setApellido("Iturrioz Garcia");
+        fisico.setNombre("Pedro");
+        fisico.setApellido("Garcia");
         fisico.setNumeroDocumento("847872313");
         fisico.setTipoDeDocumento(TipoDeDocumento.DNI);
         fisico.setTipoUsuario(RolUsuario.FISICO);
-        fisico.setCorreElectronico("liturriozgarcia@frba.utn.edu.ar");
+        fisico.setCorreElectronico("jgarcia@frba.utn.edu.ar");
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
@@ -160,6 +162,8 @@ public class PseudoBaseDatosUsuario {
                 .flagSituacionDeCalle(true)
                 .construir();
         fisicoV.agregarRol(personaVulnerable);
+        TarjetaAlimentar tarjeta = new TarjetaAlimentar(fisicoV);
+
         agregar(fisicoV);
 
     }
@@ -233,5 +237,19 @@ public class PseudoBaseDatosUsuario {
         }
         return  personaVulnerables;
     }
+
+
+    public List<Tarjeta> getTarjetasAlimentar() {
+        List<Tarjeta> tarjetas = new ArrayList<>();
+        for(Persona persona : base){
+            if(persona.checkRol(TipoRol.VULNERABLE)){
+              PersonaVulnerable personaVulnerable = (PersonaVulnerable) persona.getRol(TipoRol.VULNERABLE);
+                tarjetas.add(personaVulnerable.getTarjeta());
+
+            }
+        }
+        return  tarjetas;
+    }
+
 
 }

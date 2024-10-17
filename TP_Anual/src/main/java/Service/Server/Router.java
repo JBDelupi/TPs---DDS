@@ -18,8 +18,8 @@ public class Router {
         Server.app().get("/about",context -> context.render("main/about.hbs"));
         Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
 
-        Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index);
-        Server.app().post("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::cargarPuntos);
+        Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
+        Server.app().post("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::cargarPuntos,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
 
 
         Server.app().routes(()->{
@@ -28,19 +28,20 @@ public class Router {
             post("/login", ((LoginController) FactoryController.controller("login"))::manejarInicioSesion);
         });
 
+
         Server.app().routes(()->{
             get("/recuperar", ((RecuperarController) FactoryController.controller("recuperar"))::index); //para el olvide mi contrasena
         });
 
         Server.app().routes(()->{
-            get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index);
+            get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index, RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
             get("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::save);
-            get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show);
+            get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
         });
 
         Server.app().routes(()->{
-            get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create);
+            get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create, RolUsuario.ADMINISTRADOR);
             get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
             get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
             post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
@@ -50,19 +51,19 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/index/fisico",((HumanoController) FactoryController.controller("humano"))::index );
+            get("/index/fisico",((HumanoController) FactoryController.controller("humano"))::index, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR );
             get("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::create);
-            post("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::update);
+            post("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::update, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
             post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
-            get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show);
+            get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR );
         });
 
         Server.app().routes(()->{
-            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index);
-            get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create);
-            post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save);
-            get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento);
-            get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show);
+            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index, RolUsuario.ADMINISTRADOR);
+            get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
+            post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save );
+            get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
+            get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
         });
 
         Server.app().routes(()->{
@@ -91,10 +92,10 @@ public class Router {
 
         Server.app().routes(()->{
             // Pantallas de admins
-            get("/registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::getImportarColaborador);
+            get("/registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::getImportarColaborador, RolUsuario.ADMINISTRADOR);
             post("registro/colaboradores", ((AdministradorController) FactoryController.controller("admin"))::saveImportarColaborador);
             get("/index/administrador", ((AdministradorController) FactoryController.controller("admin"))::index, RolUsuario.ADMINISTRADOR);
-            get("/persona/administrador/{id}", ((AdministradorController) FactoryController.controller("admin"))::show);
+            get("/persona/administrador/{id}", ((AdministradorController) FactoryController.controller("admin"))::show, RolUsuario.ADMINISTRADOR);
         });
 
         Server.app().routes(()->{

@@ -4,6 +4,7 @@ package Models.Domain.Builder.UsuariosBuilder;
 import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.Validador.CredencialDeAcceso;
 
@@ -53,6 +54,11 @@ public class FisicoBuilder {
 
     public FisicoBuilder rol(Rol rol){
         this.fisico.agregarRol(rol);
+        return this;
+    }
+
+    public FisicoBuilder direccion(Direccion direccion){
+        this.fisico.setDireccion(direccion);
         return this;
     }
 

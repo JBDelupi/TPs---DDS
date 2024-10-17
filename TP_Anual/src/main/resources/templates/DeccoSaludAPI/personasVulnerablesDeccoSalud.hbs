@@ -43,14 +43,11 @@
                             <tbody>
                             {{#each localidades}}
                                 <tr>
-                                    <td rowspan="{{this.personas.length}}">{{this.barrio}} ({{this.cantidadPersonas}} personas)</td>
-                                    <td>{{this.personas.[0]}}</td>
+                                    <td rowspan="{{this.cantidadPersonas}}">{{this.barrio}} ({{this.cantidadPersonas}} personas)</td>
                                 </tr>
-                                {{#each this.personas.[1:]}}
                                     <tr>
-                                        <td>{{this}}</td>
+                                        <td>{{personas}}</td>
                                     </tr>
-                                {{/each}}
                             {{/each}}
                             </tbody>
                         </table>

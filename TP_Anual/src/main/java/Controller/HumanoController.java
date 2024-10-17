@@ -9,6 +9,7 @@ import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
@@ -35,10 +36,12 @@ public class HumanoController extends Controller  {
 
         String nombre = context.formParam("nombre") ;
         String apellido = context.formParam("apellido") ;
-     // LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
+        LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
         String correo = context.formParam("correo");
-        String nroTelefono = context.formParam("nroTelefono");
         String nroDocumento = context.formParam("documento");
+        String calle = context.formParam("calle");
+        String numero = context.formParam("numero");
+        String localidad = context.formParam("localidad");
         TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
@@ -47,15 +50,21 @@ public class HumanoController extends Controller  {
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
 
+        Direccion direccion = new Direccion();
+        direccion.setCalle(calle);
+        direccion.setNumero(numero);
+        direccion.setLocalidad(localidad);
+
         FisicoBuilder fisicoBuilder = new FisicoBuilder();
         Fisico fisico = fisicoBuilder
                 .nombre(nombre)
                 .apellido(apellido)
-             // .fechaNacimiento(fechaNacimiento)
+                .fechaNacimiento(fechaNacimiento)
                 .correoElectronico(correo)
                 .numeroDocumento(nroDocumento)
                 .credencialDeAcceso(credencialDeAcceso)
                 .tipoDocumento(tipoDeDocumento)
+                .direccion(direccion)
                 .construir();
 
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
@@ -68,6 +77,7 @@ public class HumanoController extends Controller  {
 
         context.redirect("/login");
     }
+
 
 
 

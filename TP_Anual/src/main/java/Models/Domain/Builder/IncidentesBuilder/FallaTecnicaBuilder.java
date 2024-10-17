@@ -1,5 +1,6 @@
 package Models.Domain.Builder.IncidentesBuilder;
 
+import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
@@ -22,6 +23,7 @@ public class FallaTecnicaBuilder {
 
     public FallaTecnicaBuilder heladera(Heladera heladera) {
         fallaTecnica.setHeladera(heladera);
+        heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
         return this;
     }

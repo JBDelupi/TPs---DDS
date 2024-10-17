@@ -23,6 +23,7 @@ public class TarjetaAlimentar extends Tarjeta {
 
     public TarjetaAlimentar(Persona titular){
         this.titular = titular;
+        ((PersonaVulnerable)this.titular.getRol(TipoRol.VULNERABLE)).setTarjeta(this);
         this.cantMaxUso = 4 + 2 * ((PersonaVulnerable)getTitular().getRol(TipoRol.VULNERABLE)).getMenoresACargo();
         this.fechaUltUso = LocalDate.now();
         this.usosHoy = 0;

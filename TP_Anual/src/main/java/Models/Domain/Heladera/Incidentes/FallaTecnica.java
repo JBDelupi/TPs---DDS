@@ -32,6 +32,7 @@ public class FallaTecnica extends Incidente {
 
     public FallaTecnica() {
         this.setSolucionado(false);
+
     }
 
     public Persona avisarATecnico(List<Persona> tecnicos) {
