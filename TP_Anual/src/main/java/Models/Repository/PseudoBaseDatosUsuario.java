@@ -34,12 +34,12 @@ public class PseudoBaseDatosUsuario {
 
         // USUARIO FISICO COLABORADOR PARA TESTS
         Fisico fisico = new Fisico();
-        fisico.setNombre("Juan");
-        fisico.setApellido("Garcia");
+        fisico.setNombre("Lucas");
+        fisico.setApellido("Iturrioz Garcia");
         fisico.setNumeroDocumento("847872313");
         fisico.setTipoDeDocumento(TipoDeDocumento.DNI);
         fisico.setTipoUsuario(RolUsuario.FISICO);
-        fisico.setCorreElectronico("unbuenmail@gmail.com");
+        fisico.setCorreElectronico("liturriozgarcia@frba.utn.edu.ar");
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
@@ -52,6 +52,7 @@ public class PseudoBaseDatosUsuario {
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
         Colaborador colaborador = colaboradorBuilder
                 .construir(fisico);
+        colaborador.setPuntaje(1000000.00);
         fisico.agregarRol(colaborador);
         agregar(fisico);
 

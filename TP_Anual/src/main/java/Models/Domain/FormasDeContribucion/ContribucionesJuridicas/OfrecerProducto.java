@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 public class OfrecerProducto extends Contribucion {
 
-    private Integer ID;
+    private Integer id;
     private Producto producto;
     private Double puntosNecesarios;
     private Integer stock;

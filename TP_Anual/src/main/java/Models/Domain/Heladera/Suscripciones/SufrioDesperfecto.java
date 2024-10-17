@@ -32,13 +32,12 @@ public class SufrioDesperfecto implements ObserverHeladera {
         if( publicacion.equals(TipoDePublicacion.SUFRIO_DESPERFECTO) ){
             MensajeBuilder nuevaPublicacionBuilder = new MensajeBuilder();
 
-            PseudoBaseDatosHeladera base = new PseudoBaseDatosHeladera();
-            SistemaDeRedistribucion sistema = new SistemaDeRedistribucion(base.baseHeladeras);
+            SistemaDeRedistribucion sistema = new SistemaDeRedistribucion(PseudoBaseDatosHeladera.getInstance().getBaseHeladeras());
             Sugerencia sugerencia = sistema.generarSugerencia(heladera.getViandas().size());
 
             Mensaje unaPublicacion = nuevaPublicacionBuilder
                     .asunto(TipoDePublicacion.SUFRIO_DESPERFECTO.toString())
-                    .contenido(sugerencia.mostrar())
+                    .contenido(TipoDePublicacion.SUFRIO_DESPERFECTO + " - Heladeras donde se recomienda distribuir: " + sugerencia.mostrar())
                     .destinatario(colaborador.getCodigoDeNotificacion())
                     .construir();
 

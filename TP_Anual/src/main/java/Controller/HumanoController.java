@@ -7,11 +7,14 @@ import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
 
+import Service.Notificacion.Notificacion;
+import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
@@ -82,12 +85,28 @@ public class HumanoController extends Controller  {
         Map<String, Object> model = this.basicModel(context);
         model.put("humano", model);
 
-
         context.render("persona-humana/perfilHumana.hbs", model);
     }
 
 
+    public void update(Context context){
+        this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
+        this.asignarParametros(context);
+
+        context.redirect("/index/fisico");
+    }
+
+    public void asignarParametros(Context context){
+         if ( context.formParam("medioNotificacion") != null ) {
+             Notificacion medioDeNotificacion = StrategyMedioDeNotificacion.strategy( context.formParam("medioNotificacion") );
+             System.out.println( context.formParam("codigo") );
+             System.out.println( context.formParam("medioNotificacion"));
+             getUsuario().setMedioDeNotificacion(medioDeNotificacion);
+             getUsuario().setCodigoDeNotificacion(context.formParam("codigo"));
+         }
+    }
 
 
 }

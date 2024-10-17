@@ -28,7 +28,7 @@ public class PseudoBaseDatosProductosOfrecidos {
 
     private void agregarProducto(Producto producto, Double puntosNecesarios, Integer stock) {
         OfrecerProducto ofrecerProducto = new OfrecerProducto();
-        ofrecerProducto.setID(producto.getId());
+        ofrecerProducto.setId(producto.getId());
         ofrecerProducto.setProducto(producto);
         ofrecerProducto.setPuntosNecesarios(puntosNecesarios);
         ofrecerProducto.setStock(stock);
@@ -52,7 +52,7 @@ public class PseudoBaseDatosProductosOfrecidos {
 
     public OfrecerProducto getOfrecerProductoById(String id) {
         return baseProductosOfrecidos.stream()
-                .filter(p -> p.getID() == Integer.parseInt(id))
+                .filter(p -> p.getId() == Integer.parseInt(id))
                 .findFirst()
                 .orElse(null);
     }

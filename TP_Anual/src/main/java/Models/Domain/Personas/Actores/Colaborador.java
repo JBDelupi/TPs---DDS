@@ -31,9 +31,8 @@ public class Colaborador extends Rol {
     }
 
 
-
     public void realizarCanje(OfrecerProducto producto, Integer cantidad){
-        if (!(puntaje >= producto.getPuntosNecesarios()*cantidad &&  cantidad >=producto.getStock())){
+        if (!(puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad <=producto.getStock())){
             throw new NoTienePuntosCanjeException("No tiene suficiente Puntos");
         }
         puntaje -= producto.getPuntosNecesarios() * cantidad;

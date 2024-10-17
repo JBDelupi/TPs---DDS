@@ -61,6 +61,12 @@
                                     <label for="cantidadProducto">Cantidad Disponible</label>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <p id="puntosDisponibles" class="form-control">{{colaborador.puntaje}}</p>
+                                    <label for="puntosDisponibles">Tus puntos disponibles</label>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <p id="empresaOfreciente" class="form-control">{{producto.empresaOfreciente}}</p>
@@ -73,9 +79,10 @@
                                     <label for="empresaOfreciente">Rubro</label>
                                 </div>
                             </div>
-                            <form action="/canjeExitoso" method="GET">
+                            <form action="/canjeExitoso" method="POST">
                                 <div class="col-md-12">
                                     <div class="form-floating">
+                                        <input type="hidden" name="idProducto" value="{{producto.producto.id}}">
                                         <input type="number" class="form-control" id="cantidadCanjear" name="cantidadCanjear" placeholder="Cantidad a Canjear" min="1" max="{{producto.stock}}" required>
                                         <label for="cantidadCanjear">Cantidad a Canjear</label>
                                     </div>

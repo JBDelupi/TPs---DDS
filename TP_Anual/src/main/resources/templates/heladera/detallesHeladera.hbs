@@ -132,6 +132,7 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="suscripciones mt-4">
                         {{#each suscriptores}}
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between align-items-center form-floating">
@@ -140,7 +141,7 @@
                                         <span class="n-viandas" data-suscripcion="{{this.nombre}}" data-n="{{this.n}}" style="display:none;"> - {{this.n}} viandas</span>
                                     </p>
                                     <label for="suscripcion">Suscripción</label>
-                                    <form action="/heladeras/{{id}}/desuscribir" method="POST">
+                                    <form action="/heladeras/{{id}}/desuscribir" method="POST" class="text-center">
                                         <input type="hidden" name="heladeraId" value="{{heladera.id}}">
                                         <input type="hidden" name="idSuscripcion" value="{{this.id}}">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>
@@ -148,8 +149,7 @@
                                 </div>
                             </div>
                         {{/each}}
-
-
+                        </div>
                     </div>
                 </div>
             </div>

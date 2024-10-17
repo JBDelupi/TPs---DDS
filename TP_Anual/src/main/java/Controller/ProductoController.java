@@ -3,6 +3,10 @@ package Controller;
 import Models.Domain.Builder.ContribucionBuilder.OfrecerProductoBuilder;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Rol;
+import Models.Domain.Personas.Actores.TipoRol;
+import Models.Domain.Producto.Canje;
 import Models.Domain.Producto.Producto;
 import Models.Domain.Producto.TipoRubro;
 import Models.Repository.PseudoBaseDatosHeladera;
@@ -16,6 +20,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.random.RandomGenerator;
 
 public class ProductoController extends Controller {
@@ -41,6 +46,7 @@ public class ProductoController extends Controller {
         OfrecerProducto producto = PseudoBaseDatosProductosOfrecidos.getInstance().getOfrecerProductoById(id);
 
         model.put("producto",producto);
+        model.put("colaborador",getUsuario().getRol(TipoRol.COLABORADOR));
 
         context.render("producto/show.hbs", model);
     }
@@ -48,7 +54,15 @@ public class ProductoController extends Controller {
     public void canjeExitoso(Context context) {
         this.estaLogueado(context);
 
-        context.render("producto/canjeExitoso.hbs", this.basicModel(context));
+        String idProducto = context.formParam("idProducto");
+        OfrecerProducto producto = PseudoBaseDatosProductosOfrecidos.getInstance().getOfrecerProductoById(idProducto);
+        Integer cantidad = Integer.valueOf(context.formParam("cantidadCanjear"));
+
+        basicModel(context);
+
+        ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR)).realizarCanje(producto, cantidad);
+
+        context.render("producto/canjeExitoso.hbs");
     }
 
 

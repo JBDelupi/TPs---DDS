@@ -6,6 +6,7 @@ import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
+import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
@@ -21,6 +22,7 @@ public class FallaTecnicaBuilder {
 
     public FallaTecnicaBuilder heladera(Heladera heladera) {
         fallaTecnica.setHeladera(heladera);
+        heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
         return this;
     }
 
@@ -60,6 +62,7 @@ public class FallaTecnicaBuilder {
     }
 
     public FallaTecnica construir() {
+
         return this.fallaTecnica;
     }
 }

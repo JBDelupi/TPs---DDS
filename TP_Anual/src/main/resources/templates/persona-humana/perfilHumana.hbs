@@ -45,8 +45,6 @@
         </div>
     </div>
 
-
-
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-4">
@@ -74,53 +72,35 @@
                         <p><strong>Cantidad de Viandas Donadas: </strong>{{usuario.cantidadViandasDonadas}}</p>
                         <p><strong>Puntaje: </strong>{{usuario.puntaje}}</p>
 
-                        <!-- Medio de Notificación -->
-                        <div class="form-group mt-4">
-                            <label for="medioNotificacion"><strong>Medio de Notificación</strong></label>
-                            <select class="form-control" id="medioNotificacion" name="medioNotificacion">
-                                <option value="" disabled selected>Seleccionar medio</option>
-                                <option value="whatsapp">WhatsApp</option>
-                                <option value="telegram">Telegram</option>
-                                <option value="sms">SMS</option>
-                                <option value="correo">Correo Electrónico</option>
-                            </select>
-                        </div>
+                        <form method="POST" action="{{usuario.id}}">
+                            <div class="form-group mt-4">
+                                <label for="medioNotificacion"><strong>Medio de Notificación</strong></label>
+                                <select class="form-control" id="medioNotificacion" name="medioNotificacion" required>
+                                    <option value="" disabled selected>Seleccionar medio</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="sms">SMS</option>
+                                    <option value="correo">Correo Electrónico</option>
+                                </select>
+                            </div>
 
-                        <!-- Campo adicional para código de WhatsApp -->
-                        <div class="form-group mt-3" id="campoWhatsApp" style="display:none;">
-                            <label for="codigoWhatsApp"><strong>Código de WhatsApp</strong></label>
-                            <input type="text" class="form-control" id="codigoWhatsApp" placeholder="Ingrese su código de WhatsApp">
-                        </div>
+                            <!-- Campo único para el código de notificación -->
+                            <div class="form-group mt-3" id="campoNotificacion" style="display: none;">
+                                <label for="codigoNotificacion" id="labelCodigoNotificacion"><strong>Código de Notificación</strong></label>
+                                <input type="text" class="form-control" id="codigoNotificacion" name="codigo" placeholder="">
+                            </div>
 
-                        <!-- Campo adicional para código de Telegram -->
-                        <div class="form-group mt-3" id="campoTelegram" style="display:none;">
-                            <label for="codigoTelegram"><strong>Código de Telegram</strong></label>
-                            <input type="text" class="form-control" id="codigoTelegram" placeholder="Ingrese su código de Telegram">
-                        </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="#" class="btn btn-primary">Edit Profile</a>
+                                <button type="submit" class="btn btn-success">Guardar Medio de Notificación</button>
+                            </div>
+                        </form>
 
-                        <!-- Campo adicional para número de teléfono (SMS) -->
-                        <div class="form-group mt-3" id="campoSms" style="display:none;">
-                            <label for="numeroSms"><strong>Número de Teléfono</strong></label>
-                            <input type="tel" class="form-control" id="numeroSms" placeholder="Ingrese su número de teléfono">
-                        </div>
-
-                        <!-- Campo adicional para correo -->
-                        <div class="form-group mt-3" id="campoCorreo" style="display:none;">
-                            <label for="correo"><strong>Correo Electronico</strong></label>
-                            <input type="correo" class="form-control" id="correo" placeholder="Ingrese su número correo electronico">
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="d-flex justify-content-between mt-4">
-                            <a href="#" class="btn btn-primary">Edit Profile</a>
-                            <button type="submit" class="btn btn-success">Guardar Medio de Notificación</button>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -150,25 +130,26 @@
 <!-- Script para manejar el selector de medio de notificación -->
 <script>
     document.getElementById('medioNotificacion').addEventListener('change', function() {
-        var whatsappField = document.getElementById('campoWhatsApp');
-        var telegramField = document.getElementById('campoTelegram');
-        var smsField = document.getElementById('campoSms');
-        var correoField = document.getElementById('campoCorreo');
+        var campoNotificacion = document.getElementById('campoNotificacion');
+        var labelCodigoNotificacion = document.getElementById('labelCodigoNotificacion');
+        var inputCodigoNotificacion = document.getElementById('codigoNotificacion');
 
-        // Ocultar todos los campos adicionales
-        whatsappField.style.display = 'none';
-        telegramField.style.display = 'none';
-        smsField.style.display = 'none';
+        // Mostrar el campo de código de notificación
+        campoNotificacion.style.display = 'block';
 
-        // Mostrar campo correspondiente según el medio de notificación seleccionado
+        // Cambiar el placeholder y el label del campo según el medio seleccionado
         if (this.value === 'whatsapp') {
-            whatsappField.style.display = 'block';
+            labelCodigoNotificacion.innerText = 'Ingrese su código de WhatsApp';
+            inputCodigoNotificacion.placeholder = 'Ingrese su código de WhatsApp';
         } else if (this.value === 'telegram') {
-            telegramField.style.display = 'block';
+            labelCodigoNotificacion.innerText = 'Ingrese su código de Telegram';
+            inputCodigoNotificacion.placeholder = 'Ingrese su código de Telegram';
         } else if (this.value === 'sms') {
-            smsField.style.display = 'block';
+            labelCodigoNotificacion.innerText = 'Ingrese su número de SMS';
+            inputCodigoNotificacion.placeholder = 'Ingrese su número de SMS';
         } else if (this.value === 'correo') {
-            correoField.style.display = 'block';
+            labelCodigoNotificacion.innerText = 'Ingrese su correo electrónico';
+            inputCodigoNotificacion.placeholder = 'Ingrese su correo electrónico';
         }
     });
 </script>
