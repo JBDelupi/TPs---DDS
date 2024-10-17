@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Canjes</title>
+
+    <!-- Verificar si las rutas relativas están correctas -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Verificar que las plantillas parciales se carguen correctamente -->
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<!-- Historial de Canjes Start -->
+<section class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Historial de Canjes</h5>
+            <h1 class="mb-5">Tus Canjes Realizados</h1>
+        </div>
+        <div class="row g-4">
+            {{#each canjes}}
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="d-flex align-items-center border p-3 shadow-sm rounded">
+                        <div class="w-100 d-flex flex-column text-center ps-4">
+                            <h5 class="d-flex flex-column justify-content-between border-bottom pb-2">
+                                <div class="d-flex flex-column mb-3">
+                                    <strong class="fw-bold text-primary">Producto:</strong>  <!-- Título estilizado para el producto -->
+                                    <span class="text-secondary">{{this.producto}}</span>
+                                </div>
+                                <div class="d-flex flex-column mb-3">
+                                    <strong class="fw-bold text-primary">Fecha de Canje:</strong>  <!-- Título estilizado para la fecha -->
+                                    <span class="text-secondary">{{this.fechaDeCanje}}</span>
+                                </div>
+                                <div class="d-flex flex-column mb-3">
+                                    <strong class="fw-bold text-primary">Estado:</strong>  <!-- Título estilizado para el estado -->
+                                    <span class="text-secondary">{{this.estado}}</span>
+                                </div>
+                            </h5>
+                            <a href="{{rol}}/{{usuario.id}}/canje/{{this.id}}" class="btn btn-primary btn-sm mx-auto mt-3">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<!-- Archivos JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
+</body>
+</html>

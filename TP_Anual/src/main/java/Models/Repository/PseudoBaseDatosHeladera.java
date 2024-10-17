@@ -2,6 +2,7 @@ package Models.Repository;
 
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.EstadoHeladera;
+import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 import Service.APIPuntos.Punto;
@@ -64,7 +65,7 @@ public class PseudoBaseDatosHeladera {
             heladera.setTemperaturaMin(5.00);
             heladera.setTemperaturaMax(100.00);
             heladera.setAbierto(Math.random() < 0.5);
-            heladera.setCapacidadDeViandas((int)(Math.random()*100));
+            heladera.setCapacidadDeViandas((int)(Math.random()*100)+20);
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);
             // Generar una fecha random dentro de los últimos 365 días
             LocalDate startDate = LocalDate.now().minus(1, ChronoUnit.YEARS);
@@ -73,6 +74,14 @@ public class PseudoBaseDatosHeladera {
             LocalDate randomDate = startDate.plusDays((long) (Math.random() * daysBetween));
 
             heladera.setFechaDePuestaEnMarcha(randomDate);
+
+            Vianda vianda1 = new Vianda();
+            Vianda vianda2 = new Vianda();
+            Vianda vianda3 = new Vianda();
+
+            heladera.agregarVianda(vianda1);
+            heladera.agregarVianda(vianda2);
+            heladera.agregarVianda(vianda3);
         }
     }
 

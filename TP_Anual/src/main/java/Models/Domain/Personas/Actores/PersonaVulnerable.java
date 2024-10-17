@@ -15,6 +15,10 @@ public class PersonaVulnerable extends Rol {
     private Integer menoresACargo;
     private TarjetaAlimentar tarjeta;
 
+    public PersonaVulnerable(){
+        this.tipo = TipoRol.VULNERABLE;
+    }
+
     public Boolean tieneMenoresACargo(){
         return menoresACargo>0;
     }

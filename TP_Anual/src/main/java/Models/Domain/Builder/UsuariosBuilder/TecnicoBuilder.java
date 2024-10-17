@@ -26,8 +26,6 @@ public class TecnicoBuilder {
     }
 
     public Tecnico construir(){
-        tecnico.setTipo(TipoRol.TECNICO);
-
         return this.tecnico;
     }
 

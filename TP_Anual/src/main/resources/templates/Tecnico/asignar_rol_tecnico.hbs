@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Rol de Técnico</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Asignar Rol de Técnico</h1>
+            {{#if Error}}
+                <p>ID INVALIDO, REEINGRESAR NUEVAMENTE EL ID</p>
+            {{/if}}
+
+            <form action="/registro/rol/tecnico" method="POST">
+                <div class="form-group">
+                    <label for="userId">ID de Usuario</label>
+                    <input type="text" class="form-control" id="userId" name="userId" placeholder="Ingrese el ID del usuario" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3 w-100">Asignar Rol</button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <a href="/" class="btn btn-secondary">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -19,6 +19,8 @@ public class AdministradorController  extends Controller {
 
 
     public void index(Context context) {
+        this.estaLogueado(context);
+
         context.render("Administrador/index_Admin.hbs", this.basicModel(context));
     }
 
@@ -51,9 +53,9 @@ public class AdministradorController  extends Controller {
         Fisico usuario = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
         Map<String, Object> model = this.basicModel(context);
         model.put("usuario",usuario);
-        System.out.println(usuario.getId());
 
         context.render("Administrador/perfilAdministrador.hbs",model);
     }
+
 
 }

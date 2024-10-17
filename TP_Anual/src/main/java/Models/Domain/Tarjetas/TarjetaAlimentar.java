@@ -41,9 +41,6 @@ public class TarjetaAlimentar extends Tarjeta {
         RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,viandaConsume,tipoAccion);
         nuevoRegistro(unNuevoUso);
         this.usosHoy++;
-        System.out.println("Uso exitoso tarjeta cantidad disponible: " +  (cantMaxUso - usosHoy) );
-
-
     }
 
     public void calcularUsosHoy() {

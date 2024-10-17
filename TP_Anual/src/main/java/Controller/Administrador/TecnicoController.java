@@ -2,15 +2,19 @@ package Controller.Administrador;
 
 import Controller.Controller;
 import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Repository.PseudoBaseDatosUsuario;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-public class TecnicoController extends Controller implements ICrudViewsHandler {
+import java.util.Map;
 
-    @Override
+public class TecnicoController extends Controller {
+
+
     public void save(Context context) {
 
         String nombre = context.formParam("nombre");
@@ -20,8 +24,9 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
         String cuil = context.formParam("cuil");
         String areaCobertura = context.formParam("areaCobertura");
 
+
         TecnicoBuilder builder = new TecnicoBuilder();
-//        Tecnico tecnico = TecnicoBuilder
+//       Tecnico tecnico = TecnicoBuilder
 //                .nombre(nombre)
 //                .apellido(apellido)
 //                .tipoDeDocumento(tipoDeDocumento)
@@ -34,27 +39,39 @@ public class TecnicoController extends Controller implements ICrudViewsHandler {
 
 
 
-    @Override
     public void index(Context context) {
+        this.estaLogueado(context);
 
+        context.render("Tecnico/index_registro_tecnico.hbs");
     }
 
-    @Override
-    public void show(Context context) {
 
-    }
 
-    @Override
     public void create(Context context) {
+        this.estaLogueado(context);
+
         context.render("Tecnico/registroTecnico.hbs");
     }
 
-    public void edit(Context context) {
+
+
+    public void edit(Context context)  {
+        String idUsuario = context.formParam("userId");
+
+        Persona persona = PseudoBaseDatosUsuario.getInstance().getId(idUsuario);
+        persona.agregarRol(new Tecnico());
+        context.redirect("/index/administrador");
+
 
     }
 
-    @Override
     public void update(Context context) {
+        this.estaLogueado(context);
 
+        Map<String, Object> model = this.basicModel(context);
+
+        context.render("Tecnico/asignar_rol_tecnico.hbs",model);
     }
+
+
 }

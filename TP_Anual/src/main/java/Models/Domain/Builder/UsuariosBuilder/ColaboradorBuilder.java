@@ -20,7 +20,6 @@ public class ColaboradorBuilder {
         colaborador.setContribuciones(new ArrayList<>());
         colaborador.setPuntaje(0.0);
         colaborador.setHistorialCanje(new ArrayList<>());
-        colaborador.setTipo(TipoRol.COLABORADOR);
 
         if (persona instanceof Fisico) {
             TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(persona);

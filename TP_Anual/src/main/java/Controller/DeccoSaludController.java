@@ -34,7 +34,7 @@ public class DeccoSaludController extends Controller {
 
         r = ServicioDeccoSaludAPI.getInstance().obtenerPersonasVulnerables(listaEnviar);
 
-        model.put("",r);
+        model.put("localidades",r);
         context.render("DeccoSaludAPI/personasVulnerablesDeccoSalud.hbs", model);
     }
 }

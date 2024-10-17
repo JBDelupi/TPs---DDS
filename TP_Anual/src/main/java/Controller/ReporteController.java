@@ -31,6 +31,8 @@ public class ReporteController extends Controller implements ICrudViewsHandler {
         model.put("usuario", usuario);
         model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
 
+        
+
         context.render("Reportes/index.hbs", model);
     }
 

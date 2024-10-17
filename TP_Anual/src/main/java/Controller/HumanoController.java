@@ -84,7 +84,12 @@ public class HumanoController extends Controller  {
     public void index(Context context){
         this.estaLogueado(context);
 
-        context.render("index-inicio/index_Humana.hbs", this.basicModel(context));
+        Map<String, Object> model = this.basicModel(context);
+
+        model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
+        model.put("tecnico", usuario.checkRol(TipoRol.TECNICO));
+
+        context.render("index-inicio/index_Humana.hbs", model);
 
     }
 

@@ -27,7 +27,12 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     public void index(Context context) {
         this.estaLogueado(context);
 
-        context.render("index-inicio/index_Juridica.hbs", basicModel(context));
+        Map<String, Object> model = this.basicModel(context);
+
+        model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
+        model.put("tecnico", usuario.checkRol(TipoRol.TECNICO));
+
+        context.render("index-inicio/index_Juridica.hbs", model);
     }
 
     @Override

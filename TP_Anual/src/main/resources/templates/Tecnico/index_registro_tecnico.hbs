@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acciones Tecnico</title>
+    <title>Registrar Técnico</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
@@ -18,51 +18,39 @@
 </head>
 <body>
 
-{{> templates/partials/header esHumano = esHumano  id=id}}
+{{> templates/partials/header esHumano = esHumano id=id}}
 {{> templates/partials/tipografia}}
 
 <div class="contact_section layout_padding">
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="display-3 text-dark text-center">Acciones Disponibles</h1>
+                <h1 class="display-3 text-dark text-center">Registrar Técnico</h1>
             </div>
         </div>
         <div class="blog_section_2 mt-5">
             <div class="row justify-content-center">
-                <!-- Generar visita tecnica -->
+                <!-- Nuevo Usuario -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
-                    <a href="/contribuciones" class="text-decoration-none w-100">
+                    <a href="/registro/tecnico" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                             <div class="p-4">
-                                <i class="fa fa-3x fa fa-wrench text-primary mb-4"></i>
-                                <h5 class="text-dark">Generar visita técnica</h5>
-                                <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
+                                <i class="fa fa-3x fa-user-plus text-primary mb-4"></i>
+                                <h5 class="text-dark">Nuevo Usuario</h5>
+                                <p class="text-dark">Registra un nuevo usuario en la plataforma y asigna los roles necesarios.</p>
                             </div>
                         </div>
                     </a>
                 </div>
 
-                <!-- Consultar fallas -->
+                <!-- Asignar Rol -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
-                    <a href="/heladeras" class="text-decoration-none w-100">
+                    <a href="/registro/rol/tecnico" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                             <div class="p-4">
-                                <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
-                                <h5 class="text-dark">Consultar estado de fallas</h5>
-                                <p class="text-dark">Visualize las fallas asignadas y consulte su estado.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-                    <a href="/reportes" class="text-decoration-none w-100">
-                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
-                                <h5 class="text-dark">Ver Reportes</h5>
-                                <p class="text-dark">Crea reportes que brindan informacin sobre heladeras,colaboradores y demas.</p>
+                                <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
+                                <h5 class="text-dark">Asignar Rol</h5>
+                                <p class="text-dark">Asigna un rol a un usuario ya registrado dentro de la plataforma.</p>
                             </div>
                         </div>
                     </a>

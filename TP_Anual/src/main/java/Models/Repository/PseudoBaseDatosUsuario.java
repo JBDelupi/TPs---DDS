@@ -12,6 +12,7 @@ import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Tarjetas.Tarjeta;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
+import Models.Domain.Tarjetas.TipoAccion;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import Service.Validador.CredencialDeAcceso;
@@ -164,7 +165,38 @@ public class PseudoBaseDatosUsuario {
         fisicoV.agregarRol(personaVulnerable);
         TarjetaAlimentar tarjeta = new TarjetaAlimentar(fisicoV);
 
+        tarjeta.agregarNuevoUso(PseudoBaseDatosHeladera.getInstance().getId("1"), TipoAccion.QUITAR );
+
         agregar(fisicoV);
+
+        // USUARIO FISICO VULNERABLE 2 PARA TESTS
+        Fisico fisicoV2 = new Fisico();
+        fisicoV2.setNombre("Pedro");
+        fisicoV2.setApellido("Alvarez");
+        fisicoV2.setNumeroDocumento("4562525");
+        fisicoV2.setTipoDeDocumento(TipoDeDocumento.DNI);
+        fisicoV2.setTipoUsuario(RolUsuario.FISICO);
+        fisicoV2.setCorreElectronico("unbuedwqfgw@gmail.com");
+
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder6 = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso6 = credencialDeAccesoBuilder6
+                .nombreUsuario("v2")
+                .contrasenia("v2")
+                .construir();
+
+        fisicoV2.setCredencialDeAcceso(credencialDeAcceso6);
+        fisicoV2.setId(6);
+        VulnerableBuilder vulnerableBuilder2 = new VulnerableBuilder();
+        PersonaVulnerable personaVulnerable2 = vulnerableBuilder2
+                .menoresACargo(4)
+                .flagSituacionDeCalle(true)
+                .construir();
+        fisicoV2.agregarRol(personaVulnerable2);
+        TarjetaAlimentar tarjeta2 = new TarjetaAlimentar(fisicoV2);
+        tarjeta2.setCantMaxUso(20);
+        tarjeta2.agregarNuevoUso(PseudoBaseDatosHeladera.getInstance().getId("2"), TipoAccion.QUITAR );
+
+        agregar(fisicoV2);
 
     }
 
@@ -193,7 +225,7 @@ public class PseudoBaseDatosUsuario {
                 fisicos.add((Fisico) persona);
             }
         }
-      return   fisicos.stream().filter(f-> ((Colaborador)f.getRol(TipoRol.COLABORADOR)).getTarjeta().getCodigo().equals(tarjeta)).findAny().orElse(null);
+        return   fisicos.stream().filter(f-> ((Colaborador)f.getRol(TipoRol.COLABORADOR)).getTarjeta().getCodigo().equals(tarjeta)).findAny().orElse(null);
     }
 
     public List<Persona> getTecnicos() {
@@ -243,9 +275,9 @@ public class PseudoBaseDatosUsuario {
         List<Tarjeta> tarjetas = new ArrayList<>();
         for(Persona persona : base){
             if(persona.checkRol(TipoRol.VULNERABLE)){
-              PersonaVulnerable personaVulnerable = (PersonaVulnerable) persona.getRol(TipoRol.VULNERABLE);
+                PersonaVulnerable personaVulnerable = (PersonaVulnerable) persona.getRol(TipoRol.VULNERABLE);
                 tarjetas.add(personaVulnerable.getTarjeta());
-
+                System.out.println("Vulnerable agregado a la lista de DeccoSalud API: " + persona.getId());
             }
         }
         return  tarjetas;

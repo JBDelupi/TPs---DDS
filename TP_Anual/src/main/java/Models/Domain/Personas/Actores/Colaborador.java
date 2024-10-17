@@ -19,6 +19,9 @@ public class Colaborador extends Rol {
     private TarjetaAccesos tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
     private int cantidadViandasDonadas;
 
+    public Colaborador(){
+        this.tipo = TipoRol.COLABORADOR;
+    }
 
     public void agregarNuevaDonacion(Contribucion unaDonacion){
         this.contribuciones.add(unaDonacion);

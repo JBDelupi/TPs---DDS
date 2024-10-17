@@ -101,11 +101,15 @@ public class Router {
         Server.app().routes(()->{
             get("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::create);
             post("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::save);
+            get("/index/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::index);
+            get("/registro/rol/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::update);
+            post("/registro/rol/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::edit);
         });
 
         Server.app().routes(()->{
             get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
             get("/reportes/{id}",((ReporteController)FactoryController.controller("reporte"))::create);
+
         });
 
 

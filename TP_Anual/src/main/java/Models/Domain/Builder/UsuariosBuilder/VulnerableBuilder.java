@@ -26,7 +26,6 @@ public class VulnerableBuilder {
     }
 
     public PersonaVulnerable construir() {
-        personaVulnerable.setTipo(TipoRol.VULNERABLE);
 
         return this.personaVulnerable;}
 }

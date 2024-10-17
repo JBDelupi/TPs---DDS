@@ -9,4 +9,8 @@ public class Tecnico extends Rol {
     private String cuil;
     private AreaCobertura area;
 
+    public Tecnico(){
+        this.tipo = TipoRol.TECNICO;
+    }
+
 }
