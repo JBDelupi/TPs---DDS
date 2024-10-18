@@ -65,5 +65,17 @@ public class ProductoController extends Controller {
         context.render("producto/canjeExitoso.hbs");
     }
 
+    public void historialCanjes(Context context) {
+        this.estaLogueado(context);
+
+        Map<String, Object> model = this.basicModel(context);
+
+        Colaborador colaborador = ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR));
+        List<Canje> canjes = colaborador.getHistorialCanje();
+
+        model.put("canjes",canjes);
+
+        context.render("producto/historialCanjes.hbs", model);
+    }
 
 }

@@ -79,9 +79,8 @@ public class Router {
             get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
             get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
             post("/canjeExitoso",((ProductoController)FactoryController.controller("producto"))::canjeExitoso);
-
+            get("{rol}/{userId}/historialcanjes",((ProductoController)FactoryController.controller("producto"))::historialCanjes);
         });
-
 
        Server.app().routes(()->{
            get("{rol}/{userId}/contribuciones", ((ContribucionController) FactoryController.controller("Contribucion"))::consultarContribuciones);

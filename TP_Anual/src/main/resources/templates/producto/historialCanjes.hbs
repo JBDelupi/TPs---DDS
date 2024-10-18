@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Canjes</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Cargar el header del colaborador -->
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<!-- Historial de Canjes Start -->
+<section class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Historial</h5>
+            <h1 class="mb-5">Tus Canjes</h1>
+        </div>
+
+        <!-- Tabla de Canjes -->
+        <div class="table-responsive wow fadeInUp" data-wow-delay="0.3s">
+            <table class="table table-bordered text-center">
+                <thead class="table-primary">
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Puntos Necesarios por Unidad</th>
+                    <th scope="col">Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each canjes}}
+                    <tr>
+                        <td>{{this.fecha}}</td>
+                        <td>{{this.cantidad}}</td>
+                        <td>{{this.ofrecerProducto.producto.nombre}}</td>
+                        <td>{{this.ofrecerProducto.puntosNecesarios}}</td>
+                        <td>{{this.ofrecerProducto.producto.descripcion}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<!-- Archivos JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
+</body>
+</html>
