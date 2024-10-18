@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {
 
-    // GET
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
@@ -33,7 +32,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         context.render("heladera/registroHeladera.hbs",this.basicModel(context));
     }
 
-    // POST CREATE
     @Override
     public void save(Context context) {
         String calle = context.formParam("calle");
@@ -63,7 +61,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     }
 
 
-    // ALL - GET
     public void index(Context context){
         this.estaLogueado(context);
 
@@ -78,7 +75,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     }
 
-    // SOLO - GET
     @Override
     public void show(Context context) {
         this.estaLogueado(context);
@@ -111,18 +107,17 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     }
 
 
-    // GET
     @Override
     public void update(Context context) {
         this.estaLogueado(context);
 
         String id = context.formParam("heladeraId");
-        System.out.println("Id de heladera: "+id);
+
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
 
         String idSuscripcion = context.formParam("idSuscripcion");
 
-        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(f->f.getId() == Integer.parseInt(idSuscripcion) ).toList();
+        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(f->f.getColaborador().getId() == Integer.parseInt(idSuscripcion) ).toList();
 
         ObserverHeladera suscripcion = observerHeladeras.get(0);
 
@@ -131,7 +126,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         context.redirect("/heladeras/" + id);
     }
 
-    // POST
     @Override
     public void edit(Context context) {
         this.estaLogueado(context);

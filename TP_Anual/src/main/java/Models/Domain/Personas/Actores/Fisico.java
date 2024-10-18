@@ -16,9 +16,5 @@ public class Fisico extends Persona {
     private String numeroDocumento;
 
 
-    public Fisico(){
-
-    }
-
 
 }

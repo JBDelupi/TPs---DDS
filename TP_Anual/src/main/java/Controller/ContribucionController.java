@@ -21,15 +21,6 @@ import java.util.stream.Collectors;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
-    public ContribucionController(Persona usuario) {
-        this.usuario = usuario;
-    }
-    public ContribucionController( ) {
-
-    }
-
-
-
     @Override
     public void index(Context context) {
         this.estaLogueado(context);

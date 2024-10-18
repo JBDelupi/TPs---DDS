@@ -5,12 +5,14 @@ import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
 import Models.Domain.Heladera.Suscripciones.*;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
 import Models.Repository.PseudoBaseDatosAlerta;
 import Service.APIPuntos.Punto;
+import Service.Notificacion.Mensaje.MensajeAlerta;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,7 +55,7 @@ public class Heladera {
     private Integer cantidadDeFallas;
     private Integer cantidadDeviandasRetiradas;
     private List<ObserverHeladera> suscriptores;
-
+    private Persona responsable;
 
     public void agregarVianda(Vianda ... vianda) {
 
@@ -66,7 +68,6 @@ public class Heladera {
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
 
     }
-
 
 
     public Vianda obtenerVianda() {
@@ -84,23 +85,18 @@ public class Heladera {
     public void registrarAlerta(){
         this.cantidadDeFallas++;
     }
-
-
-    //  Registrar una falla
     public void registrarFalla() {
         this.cantidadDeFallas++;
     }
 
 
 
-    // Reestablecer la cantidad de fallas a 0
     public void reestablecerFallas() {
         this.cantidadDeFallas = 0;
     }
-
     public void registrarVianda(){ this.cantidadDeviandasRetiradas++; }
-
     public void reestablecerViandas(){ this.cantidadDeviandasRetiradas = 0; }
+
 
 
     public void agregarSubscriptor(ObserverHeladera observer) {
@@ -121,15 +117,15 @@ public class Heladera {
 
 
     public void notificar(Alerta incidente){
-    //   Juridico personaACargo;
-    //   personaACargo.notify("Nuevo Incidente en la heladera "+ id + ": " + incidente.getTipo());
+        if(responsable != null){
+            responsable.notify(new MensajeAlerta(responsable.getCodigoDeNotificacion(), this.getId() +" Tipo alerta: " + incidente.getTipo() ));
+        }
     }
 
     public void generarIncidente (TipoAlerta tipo){
         Alerta nuevaAlerta = new Alerta(tipo, this);
-        nuevaAlerta.setId(RandomGenerator.getDefault().nextInt(0,100)); //DEJAR HASTA USAR EL AUTO-INCREMENTAL DEL ORM
+        nuevaAlerta.setId(RandomGenerator.getDefault().nextInt(0,100));
         this.notificar(nuevaAlerta);
-
         PseudoBaseDatosAlerta.getInstance().agregar(nuevaAlerta);
     }
 

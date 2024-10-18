@@ -8,7 +8,6 @@ import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFr
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.ContribucionBuilder.*;
-import Models.Domain.Excepciones.Permisos;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
@@ -20,8 +19,8 @@ import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Domain.Tarjetas.TipoAccion;
 import Models.Repository.Dao;
 import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosProducto;
 import Models.Repository.PseudoBaseDatosProductosOfrecidos;
+import Service.Server.exceptions.UnauthorizedResponseException;
 import lombok.Getter;
 
 import java.text.ParseException;
@@ -46,16 +45,12 @@ public class FactoryContribucion {
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//
     private Colaborador obtenerColaborador() {
         if (!this.persona.checkRol(TipoRol.COLABORADOR)) {
-            throw new Permisos.UnauthorizedAccessException("No tienes acceso");
+            throw new UnauthorizedResponseException();
         }
         return (Colaborador) persona.getRol(TipoRol.COLABORADOR);
     }
 
-    private void validarPermisos(Class<?> tipoPersona, String mensaje) {
-        if (persona.getClass().isAssignableFrom(tipoPersona)) {
-            throw new Permisos.UnauthorizedAccessException(mensaje);
-        }
-    }
+
     private void validarSolicitud(List<SolicitudDeApertura> solicitudes, TipoDonacion tipoDonacion) {
         SolicitudDeApertura solicitudDeApertura = procesarSolicitud(solicitudes, tipoDonacion);
         if (solicitudDeApertura == null) {
@@ -78,13 +73,11 @@ public class FactoryContribucion {
     public void generarDonacion(CrearContribucionDTO crearContribucionDTO) {
         Colaborador colaborador = this.obtenerColaborador();
         colaborador.agregarNuevaDonacion(this.factoryMethod(crearContribucionDTO));
-        // agregar base de datos
+
     }
 
 
-    // Donación de Vianda
     private Contribucion DonacionDeVianda(CrearContribucionDTO dto){
-       // validarPermisos(Fisico.class, "No tienes acceso");
 
         String nombre = dto.getParams().get("nombre");
       //  DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -110,7 +103,6 @@ public class FactoryContribucion {
         return donacion;
     }
 
-    // Donación de Dinero
     private Contribucion DonacionDeDinero(CrearContribucionDTO dto) {
         double monto = Double.parseDouble(dto.getParams().get("monto"));
         TipoFrecuencia frecuencia = TipoFrecuencia.valueOf(dto.getParams().get("frecuencia"));
@@ -122,13 +114,11 @@ public class FactoryContribucion {
     }
 
 
-    // Registro de Tarjeta
     private Contribucion registrarTarjeta(CrearContribucionDTO dto) {
-     //   validarPermisos(Fisico.class, "No tienes acceso");
-
 
         String nombre = dto.getParams().get("nombreBeneficiario");
         int menoresACargo = 0;
+
         if(dto.getParams().get("menoresACargo") != null){
             menoresACargo = Integer.parseInt(dto.getParams().get("menoresACargo"));
         }
@@ -148,8 +138,6 @@ public class FactoryContribucion {
 
     // Distribución de Viandas
     private Contribucion distribucionDeViandas(CrearContribucionDTO dto) {
-        validarPermisos(Fisico.class, "No tienes acceso");
-
 
         int heladeraOrigenId = Integer.parseInt(dto.getParams().get("heladeraOrigenId"));
         Heladera heladeraOrigen = (Heladera) heladeraRepository.buscar(heladeraOrigenId);
@@ -180,13 +168,14 @@ public class FactoryContribucion {
 
     // Hacerse Cargo de una Heladera
     private Contribucion hacerseCargoDeHeladera(CrearContribucionDTO dto) {
-        //validarPermisos(Juridico.class, "No tienes acceso");
 
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
-
         String id = dto.getParams().get("heladeraId");
 
+
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+        heladera.setResponsable(this.persona);
+
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
         Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
@@ -194,9 +183,7 @@ public class FactoryContribucion {
         return donacion;
     }
 
-    // Ofrecer Producto
     private Contribucion ofrecerProducto(CrearContribucionDTO dto) {
-      //  validarPermisos(Juridico.class, "No tienes acceso");
 
         String nombre = dto.getParams().get("nombreProducto");
         String imagen = dto.getParams().get("imagenProducto");

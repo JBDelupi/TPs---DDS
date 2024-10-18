@@ -2,20 +2,15 @@ package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Builder.IncidentesBuilder.VisitaTecnicaBuilder;
 import Models.Domain.Heladera.EstadoHeladera;
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
-import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
-import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.Tecnico;
-import Service.Notificacion.Mensaje;
+import Service.Notificacion.Mensaje.MensajeTecnico;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -26,7 +21,6 @@ public class FallaTecnica extends Incidente {
     private String foto;
     private String descripcion;
     private List<RegistroVisitaTecnica> visitasTecnicas;
-    private TipoFallaTecnica tipo;
     private Boolean solucionado;
     private LocalDateTime fechaSolucionado;
 
@@ -35,13 +29,9 @@ public class FallaTecnica extends Incidente {
 
     }
 
-    public Persona avisarATecnico(List<Persona> tecnicos) {
-        SistemaGeolocalizacion sistemaGeolocalizacion = SistemaGeolocalizacion.getInstance();
-        sistemaGeolocalizacion.setTecnicosRegistrados(tecnicos);
-        Persona tecnicoMasCercano =  sistemaGeolocalizacion.masCercanoAPunto(heladera.getCoordenadas());
-        Mensaje mensaje = this.generarMensaje(tecnicoMasCercano.getCorreElectronico(), "Falla tecnica","Falla Tecnica en" + this.heladera);
-        tecnicoMasCercano.getMedioDeNotificacion().Notificar(mensaje);
-        return tecnicoMasCercano;
+    public void avisarATecnico() {
+        Persona tecnicoMasCercano =  SistemaGeolocalizacion.getInstance().masCercanoAPunto(heladera.getCoordenadas());
+        tecnicoMasCercano.getMedioDeNotificacion().Notificar(new MensajeTecnico(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla Tecnica en la localidad de: " + this.heladera.getDireccion().getLocalidad() + ".Direccion: " + this.heladera.getDireccion().getCalle() + this.heladera.getDireccion().getCalle()));
     }
 
     public void crearRegistroDeVisita(Persona tecnico, LocalDateTime fecha, Boolean solucionado) {

@@ -116,8 +116,6 @@ public class HumanoController extends Controller  {
     public void asignarParametros(Context context){
          if ( context.formParam("medioNotificacion") != null ) {
              Notificacion medioDeNotificacion = StrategyMedioDeNotificacion.strategy( context.formParam("medioNotificacion") );
-             System.out.println( context.formParam("codigo") );
-             System.out.println( context.formParam("medioNotificacion"));
              getUsuario().setMedioDeNotificacion(medioDeNotificacion);
              getUsuario().setCodigoDeNotificacion(context.formParam("codigo"));
          }

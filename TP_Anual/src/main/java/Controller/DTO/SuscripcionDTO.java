@@ -16,7 +16,7 @@ public class SuscripcionDTO {
     public SuscripcionDTO() {
     }
 
-    public void factoryDTO(ObserverHeladera observerHeladera) {
+    public void Strategy(ObserverHeladera observerHeladera) {
         switch (tipoSuscripcion) {
             case "NviandasDisponibles": this.mapNviandasDisponible((NViandasDisponibles) observerHeladera); break;
             case "SufrioDesperfecto":  this.mapSufrioDesperfecto((SufrioDesperfecto) observerHeladera); break;

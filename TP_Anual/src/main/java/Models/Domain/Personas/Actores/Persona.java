@@ -3,7 +3,8 @@ package Models.Domain.Personas.Actores;
 
 import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.DatosPersonales.Direccion;
-import Service.Notificacion.Mensaje;
+import Service.Notificacion.Mensaje.Mensaje;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Notificacion.Notificacion;
 import Service.Validador.CredencialDeAcceso;
 import lombok.Getter;

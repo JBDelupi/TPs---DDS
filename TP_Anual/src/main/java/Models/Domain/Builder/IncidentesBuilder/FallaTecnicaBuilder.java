@@ -2,18 +2,14 @@ package Models.Domain.Builder.IncidentesBuilder;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
-import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
-import Models.Domain.Heladera.Incidentes.Utils.TipoFallaTecnica;
 import Models.Domain.Heladera.Suscripciones.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FallaTecnicaBuilder {
@@ -25,6 +21,8 @@ public class FallaTecnicaBuilder {
         fallaTecnica.setHeladera(heladera);
         heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
+        fallaTecnica.avisarATecnico();
+
         return this;
     }
 
@@ -43,10 +41,6 @@ public class FallaTecnicaBuilder {
         return this;
     }
 
-    public FallaTecnicaBuilder tipo(TipoFallaTecnica tipo){
-        fallaTecnica.setTipo(tipo);
-        return this;
-    }
 
     public FallaTecnicaBuilder visitasTecnicas (List<RegistroVisitaTecnica> visitasTecnicas){
         fallaTecnica.setVisitasTecnicas(visitasTecnicas);
@@ -64,7 +58,6 @@ public class FallaTecnicaBuilder {
     }
 
     public FallaTecnica construir() {
-
         return this.fallaTecnica;
     }
 }

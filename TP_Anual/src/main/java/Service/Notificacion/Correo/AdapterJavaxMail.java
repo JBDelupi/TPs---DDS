@@ -25,7 +25,6 @@ public class AdapterJavaxMail {
 
 
     public void enviar(String destinatario, String asunto, String cuerpo) {
-        // Configuración del servidor de correo y credenciales
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", String.valueOf(port));
@@ -47,7 +46,7 @@ public class AdapterJavaxMail {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             message.setSubject(asunto);
-            message.setText(cuerpo);
+            message.setContent(cuerpo, "text/html");
 
             // Envío del mensaje
             Transport.send(message);

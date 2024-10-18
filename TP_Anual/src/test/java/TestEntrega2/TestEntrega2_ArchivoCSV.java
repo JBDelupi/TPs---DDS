@@ -5,8 +5,7 @@ import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import Service.ImportadorCSV.Mappers.FisicoMapper;
 import Service.Notificacion.Correo.CorreoAdapter;
-import Service.Notificacion.Mensaje;
-import Service.Notificacion.MensajeBuilder;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import com.opencsv.exceptions.CsvValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -65,7 +64,7 @@ public class TestEntrega2_ArchivoCSV {
 
         for(FisicoDTO fisicoDTO : importados){
             MensajeBuilder notificacion = new MensajeBuilder();
-            Mensaje mensaje = notificacion.asunto("Nuevo colaborador")
+            MensajeBienvenida mensajeBienvenida = notificacion.asunto("Nuevo colaborador")
                                           .contenido("Datos de usuario")
                                                   .destinatario(fisicoDTO.getMail())
                                                           .construir();
@@ -74,7 +73,7 @@ public class TestEntrega2_ArchivoCSV {
 
             fisico.setMedioDeNotificacion(new CorreoAdapter());
 
-            fisico.getMedioDeNotificacion().Notificar(mensaje);
+            fisico.getMedioDeNotificacion().Notificar(mensajeBienvenida);
 
 
         }

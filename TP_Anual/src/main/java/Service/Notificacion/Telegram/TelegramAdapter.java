@@ -1,6 +1,6 @@
 package Service.Notificacion.Telegram;
 
-import Service.Notificacion.Mensaje;
+import Service.Notificacion.Mensaje.Mensaje;
 import Service.Notificacion.Notificacion;
 
 public class TelegramAdapter implements Notificacion {

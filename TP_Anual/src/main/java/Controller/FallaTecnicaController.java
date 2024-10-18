@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.random.RandomGenerator;
 
 public class FallaTecnicaController extends Controller implements ICrudViewsHandler {
+
+
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
@@ -48,8 +50,6 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
                 .construir();
 
         fallaTecnica.setId(RandomGenerator.getDefault().nextInt());
-
-        System.out.println("Falla Tecnica creada en heladera: " + heladera);
 
         PseudoBaseDatosFallaTecnica.getInstance().agregar(fallaTecnica);
 
@@ -104,4 +104,5 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         context.render("incidentes/seguimientoIncidente.hbs", model);
     }
+
 }

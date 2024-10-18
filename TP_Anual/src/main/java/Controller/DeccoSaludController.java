@@ -37,4 +37,7 @@ public class DeccoSaludController extends Controller {
         model.put("localidades",r);
         context.render("DeccoSaludAPI/personasVulnerablesDeccoSalud.hbs", model);
     }
+
+
 }
+

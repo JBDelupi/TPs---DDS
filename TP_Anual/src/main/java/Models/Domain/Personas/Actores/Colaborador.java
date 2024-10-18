@@ -46,7 +46,5 @@ public class Colaborador extends Rol {
     }
 
     public void reestablecerViandas(){this.cantidadViandasDonadas = 0;}
-    public void agregarVianda(){this.cantidadViandasDonadas++;}
-
 
 }

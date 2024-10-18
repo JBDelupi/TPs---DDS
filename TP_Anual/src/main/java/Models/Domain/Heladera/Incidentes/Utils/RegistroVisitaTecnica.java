@@ -15,6 +15,5 @@ public class RegistroVisitaTecnica {
     private String foto;
     private Boolean visitaExitosa; //Se soluciono el problema
 
-    public RegistroVisitaTecnica() {}
 
 }

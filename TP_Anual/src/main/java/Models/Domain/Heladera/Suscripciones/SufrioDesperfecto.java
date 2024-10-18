@@ -4,14 +4,12 @@ package Models.Domain.Heladera.Suscripciones;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.SistemaDeRedistribucion;
 import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
-import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.TipoRol;
-import Service.Notificacion.Mensaje;
-import Service.Notificacion.MensajeBuilder;
+import Service.Notificacion.Mensaje.Mensaje;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Models.Repository.PseudoBaseDatosHeladera;
+import Service.Notificacion.Mensaje.MensajeSuscripcion;
 import lombok.Getter;
-import retrofit2.http.GET;
 
 import java.util.random.RandomGenerator;
 @Getter
@@ -30,33 +28,13 @@ public class SufrioDesperfecto implements ObserverHeladera {
     @Override
     public void update(TipoDePublicacion publicacion, Heladera heladera) {
         if( publicacion.equals(TipoDePublicacion.SUFRIO_DESPERFECTO) ){
-            MensajeBuilder nuevaPublicacionBuilder = new MensajeBuilder();
 
-            SistemaDeRedistribucion sistema = new SistemaDeRedistribucion(PseudoBaseDatosHeladera.getInstance().getBaseHeladeras());
-            Sugerencia sugerencia = sistema.generarSugerencia(heladera.getViandas().size());
+            Sugerencia sugerencia = SistemaDeRedistribucion.generarSugerencia(heladera.getViandas().size());
 
-            Mensaje unaPublicacion = nuevaPublicacionBuilder
-                    .asunto(TipoDePublicacion.SUFRIO_DESPERFECTO.toString())
-                    .contenido(TipoDePublicacion.SUFRIO_DESPERFECTO + " - Heladeras donde se recomienda distribuir: " + sugerencia.mostrar())
-                    .destinatario(colaborador.getCodigoDeNotificacion())
-                    .construir();
+            Mensaje unaPublicacion = new MensajeSuscripcion(colaborador.getCodigoDeNotificacion(), "La heladera ID:"+ heladera.getId() + " Sufrio un desperfecto - Heladeras donde se recomienda distribuir: " + sugerencia.mostrar());
 
             colaborador.notify(unaPublicacion);
         }
-    }
-    public String armarDescripcion(Heladera heladera){
-
-        return null;
-    }
-
-    @Override
-    public Persona getColaborador(){
-        return colaborador;
-    }
-
-    @Override
-    public String getNombre(){
-        return nombre;
     }
 
 }

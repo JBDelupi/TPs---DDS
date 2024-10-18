@@ -15,9 +15,6 @@ import java.util.Map;
 public abstract class Controller {
     Persona usuario;
 
-    public Controller(){
-
-    }
 
 
     public void estaLogueado(Context context){

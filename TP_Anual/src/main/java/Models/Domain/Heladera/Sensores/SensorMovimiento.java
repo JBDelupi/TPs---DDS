@@ -15,8 +15,7 @@ public class SensorMovimiento implements Sensor {
 
     public void chequear(){
         if(this.estaCerradaHeladera() && this.estaPrendido){
-            Alerta incidente = new Alerta(TipoAlerta.FRAUDE, heladera);
-            heladera.notificar(incidente);
+            heladera.generarIncidente(TipoAlerta.FRAUDE);
         }
     }
 
