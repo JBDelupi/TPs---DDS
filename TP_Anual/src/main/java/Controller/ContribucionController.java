@@ -92,11 +92,12 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
         Map<String,Object> model = this.basicModel(context);
-        if (tipoContribucion.equals("hacerseCargoHeladera") ||tipoContribucion.equals("donarViandas") ) {
+        if (tipoContribucion.equals("hacerseCargoHeladera") ||tipoContribucion.equals("donarViandas") || tipoContribucion.equals("distribucionViandas")) {
             model.put("heladeras", PseudoBaseDatosHeladera.getInstance().baseHeladeras);
             return model;
         }
-        return model;
+       return model;
+
     }
 
 

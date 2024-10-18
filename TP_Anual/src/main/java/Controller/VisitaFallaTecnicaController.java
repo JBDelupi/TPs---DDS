@@ -1,58 +1,37 @@
 package Controller;
 
-import Models.Domain.Builder.IncidentesBuilder.FallaTecnicaBuilder;
-import Models.Domain.Builder.IncidentesBuilder.VisitaTecnicaBuilder;
-import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
-import Service.Server.ICrudViewsHandler;
+
+import Models.Domain.Heladera.Incidentes.FallaTecnica;
+
+import Models.Repository.PseudoBaseDatosFallaTecnica;
+import Models.Repository.PseudoBaseDatosHeladera;
 import io.javalin.http.Context;
+import java.util.Map;
 
-import static java.lang.Integer.parseInt;
 
-public class VisitaFallaTecnicaController extends Controller implements ICrudViewsHandler {
+public class VisitaFallaTecnicaController extends Controller   {
 
-    @Override
-    public void index(Context context) {
-
-    }
-
-    @Override
-    public void show(Context context) {
-
-    }
-
-    @Override
     public void create(Context context) {
-        context.render("incidentes/VisitaFallaTecnica.hbs");
+        this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
+        model.put("heladeras",PseudoBaseDatosHeladera.getInstance().baseHeladeras);
+        model.put("incidentesAbiertos", PseudoBaseDatosFallaTecnica.getInstance().baseFallaTecnica);
+        context.render("incidentes/VisitaFallaTecnica.hbs",model);
     }
 
-    @Override
     public void save(Context context) {
         String descripcion = context.formParam("descripcion");
         String imagen = context.formParam("imagenAdjunta");
         String solucionadoStr = context.formParam("solucionado");
         Boolean solucionado = solucionadoStr.equals("si") ? true : false;
+        String incidenteId = context.formParam("incidenteId");
+        this.setPersona(context);
 
-        // Hay que crear el registro dentro de FallaTecnica.
-        // Ver como
-        VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
-        RegistroVisitaTecnica registroVisitaTecnica = visitaTecnicaBuilder
-                .visitaExitosa(solucionado)
-                .descripcion(descripcion)
-                .foto(imagen)
-                .construir();
+        FallaTecnica incidente = PseudoBaseDatosFallaTecnica.getInstance().getId(incidenteId);
+        incidente.crearRegistroDeVisita(this.usuario, descripcion,solucionado,imagen);
 
-
-
-        context.redirect("/incidente/" + context.queryParam("incidenteId"));
+        context.redirect("/incidentes");
     }
 
-    @Override
-    public void edit(Context context) {
 
-    }
-
-    @Override
-    public void update(Context context) {
-
-    }
 }

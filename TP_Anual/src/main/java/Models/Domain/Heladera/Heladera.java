@@ -35,6 +35,7 @@ public class Heladera {
         this.cantidadDeFallas = 0;
         this.fechaDePuestaEnMarcha = LocalDate.now();
         this.cantidadDeviandasRetiradas = 0;
+        this.cantidadDeviandasDepositadas = 0;
     }
 
 
@@ -54,6 +55,7 @@ public class Heladera {
     private Double temperaturaActual;
     private Integer cantidadDeFallas;
     private Integer cantidadDeviandasRetiradas;
+    private Integer cantidadDeviandasDepositadas;
     private List<ObserverHeladera> suscriptores;
     private Persona responsable;
 
@@ -63,7 +65,7 @@ public class Heladera {
             this.estaLlena = true;
             throw new HeladeraLlenaException("Esta llena la heladera");
         }
-
+        registrarViandaDepositada();
         Collections.addAll(this.viandas, vianda);
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
 
@@ -78,24 +80,18 @@ public class Heladera {
         viandas.remove(vianda);
         sensorMovimiento.chequear();
         generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
+        registrarViandaRetirada();
         return vianda;
 
     }
 
-    public void registrarAlerta(){
-        this.cantidadDeFallas++;
-    }
-    public void registrarFalla() {
-        this.cantidadDeFallas++;
-    }
+    public void registrarAlerta(){ this.cantidadDeFallas++; }
+    public void reestablecerFallas() { this.cantidadDeFallas = 0; }
 
-
-
-    public void reestablecerFallas() {
-        this.cantidadDeFallas = 0;
-    }
-    public void registrarVianda(){ this.cantidadDeviandasRetiradas++; }
-    public void reestablecerViandas(){ this.cantidadDeviandasRetiradas = 0; }
+    public void registrarViandaDepositada(){this.cantidadDeviandasDepositadas++;}
+    public void registrarViandaRetirada(){ this.cantidadDeviandasRetiradas++; }
+    public void reestablecerViandasRetiradas(){ this.cantidadDeviandasRetiradas = 0; }
+    public void reestablecerViandasDepositadas(){ this.cantidadDeviandasDepositadas = 0; }
 
 
 
@@ -127,6 +123,7 @@ public class Heladera {
         nuevaAlerta.setId(RandomGenerator.getDefault().nextInt(0,100));
         this.notificar(nuevaAlerta);
         PseudoBaseDatosAlerta.getInstance().agregar(nuevaAlerta);
+        registrarAlerta();
     }
 
 

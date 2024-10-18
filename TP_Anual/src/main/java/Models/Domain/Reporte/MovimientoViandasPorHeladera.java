@@ -12,45 +12,19 @@ import java.util.List;
 
 public class MovimientoViandasPorHeladera  extends TemplateReporte<Heladera> {
 
-
-
     @Override
-    public List<Object[]> obtenerListado(List<Heladera> heladeras) {
-        List<Object[]> listadoDeMovimientos = new ArrayList<>();
+    public void obtenerListado(List<Heladera> heladeras) {
         for (Heladera heladera : heladeras) {
             String direccion = heladera.getDireccion().getCalle() + " " +
                     heladera.getDireccion().getNumero()+ ", " +
                     heladera.getDireccion().getLocalidad();
-            int cantidadDeViandasDepositadas = heladera.getViandas().size();
+            int cantidadDeViandasDepositadas = heladera.getCantidadDeviandasDepositadas();
             int cantidadDeViandasRetiradas = heladera.getCantidadDeviandasRetiradas();
-            listadoDeMovimientos.add(new Object[]{direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas });
-        }
-        return listadoDeMovimientos;
-    }
-
-    @Override
-    protected String getFilePath() {
-        return "reporte_movimientos_" + LocalDate.now().toString() + ".txt";
-    }
-
-    @Override
-    protected void armarReporte(List<Object[]> listado, String filePath) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Reporte de Movimientos Por Heladera\n");
-            writer.write("=============================================\n\n");
-            for (Object[] heladeraMov : listado) {
-                String direccion = (String) heladeraMov[0];
-                int cantidadRetiradas = (int) heladeraMov[1];
-                int cantidadDepositadas = (int) heladeraMov[2];
-                writer.write("Heladera en: " + direccion + "\n");
-                writer.write("Viandas Depositadas: " + cantidadDepositadas + "\n");
-                writer.write("Viandas Retiradas: " + cantidadRetiradas + "\n\n");
-            }
+            heladera.reestablecerViandasRetiradas();
+            heladera.reestablecerViandasDepositadas();
+            getItems().add(new Object[]{direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas });
         }
     }
-
-
-
 }
 
 

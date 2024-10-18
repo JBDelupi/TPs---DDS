@@ -38,36 +38,50 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <form action="/contribucionExitosa" method="POST">
                             <div class="row g-3">
+                                <!-- Selección de Heladera de Origen -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control" id="heladeraOrigen" required>
+                                        <select class="form-control" id="heladeraOrigen" name="heladeraOrigen" required>
                                             <option value="" disabled selected>Seleccionar Heladera de Origen</option>
-                                            <!-- Aquí se agregarían las opciones de heladeras -->
+                                            {{#each heladeras}}
+                                                <option value="{{this.id}}">{{this.direccion.localidad}} (ID: {{this.id}})</option>
+                                            {{/each}}
                                         </select>
                                         <label for="heladeraOrigen">Heladera de Origen</label>
                                     </div>
                                 </div>
+
+                                <!-- Selección de Heladera de Destino -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control" id="heladeraDestino" required>
+                                        <select class="form-control" id="heladeraDestino" name="heladeraDestino" required>
                                             <option value="" disabled selected>Seleccionar Heladera de Destino</option>
-                                            <!-- Aquí se agregarían las opciones de heladeras -->
+                                            {{#each heladeras}}
+                                                <option value="{{this.id}}">{{this.direccion.localidad}} (ID: {{this.id}})</option>
+                                            {{/each}}
                                         </select>
                                         <label for="heladeraDestino">Heladera de Destino</label>
                                     </div>
                                 </div>
+
+                                <!-- Campo para Cantidad -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="cantidad" placeholder="Cantidad" min="0" required>
+                                        <input type="number" class="form-control" id="cantidadViandas" name="cantidadViandas" placeholder="Cantidad" min="0" required>
                                         <label for="cantidad">Cantidad</label>
                                     </div>
                                 </div>
+
+                                <!-- Campo para Motivo -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" id="motivo" placeholder="Motivo de la distribución" style="height: 100px;" required></textarea>
+                                        <textarea class="form-control" id="motivo" name="motivo" placeholder="Motivo de la distribución" style="height: 100px;" required></textarea>
                                         <label for="motivo">Motivo</label>
                                     </div>
                                 </div>
+                                <input type="hidden" name="tipo" value="DISTRIBUCION_VIANDAS">
+
+                                <!-- Botón de envío -->
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Registrar Distribución</button>
                                 </div>

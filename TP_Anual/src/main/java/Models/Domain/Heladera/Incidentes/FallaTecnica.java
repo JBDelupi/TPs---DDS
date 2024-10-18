@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -26,7 +27,7 @@ public class FallaTecnica extends Incidente {
 
     public FallaTecnica() {
         this.setSolucionado(false);
-
+        this.visitasTecnicas = new ArrayList<>();
     }
 
     public void avisarATecnico() {
@@ -34,14 +35,19 @@ public class FallaTecnica extends Incidente {
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(new MensajeTecnico(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla Tecnica en la localidad de: " + this.heladera.getDireccion().getLocalidad() + ".Direccion: " + this.heladera.getDireccion().getCalle() + this.heladera.getDireccion().getCalle()));
     }
 
-    public void crearRegistroDeVisita(Persona tecnico, LocalDateTime fecha, Boolean solucionado) {
+    public void crearRegistroDeVisita(Persona tecnico, String descripcion, Boolean solucionado, String imagen) {
         VisitaTecnicaBuilder visitaTecnicaBuilder = new VisitaTecnicaBuilder();
+
         RegistroVisitaTecnica registroVisita = visitaTecnicaBuilder
+                .descripcion(descripcion)
                 .tecnico(tecnico)
-                .fecha(fecha)
+                .fecha(LocalDateTime.now())
                 .visitaExitosa(solucionado)
                 .construir();
         visitasTecnicas.add(registroVisita);
+        if (imagen !=null) {
+            registroVisita.setFoto(imagen);
+        }
         if (registroVisita.getVisitaExitosa()) {
             this.solucionado = true;
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);

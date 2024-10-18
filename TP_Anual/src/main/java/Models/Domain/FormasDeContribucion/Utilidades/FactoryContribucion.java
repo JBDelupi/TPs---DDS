@@ -139,16 +139,19 @@ public class FactoryContribucion {
     // Distribución de Viandas
     private Contribucion distribucionDeViandas(CrearContribucionDTO dto) {
 
-        int heladeraOrigenId = Integer.parseInt(dto.getParams().get("heladeraOrigenId"));
-        Heladera heladeraOrigen = (Heladera) heladeraRepository.buscar(heladeraOrigenId);
+        String heladeraOrigenId = dto.getParams().get("heladeraOrigen");
+        //Heladera heladeraOrigen = (Heladera) heladeraRepository.buscar(heladeraOrigenId);
+        Heladera heladeraOrigen = PseudoBaseDatosHeladera.getInstance().getId(heladeraOrigenId);
 
-        int heladeraDestinoId = Integer.parseInt(dto.getParams().get("heladeraDestinoId"));
-        Heladera heladeraDestino = (Heladera) heladeraRepository.buscar(heladeraDestinoId);
+        String heladeraDestinoId = dto.getParams().get("heladeraDestino");
+        //Heladera heladeraDestino = (Heladera) heladeraRepository.buscar(heladeraDestinoId);
+        Heladera heladeraDestino = PseudoBaseDatosHeladera.getInstance().getId(heladeraDestinoId);
+
 
         int cantidad = Integer.parseInt(dto.getParams().get("cantidadViandas"));
         String motivo = dto.getParams().get("motivo");
 
-        validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
+       // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
         obtenerColaborador().getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
         for (int i = 0; i < cantidad; i++) {

@@ -59,7 +59,7 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index, RolUsuario.ADMINISTRADOR);
+            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index, RolUsuario.ADMINISTRADOR, RolUsuario.FISICO);
             get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
             post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save );
             get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
@@ -107,8 +107,8 @@ public class Router {
 
         Server.app().routes(()->{
             get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
-            get("/reportes/{id}",((ReporteController)FactoryController.controller("reporte"))::create);
-
+            get("/reportes/listadoReportes",((ReporteController)FactoryController.controller("reporte"))::show);
+            post("/reportes/detalles",((ReporteController)FactoryController.controller("reporte"))::reporte);
         });
 
 

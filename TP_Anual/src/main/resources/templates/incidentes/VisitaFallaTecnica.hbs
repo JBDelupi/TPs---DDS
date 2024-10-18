@@ -29,29 +29,63 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <form>
+                        <form action="/tecnico/visita" method="POST" enctype="multipart/form-data">
                             <div class="row g-3">
+                                <!-- Selección de la heladera -->
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" id="descripcion" placeholder="Descripción de la visita" style="height: 150px;" required></textarea>
+                                        <select class="form-control w-100" id="heladeraId" name="heladeraId" required onchange="filtrarIncidentes()">
+                                            <option value="" disabled selected>Selecciona la heladera</option>
+                                            {{#each heladeras}}  <!-- Recorremos las heladeras para el select -->
+                                                <option value="{{this.id}}">{{this.direccion.localidad}} (ID: {{this.id}})</option>
+                                            {{/each}}
+                                        </select>
+                                        <label for="heladeraId">Heladera</label>
+                                    </div>
+                                </div>
+
+                                <!-- Selección del incidente -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <select class="form-control w-100" id="incidenteId" name="incidenteId" required>
+                                            <option value="" disabled selected>Selecciona el incidente abierto</option>
+                                            {{#each incidentesAbiertos}}
+                                                <!-- Filtramos por heladera en el frontend -->
+                                                <option value="{{this.id}}" data-heladera-id="{{this.heladera.id}}" style="display: none;">
+                                                    {{this.descripcion}} (ID: {{this.id}})
+                                                </option>
+                                            {{/each}}
+                                        </select>
+                                        <label for="incidenteId">Incidente</label>
+                                    </div>
+                                </div>
+
+                                <!-- Otros campos del formulario -->
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripción de la visita" style="height: 150px;" required></textarea>
                                         <label for="descripcion">Descripción</label>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="file" class="form-control" id="imagenAdjunta" placeholder="Imagen Adjunta">
+                                        <input type="file" class="form-control" id="imagenAdjunta" name="imagenAdjunta" placeholder="Imagen Adjunta">
                                         <label for="imagenAdjunta">Imagen Adjunta</label>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control w-100" id="solucionado" required>
+                                        <select class="form-control w-100" id="solucionado" name="solucionado" required>
                                             <option value="" disabled selected>¿Se solucionó el problema?</option>
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
                                         </select>
+                                        <label for="solucionado">¿Solucionado?</label>
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Crear visita</button>
                                 </div>
@@ -81,4 +115,21 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+
+<script>
+    function filtrarIncidentes() {
+        const heladeraSeleccionada = document.getElementById('heladeraId').value;
+        const incidentes = document.querySelectorAll('#incidenteId option');
+
+        incidentes.forEach(incidente => {
+            const heladeraIdIncidente = incidente.getAttribute('data-heladera-id');
+            if (heladeraIdIncidente === heladeraSeleccionada) {
+                incidente.style.display = 'block';  // Mostrar solo los incidentes que coincidan con la heladera seleccionada
+            } else {
+                incidente.style.display = 'none';   // Ocultar el resto
+            }
+        });
+    }
+</script>
+
 </html>

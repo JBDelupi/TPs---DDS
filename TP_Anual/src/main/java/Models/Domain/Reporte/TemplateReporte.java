@@ -14,46 +14,29 @@ import java.util.List;
 @Getter
 public abstract class TemplateReporte<T> {
 
-    protected List<T> items;
+    private String id;
     protected ChromeTask chromeTask;
+    private LocalDate fecha;
+    private List<Object[]> items;
 
     public TemplateReporte() {
-        items = new ArrayList<>();
         this.chromeTask = new ChromeTask();
+        fecha = LocalDate.now();
+        items = new ArrayList<>();
     }
 
-
-
     public void activar() {
-        chromeTask.ejecutarTareaPrograma(4000, this, "generarReporte");
+        chromeTask.ejecutarTareaPrograma(4000, this, "obtenerListado");
     }
 
     public void desactivar() {
         chromeTask.pausarTarea();
     }
 
-    public void cargarItem(T item) {
-        items.add(item);
-    }
+    // Deberia ejecutarse con la tarea programada, este metodo guarda en items cada fila del reporte.
+    // hay q persistir los items
+    public abstract void obtenerListado(List<T> items);
 
-    public void cargarItems(List<T> items) {
-        this.items.addAll(items);
-    }
-
-    public void generarReporte() throws IOException {
-        List<Object[]> listado = obtenerListado(items);
-        try {
-            String filePath = getFilePath();
-            armarReporte(listado, filePath);
-            System.out.println("Reporte generado: " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public abstract List<Object[]> obtenerListado(List<T> items);
-    protected abstract String getFilePath();
-    protected abstract void armarReporte(List<Object[]> listado, String filePath) throws IOException;
 
 
 }
