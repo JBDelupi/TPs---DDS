@@ -67,10 +67,10 @@ public class HumanoController extends Controller  {
                 .direccion(direccion)
                 .construir();
 
-        ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
-        Colaborador colaborador = colaboradorBuilder.construir(fisico);
+        //ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
+       // Colaborador colaborador = colaboradorBuilder.construir(fisico);
 
-        fisico.agregarRol(colaborador);
+        fisico.agregarRol(new Colaborador());
         fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
 
         PseudoBaseDatosUsuario.getInstance().agregar(fisico);

@@ -73,10 +73,9 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         String id = context.pathParam("id");
 
-
         FallaTecnica fallaTecnica = PseudoBaseDatosFallaTecnica.getInstance().getId(id);
 
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = this.basicModel(context);
 
         model.put("fallaTecnica",fallaTecnica);
 

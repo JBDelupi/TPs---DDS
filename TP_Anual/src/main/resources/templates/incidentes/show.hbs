@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del fallaTecnica</title>
+    <title>Detalle del estado heladera</title>
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
@@ -15,8 +15,8 @@
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
-
 <body>
+
 {{> templates/partials/headerColaborador rol=rol  id=id}}  <!-- Incluye el partial header aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial typography here -->
 <main>
@@ -36,19 +36,13 @@
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <p id="nombreHeladera" class="form-control">{{fallaTecnica.heladera.id}}</p>
-                                    <label for="nombreHeladera">Nombre de la Heladera</label>
+                                    <label for="nombreHeladera">ID de la Heladera</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <p id="descripcionfallaTecnica" class="form-control">{{fallaTecnica.descripcion}}</p>
                                     <label for="descripcionfallaTecnica">Descripción del fallaTecnica</label>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-floating">
-                                    <p id="tipoFalla" class="form-control">{{fallaTecnica.tipo}}</p>
-                                    <label for="tipoFalla">Tipo de Falla</label>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -88,15 +82,19 @@
 {{> templates/partials/botonBack}}
 </body>
 
-<script src="../lib/wow/wow.min.js"></script>
-<script src="../lib/easing/easing.min.js"></script>
-<script src="../lib/waypoints/waypoints.min.js"></script>
-<script src="../lib/counterup/counterup.min.js"></script>
-<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="../lib/tempusdominus/js/moment.min.js"></script>
-<script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="../../public/js/scripts-index.js"></script>
-<script src="../../public/js/scripts-header.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
 
 </html>

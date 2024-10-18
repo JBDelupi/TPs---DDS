@@ -3,7 +3,6 @@ package Controller;
 import Controller.Administrador.AdministradorController;
 import Controller.Administrador.HeladeraController;
 import Controller.Administrador.TecnicoController;
-import Controller.Administrador.VulnerableController;
 
 
 public class FactoryController {
@@ -16,7 +15,6 @@ public class FactoryController {
           case "login": controller =  new LoginController(); break;
           case "juridico": controller =  new JuridicoController(); break;
           case "heladeras": controller =  new HeladeraController(); break;
-          case "vulnerable" : controller =  new VulnerableController(); break;
           case "incidente" : controller =  new FallaTecnicaController(); break;
           case "producto": controller =  new ProductoController(); break;
           case "puntos": controller =  new PuntoCercanoController(); break;

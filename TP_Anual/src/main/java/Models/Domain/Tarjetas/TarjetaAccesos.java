@@ -27,7 +27,6 @@ public class TarjetaAccesos extends Tarjeta{
 //        Vianda vianda = heladera.obtenerVianda();
         RegistroDeUso unNuevoUso = new RegistroDeUso(heladera,new Vianda(),accion);
         nuevoRegistro(unNuevoUso);
-        System.out.println("Uso exitoso tarjeta");
 
     }
 

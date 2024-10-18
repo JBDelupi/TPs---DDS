@@ -72,7 +72,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
         Colaborador colaborador = colaboradorBuilder.construir(juridico);
-
         juridico.agregarRol(colaborador);
 
         PseudoBaseDatosUsuario.getInstance().agregar(juridico);

@@ -35,7 +35,6 @@ public class AdministradorController  extends Controller {
         String token = context.formParam("token");
 
         String filename = file.filename();
-       // String ruta = "C:\\Facultad 2024\\Back up 2024\\Diseño de sistemas\\TPs---DDS\\TP_Anual\\";
 
         Set<FisicoDTO> importadosCSV = ImportadorCSV.getInstance( filename, token).getColaboradoresDTO();
 

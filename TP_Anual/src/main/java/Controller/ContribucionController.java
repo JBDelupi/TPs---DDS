@@ -60,11 +60,12 @@ public class ContribucionController extends Controller implements ICrudViewsHand
                 ));
 
         CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
+        Map<String, Object> model = this.basicModel(context);
 
-        FactoryContribucion factoryContribucion = new FactoryContribucion(PseudoBaseDatosUsuario.getInstance().getId("1"), null,null);
+        FactoryContribucion factoryContribucion = new FactoryContribucion(PseudoBaseDatosUsuario.getInstance().getId(String.valueOf(getUsuario().getId())));
         factoryContribucion.generarDonacion(dto);
 
-        context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
+        context.render("FormasDeContribucion/contribucionExitosa.hbs", model);
     }
 
     @Override
@@ -83,6 +84,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         Map<String, Object> model = this.basicModel(context);
 
         List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
+        System.out.println("Contribucion: " + contribuciones.size());
         model.put("contribuciones",contribuciones);
 
         context.render("FormasDeContribucion/misContribuciones.hbs",model);

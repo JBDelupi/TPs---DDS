@@ -3,38 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimientos de Viandas por Heladera</title>
+    <title>Reportes Dinámicos</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
+    <style>
+        /* Estilo para cambiar el cursor a pointer al pasar por encima de una fila */
+        .report-row {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 {{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
 
 <div class="container mt-5">
-    <h1 class="text-center">Movimientos de Viandas por Heladera</h1>
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Reportes</h5>
+        <h1 id="tituloReporte" class="text-center">Mostrando reportes</h1>
+    </div>
+
+    <!-- Buscador por fecha centrado -->
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-4 text-center">
+            <label for="buscadorFecha" class="form-label">Filtrar por fecha</label>
+            <br>
+            <!-- Input de tipo 'date' para seleccionar la fecha desde un calendario -->
+            <input id="buscadorFecha" type="date" class="form-control">
+        </div>
+    </div>
 
     <!-- Verificamos si hay reportes -->
     {{#if listaReportes}}
         <div class="table-responsive mt-4">
-            <table class="table table-bordered table-hover">
+            <table id="tablaReportes" class="table table-bordered table-hover" style="width: 50%; margin: 0 auto;">
                 <thead>
                 <tr>
                     <th>Fecha del Reporte</th>
-                    <th>Acción</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Listamos los reportes -->
                 {{#each listaReportes}}
-                    <tr>
+                    <tr class="report-row" data-id="{{this.id}}" data-tipo="{{tipoReporte}}">
                         <td>{{this.fecha}}</td>
-                        <td>
-                            <!-- Al hacer clic en el botón, enviamos el id del reporte al controlador -->
-                            <form action="/reportes/detalles?tipo={{tipoReporte}}" method="POST">
-                                <input type="hidden" name="idReporte" value="{{this.id}}">
-                                <button type="submit" class="btn btn-primary">Ver Reporte</button>
-                            </form>
-                        </td>
                     </tr>
                 {{/each}}
                 </tbody>
@@ -51,5 +63,47 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript para cambiar el título dinámicamente y hacer la fila clicable -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener el tipo de reporte desde los datos incrustados en la página
+        var tipoReporte = '{{tipoReporte}}';
+        var tituloReporte = document.getElementById('tituloReporte');
+
+        // Cambiar el título según el tipo de reporte
+        if (tipoReporte === 'MovimientoViandasPorHeladera') {
+            tituloReporte.textContent = 'Movimientos de viandas por Heladera';
+        } else if (tipoReporte === 'cantidadDeFallasPorHeladera') {
+            tituloReporte.textContent = 'Cantidad de fallas por Heladera';
+        } else if (tipoReporte === 'cantidadDeViandasPorColaborador') {
+            tituloReporte.textContent = 'Cantidad de viandas por Colaborador';
+        } else {
+            tituloReporte.textContent = 'Mostrando reportes';
+        }
+    });
+
+    // Hacer que cada fila sea clicable
+    $('.report-row').on('click', function() {
+        var idReporte = $(this).data('id');
+        var tipoReporte = $(this).data('tipo');
+
+        // Crear un formulario y enviarlo para respetar el método POST y los params
+        var form = $('<form action="/reportes/detalles?tipo=' + tipoReporte + '" method="POST">' +
+                '<input type="hidden" name="idReporte" value="' + idReporte + '"></form>');
+        $('body').append(form);
+        form.submit();
+    });
+
+    // Buscador de fechas
+    $('#buscadorFecha').on('change', function() {
+        var selectedDate = $(this).val();
+        $('#tablaReportes tbody tr').filter(function() {
+            var reportDate = $(this).find('td').text(); // Obtener la fecha del reporte en formato YYYY-MM-DD
+            $(this).toggle(reportDate === selectedDate); // Mostrar solo las filas con la fecha seleccionada
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -1,28 +1,27 @@
 package Models.Domain.Reporte;
 
 import Models.Domain.Heladera.Heladera;
-import Service.TareaDiferida.AdapterChromeTask;
-import Service.TareaDiferida.ChromeTask;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
-public class CantFallasPorHeladera extends TemplateReporte<Heladera>{
+public class CantFallasPorHeladera extends TemplateReporte<Heladera> {
 
     @Override
     public void obtenerListado(List<Heladera> heladeras) {
         for (Heladera heladera : heladeras) {
+            // Concatenar la dirección
             String direccion = heladera.getDireccion().getCalle() + " " +
-                    heladera.getDireccion().getNumero()+ ", " +
+                    heladera.getDireccion().getNumero() + ", " +
                     heladera.getDireccion().getLocalidad();
-            int cantidadDeFallas = heladera.getCantidadDeFallas();
-            heladera.reestablecerFallas(); // reestablecer sus fallas para que empiece de cero para el siguiente reporte.
-            getItems().add(new Object[]{direccion, cantidadDeFallas}); // agrego a los items
+
+            // Obtener cantidad de fallas
+            String cantidadDeFallas = String.valueOf(heladera.getCantidadDeFallas());
+
+            // Restablecer las fallas para la siguiente ejecución
+            heladera.reestablecerFallas();
+
+            // Agregar a la lista de items en el formato adecuado
+            getItems().add(Arrays.asList(direccion, cantidadDeFallas));
         }
     }
 }
-

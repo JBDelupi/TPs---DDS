@@ -33,13 +33,10 @@ import java.util.random.RandomGenerator;
 @Getter
 public class FactoryContribucion {
     private final Persona persona;
-    private final Dao viandaRepository;
-    private final Dao heladeraRepository;
 
-    public FactoryContribucion(Persona persona, Dao viandaRepository, Dao heladeraRepository) {
+
+    public FactoryContribucion(Persona persona) {
         this.persona = persona;
-        this.viandaRepository = viandaRepository;
-        this.heladeraRepository = heladeraRepository;
     }
 
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//

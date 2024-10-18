@@ -8,6 +8,7 @@ import Models.Domain.Tarjetas.TarjetaAccesos;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,9 @@ public class Colaborador extends Rol {
 
     public Colaborador(){
         this.tipo = TipoRol.COLABORADOR;
+        this.contribuciones = new ArrayList<>();
+        this.historialCanje = new ArrayList<>();
+        this.puntaje = 0.0;
     }
 
     public void agregarNuevaDonacion(Contribucion unaDonacion){

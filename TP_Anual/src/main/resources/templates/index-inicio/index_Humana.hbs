@@ -16,20 +16,22 @@
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 <body>
+
 {{> templates/partials/headerColaborador rol=rol id=id}}
 {{> templates/partials/tipografia}}
 
 <div class="contact_section layout_padding">
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-12">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Acciones</h5>
                 <h1 class="display-3 text-dark text-center">Acciones Disponibles</h1>
             </div>
         </div>
-        {{#if colaborador}}
+
         <div class="blog_section_2 mt-5">
             <div class="row justify-content-center">
-                <!-- Generar Contribución -->
+                <!-- Cuadros para todos -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
                     <a href="/contribuciones" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -42,7 +44,6 @@
                     </a>
                 </div>
 
-                <!-- Ver Puntos Heladeras -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
                     <a href="/heladeras" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -55,7 +56,6 @@
                     </a>
                 </div>
 
-                <!-- Canjear un Producto -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
                     <a href="/productos" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -68,7 +68,6 @@
                     </a>
                 </div>
 
-                <!-- Ver Contribuciones -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
                     <a href="/{{rol}}/{{id}}/contribuciones" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -81,7 +80,6 @@
                     </a>
                 </div>
 
-                <!-- Generar Incidente -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
                     <a href="/registro/incidente" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -94,7 +92,6 @@
                     </a>
                 </div>
 
-                <!-- Seguimiento Incidente -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
                     <a href="/incidentes/seguimiento" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -131,7 +128,6 @@
                     </a>
                 </div>
 
-                <!-- Ver Historial de Canjes -->
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
                     <a href="/{{rol}}/{{id}}/historialcanjes" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -144,48 +140,30 @@
                     </a>
                 </div>
 
-
-        {{/if}}
+                <!-- Cuadros adicionales solo para técnicos -->
                 {{#if tecnico}}
-                <div class="blog_section_2 mt-5">
-                    <div class="row justify-content-center">
-                        <!-- Generar visita tecnica -->
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
-                            <a href="/contribuciones" class="text-decoration-none w-100">
-                                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                                    <div class="p-4">
-                                        <i class="fa fa-3x fa fa-wrench text-primary mb-4"></i>
-                                        <h5 class="text-dark">Generar visita técnica</h5>
-                                        <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
-                                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                        <a href="/tecnico/visita" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
+                                    <h5 class="text-dark">Generar visita técnica</h5>
+                                    <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
+                    </div>
 
-                        <!-- Consultar fallas -->
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
-                            <a href="/incidentes" class="text-decoration-none w-100">
-                                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                                    <div class="p-4">
-                                        <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
-                                        <h5 class="text-dark">Consultar estado de fallas</h5>
-                                        <p class="text-dark">Visualize las fallas asignadas y consulte su estado.</p>
-                                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                        <a href="/incidentes" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
+                                    <h5 class="text-dark">Consultar estado de fallas</h5>
+                                    <p class="text-dark">Visualize las fallas asignadas y consulte su estado.</p>
                                 </div>
-                            </a>
-                        </div>
-
-                        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-                            <a href="/reportes" class="text-decoration-none w-100">
-                                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                                    <div class="p-4">
-                                        <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
-                                        <h5 class="text-dark">Ver Reportes</h5>
-                                        <p class="text-dark">Crea reportes que brindan informacin sobre heladeras,colaboradores y demas.</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
                 {{/if}}
             </div>

@@ -39,7 +39,7 @@ public class PseudoBaseDatosFallaTecnica {
         for (int i = 1; i <= 10; i++) {
             FallaTecnica falla = new FallaTecnica();
             falla.setId(i);
-            falla.setFoto("foto" + i + ".jpg");
+          //  falla.setFoto("foto" + i + ".jpg");
             falla.setDescripcion("Descripción de la falla técnica " + i);
             falla.setSolucionado(i % 2 == 0); //
             falla.setFechaSolucionado(i % 2 == 0 ? LocalDateTime.now().minusDays(i) : null);

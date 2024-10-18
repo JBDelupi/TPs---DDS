@@ -15,8 +15,6 @@
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-
 </head>
 <body>
 
@@ -32,25 +30,30 @@
             <h1 class="mb-5">Tus contribuciones</h1>
         </div>
         <div class="row g-4">
-            {{#each contribuciones}}
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="d-flex align-items-center border p-3 shadow-sm rounded">
-                        <div class="w-100 d-flex flex-column text-center ps-4">
-                            <h5 class="d-flex flex-column justify-content-between border-bottom pb-2">
-                                <div class="d-flex flex-column mb-3">
-                                    <strong class="fw-bold text-primary">Nombre:</strong>  <!-- Título estilizado para el nombre -->
-                                    <span class="text-secondary">{{this.nombre}}</span>
-                                </div>
-                                <div class="d-flex flex-column mb-3">
-                                    <strong class="fw-bold text-primary">Fecha de Donación:</strong>  <!-- Título estilizado para la fecha -->
-                                    <span class="text-secondary">{{this.fechaDeDonacion}}</span>
-                                </div>
-                            </h5>
-                            <a href="{{rol}}/{{usuario.id}}/contribuciones" class="btn btn-primary btn-sm mx-auto mt-3">Ver Detalles</a>
+            {{#if contribuciones.length}}
+                {{#each contribuciones}}
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center border p-3 shadow-sm rounded">
+                            <div class="w-100 d-flex flex-column text-center ps-4">
+                                <h5 class="d-flex flex-column justify-content-between border-bottom pb-2">
+                                    <div class="d-flex flex-column mb-3">
+                                        <strong class="fw-bold text-primary">Nombre:</strong>  <!-- Título estilizado para el nombre -->
+                                        <span class="text-secondary">{{this.nombre}}</span>
+                                    </div>
+                                    <div class="d-flex flex-column mb-3">
+                                        <strong class="fw-bold text-primary">Fecha de Donación:</strong>  <!-- Título estilizado para la fecha -->
+                                        <span class="text-secondary">{{this.fechaDeDonacion}}</span>
+                                    </div>
+                                </h5>
+                                <a href="{{rol}}/{{usuario.id}}/contribuciones" class="btn btn-primary btn-sm mx-auto mt-3">Ver Detalles</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            {{else}}
+                <!-- Mostrar este mensaje cuando no haya contribuciones -->
+                <p class="text-center">No tienes contribuciones registradas.</p>
+            {{/if}}
         </div>
     </div>
 </section>
