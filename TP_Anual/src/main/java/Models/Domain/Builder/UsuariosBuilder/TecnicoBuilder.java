@@ -1,10 +1,7 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
-import Models.Domain.Personas.Actores.TipoRol;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
-import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
-import Service.Notificacion.Notificacion;
 
 public class TecnicoBuilder {
     private Tecnico tecnico;
@@ -14,8 +11,8 @@ public class TecnicoBuilder {
     }
 
 
-    public TecnicoBuilder cuil(String cuil){
-        tecnico.setCuil(cuil);
+    public TecnicoBuilder cuil(String cuit){
+        tecnico.setCuil(cuit);
         return this;
     }
 

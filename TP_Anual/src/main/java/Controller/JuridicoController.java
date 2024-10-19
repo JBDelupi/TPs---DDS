@@ -9,6 +9,7 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Models.Repository.RepoColaboradores;
@@ -26,7 +27,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     @Override
     public void index(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
         model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
@@ -52,7 +52,16 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
         String razonSocial =  context.formParam("razon_social") ;
         TipoJuridico tipoJuridico = TipoJuridico.valueOf(context.formParam("tipo_juridico"));
-        String correo = context.formParam("correo");
+        String correo = context.formParam("email");
+        String calle = context.formParam("calle");
+        String numero = context.formParam("numero");
+        String localidad = context.formParam("localidad");
+
+        Direccion direccion = new Direccion();
+        direccion.setCalle(calle);
+        direccion.setNumero(numero);
+        direccion.setLocalidad(localidad);
+
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
@@ -66,14 +75,11 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .tipoJuridico(tipoJuridico)
                 .correoElectronico(correo)
                 .credencialDeAcceso(credencialDeAcceso)
+                .rol(new Colaborador())
+                .sede(direccion)
                 .construir();
 
         juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
-
-        ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
-        Colaborador colaborador = colaboradorBuilder.construir(juridico);
-        juridico.agregarRol(colaborador);
-
         PseudoBaseDatosUsuario.getInstance().agregar(juridico);
 
         context.redirect("/login");

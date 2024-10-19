@@ -1,16 +1,22 @@
 package Controller.Administrador;
 
 import Controller.Controller;
+import Models.Domain.Builder.CredencialDeAccesoBuilder;
+import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
+import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.PseudoBaseDatosUsuario;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Service.APIPuntos.Punto;
 import Service.Server.ICrudViewsHandler;
+import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 
 import java.util.Map;
+import java.util.random.RandomGenerator;
 
 public class TecnicoController extends Controller {
 
@@ -19,20 +25,36 @@ public class TecnicoController extends Controller {
 
         String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido");
-      //  TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipoDocumento"));
+        TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
         String numeroDocumento = context.formParam("documento");
         String cuil = context.formParam("cuil");
-        String areaCobertura = context.formParam("areaCobertura");
+        String latitud = context.formParam("latitud");
+        String longitud = context.formParam("longitud");
+        String radio = context.formParam("radio");
+        String correo = context.formParam("correo");
 
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
+                .contrasenia(context.formParam("contrasenia"))
+                .nombreUsuario(context.formParam("nombre_usuario"))
+                .construir();
 
-        TecnicoBuilder builder = new TecnicoBuilder();
-//       Tecnico tecnico = TecnicoBuilder
-//                .nombre(nombre)
-//                .apellido(apellido)
-//                .tipoDeDocumento(tipoDeDocumento)
-//                .numeroDeDocumento(numeroDocumento)
-//                .cuil(cuil)
-//                .construir();
+        Tecnico tecnico = new Tecnico(cuil, new AreaCobertura(new Punto(latitud,longitud),radio) );
+
+        FisicoBuilder fisicoBuilder = new FisicoBuilder();
+        Fisico fisico = fisicoBuilder
+                .nombre(nombre)
+                .apellido(apellido)
+                .correoElectronico(correo)
+                .tipoDocumento(tipoDeDocumento)
+                .numeroDocumento(numeroDocumento)
+                .credencialDeAcceso(credencialDeAcceso)
+                .rol(tecnico)
+                .construir();
+
+        fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
+
+        PseudoBaseDatosUsuario.getInstance().agregar(fisico);
 
         context.redirect("/index/administrador");
     }

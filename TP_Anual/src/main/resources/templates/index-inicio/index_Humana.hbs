@@ -28,7 +28,7 @@
                 <h1 class="display-3 text-dark text-center">Acciones Disponibles</h1>
             </div>
         </div>
-
+        {{#if colaborador}}
         <div class="blog_section_2 mt-5">
             <div class="row justify-content-center">
                 <!-- Cuadros para todos -->
@@ -103,19 +103,6 @@
                         </div>
                     </a>
                 </div>
-
-                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-                    <a href="/reportes" class="text-decoration-none w-100">
-                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
-                                <h5 class="text-dark">Ver Reportes</h5>
-                                <p class="text-dark">Crea reportes que brindan informacin sobre heladeras,colaboradores y demas.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
                     <a href="/deccosalud" class="text-decoration-none w-100">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -139,7 +126,18 @@
                         </div>
                     </a>
                 </div>
-
+                {{/if}}
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                    <a href="/reportes" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
+                                <h5 class="text-dark">Ver Reportes</h5>
+                                <p class="text-dark">Crea reportes que brindan informacin sobre heladeras,colaboradores y demas.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 <!-- Cuadros adicionales solo para técnicos -->
                 {{#if tecnico}}
                     <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">

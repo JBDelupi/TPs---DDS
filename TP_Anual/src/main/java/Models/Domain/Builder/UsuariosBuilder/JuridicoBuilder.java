@@ -1,9 +1,9 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 import Controller.Actores.RolUsuario;
-import Controller.JuridicoController;
 import Models.Domain.Personas.Actores.Juridico;
 import Models.Domain.Personas.Actores.Rol;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Service.Validador.CredencialDeAcceso;
 
@@ -26,6 +26,12 @@ public class JuridicoBuilder {
 
     public JuridicoBuilder correoElectronico(String correoElectronico) {
         this.juridico.setCorreElectronico(correoElectronico);
+        this.juridico.setCodigoDeNotificacion(correoElectronico);
+        return this;
+    }
+
+    public JuridicoBuilder sede(Direccion direccion) {
+        this.juridico.setDireccion(direccion);
         return this;
     }
 

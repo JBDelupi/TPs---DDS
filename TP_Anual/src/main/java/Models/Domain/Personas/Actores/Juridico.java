@@ -3,6 +3,7 @@ package Models.Domain.Personas.Actores;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Utilidades.TipoRolNegocio;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
+import Service.Notificacion.Correo.CorreoAdapter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class Juridico extends Persona {
 
     public Juridico(){
         this.productosOfrecidos = new ArrayList<>();
+        this.setMedioDeNotificacion(new CorreoAdapter());
     }
 
 

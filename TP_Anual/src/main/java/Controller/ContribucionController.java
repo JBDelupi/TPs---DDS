@@ -84,7 +84,6 @@ public class ContribucionController extends Controller implements ICrudViewsHand
         Map<String, Object> model = this.basicModel(context);
 
         List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
-        System.out.println("Contribucion: " + contribuciones.size());
         model.put("contribuciones",contribuciones);
 
         context.render("FormasDeContribucion/misContribuciones.hbs",model);

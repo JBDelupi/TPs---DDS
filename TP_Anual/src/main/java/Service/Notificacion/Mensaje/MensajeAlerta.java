@@ -10,7 +10,7 @@ public class MensajeAlerta implements Mensaje{
 
     public MensajeAlerta(String destinatario, String contenido) {
         this.destinatario = destinatario;
-        this.contenido = "NUEVO INCIDENTE";
+        this.asunto = "NUEVO INCIDENTE";
         this.generarMensaje(contenido);
     }
 

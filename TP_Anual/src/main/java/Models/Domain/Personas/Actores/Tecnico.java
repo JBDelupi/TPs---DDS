@@ -13,4 +13,9 @@ public class Tecnico extends Rol {
         this.tipo = TipoRol.TECNICO;
     }
 
+    public Tecnico(String cuil, AreaCobertura area){
+        this.tipo = TipoRol.TECNICO;
+        this.cuil = cuil;
+        this.area = area;
+    }
 }
