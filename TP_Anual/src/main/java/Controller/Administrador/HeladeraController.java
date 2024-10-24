@@ -115,9 +115,12 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
 
-        String idSuscripcion = context.formParam("idSuscripcion");
+        String idColaborador = context.formParam("idColaborador");
 
-        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(f->f.getColaborador().getId() == Integer.parseInt(idSuscripcion) ).toList();
+        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(
+                f->f.getColaborador().getId() == Integer.parseInt(idColaborador)
+        ).toList();
+
 
         ObserverHeladera suscripcion = observerHeladeras.get(0);
 
