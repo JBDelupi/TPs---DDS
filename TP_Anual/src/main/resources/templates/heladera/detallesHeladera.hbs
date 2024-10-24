@@ -103,7 +103,7 @@
                             </div>
                         </div>
 
-                        <form class="mt-4" action="/heladeras/{{id}}/suscribir" method="POST">
+                        <form class="mt-4" action="/heladeras/{{heladera.id}}/suscribir" method="POST">
                             <div class="row g-3">
                                 <!-- Selector desplegable para las opciones de suscripción -->
                                 <div class="col-md-12">
@@ -141,9 +141,9 @@
                                         <span class="n-viandas" data-suscripcion="{{this.nombre}}" data-n="{{this.n}}" style="display:none;"> - {{this.n}} viandas</span>
                                     </p>
                                     <label for="suscripcion">Suscripción</label>
-                                    <form action="/heladeras/{{id}}/desuscribir" method="POST" class="text-center">
+                                    <form action="/heladeras/{{heladera.id}}/desuscribir" method="POST" class="text-center">
                                         <input type="hidden" name="heladeraId" value="{{heladera.id}}">
-                                        <input type="hidden" name="idSuscripcion" value="{{this.id}}">
+                                        <input type="hidden" name="idColaborador" value="{{usuario.id}}">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>
                                     </form>
                                 </div>

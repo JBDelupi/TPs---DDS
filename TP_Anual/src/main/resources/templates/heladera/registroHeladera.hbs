@@ -40,13 +40,7 @@
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="direccion" placeholder="Dirección" required>
-                                        <label for="direccion">Dirección</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <select class="form-control" id="localidad" required>
+                                        <select class="form-control" id="localidad" name="localidad" required>
                                             <option value="" disabled selected>Seleccionar Localidad</option>
                                             <option value="belgrano">Belgrano</option>
                                             <option value="palermo">Palermo</option>
@@ -82,25 +76,25 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="calle" placeholder="Calle" required>
+                                        <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
                                         <label for="calle">Calle</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="numero" placeholder="Número" required>
+                                        <input type="number" class="form-control" id="numero" name="numero" placeholder="Número" required>
                                         <label for="numero">Número</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="coordenadas" placeholder="Coordenadas" required>
+                                        <input type="text" class="form-control" id="coordenadas" name="coordenadas" placeholder="Coordenadas" required>
                                         <label for="coordenadas">Coordenadas</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-control" id="estado" required>
+                                        <select class="form-control" id="estado" name="estado" required>
                                             <option value="" disabled selected>Seleccionar Estado</option>
                                             <option value="disponible">DISPONIBLE</option>
                                             <option value="no-disponible">NO DISPONIBLE</option>
@@ -110,19 +104,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="tempMax" placeholder="Temperatura Máxima" step="0.1" required>
+                                        <input type="number" class="form-control" id="tempMax" name="tempMax" placeholder="Temperatura Máxima" step="0.1" required>
                                         <label for="tempMax">Temperatura Máxima</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="temperaturaMin" placeholder="Temperatura Mínima" step="0.1" required>
+                                        <input type="number" class="form-control" id="temperaturaMin" name ="temperaturaMin" placeholder="Temperatura Mínima" step="0.1" required>
                                         <label for="tempMin">Temperatura Mínima</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="capacidad" placeholder="Capacidad heladera" step="0.1" required>
+                                        <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Capacidad heladera" step="0.1" required>
                                         <label for="capacidad">Capacidad heladera</label>
                                     </div>
                                 </div>
