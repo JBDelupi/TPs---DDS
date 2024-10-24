@@ -13,6 +13,7 @@ import Models.Domain.Heladera.Sensores.SensorTemperatura;
 import Models.Repository.PseudoBaseDatosAlerta;
 import Service.APIPuntos.Punto;
 import Service.Notificacion.Mensaje.MensajeAlerta;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,67 @@ import java.util.random.RandomGenerator;
 
 @Getter
 @Setter
+
+@Entity
+@Table(name = "Heladera")
+
 public class Heladera {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Embedded
+    private Direccion direccion;
+
+
+    @Column(name = "capacidad_de_viandas")
+    private int capacidadDeViandas;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_de_puesta_en_marcha")
+    private LocalDate fechaDePuestaEnMarcha;
+
+    @Enumerated(EnumType.STRING)
+    private EstadoHeladera estadoActual;
+
+    @Column(name = "temperatura_maxima")
+    private Double temperaturaMax;
+
+    @Column(name = "temperatura_minima")//Celsius
+    private Double temperaturaMin;
+
+    @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
+    private Boolean abierto;
+
+    @Transient
+    private List<Vianda> viandas;
+
+    @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
+    private Boolean estaLlena = false;
+
+    @Transient
+    private Sensor sensorMovimiento;
+
+    @Transient
+    private Sensor sensorTemperatura;
+
+    @Column(name = "temperatura_actual")
+    private Double temperaturaActual;
+
+    @Column(name = "cantidad_de_fallas")
+    private Integer cantidadDeFallas;
+
+    @Column(name = "cantidad_de_viandas_retiradas")
+    private Integer cantidadDeviandasRetiradas;
+
+    @Column(name = "cantidad_de_viandas_depositadas")
+    private Integer cantidadDeviandasDepositadas;
+
+    @Transient
+    private List<ObserverHeladera> suscriptores;
+
+    @Transient
+    private Persona responsable;
 
     public Heladera() {
         this.viandas = new ArrayList<>();
@@ -37,27 +98,6 @@ public class Heladera {
         this.cantidadDeviandasRetiradas = 0;
         this.cantidadDeviandasDepositadas = 0;
     }
-
-
-    private Integer id;
-    private Direccion direccion;
-    private Punto coordenadas;
-    private int capacidadDeViandas;
-    private LocalDate fechaDePuestaEnMarcha;
-    private EstadoHeladera estadoActual;
-    private Double temperaturaMax; //Celsius
-    private Double temperaturaMin;
-    private Boolean abierto;
-    private List<Vianda> viandas;
-    private Boolean estaLlena = false;
-    private Sensor sensorMovimiento;
-    private Sensor sensorTemperatura;
-    private Double temperaturaActual;
-    private Integer cantidadDeFallas;
-    private Integer cantidadDeviandasRetiradas;
-    private Integer cantidadDeviandasDepositadas;
-    private List<ObserverHeladera> suscriptores;
-    private Persona responsable;
 
     public void agregarVianda(Vianda ... vianda) {
 

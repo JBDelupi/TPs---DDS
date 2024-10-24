@@ -9,6 +9,7 @@ import Models.Repository.PseudoBaseDatosHeladera;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +19,11 @@ import java.util.random.RandomGenerator;
 @Getter
 @Setter
 public class SensorTemperatura implements Sensor {
+    @Transient
     private Heladera heladera;
+
+    @Transient
     private AdapterChromeTask tareaProgramada;
-
-
 
     public SensorTemperatura(Heladera heladera) {
         this.heladera = heladera;

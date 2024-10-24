@@ -1,25 +1,20 @@
 package Controller;
 
-import Controller.Actores.RolUsuario;
 import Models.Domain.Builder.CredencialDeAccesoBuilder;
-import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
-import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
-import Models.Repository.PseudoBaseDatosUsuario;
-import Models.Repository.RepoColaboradores;
+import Models.Repository.Dao;
 
+import Models.Repository.Repositorio;
 import Service.Notificacion.Notificacion;
 import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 import java.util.random.RandomGenerator;
 
@@ -71,9 +66,9 @@ public class HumanoController extends Controller  {
        // Colaborador colaborador = colaboradorBuilder.construir(fisico);
 
         fisico.agregarRol(new Colaborador());
-        fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
 
-        PseudoBaseDatosUsuario.getInstance().agregar(fisico);
+        Dao repo = new Repositorio(Fisico.class);
+        repo.agregar(fisico);
 
         context.redirect("/login");
     }
@@ -120,6 +115,5 @@ public class HumanoController extends Controller  {
              getUsuario().setCodigoDeNotificacion(context.formParam("codigo"));
          }
     }
-
 
 }

@@ -92,7 +92,7 @@ public class PseudoBaseDatosHeladera {
                 .abierto(true)
                 .Direccion(direccion)
                 .construir();
-        nuevaHeladera.setCoordenadas(heladera.getCoordenadas()); // Preserva las coordenadas
+        nuevaHeladera.getDireccion().setCentro(heladera.getDireccion().getCentro()); // Preserva las coordenadas
         return nuevaHeladera;
     }
 
@@ -141,11 +141,11 @@ public class PseudoBaseDatosHeladera {
         sanTelmo.setLatitud("-34.6215");
         sanTelmo.setLongitud("-58.3730");
 
-        heladera1.setCoordenadas(palermo);
-        heladera2.setCoordenadas(sanTelmo);
-        heladera3.setCoordenadas(recoleta);
-        heladera4.setCoordenadas(teatroColon);
-        heladera5.setCoordenadas(estacionRetiro);
+        heladera1.getDireccion().setCentro(palermo);
+        heladera2.getDireccion().setCentro(sanTelmo);
+        heladera3.getDireccion().setCentro(recoleta);
+        heladera4.getDireccion().setCentro(teatroColon);
+        heladera5.getDireccion().setCentro(estacionRetiro);
 
     }
 }

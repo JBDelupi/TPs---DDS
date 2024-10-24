@@ -3,9 +3,17 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 
 public class SensorMovimiento implements Sensor {
+
+    @Transient
     private Heladera heladera;
+
+    @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
+    @Column(name = "esta_prendido")
     private Boolean estaPrendido;
 
     public SensorMovimiento(Heladera heladera) {
@@ -18,8 +26,6 @@ public class SensorMovimiento implements Sensor {
             heladera.generarIncidente(TipoAlerta.FRAUDE);
         }
     }
-
-
 
     @Override
     public void activar() {

@@ -7,6 +7,7 @@ import Service.Notificacion.Mensaje.Mensaje;
 import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Notificacion.Notificacion;
 import Service.Validador.CredencialDeAcceso;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,15 +16,38 @@ import java.util.List;
 
 @Getter
 @Setter
+
+@Entity
+@Table(name = "Persona")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
+
 public abstract class Persona  {
+    @Embedded
     private CredencialDeAcceso credencialDeAcceso;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Embedded
     private Direccion direccion;
+
+    @Transient
     private Notificacion medioDeNotificacion;
+
+    @Column(name = "codigo_de_notificacion")
     private String codigoDeNotificacion; // DONDE SE VA A NOTIFICAR, MISMO CORREO, EL MISMO NUMERO TELEFONO, O USUARIO DE TELEGRAM
+
+    @Column(name="correo_electronico")
     private String correElectronico;
+
+    @Transient
     private List<Rol> roles;
+
+    @Enumerated(EnumType.STRING)
     private RolUsuario tipoUsuario;
+
 
     public Persona() {
         this.roles = new ArrayList<>();

@@ -2,6 +2,8 @@ package Controller;
 
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.Repositorio;
+import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import jakarta.servlet.http.HttpSession;
 
@@ -26,7 +28,9 @@ public class LoginController extends Controller {
         String nombreUsuario = context.formParam(USERNAME_PARAM);
         String contrasenia = context.formParam(PASSWORD_PARAM);
 
-        Persona usuario = PseudoBaseDatosUsuario.getInstance().searchUser(nombreUsuario);
+        Repositorio repo = new Repositorio(Persona.class);
+
+        Persona usuario = (Persona) repo.credenciales(new CredencialDeAcceso(nombreUsuario,contrasenia));
 
         //if (usuario != null && usuario.getCredencialDeAcceso().getContrasenia().equals(contrasenia)) {
         if (usuario != null) {

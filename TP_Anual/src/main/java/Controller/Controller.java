@@ -2,6 +2,7 @@ package Controller;
 
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.Repositorio;
 import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.http.Context;
 import lombok.Getter;
@@ -34,7 +35,8 @@ public abstract class Controller {
 
     public void setPersona(Context context){
         String id = context.sessionAttribute("idPersona");
-        this.usuario = PseudoBaseDatosUsuario.getInstance().getId(id);
+        Repositorio repositorio = new Repositorio(Persona.class);
+        this.usuario = (Persona) repositorio.buscar(Integer.parseInt(id));
     }
 
 

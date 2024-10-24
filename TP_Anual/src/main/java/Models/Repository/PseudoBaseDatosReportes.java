@@ -37,7 +37,7 @@ public class PseudoBaseDatosReportes {
         reporteViandas.obtenerListado(generarHeladerasPrueba());
 
         // Asignar ID al reporte y agregarlo a la lista de reportes
-        reporteViandas.setId("3");
+        reporteViandas.setId(3);
         reportes.add(reporteViandas);
     }
 

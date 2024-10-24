@@ -7,7 +7,9 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Heladera.Vianda;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -15,10 +17,22 @@ import java.util.ArrayList;
 
 @Setter
 @Getter
+
+@Entity
+@DiscriminatorValue("tarjeta_alimentar")
+@NoArgsConstructor
+
 public class TarjetaAlimentar extends Tarjeta {
+    @Transient
     private Fisico colaborador;
+
+    @Column(name = "cant_maxima_uso")
     private Integer cantMaxUso;
+
+    @Column(name = "usos_hoy")
     private Integer usosHoy;
+
+    @Temporal(TemporalType.DATE)
     private LocalDate fechaUltUso;
 
     public TarjetaAlimentar(Persona titular){

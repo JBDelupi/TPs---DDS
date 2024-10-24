@@ -6,14 +6,22 @@ import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.Mensaje;
 import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Notificacion.Mensaje.MensajeSuscripcion;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.random.RandomGenerator;
 @Getter
+
 public class FaltanNViandasParaLlenar implements ObserverHeladera {
     int id;
+
+    @Transient
     private Persona colaborador;
+
+    @Column(name = "cantidad_de_viandas")
     private int n;
+
+    @Column(name = "nombre")
     private String nombre;
 
 

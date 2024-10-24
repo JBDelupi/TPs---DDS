@@ -7,6 +7,7 @@ import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.MensajeTecnico;
 import Service.SistemaDeGeolocalizacion.SistemaGeolocalizacion;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,13 +17,27 @@ import java.util.List;
 
 @Setter
 @Getter
+
+@Entity
+@DiscriminatorValue("falla_tecnica")
 public class FallaTecnica extends Incidente {
-    private Integer id;
+
+    @Transient
     private Colaborador colaborador;
+
+    @Column(name = "foto")
     private String foto;
+
+    @Column(name = "descripcion")
     private String descripcion;
+
+    @Transient
     private List<RegistroVisitaTecnica> visitasTecnicas;
+
+    @Column(name = "solucionado")
     private Boolean solucionado;
+
+    @Transient
     private LocalDateTime fechaSolucionado;
 
     public FallaTecnica() {
@@ -31,7 +46,7 @@ public class FallaTecnica extends Incidente {
     }
 
     public void avisarATecnico() {
-        Persona tecnicoMasCercano =  SistemaGeolocalizacion.getInstance().masCercanoAPunto(heladera.getCoordenadas());
+        Persona tecnicoMasCercano =  SistemaGeolocalizacion.getInstance().masCercanoAPunto(heladera.getDireccion().getCentro());
         tecnicoMasCercano.getMedioDeNotificacion().Notificar(new MensajeTecnico(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla Tecnica en la localidad de: " + this.heladera.getDireccion().getLocalidad() + ".Direccion: " + this.heladera.getDireccion().getCalle() + this.heladera.getDireccion().getCalle()));
     }
 

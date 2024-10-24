@@ -6,6 +6,7 @@ import Models.Domain.Personas.Actores.Persona;
 
 public interface ObserverHeladera {
 
+
      void update(TipoDePublicacion tipoDePublicacion,Heladera heladera);
 
      Persona getColaborador();

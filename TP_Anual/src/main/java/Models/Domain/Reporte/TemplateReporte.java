@@ -1,6 +1,7 @@
 package Models.Domain.Reporte;
 
 import Service.TareaDiferida.ChromeTask;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,11 +15,24 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class TemplateReporte<T> {
 
-    private String id;
+@Entity
+@Table(name = "reporte")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo")
+
+public abstract class TemplateReporte<T> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Transient
     protected ChromeTask chromeTask;
+
+    @Temporal(TemporalType.DATE)
     private LocalDate fecha;
+
+    @Transient
     private List<List<String>> items;
 
     public TemplateReporte() {
