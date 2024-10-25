@@ -2,7 +2,7 @@ package Controller.Administrador;
 
 import Controller.Controller;
 import Models.Domain.Personas.Actores.Fisico;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
 import com.opencsv.exceptions.CsvValidationException;
@@ -15,7 +15,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class AdministradorController  extends Controller {
+    private RepoPersona repo;
 
+    public AdministradorController(RepoPersona repo) {
+        this.repo = repo;
+    }
 
 
     public void index(Context context) {
@@ -48,12 +52,7 @@ public class AdministradorController  extends Controller {
     public void show(Context context){
         this.estaLogueado(context);
 
-        String id = context.pathParam("id");
-        Fisico usuario = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
-        Map<String, Object> model = this.basicModel(context);
-        model.put("usuario",usuario);
-
-        context.render("Administrador/perfilAdministrador.hbs",model);
+        context.render("Administrador/perfilAdministrador.hbs",this.basicModel(context));
     }
 
 

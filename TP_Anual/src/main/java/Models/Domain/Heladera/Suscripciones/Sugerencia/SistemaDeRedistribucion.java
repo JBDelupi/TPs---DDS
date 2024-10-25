@@ -2,10 +2,10 @@ package Models.Domain.Heladera.Suscripciones.Sugerencia;
 
 import Models.Domain.Heladera.EstadoHeladera;
 import Models.Domain.Heladera.Heladera;
-import Models.Repository.PseudoBaseDatosHeladera;
+import Models.Repository.RepoHeladera;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class SistemaDeRedistribucion {
 
@@ -15,8 +15,9 @@ public class SistemaDeRedistribucion {
 
     public static Sugerencia generarSugerencia(Integer cantidadViandas){
         int n = cantidadViandas;
+        RepoHeladera  repoHeladera = new RepoHeladera(Heladera.class);
         SugerenciaCompuesta sugerencia = new SugerenciaCompuesta();
-        for(Heladera heladera : PseudoBaseDatosHeladera.getInstance().baseHeladeras){
+        for(Heladera heladera : (List<Heladera>) repoHeladera.buscarTodos()){
             if(heladera.getEstadoActual().equals(EstadoHeladera.DISPONIBLE)) {
                 int capacidadDisponible = heladera.getCapacidadDeViandas() - heladera.getViandas().size();
                 SugerenciaSimple sugerenciaSimple = new SugerenciaSimple();

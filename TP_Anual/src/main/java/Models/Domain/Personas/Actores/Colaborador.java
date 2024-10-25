@@ -5,10 +5,7 @@ import Models.Domain.Producto.Canje;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Tarjetas.TarjetaAccesos;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +18,9 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("Colaborador")
 public class Colaborador extends Rol {
-    @Transient
+
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinColumn(name = "id_colaborador") // CLAVE FORANEA
     private List<Contribucion> contribuciones;
 
     @Transient

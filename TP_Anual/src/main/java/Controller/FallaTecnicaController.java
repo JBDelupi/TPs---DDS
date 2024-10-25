@@ -3,12 +3,8 @@ package Controller;
 import Models.Domain.Builder.IncidentesBuilder.FallaTecnicaBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.TipoRol;
-import Models.Repository.PseudoBaseDatosFallaTecnica;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.RepoIncidente;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -20,16 +16,21 @@ import java.util.random.RandomGenerator;
 
 public class FallaTecnicaController extends Controller implements ICrudViewsHandler {
 
+    private RepoIncidente repo;
+
+    public FallaTecnicaController(RepoIncidente repo) {
+        this.repo = repo;
+    }
+
 
     @Override
     public void create(Context context) {
         this.estaLogueado(context);
 
-        List<Heladera> heladeras = PseudoBaseDatosHeladera.getInstance().baseHeladeras;
-
-        Map<String, Object> model = new HashMap<>();
-
+        List<Heladera> heladeras = repo.queryHeladera();
+        Map<String, Object> model = this.basicModel(context);
         model.put("heladeras",heladeras);
+
 
         context.render("incidentes/createIncidente.hbs", model);
     }
@@ -42,27 +43,28 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         FallaTecnicaBuilder fallaTecnicaBuilder = new FallaTecnicaBuilder();
         FallaTecnica fallaTecnica = fallaTecnicaBuilder
-                .heladera(PseudoBaseDatosHeladera.getInstance().getId(heladera))
-                .colaborador( (Fisico) PseudoBaseDatosUsuario.getInstance().getId(context.sessionAttribute("idPersona")))
+                .heladera((Heladera) repo.search(Heladera.class, heladera))
+                .colaborador( (Fisico) repo.search(Fisico.class, context.sessionAttribute("idPersona")))
                 .descripcion(descripcion)
                 .foto(imagenAdjunta)
                 .fecha(LocalDateTime.now())
                 .construir();
 
-        fallaTecnica.setId(RandomGenerator.getDefault().nextInt());
+        repo.agregar(fallaTecnica);
 
-        PseudoBaseDatosFallaTecnica.getInstance().agregar(fallaTecnica);
 
         context.redirect("/incidentes");
     }
 
     @Override
     public void index(Context context) {
-        List<FallaTecnica> fallasTecnicas = PseudoBaseDatosFallaTecnica.getInstance().baseFallaTecnica;
+        this.estaLogueado(context);
 
-        Map<String, Object> model = new HashMap<>();
+        List<FallaTecnica> fallasTecnicas = repo.buscarTodos();
 
+        Map<String, Object> model = this.basicModel(context);
         model.put("fallasTecnicas",fallasTecnicas);
+
 
         context.render("incidentes/index.hbs", model);
     }
@@ -73,7 +75,7 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         String id = context.pathParam("id");
 
-        FallaTecnica fallaTecnica = PseudoBaseDatosFallaTecnica.getInstance().getId(id);
+        FallaTecnica fallaTecnica = (FallaTecnica) repo.buscar(Integer.parseInt(id));
 
         Map<String, Object> model = this.basicModel(context);
 
@@ -96,7 +98,7 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         this.estaLogueado(context);
 
         String id = context.sessionAttribute("idPersona");
-        Fisico fisico = (Fisico) PseudoBaseDatosUsuario.getInstance().getId(id);
+        Fisico fisico = (Fisico) repo.search(Fisico.class,id);
         Map<String, Object> model = this.basicModel(context);
         model.put("humano", fisico);
 

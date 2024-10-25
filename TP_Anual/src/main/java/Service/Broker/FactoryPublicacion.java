@@ -3,7 +3,6 @@ package Service.Broker;
 
 import Service.Broker.Controllers.ActualizacionTemperaturaController;
 import Service.Broker.Controllers.AlertaController;
-import Service.Broker.Controllers.SolicitudAperturaController;
 
 public class FactoryPublicacion {
 
@@ -12,7 +11,7 @@ public class FactoryPublicacion {
         switch (nombre) {
             case "temperatura": publicacion =  new ActualizacionTemperaturaController(); break;
             case "alerta": publicacion =  new AlertaController(); break;
-            case "usoTarjeta": publicacion =  new SolicitudAperturaController(); break;
+            //case "usoTarjeta": publicacion =  new SolicitudAperturaController(); break;
         }
         return publicacion;
     }

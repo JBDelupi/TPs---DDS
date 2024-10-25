@@ -1,27 +1,30 @@
 package Controller;
 
-import Controller.Actores.RolUsuario;
 import Models.Domain.Builder.CredencialDeAccesoBuilder;
-import Models.Domain.Builder.UsuariosBuilder.ColaboradorBuilder;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
-import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Juridico;
-import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
-import Models.Repository.PseudoBaseDatosUsuario;
-import Models.Repository.RepoColaboradores;
+import Models.Repository.RepoPersona;
 import Service.Server.ICrudViewsHandler;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 
-import java.util.List;
 import java.util.Map;
 import java.util.random.RandomGenerator;
 
+
+
+
 public class JuridicoController extends Controller implements ICrudViewsHandler {
+
+    private RepoPersona repo;
+
+    public JuridicoController(RepoPersona repo) {
+        this.repo = repo;
+    }
 
 
     @Override
@@ -79,8 +82,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .sede(direccion)
                 .construir();
 
-        juridico.setId(RandomGenerator.getDefault().nextInt(0,100));
-        PseudoBaseDatosUsuario.getInstance().agregar(juridico);
+        repo.agregar(juridico);
 
         context.redirect("/login");
     }

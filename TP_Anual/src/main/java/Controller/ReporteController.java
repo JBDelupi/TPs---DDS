@@ -1,23 +1,22 @@
 package Controller;
 
 import Controller.Actores.RolUsuario;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Reporte.*;
-import Models.Repository.*;
-import Service.Server.ICrudViewsHandler;
+import Models.Repository.RepoReporte;
 import io.javalin.http.Context;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ReporteController extends Controller {
+
+    private RepoReporte repo;
+
+    public ReporteController(RepoReporte repo) {
+        this.repo = repo;
+    }
 
 
     public void index(Context context) {
@@ -38,7 +37,7 @@ public class ReporteController extends Controller {
         String tipoReporte = context.queryParam("tipo");
 
         // busco en la base de datos los reportes del tipo seleccionado en el index.
-        List<TemplateReporte<?>> listaReportes = PseudoBaseDatosReportes.getInstance().getReportesDeTipo(tipoReporte);
+        List<TemplateReporte<?>> listaReportes = repo.buscarTodos();
 
         Map<String, Object> model = this.basicModel(context);
         model.put("listaReportes", listaReportes);
@@ -56,7 +55,7 @@ public class ReporteController extends Controller {
         String tipoReporte = context.queryParam("tipo");
 
         // busco en la base de datos el reporte del idReporte que me pasaron por formParam.
-        TemplateReporte reporte = PseudoBaseDatosReportes.getInstance().getReportesPorID(idReporte);
+        TemplateReporte reporte = (TemplateReporte) repo.buscar(Integer.parseInt(idReporte));
         Map<String, Object> model = this.basicModel(context);
         model.put("reporte",reporte);
 

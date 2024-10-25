@@ -4,7 +4,6 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.Actores.TipoRol;
-import Models.Repository.PseudoBaseDatosHeladera;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
@@ -20,8 +19,8 @@ public class SistemaGeolocalizacion {
     private static SistemaGeolocalizacion instacia = null;
 
     private SistemaGeolocalizacion(){
-        PseudoBaseDatosHeladera pseudoBaseDatosHeladera = new PseudoBaseDatosHeladera();
-        heladerasDisponibles = pseudoBaseDatosHeladera.baseHeladeras;
+    //    PseudoBaseDatosHeladera pseudoBaseDatosHeladera = new PseudoBaseDatosHeladera();
+    //    heladerasDisponibles = pseudoBaseDatosHeladera.baseHeladeras;
     }
 
     public static SistemaGeolocalizacion getInstance(){

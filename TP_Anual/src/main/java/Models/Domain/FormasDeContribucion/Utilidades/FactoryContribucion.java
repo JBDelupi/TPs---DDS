@@ -17,9 +17,8 @@ import Models.Domain.Producto.TipoRubro;
 import Models.Domain.Tarjetas.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Domain.Tarjetas.TipoAccion;
-import Models.Repository.Dao;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosProductosOfrecidos;
+import Models.Repository.EntityManager.EntityManagerHelper;
+import Models.Repository.RepoContribucion;
 import Service.Server.exceptions.UnauthorizedResponseException;
 import lombok.Getter;
 
@@ -32,11 +31,20 @@ import java.util.random.RandomGenerator;
 
 @Getter
 public class FactoryContribucion {
-    private final Persona persona;
 
+    private static FactoryContribucion instancia;
+    private Persona persona;
+    private RepoContribucion repo = new RepoContribucion(Colaborador.class);
 
-    public FactoryContribucion(Persona persona) {
-        this.persona = persona;
+    public static FactoryContribucion getInstance(){
+        if(instancia == null ){
+            instancia = new FactoryContribucion();
+        }
+        return instancia;
+    }
+
+    private FactoryContribucion() {
+
     }
 
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//
@@ -67,51 +75,53 @@ public class FactoryContribucion {
 
     // ------------------- CREAR CONTRIBUCIONES -----------------------------------//
 
-    public void generarDonacion(CrearContribucionDTO crearContribucionDTO) {
-        Colaborador colaborador = this.obtenerColaborador();
-        colaborador.agregarNuevaDonacion(this.factoryMethod(crearContribucionDTO));
-
-    }
 
 
-    private Contribucion DonacionDeVianda(CrearContribucionDTO dto){
+    private void DonacionDeVianda(CrearContribucionDTO dto){
 
         String nombre = dto.getParams().get("nombre");
-      //  DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      //  LocalDate fechaCaducidad = LocalDate.parse(dto.getParams().get("fechaDeCaducidad"), formato);
+        LocalDate fechaCaducidad = LocalDate.parse(dto.getParams().get("fechaDeCaducidad"));
         int calorias = Integer.parseInt(dto.getParams().get("calorias"));
         int peso = Integer.parseInt(dto.getParams().get("peso"));
 
         String heladeraId = dto.getParams().get("heladera");
-        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(heladeraId);
+        Heladera heladera = EntityManagerHelper.getEntityManager().find(Heladera.class, heladeraId);
 
         //validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(),TipoDonacion.DONACION_DE_VIANDA);
 
         Vianda vianda = new Vianda();
         vianda.setNombre(nombre);
-      //  vianda.setFechaDeCaducidad(fechaCaducidad);
+        vianda.setFechaDeCaducidad(fechaCaducidad);
         vianda.setCalorias(calorias);
         vianda.setPeso(peso);
-        vianda.setId(1);
 
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
 
-        return donacion;
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
     }
 
-    private Contribucion DonacionDeDinero(CrearContribucionDTO dto) {
+    private void DonacionDeDinero(CrearContribucionDTO dto) {
+
         double monto = Double.parseDouble(dto.getParams().get("monto"));
         TipoFrecuencia frecuencia = TipoFrecuencia.valueOf(dto.getParams().get("frecuencia"));
 
         DonacionDeDineroBuilder builder = new DonacionDeDineroBuilder();
         Contribucion donacion = builder.monto(monto).frecuencia(frecuencia).construir();
 
-        return donacion;
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
+
+
     }
 
 
-    private Contribucion registrarTarjeta(CrearContribucionDTO dto) {
+    private void registrarTarjeta(CrearContribucionDTO dto) {
 
         String nombre = dto.getParams().get("nombreBeneficiario");
         int menoresACargo = 0;
@@ -130,26 +140,29 @@ public class FactoryContribucion {
         TarjetaAlimentar tarjeta = new TarjetaAlimentar(personaVulnerable);
         Contribucion donacion = new EntregaDeTarjeta(tarjeta);
 
-        return donacion;
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
+
     }
 
     // Distribución de Viandas
-    private Contribucion distribucionDeViandas(CrearContribucionDTO dto) {
+    private void distribucionDeViandas(CrearContribucionDTO dto) {
 
         String heladeraOrigenId = dto.getParams().get("heladeraOrigen");
-        //Heladera heladeraOrigen = (Heladera) heladeraRepository.buscar(heladeraOrigenId);
-        Heladera heladeraOrigen = PseudoBaseDatosHeladera.getInstance().getId(heladeraOrigenId);
+        Heladera heladeraOrigen = EntityManagerHelper.getEntityManager().find(Heladera.class,heladeraOrigenId);
 
         String heladeraDestinoId = dto.getParams().get("heladeraDestino");
-        //Heladera heladeraDestino = (Heladera) heladeraRepository.buscar(heladeraDestinoId);
-        Heladera heladeraDestino = PseudoBaseDatosHeladera.getInstance().getId(heladeraDestinoId);
-
+        Heladera heladeraDestino = EntityManagerHelper.getEntityManager().find(Heladera.class,heladeraDestinoId);
 
         int cantidad = Integer.parseInt(dto.getParams().get("cantidadViandas"));
         String motivo = dto.getParams().get("motivo");
 
        // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
-        obtenerColaborador().getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+        Colaborador colaborador = this.obtenerColaborador();
+
+        colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
         for (int i = 0; i < cantidad; i++) {
             Vianda vianda = heladeraOrigen.obtenerVianda();
@@ -163,35 +176,41 @@ public class FactoryContribucion {
                 .motivos(motivo)
                 .construir();
 
-        return donacion;
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
+
     }
 
     // Hacerse Cargo de una Heladera
-    private Contribucion hacerseCargoDeHeladera(CrearContribucionDTO dto) {
+    private void hacerseCargoDeHeladera(CrearContribucionDTO dto) {
 
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
         String id = dto.getParams().get("heladeraId");
 
-
-        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+        Heladera heladera = EntityManagerHelper.getEntityManager().find(Heladera.class,id);
         heladera.setResponsable(this.persona);
 
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
         Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
 
-        return donacion;
+
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
+
     }
 
-    private Contribucion ofrecerProducto(CrearContribucionDTO dto) {
+    private void ofrecerProducto(CrearContribucionDTO dto) {
 
         String nombre = dto.getParams().get("nombreProducto");
         String imagen = dto.getParams().get("imagenProducto");
         String descripcion = dto.getParams().get("descripcionProducto");
         String rubroProducto = dto.getParams().get("rubroProducto");
-        Double precio = Double.parseDouble(dto.getParams().get("precioProducto"));
         Integer stock = Integer.parseInt(dto.getParams().get("stock"));
-       // double puntosNecesarios = Double.parseDouble(dto.getParams().get("puntosNecesarios"));
+        double puntosNecesarios = Double.parseDouble(dto.getParams().get("puntosNecesarios"));
 
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
@@ -201,19 +220,24 @@ public class FactoryContribucion {
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
         Contribucion donacion = builder.producto(producto)
-                .puntosNecesarios(3.00) // Hardcodeado agregar vista
+                .puntosNecesarios(puntosNecesarios)
                 .stock(stock)
                 .construir();
 
-        PseudoBaseDatosProductosOfrecidos.getInstance().agregar((OfrecerProducto) donacion);
 
-        return donacion;
+        Colaborador colaborador = this.obtenerColaborador();
+        colaborador.agregarNuevaDonacion(donacion);
+
+        repo.modificar(colaborador);
+
+
     }
 
     // ------------------- FACTORY METHOD ----------------------------------------//
-    public Contribucion factoryMethod(CrearContribucionDTO dto) {
+    public void factoryMethod(String id, CrearContribucionDTO dto) {
         TipoDonacion tipo = TipoDonacion.valueOf(dto.getTipoDonacion());
-        return switch (tipo) {
+        this.persona = EntityManagerHelper.getEntityManager().find(Persona.class,id);
+        switch (tipo) {
             case DONACION_DINERO -> DonacionDeDinero(dto);
             case DONACION_DE_VIANDA -> DonacionDeVianda(dto);
             case HACERSE_CARGO_DE_HELADERA -> hacerseCargoDeHeladera(dto);

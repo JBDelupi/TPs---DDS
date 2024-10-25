@@ -1,5 +1,5 @@
 package Service.Broker.Controllers;
-
+/*
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
@@ -7,8 +7,6 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Tarjetas.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAccesos;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosUsuario;
 import Service.Broker.RabbitMQAdapter;
 import org.json.JSONObject;
 
@@ -22,7 +20,7 @@ public class SolicitudAperturaController implements Publicacion {
             // Obtener información del mensaje
             String heladeraId = jsonMessage.getString("heladeraId");
             String usoTarjeta = jsonMessage.getString("value");
-
+            /*
             // Buscar el usuario asociado a la tarjeta
             fisico = PseudoBaseDatosUsuario.getInstance().searchUserTarjeta(usoTarjeta);
 
@@ -43,6 +41,8 @@ public class SolicitudAperturaController implements Publicacion {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     private boolean verificarSolicitudDeApertura(Heladera heladera, Fisico fisico) {
@@ -68,4 +68,8 @@ public class SolicitudAperturaController implements Publicacion {
         // Usar RabbitMQAdapter para enviar la autorización
         RabbitMQAdapter.getInstance().publish(routingKey, autorizacionJson);
     }
-}
+
+  }
+
+ */
+

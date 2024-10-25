@@ -3,15 +3,13 @@ package Controller.Administrador;
 import Controller.Controller;
 import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
-import Models.Domain.Builder.UsuariosBuilder.TecnicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.RepoTecnico;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.Punto;
-import Service.Server.ICrudViewsHandler;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 
@@ -20,6 +18,11 @@ import java.util.random.RandomGenerator;
 
 public class TecnicoController extends Controller {
 
+    private RepoTecnico repo;
+
+    public TecnicoController(RepoTecnico repo){
+        this.repo = repo;
+    }
 
     public void save(Context context) {
 
@@ -52,9 +55,7 @@ public class TecnicoController extends Controller {
                 .rol(tecnico)
                 .construir();
 
-        fisico.setId(RandomGenerator.getDefault().nextInt(0,100));
-
-        PseudoBaseDatosUsuario.getInstance().agregar(fisico);
+        repo.agregar(fisico);
 
         context.redirect("/index/administrador");
     }
@@ -80,8 +81,11 @@ public class TecnicoController extends Controller {
     public void edit(Context context)  {
         String idUsuario = context.formParam("userId");
 
-        Persona persona = PseudoBaseDatosUsuario.getInstance().getId(idUsuario);
+        Persona persona = (Persona) repo.buscar( Integer.parseInt(idUsuario));
         persona.agregarRol(new Tecnico());
+
+        repo.modificar(persona);
+
         context.redirect("/index/administrador");
 
 

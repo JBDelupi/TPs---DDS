@@ -1,11 +1,7 @@
 package Models.Domain.Heladera.Sensores;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Alerta;
-import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
-import Models.Repository.PseudoBaseDatosAlerta;
-import Models.Repository.PseudoBaseDatosHeladera;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
@@ -13,7 +9,6 @@ import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.random.RandomGenerator;
 
 
 @Getter

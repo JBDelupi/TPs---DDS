@@ -1,37 +1,30 @@
 package Controller;
 
-import Models.Domain.Builder.ContribucionBuilder.OfrecerProductoBuilder;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Producto.Canje;
-import Models.Domain.Producto.Producto;
-import Models.Domain.Producto.TipoRubro;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosProducto;
-import Models.Repository.PseudoBaseDatosProductosOfrecidos;
-import Service.Server.ICrudViewsHandler;
+import Models.Repository.RepoContribucion;
 import io.javalin.http.Context;
-
-import javax.annotation.processing.Generated;
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.random.RandomGenerator;
+
 
 public class ProductoController extends Controller {
+
+    private RepoContribucion repo;
+
+    public ProductoController(RepoContribucion repo) {
+        this.repo = repo;
+    }
+
 
     public void index(Context context) {
         this.estaLogueado(context);
 
-        List<OfrecerProducto> productos = PseudoBaseDatosProductosOfrecidos.getInstance().getBaseProductosOfrecidos();
+        List<OfrecerProducto> productos = repo.buscarTodos();
 
         Map<String, Object> model = this.basicModel(context);
-
         model.put("productos",productos);
 
         context.render("producto/productosOfrecidos.hbs", model);
@@ -43,7 +36,7 @@ public class ProductoController extends Controller {
         Map<String, Object> model = this.basicModel(context);
 
         String id = context.pathParam("id");
-        OfrecerProducto producto = PseudoBaseDatosProductosOfrecidos.getInstance().getOfrecerProductoById(id);
+        OfrecerProducto producto = (OfrecerProducto) repo.buscar(Integer.parseInt(id));
 
         model.put("producto",producto);
         model.put("colaborador",getUsuario().getRol(TipoRol.COLABORADOR));
@@ -55,12 +48,11 @@ public class ProductoController extends Controller {
         this.estaLogueado(context);
 
         String idProducto = context.formParam("idProducto");
-        OfrecerProducto producto = PseudoBaseDatosProductosOfrecidos.getInstance().getOfrecerProductoById(idProducto);
+        OfrecerProducto producto = (OfrecerProducto) repo.buscar(Integer.parseInt(idProducto));
         Integer cantidad = Integer.valueOf(context.formParam("cantidadCanjear"));
 
-        basicModel(context);
-
         ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR)).realizarCanje(producto, cantidad);
+
 
         context.render("producto/canjeExitoso.hbs");
     }

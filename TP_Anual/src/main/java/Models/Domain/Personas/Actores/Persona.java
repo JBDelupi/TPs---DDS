@@ -42,7 +42,9 @@ public abstract class Persona  {
     @Column(name="correo_electronico")
     private String correElectronico;
 
-    @Transient
+
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_persona") // CLAVE FORANEA
     private List<Rol> roles;
 
     @Enumerated(EnumType.STRING)

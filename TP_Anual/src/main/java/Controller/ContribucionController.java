@@ -1,33 +1,31 @@
 package Controller;
 
-import Controller.Actores.RolUsuario;
 import Controller.DTO.CrearContribucionDTO;
-import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
-import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Repository.Dao;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Domain.Personas.Actores.Fisico;
+import Models.Repository.RepoContribucion;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ContribucionController extends Controller implements ICrudViewsHandler {
 
+    private RepoContribucion repo;
+
+    public ContribucionController(RepoContribucion repo){
+        this.repo = repo;
+    }
+
+
     @Override
     public void index(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
-        model.put("esHumano", usuario.getTipoUsuario().equals(RolUsuario.FISICO));
+        model.put("esHumano", this.usuario instanceof Fisico );
 
         context.render("FormasDeContribucion/index.hbs", model);
 
@@ -52,20 +50,18 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     @Override
     public void save(Context context) {
+        this.estaLogueado(context);
 
         Map<String, String> singleValueParams = context.formParamMap().entrySet().stream()
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
-                        entry -> entry.getValue().get(0) // Toma el primer valor de la lista
+                        entry -> entry.getValue().get(0)
                 ));
 
         CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
-        Map<String, Object> model = this.basicModel(context);
+        FactoryContribucion.getInstance().factoryMethod( context.sessionAttribute("idPersona") , dto );
 
-        FactoryContribucion factoryContribucion = new FactoryContribucion(PseudoBaseDatosUsuario.getInstance().getId(String.valueOf(getUsuario().getId())));
-        factoryContribucion.generarDonacion(dto);
-
-        context.render("FormasDeContribucion/contribucionExitosa.hbs", model);
+        context.render("FormasDeContribucion/contribucionExitosa.hbs", this.basicModel(context));
     }
 
     @Override
@@ -80,10 +76,10 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     public void consultarContribuciones(Context context){
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
-        List<Contribucion> contribuciones = ((Colaborador)usuario.getRol(TipoRol.COLABORADOR)).getContribuciones();
+        List<Contribucion> contribuciones = repo.queryContribucion( context.sessionAttribute("idPersona") );
+
         model.put("contribuciones",contribuciones);
 
         context.render("FormasDeContribucion/misContribuciones.hbs",model);
@@ -94,7 +90,7 @@ public class ContribucionController extends Controller implements ICrudViewsHand
     private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
         Map<String,Object> model = this.basicModel(context);
         if (tipoContribucion.equals("hacerseCargoHeladera") ||tipoContribucion.equals("donarViandas") || tipoContribucion.equals("distribucionViandas")) {
-            model.put("heladeras", PseudoBaseDatosHeladera.getInstance().baseHeladeras);
+            model.put("heladeras", repo.queryHeladera() );
             return model;
         }
        return model;

@@ -7,18 +7,23 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
-import Models.Repository.Dao;
+import Models.Repository.RepoPersona;
 
-import Models.Repository.Repositorio;
 import Service.Notificacion.Notificacion;
 import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.random.RandomGenerator;
 
 public class HumanoController extends Controller  {
+
+    private RepoPersona repo;
+
+    public HumanoController(RepoPersona repo) {
+        this.repo = repo;
+    }
+
 
 
     public void create(Context context){
@@ -62,12 +67,8 @@ public class HumanoController extends Controller  {
                 .direccion(direccion)
                 .construir();
 
-        //ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
-       // Colaborador colaborador = colaboradorBuilder.construir(fisico);
-
         fisico.agregarRol(new Colaborador());
 
-        Dao repo = new Repositorio(Fisico.class);
         repo.agregar(fisico);
 
         context.redirect("/login");

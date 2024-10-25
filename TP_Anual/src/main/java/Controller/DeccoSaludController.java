@@ -1,11 +1,8 @@
 package Controller;
 
-import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
+
 import Models.Domain.Tarjetas.Tarjeta;
-import Models.Repository.PseudoBaseDatosFallaTecnica;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.RepoSalud;
 import Service.DeccoSaludAPI.DTO.PersonaVulnerableDTO;
 import Service.DeccoSaludAPI.DTO.RespuestaDTO;
 import Service.DeccoSaludAPI.Mapper.PersonaVulneableMapper;
@@ -19,12 +16,18 @@ import java.util.List;
 import java.util.Map;
 
 public class DeccoSaludController extends Controller {
+    private RepoSalud repoSalud;
+
+    public DeccoSaludController(RepoSalud repoSalud) {
+        this.repoSalud = repoSalud;
+    }
+
     public void index(Context context) throws IOException {
         List<RespuestaDTO> r = new ArrayList<>();
 
         Map<String, Object> model = this.basicModel(context);
 
-        List<Tarjeta> tarjetas = PseudoBaseDatosUsuario.getInstance().getTarjetasAlimentar();
+        List<Tarjeta> tarjetas = repoSalud.buscarTodos();
         List<PersonaVulnerableDTO> listaEnviar = new ArrayList<>();
 
         for(Tarjeta tarjeta : tarjetas){

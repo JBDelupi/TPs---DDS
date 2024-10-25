@@ -1,7 +1,6 @@
 package Controller.Administrador;
 
 import Controller.Actores.RolUsuario;
-import Controller.DTO.SuscripcionDTO;
 import Models.Domain.Heladera.Suscripciones.FaltanNViandasParaLlenar;
 import Models.Domain.Heladera.Suscripciones.NViandasDisponibles;
 import Models.Domain.Heladera.Suscripciones.ObserverHeladera;
@@ -11,9 +10,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Repository.PseudoBaseDatosAlerta;
-import Models.Repository.PseudoBaseDatosHeladera;
-import Models.Repository.PseudoBaseDatosUsuario;
+import Models.Repository.RepoHeladera;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -24,6 +21,13 @@ import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {
+
+    private RepoHeladera repo;
+
+    public HeladeraController(RepoHeladera repo){
+        this.repo = repo;
+    }
+
 
     @Override
     public void create(Context context) {
@@ -52,11 +56,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                 .numero(numero)
                 .construir();
 
-        heladera.setId(RandomGenerator.getDefault().nextInt(0,1));
+        repo.agregar(heladera);
 
-        PseudoBaseDatosHeladera.getInstance().agregar(heladera);
-
-        // Guardar
         context.redirect("/heladeras");
     }
 
@@ -64,12 +65,12 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     public void index(Context context){
         this.estaLogueado(context);
 
-        List<Heladera> heladeraList = PseudoBaseDatosHeladera.getInstance().getBaseHeladeras();
+        List<Heladera> heladeraList = repo.buscarTodos();
 
         Map<String, Object> model = this.basicModel(context);
 
         model.put("heladeras",heladeraList);
-        model.put("esHumano",this.getUsuario().getTipoUsuario().equals(RolUsuario.FISICO));
+
 
         context.render("heladera/heladeras.hbs", model);
 
@@ -81,8 +82,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         // <-- HELADERA -->
         String id = context.pathParam("id");
-        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
-        Alerta alerta = PseudoBaseDatosAlerta.getInstance().ultimaAlerta(id);
+        Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(id));
+        Alerta alerta = repo.ultimaAlerta(id);
 
         Map<String, Object> model = this.basicModel(context);
 
@@ -94,8 +95,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         String idPersona = context.sessionAttribute("idPersona");
 
 
-            List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
-                    .filter(f -> f.getColaborador().equals(PseudoBaseDatosUsuario.getInstance().getId(idPersona)))
+        List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
+                    .filter(f -> f.getColaborador().equals(context.formParam("IdPersona")))
                     .toList();
 
             model.put("suscriptores",suscriptores);
@@ -113,7 +114,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         String id = context.formParam("heladeraId");
 
-        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+        Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(id));
 
         String idColaborador = context.formParam("idColaborador");
 
@@ -134,7 +135,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         this.estaLogueado(context);
 
         String id = context.pathParam("id");
-        Heladera heladera = PseudoBaseDatosHeladera.getInstance().getId(id);
+        Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(id));
 
         String opcionSuscripcion = context.formParam("opcionSuscripcion");
         String numeroViandasStr = context.formParam("numeroViandas");
@@ -145,20 +146,21 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         switch (opcionSuscripcion) {
             case "faltanNViandas":
-                FaltanNViandasParaLlenar suscripcion = new FaltanNViandasParaLlenar(PseudoBaseDatosUsuario.getInstance().getId(idPersona), numeroViandas);
+                FaltanNViandasParaLlenar suscripcion = new FaltanNViandasParaLlenar( (Persona) repo.search(Persona.class, context.sessionAttribute("IdPersona")) , numeroViandas);
                 heladera.agregarSubscriptor(suscripcion);
 
                 break;
             case "quedanNViandas":
-                NViandasDisponibles suscripcion2 = new NViandasDisponibles(PseudoBaseDatosUsuario.getInstance().getId(idPersona),numeroViandas);
+                NViandasDisponibles suscripcion2 = new NViandasDisponibles( (Persona) repo.search(Persona.class, context.sessionAttribute("IdPersona"))  ,numeroViandas);
                 heladera.agregarSubscriptor(suscripcion2);
                 break;
             case "desperfecto":
-                SufrioDesperfecto suscripcion3 = new SufrioDesperfecto(PseudoBaseDatosUsuario.getInstance().getId(idPersona));
+                SufrioDesperfecto suscripcion3 = new SufrioDesperfecto( (Persona) repo.search(Persona.class, context.sessionAttribute("IdPersona")) );
                 heladera.agregarSubscriptor(suscripcion3);
                 break;
         }
 
+        repo.modificar(heladera);
         context.redirect("/heladeras/"+id);
     }
 
