@@ -23,8 +23,8 @@ import java.util.ArrayList;
 @NoArgsConstructor
 
 public class TarjetaAlimentar extends Tarjeta {
-    @ManyToOne()
-    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(referencedColumnName = "id", name = "colaborador_id")
     private Fisico colaborador;
 
     @Column(name = "cant_maxima_uso")

@@ -10,6 +10,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.SufrioDesperfecto;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -42,8 +43,16 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         String numero = context.formParam("numero");
         String localidad = context.formParam("localidad");
         int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
-        double temperaturaMax = Double.parseDouble(context.formParam("TemperaturaMax"));
-        double temperaturaMin = Double.parseDouble(context.formParam("TemperaturaMin"));
+        double temperaturaMax = Double.parseDouble(context.formParam("temperaturaMax"));
+        double temperaturaMin = Double.parseDouble(context.formParam("temperaturaMin"));
+
+        System.out.println(temperaturaMax);
+        System.out.println(temperaturaMin);
+
+        Direccion direccion = new Direccion();
+        direccion.setNumero(numero);
+        direccion.setLocalidad(localidad);
+        direccion.setCalle(calle);
 
         HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
         Heladera heladera = heladeraBuilder
@@ -51,9 +60,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                 .capacidadMaxima(capacidadMaxima)
                 .temperaturaMax(temperaturaMax)
                 .temperaturaMin(temperaturaMin)
-                .calle(calle)
-                .localidad(localidad)
-                .numero(numero)
+                .Direccion(direccion)
                 .construir();
 
         repo.agregar(heladera);
@@ -83,6 +90,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         // <-- HELADERA -->
         String id = context.pathParam("id");
         Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(id));
+
         Alerta alerta = repo.ultimaAlerta(id);
 
         Map<String, Object> model = this.basicModel(context);

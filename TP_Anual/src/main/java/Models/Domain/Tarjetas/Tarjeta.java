@@ -20,7 +20,7 @@ public abstract class Tarjeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer codigo;
 
-    @OneToOne()
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     protected Persona titular;
 
     @OneToMany()

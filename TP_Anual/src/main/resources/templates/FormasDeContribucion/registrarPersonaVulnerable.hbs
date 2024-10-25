@@ -39,25 +39,25 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" required>
                                         <label for="nombre">Nombre</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+                                        <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" required>
                                         <label for="apellido">Apellido</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="date" class="form-control" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                                        <input type="date" class="form-control" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
                                         <label for="fechaNacimiento">Fecha de Nacimiento</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-control" id="tipoDocumento" required>
+                                        <select class="form-control"  name="tipoDocumento" id="tipoDocumento" required>
                                             <option value="" disabled selected>Seleccionar Tipo De Documento</option>
                                             <option value="DNI">DNI</option>
                                             <option value="LIBRETA">LIBRETA</option>
@@ -69,14 +69,14 @@
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="documento" placeholder="Numero de Documento" required>
+                                        <input type="text" class="form-control" name="documento" id="documento" placeholder="Numero de Documento" required>
                                         <label for="documento">Numero de Documento</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-control" id="menoresACargo" required>
+                                        <select class="form-control" name="menoresACargo" id="menoresACargo" required>
                                             <option value="" disabled selected>Posee menores a cargo?</option>
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
@@ -87,14 +87,14 @@
 
                                 <div class="col-md-12" id="cantidadMenoresContainer" style="display: none;">
                                     <div class="form-floating">
-                                        <input type="number" class="form-control" id="cantidadMenores" placeholder="Cantidad de menores a cargo" min="0">
+                                        <input type="number" class="form-control"  name = "cantidadMenores" id="cantidadMenores" placeholder="Cantidad de menores a cargo" min="0">
                                         <label for="cantidadMenores">Cantidad de menores a cargo</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control w-100" id="situacionCalle" required>
+                                        <select class="form-control w-100" name="situacionCalle" id="situacionCalle" required>
                                             <option value="" disabled selected>Se encuentra en situación de calle?</option>
                                             <option value="si">Sí</option>
                                             <option value="no">No</option>
@@ -105,21 +105,21 @@
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="calle" placeholder="Calle">
+                                        <input type="text" class="form-control" id="calle" name ="calle"  placeholder="Calle" >
                                         <label for="domicilioActual">Calle</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="numero" placeholder="Numero">
+                                        <input type="text" class="form-control" name="numero" id="numero" placeholder="Numero">
                                         <label for="domicilioActual">Numero</label>
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+                                        <input type="text" class="form-control" name="localidad" id="localidad" placeholder="Localidad">
                                         <label for="domicilioActual">Localidad</label>
                                     </div>
                                 </div>

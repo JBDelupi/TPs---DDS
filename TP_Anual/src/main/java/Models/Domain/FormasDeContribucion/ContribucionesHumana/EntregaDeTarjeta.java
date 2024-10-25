@@ -1,6 +1,8 @@
 package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,11 +15,11 @@ import java.time.LocalDate;
 @DiscriminatorValue("entrega_de_tarjeta")
 public class EntregaDeTarjeta extends Contribucion {
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private TarjetaAlimentar tarjetaAlimentar;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private TarjetaAlimentar tarjeta;
 
-    public EntregaDeTarjeta(TarjetaAlimentar tarjetaAlimentar){
-        this.tarjetaAlimentar = tarjetaAlimentar;
+    public EntregaDeTarjeta(TarjetaAlimentar tarjeta){
+        this.tarjeta = tarjeta;
         this.fechaDeDonacion = LocalDate.now();
         this.nombre = "Entrega de Tarjeta";
     }

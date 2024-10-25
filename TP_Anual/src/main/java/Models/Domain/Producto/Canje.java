@@ -14,11 +14,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 public class Canje {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne()
+    @ManyToOne()
     private OfrecerProducto ofrecerProducto; // Lo que canjeo
 
     @ManyToOne()

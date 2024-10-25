@@ -13,7 +13,7 @@ import lombok.Setter;
 @DiscriminatorValue("ofrecer_producto")
 public class OfrecerProducto extends Contribucion {
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = {CascadeType.ALL})
     private Producto producto;
 
     @Column(name = "puntos_necesarios")

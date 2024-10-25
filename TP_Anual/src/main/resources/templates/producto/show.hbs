@@ -82,7 +82,7 @@
                             <form action="/canjeExitoso" method="POST">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="hidden" name="idProducto" value="{{producto.producto.id}}">
+                                        <input type="hidden" name="idProducto" value="{{producto.id}}">
                                         <input type="number" class="form-control" id="cantidadCanjear" name="cantidadCanjear" placeholder="Cantidad a Canjear" min="1" max="{{producto.stock}}" required>
                                         <label for="cantidadCanjear">Cantidad a Canjear</label>
                                     </div>

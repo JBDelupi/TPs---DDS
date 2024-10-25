@@ -12,6 +12,8 @@ import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.*;
+import Models.Domain.Personas.DatosPersonales.Direccion;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Producto.Producto;
 import Models.Domain.Producto.TipoRubro;
 import Models.Domain.Tarjetas.SolicitudDeApertura;
@@ -123,26 +125,46 @@ public class FactoryContribucion {
 
     private void registrarTarjeta(CrearContribucionDTO dto) {
 
-        String nombre = dto.getParams().get("nombreBeneficiario");
-        int menoresACargo = 0;
+        Integer cantidadMenores = 0;
+        String calle = dto.getParams().get("calle");
+        String numero = dto.getParams().get("numero");
+        String localidad = dto.getParams().get("localidad");
+        String documento  = dto.getParams().get("documento");
+        TipoDeDocumento tipoDocumento = TipoDeDocumento.valueOf(dto.getParams().get("tipoDocumento"));
+        LocalDate fechaNacimiento = LocalDate.parse( dto.getParams().get("fechaNacimiento"));
+        String apellido = dto.getParams().get("apellido");
+        String nombre = dto.getParams().get("nombre");
 
-        if(dto.getParams().get("menoresACargo") != null){
-            menoresACargo = Integer.parseInt(dto.getParams().get("menoresACargo"));
+
+        if(dto.getParams().get("menoresACargo").equals("si")){
+            cantidadMenores = Integer.parseInt(dto.getParams().get("cantidadMenores"));
         }
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
-        PersonaVulnerable vulnerable = vulnerableBuilder.menoresACargo(menoresACargo).construir();
+        PersonaVulnerable rolVulnerable = vulnerableBuilder.menoresACargo(cantidadMenores).construir();
 
+        Direccion direccion = new Direccion();
+        direccion.setNumero(numero);
+        direccion.setLocalidad(localidad);
+        direccion.setCalle(calle);
 
         FisicoBuilder personaVulnerableBuilder = new FisicoBuilder();
-        Fisico personaVulnerable = personaVulnerableBuilder.nombre(nombre).rol(vulnerable).construir();
+        Fisico persona = personaVulnerableBuilder
+                .nombre(nombre)
+                .numeroDocumento(documento)
+                .tipoDocumento(tipoDocumento)
+                .apellido(apellido)
+                .direccion(direccion)
+                .fechaNacimiento(fechaNacimiento)
+                .rol(rolVulnerable)
+                .construir();
 
-        TarjetaAlimentar tarjeta = new TarjetaAlimentar(personaVulnerable);
-        Contribucion donacion = new EntregaDeTarjeta(tarjeta);
-
+        TarjetaAlimentar tarjetaAlimentar = new TarjetaAlimentar(persona);
+        Contribucion donacion = new EntregaDeTarjeta(tarjetaAlimentar);
         Colaborador colaborador = this.obtenerColaborador();
         colaborador.agregarNuevaDonacion(donacion);
 
+        repo.agregar(persona);
         repo.modificar(colaborador);
 
     }
@@ -214,7 +236,11 @@ public class FactoryContribucion {
 
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
-        Producto producto = new Producto(tipoRubro, nombre, imagen, descripcion);
+        Producto producto = new Producto();
+        producto.setNombre(nombre);
+        producto.setImagen(imagen);
+        producto.setDescripcion(descripcion);
+        producto.setRubro(tipoRubro);
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
         Contribucion donacion = builder.producto(producto)
