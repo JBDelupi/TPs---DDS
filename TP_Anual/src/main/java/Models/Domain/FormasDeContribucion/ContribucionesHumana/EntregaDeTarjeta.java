@@ -2,9 +2,7 @@ package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -14,7 +12,8 @@ import java.time.LocalDate;
 @Entity
 @DiscriminatorValue("entrega_de_tarjeta")
 public class EntregaDeTarjeta extends Contribucion {
-    @Transient
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     private TarjetaAlimentar tarjetaAlimentar;
 
     public EntregaDeTarjeta(TarjetaAlimentar tarjetaAlimentar){

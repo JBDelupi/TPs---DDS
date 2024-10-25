@@ -22,7 +22,8 @@ import java.util.List;
 @DiscriminatorValue("falla_tecnica")
 public class FallaTecnica extends Incidente {
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "colaborador_id")
     private Colaborador colaborador;
 
     @Column(name = "foto")
@@ -31,8 +32,10 @@ public class FallaTecnica extends Incidente {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Transient
+    @OneToMany(cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "id_persona")
     private List<RegistroVisitaTecnica> visitasTecnicas;
+
 
     @Column(name = "solucionado")
     private Boolean solucionado;

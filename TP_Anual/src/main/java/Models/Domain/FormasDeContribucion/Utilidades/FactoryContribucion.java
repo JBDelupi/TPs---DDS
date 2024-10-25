@@ -215,8 +215,6 @@ public class FactoryContribucion {
         TipoRubro tipoRubro = TipoRubro.valueOf(rubroProducto);
 
         Producto producto = new Producto(tipoRubro, nombre, imagen, descripcion);
-        producto.setId(RandomGenerator.getDefault().nextInt());
-
 
         OfrecerProductoBuilder builder = new OfrecerProductoBuilder();
         Contribucion donacion = builder.producto(producto)

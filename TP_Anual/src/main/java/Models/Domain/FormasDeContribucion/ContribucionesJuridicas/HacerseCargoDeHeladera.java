@@ -2,10 +2,7 @@ package Models.Domain.FormasDeContribucion.ContribucionesJuridicas;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Setter;
 
 @Setter
@@ -13,10 +10,12 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera extends Contribucion {
+
     @Column(name = "nombre_caracteristico")
     private String nombreCaracteristico;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
     private Heladera heladera;
 
     public HacerseCargoDeHeladera() {

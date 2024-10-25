@@ -3,15 +3,17 @@ package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Setter;
 
 @Setter
 public class DonacionDeVianda extends Contribucion {
-    @Transient
+
+    @OneToOne(cascade = CascadeType.PERSIST )
     private Vianda vianda;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
     private Heladera heladera;
 
     @Override

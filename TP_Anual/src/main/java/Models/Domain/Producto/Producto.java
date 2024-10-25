@@ -24,7 +24,7 @@ public class Producto
     @Column(name = "nombre")
     private String nombre;
 
-    @Transient
+    @Column(name = "imagen")
     private String imagen;
 
     @Column(name = "descripcion")

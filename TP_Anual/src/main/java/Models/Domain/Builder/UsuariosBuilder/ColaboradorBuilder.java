@@ -17,9 +17,7 @@ public class ColaboradorBuilder {
 
     public Colaborador construir(Persona persona) {
         if (persona instanceof Fisico) {
-            TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(persona);
-            colaborador.setTarjeta(tarjetaAccesos);
-          //  new MensajeBienvenida(persona.getCorreElectronico(), tarjetaAccesos.getCodigo());
+
         }
         return this.colaborador;
     }

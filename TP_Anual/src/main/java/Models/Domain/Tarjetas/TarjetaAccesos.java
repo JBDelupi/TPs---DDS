@@ -4,10 +4,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,7 +19,8 @@ import java.util.List;
 
 public class TarjetaAccesos extends Tarjeta{
 
-    @Transient
+    @OneToMany()
+    @JoinColumn(name = "tarjeta_id")
     private List<SolicitudDeApertura> solicitudesDeApertura;
 
     public TarjetaAccesos(Persona titular){

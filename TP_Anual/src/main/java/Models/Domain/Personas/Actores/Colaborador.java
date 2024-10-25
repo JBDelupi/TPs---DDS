@@ -23,13 +23,13 @@ public class Colaborador extends Rol {
     @JoinColumn(name = "id_colaborador") // CLAVE FORANEA
     private List<Contribucion> contribuciones;
 
-    @Transient
+    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Canje> historialCanje;
 
     @Column(name = "puntaje")
     private Double puntaje;
 
-    @Transient
+    @OneToOne(cascade = CascadeType.PERSIST)
     private TarjetaAccesos tarjeta; // Persistencia se elimina, para evitar bidireccionaldiad
 
     @Column(name = "cantidad_viandas_donadas")
@@ -54,6 +54,7 @@ public class Colaborador extends Rol {
 
 
     public void realizarCanje(OfrecerProducto producto, Integer cantidad){
+        // Habria que separar los casos
         if (!(puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad <=producto.getStock())){
             throw new NoTienePuntosCanjeException("No tiene suficiente Puntos");
         }

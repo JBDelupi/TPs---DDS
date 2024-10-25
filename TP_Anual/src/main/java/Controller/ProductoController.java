@@ -51,8 +51,11 @@ public class ProductoController extends Controller {
         OfrecerProducto producto = (OfrecerProducto) repo.buscar(Integer.parseInt(idProducto));
         Integer cantidad = Integer.valueOf(context.formParam("cantidadCanjear"));
 
-        ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR)).realizarCanje(producto, cantidad);
 
+        Colaborador colaborador = (Colaborador) getUsuario().getRol(TipoRol.COLABORADOR);
+        colaborador.realizarCanje(producto,cantidad);
+
+        repo.modificar(colaborador);
 
         context.render("producto/canjeExitoso.hbs");
     }

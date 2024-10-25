@@ -23,7 +23,8 @@ import java.util.ArrayList;
 @NoArgsConstructor
 
 public class TarjetaAlimentar extends Tarjeta {
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
     private Fisico colaborador;
 
     @Column(name = "cant_maxima_uso")

@@ -23,7 +23,7 @@ public class PersonaVulnerable extends Rol {
     @Column(name = "menores_a_cargo")
     private Integer menoresACargo;
 
-    @Transient
+    @OneToOne(cascade = CascadeType.PERSIST)
     private TarjetaAlimentar tarjeta;
 
     public PersonaVulnerable(){

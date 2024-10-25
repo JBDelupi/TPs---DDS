@@ -56,7 +56,8 @@ public class Heladera {
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
     private Boolean abierto;
 
-    @Transient
+    @OneToMany()
+    @JoinColumn(name = "id_heladera") // CLAVE FORANEA
     private List<Vianda> viandas;
 
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
@@ -83,7 +84,8 @@ public class Heladera {
     @Transient
     private List<ObserverHeladera> suscriptores;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "persona_responsable_id")
     private Persona responsable;
 
     public Heladera() {

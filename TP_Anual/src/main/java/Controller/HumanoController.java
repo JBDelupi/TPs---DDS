@@ -7,6 +7,7 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.RepoPersona;
 
 import Service.Notificacion.Notificacion;
@@ -67,7 +68,11 @@ public class HumanoController extends Controller  {
                 .direccion(direccion)
                 .construir();
 
-        fisico.agregarRol(new Colaborador());
+        Colaborador colaborador = new Colaborador();
+        TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(fisico);
+        colaborador.setTarjeta(tarjetaAccesos);
+        fisico.agregarRol(colaborador);
+        //  new MensajeBienvenida(persona.getCorreElectronico(), tarjetaAccesos.getCodigo());
 
         repo.agregar(fisico);
 

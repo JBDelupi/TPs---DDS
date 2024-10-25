@@ -15,15 +15,16 @@ import java.time.LocalDate;
 public class RegistroDeUso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
     private Heladera heladera;
 
-    @Transient
+    @OneToOne
     private Vianda vianda;
 
     @Enumerated(EnumType.STRING)

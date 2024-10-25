@@ -17,9 +17,11 @@ public class Canje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Transient
+
+    @OneToOne()
     private OfrecerProducto ofrecerProducto; // Lo que canjeo
-    @Transient
+
+    @ManyToOne()
     private Colaborador colaborador; // El que hizo el canje
 
     @Temporal(TemporalType.DATE)

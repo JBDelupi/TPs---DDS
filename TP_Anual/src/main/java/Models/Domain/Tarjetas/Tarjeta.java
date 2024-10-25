@@ -20,10 +20,11 @@ public abstract class Tarjeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer codigo;
 
-    @Transient
+    @OneToOne()
     protected Persona titular;
 
-    @Transient
+    @OneToMany()
+    @JoinColumn(name = "tarjeta_id")
     protected List<RegistroDeUso> usos;
 
     public Tarjeta() {

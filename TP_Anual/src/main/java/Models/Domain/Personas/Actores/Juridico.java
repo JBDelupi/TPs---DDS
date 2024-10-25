@@ -23,11 +23,7 @@ public class Juridico extends Persona {
     @Enumerated(EnumType.STRING)
     private TipoJuridico tipoJuridico;
 
-    @Transient
-    private List<OfrecerProducto> productosOfrecidos;
-
     public Juridico(){
-        this.productosOfrecidos = new ArrayList<>();
         this.setMedioDeNotificacion(new CorreoAdapter());
     }
 

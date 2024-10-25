@@ -2,10 +2,7 @@ package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Setter;
 
 @Setter
@@ -13,10 +10,13 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("distribucion_de_viandas")
 public class DistribucionDeViandas extends Contribucion {
-    @Transient
+   
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_origen_id")
     private Heladera heladeraOrigen;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_destino_id") // FK
     private Heladera heladeraDestino;
 
     @Column(name = "cantidad_de_viandas_a_mover")

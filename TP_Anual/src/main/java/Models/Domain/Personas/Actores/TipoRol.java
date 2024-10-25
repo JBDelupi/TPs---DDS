@@ -4,5 +4,4 @@ public enum TipoRol {
     COLABORADOR,
     VULNERABLE,
     TECNICO,
-    ADMINISTRADOR,
 }

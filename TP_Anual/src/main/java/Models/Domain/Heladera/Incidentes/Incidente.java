@@ -26,10 +26,14 @@ public abstract class Incidente {
     @Transient // TIEMPO
     protected LocalDateTime fecha;
 
-    @Transient
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "heladera_id")
     protected Heladera heladera;
 
+
+    @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
     @Column(name = "solucionado")
     protected Boolean solucionado;
+
 
 }
