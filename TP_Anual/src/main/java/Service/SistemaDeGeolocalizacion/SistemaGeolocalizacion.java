@@ -4,6 +4,8 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.Actores.TipoRol;
+import Models.Repository.RepoHeladera;
+import Models.Repository.RepoPersona;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;
 import lombok.Getter;
@@ -14,13 +16,12 @@ import java.util.List;
 @Setter
 @Getter
 public class SistemaGeolocalizacion {
-    private List<Heladera> heladerasDisponibles;
-    private List<Persona> tecnicosRegistrados;
     private static SistemaGeolocalizacion instacia = null;
+    private RepoPersona repoPersona = new RepoPersona(Persona.class);
+    private RepoHeladera repoHeladera = new RepoHeladera(Heladera.class);
+
 
     private SistemaGeolocalizacion(){
-    //    PseudoBaseDatosHeladera pseudoBaseDatosHeladera = new PseudoBaseDatosHeladera();
-    //    heladerasDisponibles = pseudoBaseDatosHeladera.baseHeladeras;
     }
 
     public static SistemaGeolocalizacion getInstance(){
@@ -33,7 +34,8 @@ public class SistemaGeolocalizacion {
 
 
     public List<Heladera> generarHeladerasDisponibles(AreaCobertura area, Integer cantidadDeAlimentos) {
-        return heladerasDisponibles.stream().filter(
+        List<Heladera> heladeraList = repoHeladera.buscarTodos();
+        return heladeraList.stream().filter(
                 f->f.tieneCantidadDisponible(cantidadDeAlimentos) && estaDentroDe(area, f.getDireccion().getCentro())
         ).toList();
     }
@@ -57,7 +59,9 @@ public class SistemaGeolocalizacion {
 
 
     public Persona masCercanoAPunto(Punto punto) {
-        List<Persona> listaFiltrada = this.tecnicosRegistrados.stream()
+        List<Persona> listaFiltrada = repoPersona.buscarTodos();
+
+                 listaFiltrada.stream()
                 .filter(f -> estaDentroDe(((Tecnico)f.getRol(TipoRol.TECNICO)).getArea(), punto))
                 .toList();
         if (listaFiltrada.isEmpty()) {

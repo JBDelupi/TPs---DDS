@@ -27,6 +27,8 @@ public class VisitaFallaTecnicaController extends Controller   {
     }
 
     public void save(Context context) {
+        this.estaLogueado(context);
+
         String descripcion = context.formParam("descripcion");
         String imagen = context.formParam("imagenAdjunta");
         String solucionadoStr = context.formParam("solucionado");

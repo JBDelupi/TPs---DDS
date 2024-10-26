@@ -7,9 +7,13 @@ import jakarta.persistence.*;
 import lombok.Setter;
 
 @Setter
+
+
+@Entity
+@DiscriminatorValue("donacion_de_vianda")
 public class DonacionDeVianda extends Contribucion {
 
-    @OneToOne(cascade = CascadeType.PERSIST )
+    @OneToOne()
     private Vianda vianda;
 
     @ManyToOne()

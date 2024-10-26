@@ -37,6 +37,7 @@ public class FactoryContribucion {
     private static FactoryContribucion instancia;
     private Persona persona;
     private RepoContribucion repo = new RepoContribucion(Colaborador.class);
+    private String id;
 
     public static FactoryContribucion getInstance(){
         if(instancia == null ){
@@ -97,6 +98,10 @@ public class FactoryContribucion {
         vianda.setCalorias(calorias);
         vianda.setPeso(peso);
 
+        heladera.agregarVianda(vianda);
+
+        repo.modificar(heladera);
+
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
 
@@ -104,6 +109,8 @@ public class FactoryContribucion {
         colaborador.agregarNuevaDonacion(donacion);
 
         repo.modificar(colaborador);
+
+
     }
 
     private void DonacionDeDinero(CrearContribucionDTO dto) {
@@ -261,6 +268,7 @@ public class FactoryContribucion {
     public void factoryMethod(String id, CrearContribucionDTO dto) {
         TipoDonacion tipo = TipoDonacion.valueOf(dto.getTipoDonacion());
         this.persona = EntityManagerHelper.getEntityManager().find(Persona.class,id);
+        this.id = id;
         switch (tipo) {
             case DONACION_DINERO -> DonacionDeDinero(dto);
             case DONACION_DE_VIANDA -> DonacionDeVianda(dto);

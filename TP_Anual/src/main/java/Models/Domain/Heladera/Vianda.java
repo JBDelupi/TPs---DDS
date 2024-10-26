@@ -2,6 +2,7 @@ package Models.Domain.Heladera;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "Vianda")
+@NoArgsConstructor
 public class Vianda {
 
     @Id
@@ -28,5 +30,7 @@ public class Vianda {
 
     @Column(name = "peso")
     private Integer peso;
+
+
 
 }

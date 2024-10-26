@@ -56,12 +56,12 @@ public class Heladera {
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
     private Boolean abierto;
 
-    @OneToMany()
+    @OneToMany( cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @JoinColumn(name = "id_heladera") // CLAVE FORANEA
     private List<Vianda> viandas;
 
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
-    private Boolean estaLlena = false;
+    private Boolean estaLlena;
 
     @Transient
     private Sensor sensorMovimiento;
@@ -94,6 +94,7 @@ public class Heladera {
         this.sensorMovimiento = new SensorMovimiento(this);
         this.sensorTemperatura = new SensorTemperatura(this);
         this.setEstadoActual(EstadoHeladera.DISPONIBLE);
+        this.estaLlena = false;
         this.cantidadDeFallas = 0;
         this.fechaDePuestaEnMarcha = LocalDate.now();
         this.cantidadDeviandasRetiradas = 0;

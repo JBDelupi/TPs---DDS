@@ -18,7 +18,8 @@ public class RegistroVisitaTecnica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Embedded
+    @ManyToOne()
+    @JoinColumn(referencedColumnName = "id", name = "tecnico_visita_id")
     private Tecnico tecnico;
 
     @Column(name = "descripcion")
@@ -30,7 +31,8 @@ public class RegistroVisitaTecnica {
     @Transient
     private String foto;
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
-    private Boolean visitaExitosa; //Se soluciono el problema
+    private Boolean visitaExitosa;
+
 
 
 

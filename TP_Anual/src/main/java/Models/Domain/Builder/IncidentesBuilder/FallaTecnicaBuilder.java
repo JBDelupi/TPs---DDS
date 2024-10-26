@@ -21,7 +21,7 @@ public class FallaTecnicaBuilder {
         fallaTecnica.setHeladera(heladera);
         heladera.setEstadoActual(EstadoHeladera.NO_DISPONIBLE);
         heladera.generarNuevaPublicacion(TipoDePublicacion.SUFRIO_DESPERFECTO);
-        fallaTecnica.avisarATecnico();
+        //     fallaTecnica.avisarATecnico();
 
         return this;
     }

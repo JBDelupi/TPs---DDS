@@ -30,7 +30,10 @@ public class RepoContribucion extends Dao{
                     .getResultList();
     }
 
+    public Object search(Class<?> objeto, String id) {
+        return EntityManagerHelper.getEntityManager().find(objeto,id);
 
+    }
 
 
 }

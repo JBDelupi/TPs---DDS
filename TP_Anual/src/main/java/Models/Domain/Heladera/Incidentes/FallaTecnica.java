@@ -32,13 +32,10 @@ public class FallaTecnica extends Incidente {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(cascade = {CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id_persona")
     private List<RegistroVisitaTecnica> visitasTecnicas;
 
-
-    @Column(name = "solucionado")
-    private Boolean solucionado;
 
     @Transient
     private LocalDateTime fechaSolucionado;
@@ -63,12 +60,15 @@ public class FallaTecnica extends Incidente {
                 .visitaExitosa(solucionado)
                 .construir();
         visitasTecnicas.add(registroVisita);
+
         if (imagen !=null) {
             registroVisita.setFoto(imagen);
         }
-        if (registroVisita.getVisitaExitosa()) {
+        if (solucionado) {
             this.solucionado = true;
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);
         }
+
     }
+
 }
