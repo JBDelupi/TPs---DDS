@@ -56,7 +56,7 @@ public class Heladera {
     @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
     private Boolean abierto;
 
-    @OneToMany( cascade ={CascadeType.PERSIST,CascadeType.MERGE})
+    @OneToMany()
     @JoinColumn(name = "id_heladera") // CLAVE FORANEA
     private List<Vianda> viandas;
 
@@ -102,15 +102,15 @@ public class Heladera {
     }
 
     public void agregarVianda(Vianda ... vianda) {
-
-        if ( capacidadDeViandas == viandas.size() ) {
-            this.estaLlena = true;
+        if (estaLlena) {
             throw new HeladeraLlenaException("Esta llena la heladera");
         }
         registrarViandaDepositada();
         Collections.addAll(this.viandas, vianda);
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
-
+        if ( capacidadDeViandas == viandas.size() ) {
+            this.estaLlena = true;
+        }
     }
 
 

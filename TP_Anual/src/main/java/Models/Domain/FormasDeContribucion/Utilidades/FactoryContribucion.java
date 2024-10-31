@@ -36,7 +36,7 @@ public class FactoryContribucion {
 
     private static FactoryContribucion instancia;
     private Persona persona;
-    private RepoContribucion repo = new RepoContribucion(Colaborador.class);
+    private final RepoContribucion repo  = new RepoContribucion(Colaborador.class);
     private String id;
 
     public static FactoryContribucion getInstance(){
@@ -52,6 +52,7 @@ public class FactoryContribucion {
 
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//
     private Colaborador obtenerColaborador() {
+        this.persona = (Persona) repo.search(Persona.class,id);
         if (!this.persona.checkRol(TipoRol.COLABORADOR)) {
             throw new UnauthorizedResponseException();
         }
@@ -88,7 +89,6 @@ public class FactoryContribucion {
         int peso = Integer.parseInt(dto.getParams().get("peso"));
 
         String heladeraId = dto.getParams().get("heladera");
-        Heladera heladera = EntityManagerHelper.getEntityManager().find(Heladera.class, heladeraId);
 
         //validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(),TipoDonacion.DONACION_DE_VIANDA);
 
@@ -98,13 +98,14 @@ public class FactoryContribucion {
         vianda.setCalorias(calorias);
         vianda.setPeso(peso);
 
+        repo.agregar(vianda);
+
+        Heladera heladera = (Heladera) repo.search(Heladera.class, heladeraId);
         heladera.agregarVianda(vianda);
 
-        repo.modificar(heladera);
 
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
-
         Colaborador colaborador = this.obtenerColaborador();
         colaborador.agregarNuevaDonacion(donacion);
 
@@ -267,7 +268,6 @@ public class FactoryContribucion {
     // ------------------- FACTORY METHOD ----------------------------------------//
     public void factoryMethod(String id, CrearContribucionDTO dto) {
         TipoDonacion tipo = TipoDonacion.valueOf(dto.getTipoDonacion());
-        this.persona = EntityManagerHelper.getEntityManager().find(Persona.class,id);
         this.id = id;
         switch (tipo) {
             case DONACION_DINERO -> DonacionDeDinero(dto);
