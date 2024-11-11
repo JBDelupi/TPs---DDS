@@ -3,10 +3,13 @@ package Controller;
 import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
+import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoContribucion;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -89,11 +92,39 @@ public class ContribucionController extends Controller implements ICrudViewsHand
 
     private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
         Map<String,Object> model = this.basicModel(context);
-        if (tipoContribucion.equals("hacerseCargoHeladera") ||tipoContribucion.equals("donarViandas") || tipoContribucion.equals("distribucionViandas")) {
-            model.put("heladeras", repo.queryHeladera() );
-            return model;
+        switch (tipoContribucion) {
+            case "donarViandas" -> {
+                model.put("heladeras", repo.queryHeladeraDisponible());
+                return model;
+            }
+            case "distribucionViandas" -> {
+                List<Heladera> heladeraList = repo.queryHeladera();
+
+                List<Heladera> heladerasConAlimentos = new ArrayList<>();
+                List<Heladera> heladerasDisponibles = new ArrayList<>();
+
+                for (Heladera heladera : heladeraList) {
+                    if (!heladera.getViandas().isEmpty()) {
+                        heladerasConAlimentos.add(heladera);
+                    }
+                    if (!heladera.getEstaLlena()) {
+                        heladerasDisponibles.add(heladera);
+                    }
+                }
+
+                model.put("heladeras", heladerasConAlimentos);
+                model.put("heladerasDisponible", heladerasDisponibles);
+
+                return model;
+            }
+            case "hacerseCargoHeladera" -> {
+                model.put("heladeras", repo.queryHeladeraDuenia());
+                return model;
+            }
         }
-       return model;
+
+
+        return model;
 
     }
 

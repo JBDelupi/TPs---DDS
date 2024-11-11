@@ -7,18 +7,16 @@
 
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/estilos.css">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 
 <body>
-{{> templates/partials/headerColaborador rol = rol  id=id}}  <!-- Incluye el partial footer aquí -->
-{{> templates/partials/tipografia}}  <!-- Incluye el partial footer aquí -->
+{{> templates/partials/headerColaborador rol = rol  id=id}}
+{{> templates/partials/tipografia}}
 <main>
     <div class="container-xxl py-5">
         <div class="container">
@@ -43,8 +41,10 @@
                                     <div class="form-floating">
                                         <select class="form-control" id="heladeraOrigen" name="heladeraOrigen" required>
                                             <option value="" disabled selected>Seleccionar Heladera de Origen</option>
-                                            {{#each heladeras}}
-                                                <option value="{{this.id}}">{{this.direccion.localidad}} (ID: {{this.id}})</option>
+                                            {{#each heladeras }}
+                                                <option value="{{this.id}}" data-max="{{this.viandas.size}}">
+                                                    {{this.direccion.localidad}} (ID: {{this.id}} - Cantidad a mover {{this.viandas.size}})
+                                                </option>
                                             {{/each}}
                                         </select>
                                         <label for="heladeraOrigen">Heladera de Origen</label>
@@ -56,8 +56,10 @@
                                     <div class="form-floating">
                                         <select class="form-control" id="heladeraDestino" name="heladeraDestino" required>
                                             <option value="" disabled selected>Seleccionar Heladera de Destino</option>
-                                            {{#each heladeras}}
-                                                <option value="{{this.id}}">{{this.direccion.localidad}} (ID: {{this.id}})</option>
+                                            {{#each heladerasDisponible}}
+                                                <option value="{{this.id}}" data-max="{{this.capacidadActual}}">
+                                                    {{this.direccion.localidad}} (ID: {{this.id}}) - Capacidad Disponible: {{this.capacidadActual}})
+                                                </option>
                                             {{/each}}
                                         </select>
                                         <label for="heladeraDestino">Heladera de Destino</label>
@@ -111,5 +113,25 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+
+<script>
+    // Al seleccionar una heladera de destino, establecer el límite máximo de cantidad
+    document.getElementById('heladeraDestino').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const maxCantidad = selectedOption.getAttribute('data-max');
+
+        const inputCantidad = document.getElementById('cantidadViandas');
+        inputCantidad.setAttribute('max', maxCantidad);
+        inputCantidad.value = ""; // Limpia el valor de cantidad al cambiar de heladera
+    });
+
+    document.getElementById('cantidadViandas').addEventListener('input', function () {
+        const max = this.getAttribute('max');
+        if (parseInt(this.value) > parseInt(max)) {
+            alert(`La cantidad máxima permitida es ${max}`);
+            this.value = max;
+        }
+    });
+</script>
 
 </html>

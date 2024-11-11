@@ -32,5 +32,4 @@ public class Vianda {
     private Integer peso;
 
 
-
 }

@@ -24,7 +24,7 @@ public class Server {
 
     public static void init() {
         if(app == null) {
-            Integer port = Integer.parseInt(System.getProperty("port", "8080"));
+            Integer port = Integer.parseInt(System.getProperty("port", "7000"));
             app = Javalin.create(config()).start(port);
             initTemplateEngine();
             AppHandlers.applyHandlers(app);

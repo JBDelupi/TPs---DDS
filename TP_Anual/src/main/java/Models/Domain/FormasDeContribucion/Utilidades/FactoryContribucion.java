@@ -3,9 +3,9 @@ package Models.Domain.FormasDeContribucion.Utilidades;
 import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
+import Models.Domain.Builder.ViandaBuilder;
 import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.ContribucionBuilder.*;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
@@ -24,12 +24,9 @@ import Models.Repository.RepoContribucion;
 import Service.Server.exceptions.UnauthorizedResponseException;
 import lombok.Getter;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.random.RandomGenerator;
 
 @Getter
 public class FactoryContribucion {
@@ -85,18 +82,21 @@ public class FactoryContribucion {
 
         String nombre = dto.getParams().get("nombre");
         LocalDate fechaCaducidad = LocalDate.parse(dto.getParams().get("fechaDeCaducidad"));
-        int calorias = Integer.parseInt(dto.getParams().get("calorias"));
-        int peso = Integer.parseInt(dto.getParams().get("peso"));
+
+        int calorias = dto.getParams().get("calorias") != null && !dto.getParams().get("calorias").isEmpty()
+                ? Integer.parseInt(dto.getParams().get("calorias"))
+                : 0;
+
+        int peso = dto.getParams().get("peso") != null && !dto.getParams().get("peso").isEmpty()
+                ? Integer.parseInt(dto.getParams().get("peso"))
+                : 0;
 
         String heladeraId = dto.getParams().get("heladera");
 
         //validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(),TipoDonacion.DONACION_DE_VIANDA);
 
-        Vianda vianda = new Vianda();
-        vianda.setNombre(nombre);
-        vianda.setFechaDeCaducidad(fechaCaducidad);
-        vianda.setCalorias(calorias);
-        vianda.setPeso(peso);
+        ViandaBuilder viandaBuilder = new ViandaBuilder();
+        Vianda vianda = viandaBuilder.nombre(nombre).peso(peso).fechaDeCaducidad(fechaCaducidad).calorias(calorias).construir();
 
         repo.agregar(vianda);
 
@@ -192,7 +192,7 @@ public class FactoryContribucion {
        // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
         Colaborador colaborador = this.obtenerColaborador();
 
-        colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+      //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
         for (int i = 0; i < cantidad; i++) {
             Vianda vianda = heladeraOrigen.obtenerVianda();

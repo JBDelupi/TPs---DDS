@@ -24,11 +24,24 @@ public class RepoContribucion extends Dao{
         return colaborador.getContribuciones();
     }
 
-    public List<Heladera> queryHeladera() {
+    public List<Heladera> queryHeladeraDuenia() {
             return EntityManagerHelper.getEntityManager()
-                    .createQuery("FROM Heladera", Heladera.class)
+                    .createQuery("FROM Heladera as H where H.responsable IS NULL", Heladera.class)
                     .getResultList();
     }
+
+    public List<Heladera> queryHeladeraDisponible() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("FROM Heladera as H WHERE H.estaLlena = false ", Heladera.class)
+                .getResultList();
+    }
+
+    public List<Heladera> queryHeladera() {
+        return EntityManagerHelper.getEntityManager()
+                .createQuery("FROM Heladera ", Heladera.class)
+                .getResultList();
+    }
+
 
     public Object search(Class<?> objeto, String id) {
         return EntityManagerHelper.getEntityManager().find(objeto,id);

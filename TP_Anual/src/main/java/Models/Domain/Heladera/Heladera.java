@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.random.RandomGenerator;
 
 @Getter
 @Setter
@@ -81,12 +80,16 @@ public class Heladera {
     @Column(name = "cantidad_de_viandas_depositadas")
     private Integer cantidadDeviandasDepositadas;
 
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_heladera") // CLAVE FORANEA
     private List<ObserverHeladera> suscriptores;
 
     @ManyToOne()
     @JoinColumn(referencedColumnName = "id", name = "persona_responsable_id")
     private Persona responsable;
+
+    @Column(name = "capacidadActual")
+    private int capacidadActual;
 
     public Heladera() {
         this.viandas = new ArrayList<>();
@@ -99,6 +102,8 @@ public class Heladera {
         this.fechaDePuestaEnMarcha = LocalDate.now();
         this.cantidadDeviandasRetiradas = 0;
         this.cantidadDeviandasDepositadas = 0;
+        this.capacidadActual = this.capacidadDeViandas;
+
     }
 
     public void agregarVianda(Vianda ... vianda) {
@@ -107,6 +112,7 @@ public class Heladera {
         }
         registrarViandaDepositada();
         Collections.addAll(this.viandas, vianda);
+        this.capacidadActual --;
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
         if ( capacidadDeViandas == viandas.size() ) {
             this.estaLlena = true;
@@ -115,17 +121,24 @@ public class Heladera {
 
 
     public Vianda obtenerVianda() {
-        if (this.viandas.isEmpty()) {
+        if (viandas.isEmpty()) {
             throw new SinViandasException("No hay viandas");
         }
-        Vianda vianda = viandas.get(0);
-        viandas.remove(vianda);
+
+        if (estaLlena) {
+            estaLlena = false;
+        }
+
+        Vianda vianda = viandas.remove(0);
+        capacidadActual++;
+
         sensorMovimiento.chequear();
         generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
         registrarViandaRetirada();
-        return vianda;
 
+        return vianda;
     }
+
 
     public void registrarAlerta(){ this.cantidadDeFallas++; }
     public void reestablecerFallas() { this.cantidadDeFallas = 0; }

@@ -1,6 +1,5 @@
 package Models.Domain.FormasDeContribucion.Utilidades;
 
-import Models.Domain.Personas.Actores.Colaborador;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,3 +30,4 @@ public abstract class Contribucion {
         return 0.0;
     }
 }
+

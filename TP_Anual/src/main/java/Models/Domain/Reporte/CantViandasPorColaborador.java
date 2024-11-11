@@ -13,14 +13,11 @@ public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
         for (Fisico fisico : fisicos) {
             String nombre = fisico.getNombre();
 
-            // Obtener la cantidad de viandas donadas por el colaborador
             Colaborador colaborador = (Colaborador) fisico.getRol(TipoRol.COLABORADOR);
             String cantidadDeViandas = String.valueOf(colaborador.getCantidadViandasDonadas());
 
-            // Agregar los datos a la lista de items como una lista de strings
             getItems().add(Arrays.asList(nombre, cantidadDeViandas));
 
-            // Restablecer la cantidad de viandas donadas para la siguiente ejecución
             colaborador.reestablecerViandas();
         }
     }

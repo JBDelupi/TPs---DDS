@@ -7,17 +7,30 @@ import Models.Domain.Heladera.Suscripciones.Sugerencia.Sugerencia;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.Mensaje;
 import Service.Notificacion.Mensaje.MensajeSuscripcion;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.random.RandomGenerator;
 @Getter
-public class SufrioDesperfecto implements ObserverHeladera {
-    int id;
+
+@Entity
+@DiscriminatorValue("SufrioDesperfecto")
+@NoArgsConstructor
+
+public class SufrioDesperfecto extends ObserverHeladera {
+
+   @ManyToOne
     private Persona colaborador;
+
+    @Column(name = "nombre")
+
     private String nombre;
 
     public SufrioDesperfecto(Persona colaborador){
-        this.id = RandomGenerator.getDefault().nextInt(0,1000);
         this.colaborador = colaborador;
         this.nombre = "Sufrio un desperfecto";
     }

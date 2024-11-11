@@ -6,6 +6,7 @@ import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Validador.CredencialDeAcceso;
 
 import java.time.LocalDate;
@@ -64,6 +65,7 @@ public class FisicoBuilder {
 
     public Fisico construir(){
         fisico.setTipoUsuario(RolUsuario.FISICO);
+        fisico.setMedioDeNotificacion(new CorreoAdapter());
         fisico.setCodigoDeNotificacion(fisico.getCorreElectronico());
         return this.fisico;
     }

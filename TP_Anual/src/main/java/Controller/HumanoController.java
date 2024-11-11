@@ -107,9 +107,10 @@ public class HumanoController extends Controller  {
 
     public void update(Context context){
         this.estaLogueado(context);
-        Map<String, Object> model = this.basicModel(context);
 
+        Map<String, Object> model = this.basicModel(context);
         this.asignarParametros(context);
+        repo.agregar(this.usuario);
 
         context.redirect("/index/fisico");
     }

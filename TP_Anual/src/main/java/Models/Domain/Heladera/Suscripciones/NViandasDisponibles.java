@@ -2,21 +2,22 @@ package Models.Domain.Heladera.Suscripciones;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.Mensaje;
-import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Notificacion.Mensaje.MensajeSuscripcion;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.random.RandomGenerator;
 
 @Getter
 
+@Entity
+@DiscriminatorValue("NViandasDisponibles")
+@NoArgsConstructor
+public class NViandasDisponibles extends ObserverHeladera {
 
-public class NViandasDisponibles implements ObserverHeladera {
 
-    int id;
-
-    @Transient
+    @ManyToOne()
     private Persona colaborador;
 
     @Column(name = "cantidad_de_viandas")
@@ -26,7 +27,6 @@ public class NViandasDisponibles implements ObserverHeladera {
     private String nombre;
 
     public NViandasDisponibles(Persona colaborador, int n) {
-        this.id = RandomGenerator.getDefault().nextInt(0,1000);
         this.colaborador = colaborador;
         this.n = n;
         nombre = "Quedan N viandas disponibles";

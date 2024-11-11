@@ -23,6 +23,7 @@ public class DeccoSaludController extends Controller {
     }
 
     public void index(Context context) throws IOException {
+        this.estaLogueado(context);
         List<RespuestaDTO> r = new ArrayList<>();
 
         Map<String, Object> model = this.basicModel(context);
