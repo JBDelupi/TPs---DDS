@@ -8,6 +8,10 @@ public class ChromeTask implements AdapterChromeTask{
 
     }
 
+    public boolean estaActivado(){
+       return adapterChromeTask.estaActiva();
+    }
+
     public void ejecutarTareaPrograma(int periodo, Object objeto, String metodo){
         adapterChromeTask.ejecutarTareaPrograma(periodo,objeto,metodo);
     }

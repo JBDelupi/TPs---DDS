@@ -113,6 +113,7 @@ public class Heladera {
         registrarViandaDepositada();
         Collections.addAll(this.viandas, vianda);
         this.capacidadActual --;
+        this.registrarViandaDepositada();
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
         if ( capacidadDeViandas == viandas.size() ) {
             this.estaLlena = true;
@@ -133,12 +134,18 @@ public class Heladera {
         capacidadActual++;
 
         sensorMovimiento.chequear();
+        this.registrarViandaRetirada();
+
         generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
         registrarViandaRetirada();
 
         return vianda;
     }
 
+    public void setTemperaturaActual(Double temperaturaActual) {
+        this.temperaturaActual = temperaturaActual;
+        this.sensorTemperatura.activar();
+    }
 
     public void registrarAlerta(){ this.cantidadDeFallas++; }
     public void reestablecerFallas() { this.cantidadDeFallas = 0; }
@@ -175,6 +182,7 @@ public class Heladera {
 
     public void generarIncidente (TipoAlerta tipo){
         Alerta nuevaAlerta = new Alerta(tipo, this);
+        this.registrarAlerta();
         this.notificar(nuevaAlerta);
         EntityManagerHelper.persist(nuevaAlerta);
         registrarAlerta();

@@ -107,6 +107,7 @@ public class FactoryContribucion {
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
         Colaborador colaborador = this.obtenerColaborador();
+        colaborador.setCantidadViandasDonadas(1 + colaborador.getCantidadViandasDonadas());
         colaborador.agregarNuevaDonacion(donacion);
 
         repo.modificar(colaborador);

@@ -2,14 +2,27 @@ package Models.Domain.Reporte;
 
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
+import Models.Repository.RepoPersona;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.Arrays;
 
-public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
 
-    @Override
-    public void obtenerListado(List<Fisico> fisicos) {
+@Entity
+@DiscriminatorValue("CantViandasPorColaborador")
+@NoArgsConstructor
+public class CantViandasPorColaborador extends TemplateReporte {
+
+    public  void obtenerListado() {
+
+        RepoPersona repoPersona = new RepoPersona(Fisico.class);
+        List<Fisico> fisicos = repoPersona.fisicoRol(TipoRol.COLABORADOR);
+
         for (Fisico fisico : fisicos) {
             String nombre = fisico.getNombre();
 
@@ -20,5 +33,7 @@ public class CantViandasPorColaborador extends TemplateReporte<Fisico> {
 
             colaborador.reestablecerViandas();
         }
+        repoPersona.agregar(this);
+
     }
 }

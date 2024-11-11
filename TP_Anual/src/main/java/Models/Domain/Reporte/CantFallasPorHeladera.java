@@ -1,13 +1,23 @@
 package Models.Domain.Reporte;
 
 import Models.Domain.Heladera.Heladera;
+import Models.Repository.RepoHeladera;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.Arrays;
 
-public class CantFallasPorHeladera extends TemplateReporte<Heladera> {
+@Entity
+@DiscriminatorValue("CantFallasPorHeladera")
+@NoArgsConstructor
+public class CantFallasPorHeladera extends TemplateReporte{
 
-    @Override
-    public void obtenerListado(List<Heladera> heladeras) {
+    public  void obtenerListado() {
+        RepoHeladera repoHeladera = new RepoHeladera(Heladera.class);
+        List<Heladera> heladeras = repoHeladera.buscarTodos();
+
         for (Heladera heladera : heladeras) {
             // Concatenar la dirección
             String direccion = heladera.getDireccion().getCalle() + " " +
@@ -23,5 +33,6 @@ public class CantFallasPorHeladera extends TemplateReporte<Heladera> {
             // Agregar a la lista de items en el formato adecuado
             getItems().add(Arrays.asList(direccion, cantidadDeFallas));
         }
+        repoHeladera.agregar(this);
     }
 }

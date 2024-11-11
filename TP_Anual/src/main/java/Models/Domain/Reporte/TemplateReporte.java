@@ -18,37 +18,28 @@ import java.util.List;
 
 @Entity
 @Table(name = "reporte")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
-
-public abstract class TemplateReporte<T> {
+public abstract class TemplateReporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Transient
-    protected ChromeTask chromeTask;
 
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;
 
-    @Transient
+    @ElementCollection
+    @CollectionTable(
+            name = "reporte_items",      // Nombre de la tabla que almacenará los elementos de la colección
+            joinColumns = @JoinColumn(name = "reporte_id")  // Relación con la tabla principal
+    )
     private List<List<String>> items;
 
     public TemplateReporte() {
-       // this.chromeTask = new ChromeTask();
         fecha = LocalDate.now();
         items = new ArrayList<>();
     }
 
-    public void activar() {
-     //   chromeTask.ejecutarTareaPrograma(4000, this, "obtenerListado");
-    }
-
-    public void desactivar() {
-        //   chromeTask.pausarTarea();
-    }
-
-    // Este método guarda en items cada fila del reporte.
-    public abstract void obtenerListado(List<T> items);
+    public abstract  void obtenerListado();
 }

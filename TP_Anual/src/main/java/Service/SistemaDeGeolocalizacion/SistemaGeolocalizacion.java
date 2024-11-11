@@ -20,32 +20,15 @@ public class SistemaGeolocalizacion {
 
     private static final SistemaGeolocalizacion INSTANCE = new SistemaGeolocalizacion();
 
-    private final RepoPersona repoPersona = new RepoPersona(Persona.class);
-    private final RepoHeladera repoHeladera = new RepoHeladera(Heladera.class);
+    private final RepoPersona repo = new RepoPersona(Persona.class);
 
     // Constructor privado para Singleton
     private SistemaGeolocalizacion() {}
 
-    // Método para obtener la instancia única (Singleton)
     public static SistemaGeolocalizacion getInstance() {
         return INSTANCE;
     }
 
-    /**
-     * Genera una lista de heladeras disponibles según un área de cobertura
-     * y la cantidad de alimentos requerida.
-     *
-     * @param area             El área de cobertura
-     * @param cantidadDeAlimentos La cantidad de alimentos a verificar
-     * @return Lista de heladeras disponibles
-     */
-    public List<Heladera> generarHeladerasDisponibles(AreaCobertura area, Integer cantidadDeAlimentos) {
-        List<Heladera> heladeras = (List<Heladera>) repoHeladera.buscarTodos();
-        return heladeras.stream()
-                .filter(heladera -> heladera.tieneCantidadDisponible(cantidadDeAlimentos)
-                        && estaDentroDe(area, heladera.getDireccion().getCentro()))
-                .collect(Collectors.toList());
-    }
 
     /**
      * Calcula la distancia entre dos puntos usando sus coordenadas de latitud y longitud.
@@ -84,9 +67,8 @@ public class SistemaGeolocalizacion {
      * @return La persona más cercana
      */
     public Persona masCercanoAPunto(Punto punto) {
-        List<Persona> tecnicos = repoPersona.buscarTodos();
+        List<Persona> tecnicos = repo.personasRol(TipoRol.TECNICO);
         tecnicos.stream()
-                .filter(persona -> persona.getRol(TipoRol.TECNICO) != null) // Filtra por rol de Técnico
                 .filter(persona -> estaDentroDe(((Tecnico) persona.getRol(TipoRol.TECNICO)).getArea(), punto)) // Verifica si está dentro del área
                 .toList();
 

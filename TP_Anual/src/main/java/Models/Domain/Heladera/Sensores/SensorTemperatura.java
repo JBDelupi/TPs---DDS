@@ -14,10 +14,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SensorTemperatura implements Sensor {
-    @Transient
     private Heladera heladera;
 
-    @Transient
     private AdapterChromeTask tareaProgramada;
 
     public SensorTemperatura(Heladera heladera) {
@@ -26,8 +24,11 @@ public class SensorTemperatura implements Sensor {
     }
 
     public void activar(){
-        this.tareaProgramada.ejecutarTareaPrograma(5,this,"chequear");
+        if (!tareaProgramada.estaActivado()) {
+            this.tareaProgramada.ejecutarTareaPrograma(5, this, "chequear");
+        }
     }
+
 
     public void desactivar(){
         this.tareaProgramada.pausarTarea();
@@ -42,7 +43,11 @@ public class SensorTemperatura implements Sensor {
     }
 
 
+
+
     public boolean superaTemperaturaMax(){
+
+
         return heladera.getTemperaturaActual() > heladera.getTemperaturaMax();
     }
 

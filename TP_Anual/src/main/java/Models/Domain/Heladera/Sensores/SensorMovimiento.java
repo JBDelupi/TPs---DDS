@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 
 public class SensorMovimiento implements Sensor {
 
-    @Transient
     private Heladera heladera;
 
-    @Convert(converter = org.hibernate.type.TrueFalseConverter.class)
-    @Column(name = "esta_prendido")
     private Boolean estaPrendido;
 
     public SensorMovimiento(Heladera heladera) {
