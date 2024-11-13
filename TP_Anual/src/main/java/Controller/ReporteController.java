@@ -37,8 +37,7 @@ public class ReporteController extends Controller {
         String tipoReporte = context.queryParam("tipo");
 
         // busco en la base de datos los reportes del tipo seleccionado en el index.
-        List<TemplateReporte> listaReportes = repo.buscarTodos();
-
+        List<TemplateReporte> listaReportes = repo.buscarPorTipo(tipoReporte);
         Map<String, Object> model = this.basicModel(context);
         model.put("listaReportes", listaReportes);
         model.put("tipoReporte", tipoReporte);

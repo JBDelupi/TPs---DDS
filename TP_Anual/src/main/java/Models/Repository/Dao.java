@@ -7,7 +7,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public abstract class Dao {
-    private Object type;
+    Object type;
 
     public Dao(Object type){
         this.type = type;

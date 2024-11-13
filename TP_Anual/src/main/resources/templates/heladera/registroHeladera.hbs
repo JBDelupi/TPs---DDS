@@ -40,7 +40,7 @@
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <select class="form-control" id="localidad" name="localidad" required>
+                                        <select class="form-control" id="localidad" name="localidad" required onchange="actualizarCoordenadas()">
                                             <option value="" disabled selected>Seleccionar Localidad</option>
                                             <option value="belgrano">Belgrano</option>
                                             <option value="palermo">Palermo</option>
@@ -74,6 +74,8 @@
                                         <label for="localidad">Localidad</label>
                                     </div>
                                 </div>
+                                <input type="hidden" id="latitud" name="latitud">
+                                <input type="hidden" id="longitud" name="longitud">
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
@@ -149,5 +151,50 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+
+<script>
+    // Mapa de coordenadas para cada localidad
+    const coordenadasLocalidades = {
+        'belgrano': { latitud: -34.5625, longitud: -58.4585 },
+        'palermo': { latitud: -34.5889, longitud: -58.4306 },
+        'recoleta': { latitud: -34.5875, longitud: -58.3974 },
+        'villa-crespo': { latitud: -34.6019, longitud: -58.4333 },
+        'caballito': { latitud: -34.6186, longitud: -58.4419 },
+        'almagro': { latitud: -34.6066, longitud: -58.4281 },
+        'flores': { latitud: -34.6346, longitud: -58.4444 },
+        'villa-urquiza': { latitud: -34.5722, longitud: -58.4858 },
+        'boedo': { latitud: -34.6254, longitud: -58.4268 },
+        'barracas': { latitud: -34.6372, longitud: -58.3847 },
+        'san-telmo': { latitud: -34.6217, longitud: -58.3738 },
+        'villa-devoto': { latitud: -34.5988, longitud: -58.5165 },
+        'nunez': { latitud: -34.5508, longitud: -58.4645 },
+        'retiro': { latitud: -34.5944, longitud: -58.3745 },
+        'san-nicolas': { latitud: -34.6037, longitud: -58.3816 },
+        'monserrat': { latitud: -34.6144, longitud: -58.3804 },
+        'parque-chacabuco': { latitud: -34.6341, longitud: -58.4406 },
+        'constitucion': { latitud: -34.6272, longitud: -58.3818 },
+        'barrio-norte': { latitud: -34.5875, longitud: -58.3974 },
+        'parque-patricios': { latitud: -34.6355, longitud: -58.4046 },
+        'chacarita': { latitud: -34.5873, longitud: -58.4465 },
+        'villa-lugano': { latitud: -34.6729, longitud: -58.4726 },
+        'mataderos': { latitud: -34.6563, longitud: -58.4991 },
+        'liniers': { latitud: -34.6425, longitud: -58.5231 },
+        'villa-ortuzar': { latitud: -34.5863, longitud: -58.4682 },
+        'villa-santa-rita': { latitud: -34.6108, longitud: -58.4738 },
+        'saavedra': { latitud: -34.5615, longitud: -58.4827 },
+        'villa-real': { latitud: -34.6116, longitud: -58.5151 }
+    };
+
+    // Función que actualiza las coordenadas según la localidad seleccionada
+    function actualizarCoordenadas() {
+        const localidadSeleccionada = document.getElementById('localidad').value;
+        const coordenadas = coordenadasLocalidades[localidadSeleccionada];
+        if (coordenadas) {
+            document.getElementById('latitud').value = coordenadas.latitud;
+            document.getElementById('longitud').value = coordenadas.longitud;
+        }
+    }
+</script>
+
 
 </html>

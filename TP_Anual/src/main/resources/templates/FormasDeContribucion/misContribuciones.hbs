@@ -37,23 +37,26 @@
                             <div class="w-100 d-flex flex-column text-center ps-4">
                                 <h5 class="d-flex flex-column justify-content-between border-bottom pb-2">
                                     <div class="d-flex flex-column mb-3">
-                                        <strong class="fw-bold text-primary">Nombre:</strong>  <!-- Título estilizado para el nombre -->
+                                        <strong class="fw-bold text-primary">Nombre:</strong>
                                         <span class="text-secondary">{{this.nombre}}</span>
                                     </div>
                                     <div class="d-flex flex-column mb-3">
-                                        <strong class="fw-bold text-primary">Fecha de Donación:</strong>  <!-- Título estilizado para la fecha -->
+                                        <strong class="fw-bold text-primary">Fecha de Donación:</strong>
                                         <span class="text-secondary">{{this.fechaDeDonacion}}</span>
                                     </div>
+                                    <div class="d-flex flex-column mb-3">
+                                        <strong class="fw-bold text-primary">Detalle:</strong>
+                                        <span class="text-secondary">{{lookup ../detalles @index}}</span> <!-- Aquí se muestra el detalle correspondiente -->
+                                    </div>
                                 </h5>
-                                <a href="{{rol}}/{{usuario.id}}/contribuciones" class="btn btn-primary btn-sm mx-auto mt-3">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
                 {{/each}}
             {{else}}
-                <!-- Mostrar este mensaje cuando no haya contribuciones -->
                 <p class="text-center">No tienes contribuciones registradas.</p>
             {{/if}}
+
         </div>
     </div>
 </section>

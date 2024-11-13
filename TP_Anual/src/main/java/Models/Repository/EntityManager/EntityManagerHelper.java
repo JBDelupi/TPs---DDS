@@ -1,5 +1,6 @@
 package Models.Repository.EntityManager;
 
+import Models.Domain.Reporte.TemplateReporte;
 import jakarta.persistence.*;
 
 import java.util.function.Supplier;
@@ -85,7 +86,7 @@ public class EntityManagerHelper {
         }
     }
 
-    public static Query createQuery(String query) {
+    public static Query createQuery(String query, Class<TemplateReporte> templateReporteClass) {
         return getEntityManager().createQuery(query);
     }
 

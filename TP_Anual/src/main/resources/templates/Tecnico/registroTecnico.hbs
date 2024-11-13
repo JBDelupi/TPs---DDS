@@ -71,10 +71,51 @@
                                         <select class="form-control" id="ciudad" name="ciudad" required onchange="actualizarCoordenadas()">
                                             <option value="" disabled selected>Seleccionar Ciudad de cobertura</option>
                                             <option value="Almagro">Almagro</option>
-                                            <option value="Palermo">Palermo</option>
+                                            <option value="Balvanera">Balvanera</option>
+                                            <option value="Barracas">Barracas</option>
                                             <option value="Belgrano">Belgrano</option>
+                                            <option value="Boedo">Boedo</option>
                                             <option value="Caballito">Caballito</option>
+                                            <option value="Chacarita">Chacarita</option>
+                                            <option value="Colegiales">Colegiales</option>
+                                            <option value="Constitución">Constitución</option>
+                                            <option value="Flores">Flores</option>
+                                            <option value="Floresta">Floresta</option>
+                                            <option value="La Boca">La Boca</option>
+                                            <option value="La Paternal">La Paternal</option>
+                                            <option value="Liniers">Liniers</option>
+                                            <option value="Mataderos">Mataderos</option>
+                                            <option value="Monte Castro">Monte Castro</option>
+                                            <option value="Monserrat">Monserrat</option>
+                                            <option value="Nueva Pompeya">Nueva Pompeya</option>
+                                            <option value="Nuñez">Nuñez</option>
+                                            <option value="Palermo">Palermo</option>
+                                            <option value="Parque Avellaneda">Parque Avellaneda</option>
+                                            <option value="Parque Chacabuco">Parque Chacabuco</option>
+                                            <option value="Parque Chas">Parque Chas</option>
+                                            <option value="Parque Patricios">Parque Patricios</option>
+                                            <option value="Puerto Madero">Puerto Madero</option>
                                             <option value="Recoleta">Recoleta</option>
+                                            <option value="Retiro">Retiro</option>
+                                            <option value="Saavedra">Saavedra</option>
+                                            <option value="San Cristóbal">San Cristóbal</option>
+                                            <option value="San Nicolás">San Nicolás</option>
+                                            <option value="San Telmo">San Telmo</option>
+                                            <option value="Vélez Sarsfield">Vélez Sarsfield</option>
+                                            <option value="Versalles">Versalles</option>
+                                            <option value="Villa Crespo">Villa Crespo</option>
+                                            <option value="Villa del Parque">Villa del Parque</option>
+                                            <option value="Villa Devoto">Villa Devoto</option>
+                                            <option value="Villa Gral. Mitre">Villa Gral. Mitre</option>
+                                            <option value="Villa Lugano">Villa Lugano</option>
+                                            <option value="Villa Luro">Villa Luro</option>
+                                            <option value="Villa Ortúzar">Villa Ortúzar</option>
+                                            <option value="Villa Pueyrredón">Villa Pueyrredón</option>
+                                            <option value="Villa Real">Villa Real</option>
+                                            <option value="Villa Riachuelo">Villa Riachuelo</option>
+                                            <option value="Villa Santa Rita">Villa Santa Rita</option>
+                                            <option value="Villa Soldati">Villa Soldati</option>
+                                            <option value="Villa Urquiza">Villa Urquiza</option>
                                         </select>
                                         <label for="ciudad">Ciudad</label>
                                     </div>
@@ -143,11 +184,53 @@
     // Mapeo de ciudades con sus coordenadas
     const coordenadasCiudades = {
         'Almagro': { latitud: -34.6066, longitud: -58.4281 },
-        'Palermo': { latitud: -34.5889, longitud: -58.4306 },
+        'Balvanera': { latitud: -34.6099, longitud: -58.4052 },
+        'Barracas': { latitud: -34.6372, longitud: -58.3847 },
         'Belgrano': { latitud: -34.5625, longitud: -58.4585 },
+        'Boedo': { latitud: -34.6254, longitud: -58.4268 },
         'Caballito': { latitud: -34.6186, longitud: -58.4419 },
-        'Recoleta': { latitud: -34.5875, longitud: -58.3974 }
+        'Chacarita': { latitud: -34.5873, longitud: -58.4465 },
+        'Colegiales': { latitud: -34.5775, longitud: -58.4491 },
+        'Constitución': { latitud: -34.6272, longitud: -58.3818 },
+        'Flores': { latitud: -34.6346, longitud: -58.4444 },
+        'Floresta': { latitud: -34.6267, longitud: -58.4907 },
+        'La Boca': { latitud: -34.6345, longitud: -58.3632 },
+        'La Paternal': { latitud: -34.5985, longitud: -58.4701 },
+        'Liniers': { latitud: -34.6425, longitud: -58.5231 },
+        'Mataderos': { latitud: -34.6563, longitud: -58.4991 },
+        'Monte Castro': { latitud: -34.6159, longitud: -58.4974 },
+        'Monserrat': { latitud: -34.6144, longitud: -58.3804 },
+        'Nueva Pompeya': { latitud: -34.6468, longitud: -58.4173 },
+        'Nuñez': { latitud: -34.5508, longitud: -58.4645 },
+        'Palermo': { latitud: -34.5889, longitud: -58.4306 },
+        'Parque Avellaneda': { latitud: -34.6384, longitud: -58.4802 },
+        'Parque Chacabuco': { latitud: -34.6341, longitud: -58.4406 },
+        'Parque Chas': { latitud: -34.5798, longitud: -58.4786 },
+        'Parque Patricios': { latitud: -34.6355, longitud: -58.4046 },
+        'Puerto Madero': { latitud: -34.6099, longitud: -58.3644 },
+        'Recoleta': { latitud: -34.5875, longitud: -58.3974 },
+        'Retiro': { latitud: -34.5944, longitud: -58.3745 },
+        'Saavedra': { latitud: -34.5615, longitud: -58.4827 },
+        'San Cristóbal': { latitud: -34.6239, longitud: -58.4048 },
+        'San Nicolás': { latitud: -34.6037, longitud: -58.3816 },
+        'San Telmo': { latitud: -34.6217, longitud: -58.3738 },
+        'Vélez Sarsfield': { latitud: -34.6348, longitud: -58.4918 },
+        'Versalles': { latitud: -34.6257, longitud: -58.5239 },
+        'Villa Crespo': { latitud: -34.6019, longitud: -58.4333 },
+        'Villa del Parque': { latitud: -34.6096, longitud: -58.4915 },
+        'Villa Devoto': { latitud: -34.5988, longitud: -58.5165 },
+        'Villa Gral. Mitre': { latitud: -34.6064, longitud: -58.4585 },
+        'Villa Lugano': { latitud: -34.6729, longitud: -58.4726 },
+        'Villa Luro': { latitud: -34.6354, longitud: -58.5045 },
+        'Villa Ortúzar': { latitud: -34.5863, longitud: -58.4682 },
+        'Villa Pueyrredón': { latitud: -34.5836, longitud: -58.5077 },
+        'Villa Real': { latitud: -34.6116, longitud: -58.5151 },
+        'Villa Riachuelo': { latitud: -34.6823, longitud: -58.4815 },
+        'Villa Santa Rita': { latitud: -34.6108, longitud: -58.4738 },
+        'Villa Soldati': { latitud: -34.6722, longitud: -58.4585 },
+        'Villa Urquiza': { latitud: -34.5722, longitud: -58.4858 }
     };
+
 
     // Función que actualiza las coordenadas según la ciudad seleccionada
     function actualizarCoordenadas() {

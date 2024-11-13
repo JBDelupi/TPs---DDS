@@ -9,6 +9,7 @@ import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
+import Service.APIPuntos.Punto;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -42,6 +43,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         int capacidadMaxima = Integer.parseInt(context.formParam("capacidad"));
         double temperaturaMax = Double.parseDouble(context.formParam("temperaturaMax"));
         double temperaturaMin = Double.parseDouble(context.formParam("temperaturaMin"));
+        String longitud = context.formParam("longitud");
+        String latitud = context.formParam("latitud");
 
         System.out.println(temperaturaMax);
         System.out.println(temperaturaMin);
@@ -50,6 +53,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         direccion.setNumero(numero);
         direccion.setLocalidad(localidad);
         direccion.setCalle(calle);
+        Punto punto = new Punto(latitud, longitud);
+        direccion.setCentro(punto);
 
         HeladeraBuilder heladeraBuilder = new HeladeraBuilder();
         Heladera heladera = heladeraBuilder

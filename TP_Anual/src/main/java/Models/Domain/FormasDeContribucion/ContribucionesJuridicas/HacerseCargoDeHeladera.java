@@ -3,9 +3,11 @@ package Models.Domain.FormasDeContribucion.ContribucionesJuridicas;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
+@Getter
 
 @Entity
 @DiscriminatorValue("hacerse_cargo_de_heladera")

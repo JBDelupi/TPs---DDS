@@ -25,23 +25,23 @@ public class App {
         admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
         Dao repo = new RepoPersona(Fisico.class);
         repo.agregar(admin); */
-
-        // Configuración del programador de tareas
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-        // Programar el reporte para ejecutarse cada 7 días
-        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
-
-    }
-
-    public static void generarReporte(){
-        TemplateReporte reporte1 = new CantFallasPorHeladera();
-        TemplateReporte reporte2 = new CantViandasPorColaborador();
-        TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
-
-        reporte1.obtenerListado();
-        reporte2.obtenerListado();
-        reporte3.obtenerListado();
-
+//
+//        // Configuración del programador de tareas
+//        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+//        // Programar el reporte para ejecutarse cada 7 días
+//        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
+//
+//    }
+//
+//    public static void generarReporte(){
+//        TemplateReporte reporte1 = new CantFallasPorHeladera();
+//        TemplateReporte reporte2 = new CantViandasPorColaborador();
+//        TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
+//
+//        reporte1.obtenerListado();
+//        reporte2.obtenerListado();
+//        reporte3.obtenerListado();
+//
     }
 
 }

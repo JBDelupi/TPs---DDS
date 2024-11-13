@@ -20,7 +20,7 @@ public abstract class Contribucion {
     private Integer Id;
 
     @Transient
-    protected String nombre;
+    public String nombre;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_de_donacion")

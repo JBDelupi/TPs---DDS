@@ -4,10 +4,11 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Setter
-
+@Getter
 
 @Entity
 @DiscriminatorValue("donacion_de_vianda")
