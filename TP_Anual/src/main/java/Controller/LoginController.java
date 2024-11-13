@@ -19,7 +19,6 @@ public class LoginController extends Controller {
 
     public void index(Context context) {
         Persona usuario = context.sessionAttribute(USER_SESSION_KEY);
-
         if (usuario == null) {
             context.render("sesion/login.hbs");
         } else {
@@ -35,10 +34,16 @@ public class LoginController extends Controller {
 
         Persona usuario = (Persona) repo.credenciales(new CredencialDeAcceso(nombreUsuario,contrasenia));
 
-        context.sessionAttribute(USER_SESSION_KEY, usuario);
-        context.sessionAttribute("idPersona", Integer.toString(usuario.getId()));
-        context.sessionAttribute("rolTipo", usuario.getTipoUsuario().toString());
-        context.redirect("/index/" + usuario.getTipoUsuario().toString().toLowerCase());
+        //Agregar mapa para tirar error con handlebars
+        if(usuario == null){
+            context.redirect("/login");
+        }
+        else{
+            context.sessionAttribute(USER_SESSION_KEY, usuario);
+            context.sessionAttribute("idPersona", Integer.toString(usuario.getId()));
+            context.sessionAttribute("rolTipo", usuario.getTipoUsuario().toString());
+            context.redirect("/index/" + usuario.getTipoUsuario().toString().toLowerCase());
+        }
 
     }
 

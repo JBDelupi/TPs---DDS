@@ -62,26 +62,48 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
     // Inicializa el mapa
-    var map = L.map('map').setView([-34.6037, -58.3816], 12); // Coordenadas de Buenos Aires (ajusta según necesidad)
+    var map = L.map('map').setView([-34.6037, -58.3816], 12); // Coordenadas de Buenos Aires
 
-    // Añadir capa de mapa (puedes usar OpenStreetMap)
+    // Añadir capa de mapa (usando OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
     }).addTo(map);
 
-    // Recorrer la lista de heladeras y añadir marcadores al mapa
+    // Recorrer la lista de heladeras y añadir marcadores al mapa con un contexto único
         {{#each heladeras}}
-        var marker = L.marker([{{this.coordenadas.latitud}}, {{this.coordenadas.longitud}}]).addTo(map);
+        (function() {
+            // Guardar los datos de la heladera actual en variables locales para cada iteración
+            var heladeraId = "{{this.id}}";
+            var heladeraLat = {{this.direccion.centro.latitud}};
+            var heladeraLng = {{this.direccion.centro.longitud}};
+            var heladeraCalle = "{{this.direccion.calle}}";
+            var heladeraNumero = "{{this.direccion.numero}}";
+            var heladeraLocalidad = "{{this.direccion.localidad}}";
 
-        // Añadir popup con detalles y enlace a la página de la heladera
-        marker.bindPopup(`<b>ID: {{this.id}}</b><br>Dirección: {{this.direccion.calle}} {{this.direccion.numero}}<br><a href="/heladeras/{{this.id}}">Ver Detalle</a>`);
+            // Crear el marcador para esta heladera
+            var marker = L.marker([heladeraLat, heladeraLng]).addTo(map);
 
-        // Redirigir al hacer click en el marcador
-        marker.on('click', function() {
-            window.location.href = "/heladeras/{{this.id}}";
-        });
+            // Contenido del popup para esta heladera
+            var popupContent = `<b>ID: ${heladeraId}</b><br>Dirección: ${heladeraCalle}, ${heladeraNumero}, ${heladeraLocalidad}<br>`;
+            marker.bindPopup(popupContent);
+
+            // Abrir y cerrar el popup cuando se pase el mouse
+            marker.on('mouseover', function() {
+                marker.openPopup();
+            });
+
+            marker.on('mouseout', function() {
+                marker.closePopup();
+            });
+
+            // Redirigir al hacer clic en el marcador
+            marker.on('click', function() {
+                window.location.href = "/heladeras/" + heladeraId;
+            });
+        })(); // IIFE para crear un contexto único en cada iteración
         {{/each}}
 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

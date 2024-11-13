@@ -17,6 +17,10 @@ public class Router {
         Server.app().get("/team",context -> context.render("main/team.hbs"));
         Server.app().get("/about",context -> context.render("main/about.hbs"));
         Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
+        Server.app().get("/asignar-rol",context -> context.render("asignarRol/asignar-rol.hbs"));
+        Server.app().get("/asignar-rol/tecnico",context -> context.render("asignarRol/solicitud-tecnico.hbs"));
+        Server.app().get("/asignar-rol/solicitudExitosa",context -> context.render("asignarRol/solicitud-enviada.hbs"));
+
 
         Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
         Server.app().post("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::cargarPuntos,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);

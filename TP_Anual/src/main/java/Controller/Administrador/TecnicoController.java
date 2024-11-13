@@ -5,6 +5,7 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Repository.RepoRol;
 import Models.Repository.RepoTecnico;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
@@ -19,6 +20,7 @@ import java.util.random.RandomGenerator;
 public class TecnicoController extends Controller {
 
     private RepoTecnico repo;
+    private RepoRol repoRol;
 
     public TecnicoController(RepoTecnico repo){
         this.repo = repo;
@@ -81,8 +83,17 @@ public class TecnicoController extends Controller {
     public void edit(Context context)  {
         String idUsuario = context.formParam("userId");
 
+        String cuil = context.formParam("cuil");
+        String latitud = context.formParam("latitud");
+        String longitud = context.formParam("longitud");
+        String radio = context.formParam("radio");
+
+
         Persona persona = (Persona) repo.buscar( Integer.parseInt(idUsuario));
-        persona.agregarRol(new Tecnico());
+
+        Tecnico tecnico = new Tecnico(cuil,new AreaCobertura(new Punto(latitud,longitud),radio));
+
+        persona.agregarRol(tecnico);
 
         repo.modificar(persona);
 

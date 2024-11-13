@@ -2,9 +2,13 @@ package Controller;
 
 
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
+import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Repository.RepoIncidente;
 import io.javalin.http.Context;
+
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class VisitaFallaTecnicaController extends Controller   {
@@ -21,7 +25,13 @@ public class VisitaFallaTecnicaController extends Controller   {
 
         Map<String, Object> model = this.basicModel(context);
         model.put("heladeras", repo.queryHeladera() );
-        model.put("incidentesAbiertos", repo.buscarTodos());
+
+        List<Object> incidentesAbiertos = (List<Object>) repo.buscarTodos().stream()
+                .filter(incidente -> !((Incidente) incidente).getSolucionado())
+                .collect(Collectors.toList());
+
+        model.put("incidentesAbiertos", incidentesAbiertos);
+//        model.put("incidentesAbiertos", repo.buscarTodos());
 
         context.render("incidentes/VisitaFallaTecnica.hbs",model);
     }

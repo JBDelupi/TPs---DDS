@@ -35,7 +35,6 @@ public class Heladera {
     @Embedded
     private Direccion direccion;
 
-
     @Column(name = "capacidad_de_viandas")
     private int capacidadDeViandas;
 

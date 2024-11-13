@@ -2,6 +2,7 @@ package Models.Repository;
 
 import Models.Repository.EntityManager.EntityManagerHelper;
 import Service.Validador.CredencialDeAcceso;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 
@@ -15,10 +16,15 @@ public class RepoLogin extends Dao{
     }
 
     public Object credenciales(CredencialDeAcceso credencialDeAcceso) {
-        return EntityManagerHelper.getEntityManager()
+        try{
+            return  EntityManagerHelper.getEntityManager()
                 .createQuery("SELECT p FROM Persona AS p WHERE p.credencialDeAcceso = :credencialDeAcceso")
                 .setParameter("credencialDeAcceso", credencialDeAcceso)
                 .getSingleResult();
+        }
+        catch(NoResultException e){
+            return null;
+        }
     }
 
 

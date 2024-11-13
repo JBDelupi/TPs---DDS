@@ -40,6 +40,7 @@
                 <thead>
                 <tr>
                     <th>Fecha del Reporte</th>
+                    <th>ID</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,7 @@
                 {{#each listaReportes}}
                     <tr class="report-row" data-id="{{this.id}}" data-tipo="{{tipoReporte}}">
                         <td>{{this.fecha}}</td>
+                        <td>{{this.id}}</td>
                     </tr>
                 {{/each}}
                 </tbody>

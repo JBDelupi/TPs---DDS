@@ -4,32 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Rol de Técnico</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 </head>
 <body>
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h1 class="text-center">Asignar Rol de Técnico</h1>
+{{> templates/partials/header esHumano=esHumano id=id}}
+{{> templates/partials/tipografia}}
+
+<div class="contact_section layout_padding">
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="text-center" style="max-width: 500px;">
+            <h1 class="display-5 text-dark">Asignar Rol de Técnico</h1>
+
             {{#if Error}}
-                <p>ID INVALIDO, REEINGRESAR NUEVAMENTE EL ID</p>
+                <p class="text-danger text-center mt-3">ID INVÁLIDO. REINGRESE NUEVAMENTE EL ID.</p>
             {{/if}}
 
             <form action="/registro/rol/tecnico" method="POST">
-                <div class="form-group">
-                    <label for="userId">ID de Usuario</label>
+                <div class="mb-3">
+                    <label for="userId" class="form-label text-dark">ID de Usuario</label>
                     <input type="text" class="form-control" id="userId" name="userId" placeholder="Ingrese el ID del usuario" required>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 w-100">Asignar Rol</button>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="cuil" name="cuil" placeholder="Cuil" required>
+                        <label for="cuil">Cuil</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <select class="form-control" id="ciudad" name="ciudad" required onchange="actualizarCoordenadas()">
+                            <option value="" disabled selected>Seleccionar Ciudad de cobertura</option>
+                            <option value="Almagro">Almagro</option>
+                            <option value="Balvanera">Balvanera</option>
+                            <option value="Barracas">Barracas</option>
+                            <option value="Belgrano">Belgrano</option>
+                            <option value="Boedo">Boedo</option>
+                            <option value="Caballito">Caballito</option>
+                            <option value="Chacarita">Chacarita</option>
+                            <option value="Colegiales">Colegiales</option>
+                            <option value="Constitución">Constitución</option>
+                            <option value="Flores">Flores</option>
+                            <option value="Floresta">Floresta</option>
+                            <option value="La Boca">La Boca</option>
+                            <option value="La Paternal">La Paternal</option>
+                            <option value="Liniers">Liniers</option>
+                            <option value="Mataderos">Mataderos</option>
+                            <option value="Monte Castro">Monte Castro</option>
+                            <option value="Monserrat">Monserrat</option>
+                            <option value="Nueva Pompeya">Nueva Pompeya</option>
+                            <option value="Nuñez">Nuñez</option>
+                            <option value="Palermo">Palermo</option>
+                            <option value="Parque Avellaneda">Parque Avellaneda</option>
+                            <option value="Parque Chacabuco">Parque Chacabuco</option>
+                            <option value="Parque Chas">Parque Chas</option>
+                            <option value="Parque Patricios">Parque Patricios</option>
+                            <option value="Puerto Madero">Puerto Madero</option>
+                            <option value="Recoleta">Recoleta</option>
+                            <option value="Retiro">Retiro</option>
+                            <option value="Saavedra">Saavedra</option>
+                            <option value="San Cristóbal">San Cristóbal</option>
+                            <option value="San Nicolás">San Nicolás</option>
+                            <option value="San Telmo">San Telmo</option>
+                            <option value="Vélez Sarsfield">Vélez Sarsfield</option>
+                            <option value="Versalles">Versalles</option>
+                            <option value="Villa Crespo">Villa Crespo</option>
+                            <option value="Villa del Parque">Villa del Parque</option>
+                            <option value="Villa Devoto">Villa Devoto</option>
+                            <option value="Villa Gral. Mitre">Villa Gral. Mitre</option>
+                            <option value="Villa Lugano">Villa Lugano</option>
+                            <option value="Villa Luro">Villa Luro</option>
+                            <option value="Villa Ortúzar">Villa Ortúzar</option>
+                            <option value="Villa Pueyrredón">Villa Pueyrredón</option>
+                            <option value="Villa Real">Villa Real</option>
+                            <option value="Villa Riachuelo">Villa Riachuelo</option>
+                            <option value="Villa Santa Rita">Villa Santa Rita</option>
+                            <option value="Villa Soldati">Villa Soldati</option>
+                            <option value="Villa Urquiza">Villa Urquiza</option>
+                        </select>
+                        <label for="ciudad">Ciudad</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="radio" name="radio" placeholder="Radio de Cobertura en KM" required>
+                        <label for="radio">Radio de Cobertura en KM</label>
+                    </div>
+                </div>
+
+                <!-- Campos ocultos para la latitud y longitud -->
+                <input type="hidden" id="latitud" name="latitud">
+                <input type="hidden" id="longitud" name="longitud">
+
+                <button type="submit" class="btn btn-warning w-100">Asignar Rol</button>
             </form>
 
-            <div class="mt-3 text-center">
-                <a href="/" class="btn btn-secondary">Volver</a>
+            <div class="mt-3">
+                <a href="/" class="btn btn-secondary w-100">Volver</a>
             </div>
         </div>
     </div>
 </div>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
+
+<script>
+    // Mapeo de ciudades con sus coordenadas
+    const coordenadasCiudades = {
+        'Almagro': { latitud: -34.6066, longitud: -58.4281 },
+        'Balvanera': { latitud: -34.6099, longitud: -58.4052 },
+        'Barracas': { latitud: -34.6372, longitud: -58.3847 },
+        'Belgrano': { latitud: -34.5625, longitud: -58.4585 },
+        'Boedo': { latitud: -34.6254, longitud: -58.4268 },
+        'Caballito': { latitud: -34.6186, longitud: -58.4419 },
+        'Chacarita': { latitud: -34.5873, longitud: -58.4465 },
+        'Colegiales': { latitud: -34.5775, longitud: -58.4491 },
+        'Constitución': { latitud: -34.6272, longitud: -58.3818 },
+        'Flores': { latitud: -34.6346, longitud: -58.4444 },
+        'Floresta': { latitud: -34.6267, longitud: -58.4907 },
+        'La Boca': { latitud: -34.6345, longitud: -58.3632 },
+        'La Paternal': { latitud: -34.5985, longitud: -58.4701 },
+        'Liniers': { latitud: -34.6425, longitud: -58.5231 },
+        'Mataderos': { latitud: -34.6563, longitud: -58.4991 },
+        'Monte Castro': { latitud: -34.6159, longitud: -58.4974 },
+        'Monserrat': { latitud: -34.6144, longitud: -58.3804 },
+        'Nueva Pompeya': { latitud: -34.6468, longitud: -58.4173 },
+        'Nuñez': { latitud: -34.5508, longitud: -58.4645 },
+        'Palermo': { latitud: -34.5889, longitud: -58.4306 },
+        'Parque Avellaneda': { latitud: -34.6384, longitud: -58.4802 },
+        'Parque Chacabuco': { latitud: -34.6341, longitud: -58.4406 },
+        'Parque Chas': { latitud: -34.5798, longitud: -58.4786 },
+        'Parque Patricios': { latitud: -34.6355, longitud: -58.4046 },
+        'Puerto Madero': { latitud: -34.6099, longitud: -58.3644 },
+        'Recoleta': { latitud: -34.5875, longitud: -58.3974 },
+        'Retiro': { latitud: -34.5944, longitud: -58.3745 },
+        'Saavedra': { latitud: -34.5615, longitud: -58.4827 },
+        'San Cristóbal': { latitud: -34.6239, longitud: -58.4048 },
+        'San Nicolás': { latitud: -34.6037, longitud: -58.3816 },
+        'San Telmo': { latitud: -34.6217, longitud: -58.3738 },
+        'Vélez Sarsfield': { latitud: -34.6348, longitud: -58.4918 },
+        'Versalles': { latitud: -34.6257, longitud: -58.5239 },
+        'Villa Crespo': { latitud: -34.6019, longitud: -58.4333 },
+        'Villa del Parque': { latitud: -34.6096, longitud: -58.4915 },
+        'Villa Devoto': { latitud: -34.5988, longitud: -58.5165 },
+        'Villa Gral. Mitre': { latitud: -34.6064, longitud: -58.4585 },
+        'Villa Lugano': { latitud: -34.6729, longitud: -58.4726 },
+        'Villa Luro': { latitud: -34.6354, longitud: -58.5045 },
+        'Villa Ortúzar': { latitud: -34.5863, longitud: -58.4682 },
+        'Villa Pueyrredón': { latitud: -34.5836, longitud: -58.5077 },
+        'Villa Real': { latitud: -34.6116, longitud: -58.5151 },
+        'Villa Riachuelo': { latitud: -34.6823, longitud: -58.4815 },
+        'Villa Santa Rita': { latitud: -34.6108, longitud: -58.4738 },
+        'Villa Soldati': { latitud: -34.6722, longitud: -58.4585 },
+        'Villa Urquiza': { latitud: -34.5722, longitud: -58.4858 }
+    };
+
+    // Función que actualiza las coordenadas según la ciudad seleccionada
+    function actualizarCoordenadas() {
+        const ciudadSeleccionada = document.getElementById('ciudad').value;
+        const coordenadas = coordenadasCiudades[ciudadSeleccionada];
+        if (coordenadas) {
+            document.getElementById('latitud').value = coordenadas.latitud;
+            document.getElementById('longitud').value = coordenadas.longitud;
+        }
+    }
+</script>
 
 </body>
 </html>
