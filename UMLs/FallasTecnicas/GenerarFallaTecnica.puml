@@ -4,33 +4,51 @@ actor Colaborador
 boundary Interfaz_De_Usuario
 control FallaTecnicaController
 entity FallaTecnicaBuilder
+entity Heladera
 entity FallaTecnica
-database PaseudoBaseDeDatosUsuario
-database PseudoBaseDatosFallaTecnica
+entity SistemaDeGeolocalizacion
+entity Tecnico
+entity SufrioDesperfecto
+entity Suscriptor
+database BaseDeDatos
 
 Colaborador -> Interfaz_De_Usuario: registrar nueva falla tecnica
 activate Colaborador
 activate Interfaz_De_Usuario
 Interfaz_De_Usuario -> FallaTecnicaController: save(Context context)
 activate FallaTecnicaController
-FallaTecnicaController -> FallaTecnicaBuilder: construir()
 activate FallaTecnicaBuilder
-FallaTecnicaBuilder -> FallaTecnicaController: fallaTecnica
+FallaTecnicaController -> FallaTecnicaBuilder: new FallaTecnicaBuilder()
+activate BaseDeDatos
+FallaTecnicaBuilder -> BaseDeDatos: Repo.search(idHeladera)
+BaseDeDatos -> FallaTecnicaBuilder: heladera
+deactivate BaseDeDatos
+activate Heladera
+FallaTecnicaBuilder -> Heladera : setEstadoActual (NO_DISPONIBLE)
+FallaTecnicaBuilder -> Heladera : generarNuevaPublicacion(SUFRIO_DESPERFECTO)
+activate SufrioDesperfecto
+Heladera -> SufrioDesperfecto : update(Heladera, Publicacion)
+SufrioDesperfecto -> Suscriptor : notify()
+deactivate SufrioDesperfecto
+activate Suscriptor
+deactivate Heladera
+FallaTecnicaController -> FallaTecnicaBuilder: construir()
+deactivate Suscriptor
 deactivate FallaTecnicaBuilder
-FallaTecnicaController -> FallaTecnica: setId()
 activate FallaTecnica
 deactivate FallaTecnica
-FallaTecnicaController -> PaseudoBaseDeDatosUsuario: getId()
-activate PaseudoBaseDeDatosUsuario
-PaseudoBaseDeDatosUsuario -> FallaTecnicaController: id
-deactivate PaseudoBaseDeDatosUsuario
-activate FallaTecnica
-FallaTecnicaController -> FallaTecnica: setColaborador(id)
+activate SistemaDeGeolocalizacion
 FallaTecnicaController -> FallaTecnica: avisarATecnico()
+FallaTecnica -> SistemaDeGeolocalizacion: TecnicoMasCercano()
+SistemaDeGeolocalizacion -> FallaTecnica : tecnico
+deactivate SistemaDeGeolocalizacion
+activate Tecnico
+FallaTecnica -> Tecnico : notify()
+deactivate Tecnico
 deactivate FallaTecnica
-FallaTecnicaController -> PseudoBaseDatosFallaTecnica: agregar(fallaTecnica)
-activate PseudoBaseDatosFallaTecnica
-deactivate PseudoBaseDatosFallaTecnica
+FallaTecnicaController -> BaseDeDatos: Repo.agregar(fallaTecnica)
+activate BaseDeDatos
+deactivate BaseDeDatos
 FallaTecnicaController -> Interfaz_De_Usuario: redirect("/incidentes")
 deactivate FallaTecnicaController
 Interfaz_De_Usuario -> Colaborador: falla tecnica registrada

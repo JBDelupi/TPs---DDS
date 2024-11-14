@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ServicioDeccoSaludAPI {
     private static ServicioDeccoSaludAPI instacia = null;
-    private static final String urlAPI = "https://deccosalud.onrender.com/"; // ES ESTA LA URL??
+    private static final String urlAPI = "https://deccosalud.onrender.com/";
 
     private Retrofit retrofit;
 
@@ -36,7 +36,7 @@ public class ServicioDeccoSaludAPI {
         return instacia;
     }
 
-        public List<RespuestaDTO> obtenerPersonasVulnerables(List<PersonaVulnerableDTO> lista) throws IOException {
+    public List<RespuestaDTO> obtenerPersonasVulnerables(List<PersonaVulnerableDTO> lista) throws IOException {
         ServicioDeccoSaludAPIAdapter servicioDeccoSaludAPIAdapter = this.retrofit.create(ServicioDeccoSaludAPIAdapter.class);
         Call<List<RespuestaDTO>> request = servicioDeccoSaludAPIAdapter.personas(lista);
         return  request.execute().body();
