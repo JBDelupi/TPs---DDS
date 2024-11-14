@@ -4,6 +4,7 @@ package Controller;
 import Models.Domain.Tarjetas.Tarjeta;
 import Models.Repository.RepoSalud;
 import Service.DeccoSaludAPI.DTO.PersonaVulnerableDTO;
+import Service.DeccoSaludAPI.DTO.Reporte.ReporteSalud;
 import Service.DeccoSaludAPI.DTO.RespuestaDTO;
 import Service.DeccoSaludAPI.Mapper.PersonaVulneableMapper;
 import Service.DeccoSaludAPI.ServicioDeccoSaludAPI;
@@ -22,23 +23,13 @@ public class DeccoSaludController extends Controller {
         this.repoSalud = repoSalud;
     }
 
-    public void index(Context context) throws IOException {
+    public void index(Context context) {
         this.estaLogueado(context);
-        List<RespuestaDTO> r = new ArrayList<>();
 
         Map<String, Object> model = this.basicModel(context);
-
-        List<Tarjeta> tarjetas = repoSalud.buscarTodos();
-        List<PersonaVulnerableDTO> listaEnviar = new ArrayList<>();
-
-        for(Tarjeta tarjeta : tarjetas){
-            PersonaVulnerableDTO personaVulnerableDTO = PersonaVulneableMapper.toDto(tarjeta);
-            listaEnviar.add(personaVulnerableDTO);
-        }
-
-        r = ServicioDeccoSaludAPI.getInstance().obtenerPersonasVulnerables(listaEnviar);
-
+        List<ReporteSalud> r = repoSalud.buscarTodos();
         model.put("localidades",r);
+
         context.render("DeccoSaludAPI/personasVulnerablesDeccoSalud.hbs", model);
     }
 

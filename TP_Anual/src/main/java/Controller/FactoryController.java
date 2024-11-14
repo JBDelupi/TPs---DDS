@@ -14,6 +14,7 @@ import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Repository.RepoReporte;
 import Models.Repository.RepoPersona;
 import Models.Repository.*;
+import Service.DeccoSaludAPI.DTO.Reporte.ReporteSalud;
 
 
 public class FactoryController {
@@ -34,7 +35,7 @@ public class FactoryController {
           case "recuperar": controller = new RecuperarController(); break;
           case "visitaTecnica": controller = new VisitaFallaTecnicaController( new RepoIncidente(FallaTecnica.class)); break;
           case "reporte": controller = new ReporteController( new RepoReporte(TemplateReporte.class)); break;
-          case "deccosalud": controller = new DeccoSaludController( new RepoSalud(TarjetaAlimentar.class)); break;
+          case "deccosalud": controller = new DeccoSaludController( new RepoSalud(ReporteSalud.class)); break;
         }
         return controller;
     }

@@ -5,7 +5,6 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Repository.RepoRol;
 import Models.Repository.RepoTecnico;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
@@ -20,7 +19,6 @@ import java.util.random.RandomGenerator;
 public class TecnicoController extends Controller {
 
     private RepoTecnico repo;
-    private RepoRol repoRol;
 
     public TecnicoController(RepoTecnico repo){
         this.repo = repo;

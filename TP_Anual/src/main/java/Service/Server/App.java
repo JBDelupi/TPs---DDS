@@ -4,8 +4,11 @@ import Models.Domain.Reporte.CantFallasPorHeladera;
 import Models.Domain.Reporte.CantViandasPorColaborador;
 import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
+import Service.DeccoSaludAPI.GeneradorReporteSalud;
 import Service.TareaDiferida.ChromeTask;
+import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -13,6 +16,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class App {
+
     public static void main(String[] args) {
         Server.init();
 
@@ -27,21 +31,30 @@ public class App {
         repo.agregar(admin); */
 
         // Configuración del programador de tareas
-     //   ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         // Programar el reporte para ejecutarse cada 7 días
-     //   executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
+        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
 
     }
 
-    public static void generarReporte(){
+    public static void generarReporte()  {
         TemplateReporte reporte1 = new CantFallasPorHeladera();
         TemplateReporte reporte2 = new CantViandasPorColaborador();
         TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
+        GeneradorReporteSalud reporteSalud = new GeneradorReporteSalud();
+
+
 
         reporte1.obtenerListado();
         reporte2.obtenerListado();
         reporte3.obtenerListado();
+        try {
+            reporteSalud.generarReporte();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 
 }
