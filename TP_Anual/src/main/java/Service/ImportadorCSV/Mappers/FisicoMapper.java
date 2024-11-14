@@ -10,6 +10,7 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
+import Service.ImportadorCSV.DTO.FactoryContribucionDTO;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
 import Service.Validador.CredencialDeAcceso;
@@ -41,10 +42,11 @@ public class FisicoMapper {
         Double puntaje = 0.0;
 
         for(FormaColaboracionDTO colaboracionDTO : dto.getColaboracionDTOS() ){
-            Contribucion unaColaboracion = this.FactoryContribucion(colaboracionDTO.getFormaDeColaboracion());
+            Contribucion unaColaboracion = FactoryContribucionDTO.getContribucion(colaboracionDTO.getFormaDeColaboracion());
 
             LocalDate fechaDonacion = LocalDate.parse(colaboracionDTO.getFechaColaboracion(), formatter);
             unaColaboracion.setFechaDeDonacion(fechaDonacion);
+
 
             colaborador.agregarNuevaDonacion(unaColaboracion);
             puntaje += Double.parseDouble(colaboracionDTO.getCantidad());
