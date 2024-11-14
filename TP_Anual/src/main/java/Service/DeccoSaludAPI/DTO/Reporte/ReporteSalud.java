@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "Reporte_Decco_Salud")
+@Table(name = "ReporteSalud")
 public class ReporteSalud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class ReporteSalud {
     private LocalDate fecha;
 
     @OneToMany()
-    @JoinColumn(referencedColumnName = "reporte_id")
+    @JoinColumn(name = "reporte_id")
     List<Informacion> respuestas;
 
     public ReporteSalud() {

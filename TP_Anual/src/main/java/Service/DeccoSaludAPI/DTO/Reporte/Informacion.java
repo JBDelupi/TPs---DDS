@@ -2,6 +2,7 @@ package Service.DeccoSaludAPI.DTO.Reporte;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "informacion")
+@NoArgsConstructor
 public class Informacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
