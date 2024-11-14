@@ -12,6 +12,7 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
+import Service.Validador.CredencialDeAcceso;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,14 +21,16 @@ public class FisicoMapper {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
-    public Fisico toEntity(FisicoDTO dto) {
+    public  Fisico  toEntity(FisicoDTO dto) {
 
         FisicoBuilder fisicoBuilder = new FisicoBuilder();
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(dto.getMail(), dto.getNumDocumento());
 
         Fisico fisico = fisicoBuilder
                 .nombre(dto.getNombre())
                 .apellido(dto.getApellido())
                 .numeroDocumento(dto.getNumDocumento())
+                .credencialDeAcceso(credencialDeAcceso)
                 .tipoDocumento( this.TipoSeleccionado(dto.getTipoDocumento() ) )
                 .construir();
 
@@ -48,6 +51,9 @@ public class FisicoMapper {
         }
 
         colaborador.setPuntaje(puntaje);
+
+
+
 
         return fisico;
 
