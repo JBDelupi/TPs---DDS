@@ -18,9 +18,8 @@ public class GeneradorFisico {
         for (FisicoDTO fisicoDTO : fisicoDTOS) {
             Fisico fisico = mapper.toEntity(fisicoDTO);
             fisicos.add(fisico);
-
+            repo.agregar(fisico);
         }
-        repo.agregar(fisicos);
     }
 
 }

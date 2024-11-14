@@ -12,15 +12,18 @@ import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 public class FactoryContribucionDTO {
 
     public static Contribucion getContribucion(String tipoDonacion) {
+        Contribucion contribucion = null;
         switch (tipoDonacion) {
             case "DINERO" -> {
-                return new DonacionDeDinero();
+                contribucion = new DonacionDeDinero();
+                ((DonacionDeDinero) contribucion).setMonto(0.0);
             }
             case "ENTREGA_TARJETAS" -> {
                 return new EntregaDeTarjeta();
             }
             case "REDISTRIBUCION_VIANDAS" -> {
-                return new DistribucionDeViandas();
+                contribucion = new DistribucionDeViandas();
+                ((DistribucionDeViandas) contribucion).setCantidadDeViandasAMover(0);
             }
             case "DONACION_VIANDAS" -> {
                 return new DonacionDeVianda();
@@ -28,7 +31,7 @@ public class FactoryContribucionDTO {
 
             }
 
-        return null;
+        return contribucion;
     }
 
 }

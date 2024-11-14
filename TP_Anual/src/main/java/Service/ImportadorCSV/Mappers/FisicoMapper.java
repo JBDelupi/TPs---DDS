@@ -35,6 +35,8 @@ public class FisicoMapper {
                 .tipoDocumento( this.TipoSeleccionado(dto.getTipoDocumento() ) )
                 .construir();
 
+        fisico.setCodigoDeNotificacion(dto.getMail());
+
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
         Colaborador colaborador = colaboradorBuilder
                 .construir(fisico);
