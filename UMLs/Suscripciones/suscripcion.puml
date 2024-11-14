@@ -2,36 +2,37 @@
 
 entity Colaborador
 boundary Interfaz_De_Usuario
-control Controller
 control SuscriptorController
-database PseudoBaseDeDatosHeladera
+database BaseDeDatosHeladera
 entity Heladera
 entity FactorySuscripcion
 
 Colaborador -> Interfaz_De_Usuario: seleccionar suscripcion
 activate Colaborador
 activate Interfaz_De_Usuario
-Interfaz_De_Usuario -> Controller: estaLogeado()
-activate Controller
+Interfaz_De_Usuario -> SuscriptorController: estaLogeado()
+activate SuscriptorController
 
 alt No esta estaLogeado
-    Controller -> Interfaz_De_Usuario: AccessDeniedException()
+    SuscriptorController -> Interfaz_De_Usuario: AccessDeniedException()
     Interfaz_De_Usuario -> Colaborador: error: acceso denegado
 end
 
-Controller -> SuscriptorController: true
-deactivate Controller
-activate SuscriptorController
-SuscriptorController -> PseudoBaseDeDatosHeladera: getInstance().getId(idHeladera)
-activate PseudoBaseDeDatosHeladera
-PseudoBaseDeDatosHeladera -> SuscriptorController: Heladera
-deactivate PseudoBaseDeDatosHeladera
+
+SuscriptorController -> BaseDeDatosHeladera: Repo.search(idHeladera)
+activate BaseDeDatosHeladera
+BaseDeDatosHeladera -> SuscriptorController: Heladera
+deactivate BaseDeDatosHeladera
 SuscriptorController -> FactorySuscripcion: selecciona(tipoSuscripcion)
 activate FactorySuscripcion
 FactorySuscripcion -> SuscriptorController: nuevoSuscriptor
 deactivate FactorySuscripcion
 SuscriptorController -> Heladera: agregarSubscriptor(nuevoSuscritor)
 activate Heladera
+SuscriptorController -> BaseDeDatosHeladera : Repo.agregar(nuevoSuscritor)
+activate BaseDeDatosHeladera
+deactivate BaseDeDatosHeladera
+deactivate SuscriptorController
 deactivate Heladera
 SuscriptorController -> Interfaz_De_Usuario: redirect("/suscripcionExitosa")
 Interfaz_De_Usuario -> Colaborador: suscripcion exitosa

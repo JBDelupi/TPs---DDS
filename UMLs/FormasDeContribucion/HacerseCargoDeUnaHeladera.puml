@@ -1,4 +1,4 @@
-@startuml GenerarHacerseCargoDeHeladera
+@startuml HacerseCargoDeHeladera
 
 actor PersonaJuridica
 boundary Interfaz_De_Usuario
@@ -33,23 +33,38 @@ ContribucionController -> FactoryContribucion: factoryMethod(Context context)
 
 activate FactoryContribucion
 FactoryContribucion -> FactoryContribucion: HacerseCargoDeHeladera(Context)
-deactivate ContribucionController
+
 activate HacerseCargoDeHeladeraBuilder
 FactoryContribucion -> HacerseCargoDeHeladeraBuilder: construir()
 HacerseCargoDeHeladeraBuilder -> FactoryContribucion: HacerseCargoDeHeladera
 deactivate HacerseCargoDeHeladeraBuilder
 FactoryContribucion -> Colaborador: generarNuevaDonacion(HacerseCargoDeHeladera)
+activate BaseDeDatosContribucion
+FactoryContribucion -> BaseDeDatosContribucion: repo.search(Persona.class,id)
+
+alt No tiene Permisos
+
+    FactoryContribucion->ContribucionController: AccessDeniedException()
+    ContribucionController->Interfaz_De_Usuario: AccesDeniedException()
+    Interfaz_De_Usuario->PersonaJuridica: No tiene Permisos
+
+end
+
+BaseDeDatosContribucion -> FactoryContribucion : colaborador
+deactivate BaseDeDatosContribucion
 activate Colaborador
 Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
 Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
+Colaborador -> FactoryContribucion: ok
 FactoryContribucion -> ContribucionController: HacerseCargoDeHeladera
 deactivate Colaborador
 deactivate FactoryContribucion
-activate ContribucionController
 ContribucionController -> BaseDeDatosContribucion: guardar(HacerseCargoDeHeladera)
 activate BaseDeDatosContribucion
+BaseDeDatosContribucion -> FactoryContribucion: ok
 deactivate BaseDeDatosContribucion
 ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
+
 activate Interfaz_De_Usuario
 deactivate ContribucionController
 

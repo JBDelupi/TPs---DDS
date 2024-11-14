@@ -1,11 +1,10 @@
-@startuml GenerarofrecerProducto
+@startuml OfrecerProducto
 actor PersonaJuridica
 boundary Interfaz_De_Usuario
 control ContribucionController
 
-
 entity FactoryContribucion
-entity ofrecerProductoBuilder
+entity OfrecerProductoBuilder
 entity Colaborador
 database BaseDeDatosContribucion
 
@@ -13,6 +12,7 @@ activate PersonaJuridica
 activate Interfaz_De_Usuario
 activate ContribucionController
 PersonaJuridica->Interfaz_De_Usuario: ofrecerProducto
+
 Interfaz_De_Usuario->ContribucionController: create(Context context)
 ContribucionController->ContribucionController: estaLogueado(Context context)
 
@@ -27,29 +27,35 @@ Interfaz_De_Usuario -> PersonaJuridica: context.render("ofrecerProducto.hbs", mo
 
 PersonaJuridica -> Interfaz_De_Usuario: save(Context context)
 Interfaz_De_Usuario -> ContribucionController: save(Context context)
-deactivate Interfaz_De_Usuario
 ContribucionController -> FactoryContribucion: factoryMethod(Context context)
-
 activate FactoryContribucion
 FactoryContribucion -> FactoryContribucion: ofrecerProducto(Context)
-deactivate ContribucionController
-activate ofrecerProductoBuilder
-FactoryContribucion -> ofrecerProductoBuilder: construir()
-ofrecerProductoBuilder -> FactoryContribucion: ofrecerProducto
-deactivate ofrecerProductoBuilder
-FactoryContribucion -> Colaborador: generarNuevaDonacion(ofrecerProducto)
+FactoryContribucion -> FactoryContribucion: obtenerColaborador()
+activate BaseDeDatosContribucion
+FactoryContribucion -> BaseDeDatosContribucion : repo.search(PersonaJuridica.class,id)
+alt No tiene permiso
+    FactoryContribucion -> ContribucionController: UnauthorizedResponseException()
+    ContribucionController -> Interfaz_De_Usuario: UnauthorizedResponseException
+    Interfaz_De_Usuario -> PersonaJuridica: No tienes permisos
+end
+BaseDeDatosContribucion -> FactoryContribucion : colaborador
+deactivate BaseDeDatosContribucion
+FactoryContribucion -> OfrecerProductoBuilder: construir()
+activate OfrecerProductoBuilder
+OfrecerProductoBuilder -> FactoryContribucion: ofrecerProducto
+deactivate OfrecerProductoBuilder
 activate Colaborador
+FactoryContribucion -> Colaborador: generarNuevaDonacion(ofrecerProducto)
 Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
 Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
 FactoryContribucion -> ContribucionController: ofrecerProducto
 deactivate Colaborador
-deactivate FactoryContribucion
-activate ContribucionController
-ContribucionController -> BaseDeDatosContribucion: guardar(ofrecerProducto)
+FactoryContribucion -> BaseDeDatosContribucion: Repo.modificar(colaborador)
 activate BaseDeDatosContribucion
+BaseDeDatosContribucion -> FactoryContribucion: ok
+deactivate FactoryContribucion
 deactivate BaseDeDatosContribucion
 ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
-activate Interfaz_De_Usuario
 deactivate ContribucionController
 
 Interfaz_De_Usuario -> PersonaJuridica: context.redirect("/contribucionExitosa")

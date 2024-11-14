@@ -8,7 +8,6 @@ entity FactoryContribucion
 entity DistribucionDeViandasBuilder
 entity Colaborador
 database BaseDeDatosContribucion
-entity Permisos
 
 activate PersonaHumana
 activate Interfaz_De_Usuario
@@ -29,35 +28,35 @@ Interfaz_De_Usuario -> PersonaHumana: context.render("distribucionDeViandas.hbs"
 
 PersonaHumana -> Interfaz_De_Usuario: save(Context context)
 Interfaz_De_Usuario -> ContribucionController: save(Context context)
-deactivate Interfaz_De_Usuario
 ContribucionController -> FactoryContribucion: factoryMethod(Context context)
 activate FactoryContribucion
 FactoryContribucion -> FactoryContribucion: distribucionDeViandas(Context)
-deactivate ContribucionController
-FactoryContribucion -> Permisos: checkUserRoleAndProceed(TipoRolNegocio.HUMANO)
-activate Permisos
-deactivate Permisos
-FactoryContribucion -> Colaborador: getTarjeta()
-activate Colaborador
-Colaborador -> FactoryContribucion: TarjetaDeAcceso
-deactivate Colaborador
+FactoryContribucion -> FactoryContribucion: obtenerColaborador()
+activate BaseDeDatosContribucion
+FactoryContribucion -> BaseDeDatosContribucion : repo.search(Persona.class,id)
+alt No tiene permiso
+    FactoryContribucion -> ContribucionController: UnauthorizedResponseException()
+    ContribucionController -> Interfaz_De_Usuario: UnauthorizedResponseException
+    Interfaz_De_Usuario -> PersonaHumana: No tienes permisos
+end
+BaseDeDatosContribucion -> FactoryContribucion : colaborador
+deactivate BaseDeDatosContribucion
 FactoryContribucion -> DistribucionDeViandasBuilder: construir()
 activate DistribucionDeViandasBuilder
 DistribucionDeViandasBuilder -> FactoryContribucion: distribucionDeViandas
 deactivate DistribucionDeViandasBuilder
-FactoryContribucion -> Colaborador: generarNuevaDonacion(distribucionDeViandas)
 activate Colaborador
+FactoryContribucion -> Colaborador: generarNuevaDonacion(distribucionDeViandas)
 Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
 Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
 FactoryContribucion -> ContribucionController: distribucionDeViandas
 deactivate Colaborador
-deactivate FactoryContribucion
-activate ContribucionController
-ContribucionController -> BaseDeDatosContribucion: guardar(distribucionDeViandas)
+FactoryContribucion -> BaseDeDatosContribucion: Repo.agregar(distribucionDeViandas)
 activate BaseDeDatosContribucion
+BaseDeDatosContribucion -> FactoryContribucion: ok
+deactivate FactoryContribucion
 deactivate BaseDeDatosContribucion
 ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
-activate Interfaz_De_Usuario
 deactivate ContribucionController
 
 Interfaz_De_Usuario -> PersonaHumana: context.redirect("/contribucionExitosa")

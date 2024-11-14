@@ -39,7 +39,7 @@ activate VisitaTecnicaBuilder
 VisitaTecnicaBuilder-> FallaTecnica: RegistroVisita
 deactivate VisitaTecnicaBuilder
 FallaTecnica->FallaTecnica: visitasTecnicas.add(registroVisita)
-FallaTecnica -> BaseDeDatos: guardar(RegistroVisita)
+FallaTecnica -> BaseDeDatos: Repo.agregar(RegistroVisita)
 activate BaseDeDatos
 
 

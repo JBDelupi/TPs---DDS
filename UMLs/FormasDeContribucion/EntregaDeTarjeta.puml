@@ -6,7 +6,9 @@ control ContribucionController
 
 entity FactoryContribucion
 entity vulnerableBuilder
+entity TarjetaAlimentar
 entity Colaborador
+entity EntregaDeTarjeta
 database BaseDeDatosContribucion
 
 activate PersonaHumana
@@ -35,19 +37,40 @@ activate FactoryContribucion
 FactoryContribucion -> FactoryContribucion: registrarTarjeta(Context)
 deactivate ContribucionController
 activate vulnerableBuilder
-FactoryContribucion -> vulnerableBuilder: construir()
-vulnerableBuilder -> FactoryContribucion: registrarTarjeta
 deactivate vulnerableBuilder
-FactoryContribucion -> Colaborador: generarNuevaDonacion(registrarTarjeta)
+FactoryContribucion -> vulnerableBuilder: construir()
+vulnerableBuilder -> FactoryContribucion: persona
+deactivate vulnerableBuilder
+activate TarjetaAlimentar
+FactoryContribucion -> TarjetaAlimentar : new TarjetaAlimentar(persona)
+TarjetaAlimentar -> FactoryContribucion : tarjeta
+deactivate TarjetaAlimentar
+activate EntregaDeTarjeta
+FactoryContribucion -> EntregaDeTarjeta: new EntregaDeTarjeta(tarjeta)
+EntregaDeTarjeta -> FactoryContribucion : unaDonacion
+deactivate EntregaDeTarjeta
+
+FactoryContribucion -> FactoryContribucion : obtenerColaborador()
+FactoryContribucion -> BaseDeDatosContribucion : repo.search(Persona.class,id)
+activate BaseDeDatosContribucion
+
+alt No tiene permiso
+    FactoryContribucion -> ContribucionController: UnauthorizedResponseException()
+    ContribucionController -> Interfaz_De_Usuario: UnauthorizedResponseException
+    Interfaz_De_Usuario -> PersonaHumana: No tienes permisos
+end
+BaseDeDatosContribucion -> FactoryContribucion : Persona
+FactoryContribucion -> Colaborador : persona.agregarNuevaDonacion(unaDonacion)
 activate Colaborador
 Colaborador -> Colaborador: agregarNuevaDonacion(unaDonacion)
 Colaborador -> Colaborador: sumarPuntaje(unaDonacion)
-FactoryContribucion -> ContribucionController: registrarTarjeta
 deactivate Colaborador
+deactivate BaseDeDatosContribucionr
+FactoryContribucion -> BaseDeDatosContribucion: Repo.agregar(persona);
+FactoryContribucion -> BaseDeDatosContribucion: Repo.modificar(colaborador);
+FactoryContribucion -> ContribucionController: ok
 deactivate FactoryContribucion
 activate ContribucionController
-ContribucionController -> BaseDeDatosContribucion: guardar(registrarTarjeta)
-activate BaseDeDatosContribucion
 deactivate BaseDeDatosContribucion
 ContribucionController -> Interfaz_De_Usuario: context.redirect("/contribucionExitosa")
 activate Interfaz_De_Usuario

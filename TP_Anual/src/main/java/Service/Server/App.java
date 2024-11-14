@@ -1,11 +1,18 @@
 package Service.Server;
 
+import Controller.Actores.RolUsuario;
+import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Reporte.CantFallasPorHeladera;
 import Models.Domain.Reporte.CantViandasPorColaborador;
 import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
+import Models.Repository.Dao;
+import Models.Repository.RepoPersona;
 import Service.DeccoSaludAPI.GeneradorReporteSalud;
+import Service.Notificacion.Correo.CorreoAdapter;
 import Service.TareaDiferida.ChromeTask;
+import Service.Validador.CredencialDeAcceso;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -20,15 +27,17 @@ public class App {
     public static void main(String[] args) {
         Server.init();
 
-       /* Fisico admin = new Fisico();
+        Fisico admin = new Fisico();
         admin.setNombre("Decco");
         admin.setApellido("Colaboraciones");
         admin.setNumeroDocumento("25102024");
+        admin.setMedioDeNotificacion(new CorreoAdapter());
+        admin.setCodigoDeNotificacion("admin.decco@gmail.com");
         admin.setTipoDeDocumento(TipoDeDocumento.DNI);
         admin.setCredencialDeAcceso(new CredencialDeAcceso("admin","admin"));
         admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
         Dao repo = new RepoPersona(Fisico.class);
-        repo.agregar(admin); */
+        repo.agregar(admin);
 
         // Configuración del programador de tareas
      //   ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
