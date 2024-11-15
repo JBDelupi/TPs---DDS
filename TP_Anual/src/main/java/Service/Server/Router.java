@@ -45,7 +45,7 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create, RolUsuario.ADMINISTRADOR);
+            get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create, RolUsuario.ADMINISTRADOR, RolUsuario.JURIDICO);
             get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
             post("/heladeras/{id}/suscribir",((HeladeraController) FactoryController.controller("heladeras"))::edit);
             post("/heladeras/{id}/desuscribir",((HeladeraController) FactoryController.controller("heladeras"))::update);
