@@ -1,0 +1,38 @@
+@startuml CantViandasPorColaboradorReporte
+entity ChromeTask
+entity App
+entity CantViandasPorColaborador
+entity Fisico
+entity Colaborador
+database BaseDeDatos
+
+ChromeTask -> App: generarReporte()
+App -> CantViandasPorColaborador: obtenerListado()
+activate CantViandasPorColaborador
+
+CantViandasPorColaborador -> BaseDeDatos: fisicoRol(TipoRol.COLABORADOR)
+BaseDeDatos -> CantViandasPorColaborador: List<Fisico>
+
+loop para cada Fisico
+    activate Fisico
+    CantViandasPorColaborador -> Fisico: getNombre()
+    Fisico -> CantViandasPorColaborador: nombre
+
+    CantViandasPorColaborador -> Fisico: getRol(TipoRol.COLABORADOR)
+    Fisico -> CantViandasPorColaborador: Colaborador
+
+    activate Colaborador
+    CantViandasPorColaborador -> Colaborador: getCantidadViandasDonadas()
+    Colaborador -> CantViandasPorColaborador: cantidadDeViandas
+
+    CantViandasPorColaborador -> CantViandasPorColaborador: agregar a items (nombre, cantidadDeViandas)
+
+    CantViandasPorColaborador -> Colaborador: reestablecerViandas()
+    deactivate Colaborador
+    deactivate Fisico
+end
+
+CantViandasPorColaborador -> BaseDeDatos: agregarReporte(this)
+
+deactivate CantViandasPorColaborador
+@enduml

@@ -1,0 +1,36 @@
+@startuml MovimientoViandasPorHeladeraReporte
+entity ChromeTask
+entity App
+entity MovimientoViandasPorHeladera
+entity Heladera
+database BaseDeDatos
+
+ChromeTask -> App: generarReporte()
+App -> MovimientoViandasPorHeladera: obtenerListado()
+activate MovimientoViandasPorHeladera
+
+MovimientoViandasPorHeladera -> BaseDeDatos: buscarTodos()
+BaseDeDatos -> MovimientoViandasPorHeladera: List<Heladera>
+
+loop para cada Heladera
+    activate Heladera
+    MovimientoViandasPorHeladera -> Heladera: getDireccion()
+    Heladera -> MovimientoViandasPorHeladera: Direccion
+
+    MovimientoViandasPorHeladera -> Heladera: getCantidadDeviandasDepositadas()
+    Heladera -> MovimientoViandasPorHeladera: cantidadDeViandasDepositadas
+
+    MovimientoViandasPorHeladera -> Heladera: getCantidadDeviandasRetiradas()
+    Heladera -> MovimientoViandasPorHeladera: cantidadDeViandasRetiradas
+
+    MovimientoViandasPorHeladera -> Heladera: reestablecerViandasDepositadas()
+    MovimientoViandasPorHeladera -> Heladera: reestablecerViandasRetiradas()
+
+    MovimientoViandasPorHeladera -> MovimientoViandasPorHeladera: agregar a items (direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas)
+    deactivate Heladera
+end
+
+MovimientoViandasPorHeladera -> BaseDeDatos: agregarReporte(this)
+
+deactivate MovimientoViandasPorHeladera
+@enduml
