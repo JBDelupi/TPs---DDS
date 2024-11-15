@@ -217,11 +217,12 @@ public class FactoryContribucion {
     private void hacerseCargoDeHeladera(CrearContribucionDTO dto) {
 
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
-        String id = dto.getParams().get("heladeraId");
+        String idHeladera = dto.getParams().get("heladeraId");
 
-        Heladera heladera = EntityManagerHelper.getEntityManager().find(Heladera.class,id);
-        heladera.setResponsable(this.persona);
+        Heladera heladera = (Heladera) repo.search(Heladera.class,idHeladera);
+        heladera.setResponsable((Persona) repo.search(Persona.class,id));
 
+        repo.modificar(heladera);
 
         HacerseCargoDeHeladeraBuilder builder = new HacerseCargoDeHeladeraBuilder();
         Contribucion donacion = builder.nombreCaracteristico(nombreCaracteristico).heladera(heladera).construir();
