@@ -23,7 +23,7 @@ public abstract class Tarjeta {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     protected Persona titular;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tarjeta_id")
     protected List<RegistroDeUso> usos;
 
