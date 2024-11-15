@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Reporte de Salud</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+{{> templates/partials/headerColaborador rol=rol id=id}}
+<div class="container mt-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Decco Salud</h5>
+        <h1 class="mb-5">Detalle de Reporte</h1>
+    </div>
+
+
+    {{#if reporte}}
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered">
+                <thead class="table-primary">
+                <tr>
+                    <th>Barrio</th>
+                    <th>Cantidad de Personas</th>
+                    <th>Personas</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each reporte.respuestas}}
+                    <tr>
+                        <td>{{this.barrio}}</td>
+                        <td>{{this.cantidadPersonas}}</td>
+                        <td>
+                            <ul>
+                                {{#each this.personas}}
+                                    <li>{{this}}</li>
+                                {{/each}}
+                            </ul>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <p class="text-center">No hay información disponible para este reporte.</p>
+    {{/if}}
+</div>
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
