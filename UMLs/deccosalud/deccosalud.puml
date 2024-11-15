@@ -1,0 +1,32 @@
+@startuml deccosaludReporte
+entity ChromeTask
+entity App
+entity GeneradorReporteSalud
+entity PersonaVulnerableMapper
+entity ServicioDeccoSaludAPI
+database BaseDeDatos
+
+ChromeTask -> App: generarReporte()
+App -> GeneradorReporteSalud: generarReporte()
+activate GeneradorReporteSalud
+
+activate BaseDeDatos
+GeneradorReporteSalud -> BaseDeDatos: repo.getReporte()
+BaseDeDatos -> GeneradorReporteSalud: tarjetas
+
+loop para cada tarjeta
+    activate PersonaVulnerableMapper
+    GeneradorReporteSalud -> PersonaVulnerableMapper: toDto(tarjeta)
+    PersonaVulnerableMapper -> GeneradorReporteSalud: personaVulnerableDTO
+    GeneradorReporteSalud-> GeneradorReporteSalud : listaEnviar.add(personaVulnerableDTO)
+
+end
+deactivate PersonaVulnerableMapper
+activate ServicioDeccoSaludAPI
+GeneradorReporteSalud-> ServicioDeccoSaludAPI: getInstance().obtenerPersonasVulnerables(listaEnviar)
+ServicioDeccoSaludAPI -> GeneradorReporteSalud : List< RespuestaDTO>
+deactivate ServicioDeccoSaludAPI
+GeneradorReporteSalud -> BaseDeDatos: repo.agregar(reporteMapper.getReporteSalud());
+
+deactivate GeneradorReporteSalud
+@enduml

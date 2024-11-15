@@ -1,0 +1,32 @@
+@startuml CantFallasPorHeladeraReporte
+entity ChromeTask
+entity App
+entity CantFallasPorHeladera
+entity Heladera
+database BaseDeDatos
+
+ChromeTask -> App: generarReporte()
+App -> CantFallasPorHeladera: obtenerListado()
+activate CantFallasPorHeladera
+
+CantFallasPorHeladera -> BaseDeDatos: buscarTodos()
+BaseDeDatos -> CantFallasPorHeladera: List<Heladera>
+
+loop para cada Heladera
+    activate Heladera
+    CantFallasPorHeladera -> Heladera: getDireccion()
+    Heladera -> CantFallasPorHeladera: Direccion
+
+    CantFallasPorHeladera -> Heladera: getCantidadDeFallas()
+    Heladera -> CantFallasPorHeladera: cantidadDeFallas
+
+    CantFallasPorHeladera -> Heladera: reestablecerFallas()
+
+    CantFallasPorHeladera -> CantFallasPorHeladera: agregar a items (direccion, cantidadDeFallas)
+    deactivate Heladera
+end
+
+CantFallasPorHeladera -> BaseDeDatos: agregarReporte(this)
+
+deactivate CantFallasPorHeladera
+@enduml
