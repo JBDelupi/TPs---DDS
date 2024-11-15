@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Técnico</title>
+
+    <!-- Estilos de Bootstrap y personalizados -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+
+<body>
+{{> templates/partials/header estaSesion=estaSesion}}
+{{> templates/partials/tipografia}}
+
+<main>
+    <div class="container-xxl py-5">
+        <div class="container text-center">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Registrar Técnico</h5>
+                <h1 class="mb-5">Área y Radio de Cobertura</h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-12">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <form action="/asignar-rol/tecnico" method="POST">
+                            <div class="row g-3">
+                                <!-- Campo de Selección de Área de Cobertura -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-control" id="ciudad" name="ciudad" required onchange="actualizarCoordenadas()">
+                                            <option value="" disabled selected>Seleccionar Área de Cobertura</option>
+                                            <option value="Almagro">Almagro</option>
+                                            <option value="Balvanera">Balvanera</option>
+                                            <option value="Barracas">Barracas</option>
+                                            <option value="Belgrano">Belgrano</option>
+                                            <option value="Boedo">Boedo</option>
+                                            <option value="Caballito">Caballito</option>
+                                            <option value="Chacarita">Chacarita</option>
+                                            <option value="Colegiales">Colegiales</option>
+                                            <option value="Constitución">Constitución</option>
+                                            <option value="Flores">Flores</option>
+                                            <option value="Floresta">Floresta</option>
+                                            <option value="La Boca">La Boca</option>
+                                            <option value="La Paternal">La Paternal</option>
+                                            <option value="Liniers">Liniers</option>
+                                            <option value="Mataderos">Mataderos</option>
+                                            <option value="Monte Castro">Monte Castro</option>
+                                            <option value="Monserrat">Monserrat</option>
+                                            <option value="Nueva Pompeya">Nueva Pompeya</option>
+                                            <option value="Nuñez">Nuñez</option>
+                                            <option value="Palermo">Palermo</option>
+                                            <option value="Parque Avellaneda">Parque Avellaneda</option>
+                                            <option value="Parque Chacabuco">Parque Chacabuco</option>
+                                            <option value="Parque Chas">Parque Chas</option>
+                                            <option value="Parque Patricios">Parque Patricios</option>
+                                            <option value="Puerto Madero">Puerto Madero</option>
+                                            <option value="Recoleta">Recoleta</option>
+                                            <option value="Retiro">Retiro</option>
+                                            <option value="Saavedra">Saavedra</option>
+                                            <option value="San Cristóbal">San Cristóbal</option>
+                                            <option value="San Nicolás">San Nicolás</option>
+                                            <option value="San Telmo">San Telmo</option>
+                                            <option value="Vélez Sarsfield">Vélez Sarsfield</option>
+                                            <option value="Versalles">Versalles</option>
+                                            <option value="Villa Crespo">Villa Crespo</option>
+                                            <option value="Villa del Parque">Villa del Parque</option>
+                                            <option value="Villa Devoto">Villa Devoto</option>
+                                            <option value="Villa Gral. Mitre">Villa Gral. Mitre</option>
+                                            <option value="Villa Lugano">Villa Lugano</option>
+                                            <option value="Villa Luro">Villa Luro</option>
+                                            <option value="Villa Ortúzar">Villa Ortúzar</option>
+                                            <option value="Villa Pueyrredón">Villa Pueyrredón</option>
+                                            <option value="Villa Real">Villa Real</option>
+                                            <option value="Villa Riachuelo">Villa Riachuelo</option>
+                                            <option value="Villa Santa Rita">Villa Santa Rita</option>
+                                            <option value="Villa Soldati">Villa Soldati</option>
+                                            <option value="Villa Urquiza">Villa Urquiza</option>
+                                        </select>
+                                        <label for="ciudad">Área de Cobertura</label>
+                                    </div>
+                                </div>
+
+                                <!-- Campo para Radio de Cobertura -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="radio" name="radio" placeholder="Radio de Cobertura en KM" required>
+                                        <label for="radio">Radio de Cobertura en KM</label>
+                                    </div>
+                                </div>
+
+                                <!-- Campos ocultos para latitud y longitud -->
+                                <input type="hidden" id="latitud" name="latitud">
+                                <input type="hidden" id="longitud" name="longitud">
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3 zoom-btn" type="button" onclick="mockEnviarSolicitud()">Registrar Técnico</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+
+<script>
+    // Mapeo de ciudades con sus coordenadas
+    const coordenadasCiudades = {
+        'Almagro': { latitud: -34.6066, longitud: -58.4281 },
+        'Balvanera': { latitud: -34.6099, longitud: -58.4052 },
+        'Barracas': { latitud: -34.6372, longitud: -58.3847 },
+        'Belgrano': { latitud: -34.5625, longitud: -58.4585 },
+        // Agrega todas las demás ciudades según sea necesario
+    };
+
+    // Función que actualiza las coordenadas según el área seleccionada
+    function actualizarCoordenadas() {
+        const ciudadSeleccionada = document.getElementById('ciudad').value;
+        const coordenadas = coordenadasCiudades[ciudadSeleccionada];
+        if (coordenadas) {
+            document.getElementById('latitud').value = coordenadas.latitud;
+            document.getElementById('longitud').value = coordenadas.longitud;
+        }
+    }
+
+    function mockEnviarSolicitud() {
+        window.location.href = "/asignar-rol/solicitudExitosa";
+    }
+
+</script>
+
+</body>
+</html>
