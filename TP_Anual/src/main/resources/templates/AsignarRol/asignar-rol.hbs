@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Rol</title>
+
+    <!-- Estilos de Bootstrap y estilos personalizados -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+</head>
+<body>
+
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<div class="contact_section layout_padding">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Asignación de Roles</h5>
+                <h1 class="display-3 text-dark text-center">Seleccione su Rol</h1>
+            </div>
+        </div>
+    </div>
+    <div class="blog_section_2 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                <a href="/asignar-rol/tecnico" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
+                            <h5 class="text-dark">Técnico</h5>
+                            <p class="text-dark">Asigna el rol de Técnico para realizar y gestionar visitas técnicas.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                <a href="#" class="text-decoration-none w-100" onclick="confirmarColaborador(event)">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-hand-holding-heart text-primary mb-4"></i>
+                            <h5 class="text-dark">Colaborador</h5>
+                            <p class="text-dark">Asigna el rol de Colaborador para contribuir y apoyar a nuestra comunidad.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
+<script>
+    // Función para confirmar asignación de rol de colaborador
+    function confirmarColaborador(event) {
+        event.preventDefault();
+        const confirmacion = confirm("¿Estás seguro de que deseas solicitar el rol de Colaborador?");
+        if (confirmacion) {
+            window.location.href = "/asignar-rol/solicitudExitosa";
+        }
+    }
+</script>
+</body>
+</html>

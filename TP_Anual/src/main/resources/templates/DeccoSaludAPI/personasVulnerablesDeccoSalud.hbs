@@ -2,88 +2,82 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personas Vulnerables - DeccoSalud</title>
-
-    <!-- Enlaces a CSS -->
+    <title>Listado de Reportes de Salud</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/estilos.css">
-    <link rel="stylesheet" href="../../css/efectos.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <style>
+        .report-row {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Incluir partials -->
 {{> templates/partials/headerColaborador rol=rol id=id}}
-{{> templates/partials/tipografia}}
+<div class="container mt-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Decco Salud</h5>
+        <h1 class="mb-5">Reporte de Decco Salud</h1>
+    </div>
 
-<!-- Personas Vulnerables Start -->
-<section class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 class="section-title ff-secondary text-center text-primary fw-normal">DeccoSalud</h5>
-            <h1 class="mb-5">Personas Vulnerables</h1>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                {{#if localidades}}
-                    <div class="table-responsive mt-5">
-                        <h2>Personas por Localidad</h2>
-                        <table class="table table-bordered table-hover">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Localidad</th>
-                                <th>Personas</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {{#each localidades}}
-                                <tr>
-                                    <td rowspan="{{this.personas.length}}">{{this.barrio}} ({{this.cantidadPersonas}} personas)</td>
-                                    <td>{{this.personas.[0]}}</td>
-                                </tr>
-                                {{#each this.personas}}
-                                    {{#unless @first}}
-                                        <tr>
-                                            <td>{{this}}</td>
-                                        </tr>
-                                    {{/unless}}
-                                {{/each}}
-                            {{/each}}
-                            </tbody>
-
-                        </table>
-                    </div>
-                {{else}}
-                    <p class="text-center">No hay datos disponibles sobre personas vulnerables en este momento.</p>
-                {{/if}}
-            </div>
+    <!-- Buscador por fecha centrado -->
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-4 text-center">
+            <label for="buscadorFecha" class="form-label">Filtrar por fecha</label>
+            <input id="buscadorFecha" type="date" class="form-control">
         </div>
     </div>
-</section>
-<!-- Personas Vulnerables End -->
 
-<!-- Incluir footer y botón back -->
+    <!-- Verificamos si hay reportes -->
+    {{#if localidades}}
+        <div class="table-responsive mt-4">
+            <table id="tablaReportes" class="table table-bordered table-hover" style="width: 50%; margin: 0 auto;">
+                <thead>
+                <tr>
+                    <th>Fecha del Reporte</th>
+                    <th>ID</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each localidades}}
+                    <tr class="report-row" data-id="{{this.id}}">
+                        <td>{{this.fecha}}</td>
+                        <td>{{this.id}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <p class="text-center">No hay reportes disponibles.</p>
+    {{/if}}
+</div>
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
-
-<!-- Scripts JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../../css/lib/wow/wow.min.js"></script>
-<script src="../../css/lib/easing/easing.min.js"></script>
-<script src="../../css/lib/waypoints/waypoints.min.js"></script>
-<script src="../../css/lib/counterup/counterup.min.js"></script>
-<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
-<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
-<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
-<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-<script src="../../js/scripts-header.js"></script>
-<script src="../../js/main.js"></script>
 
+<!-- JavaScript para hacer la fila clicable y filtrar por fecha -->
+<script>
+    $(document).ready(function() {
+        // Hacer que cada fila sea clicable
+        $('.report-row').on('click', function() {
+            var idReporte = $(this).data('id');
+
+            // Crear un formulario y enviarlo para respetar el método POST
+            var form = $('<form action="/deccosalud/detalles" method="POST">' +
+                    '<input type="hidden" name="idReporte" value="' + idReporte + '"></form>');
+            $('body').append(form);
+            form.submit();
+        });
+
+        // Filtrar reportes por fecha seleccionada
+        $('#buscadorFecha').on('change', function() {
+            var selectedDate = $(this).val();
+            $('#tablaReportes tbody tr').each(function() {
+                var reportDate = $(this).find('td:first').text(); // Obtener la fecha del reporte
+                $(this).toggle(reportDate === selectedDate); // Mostrar solo las filas con la fecha seleccionada
+            });
+        });
+    });
+</script>
 </body>
 </html>

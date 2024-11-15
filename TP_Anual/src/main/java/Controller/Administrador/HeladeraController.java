@@ -7,6 +7,7 @@ import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.APIPuntos.Punto;
@@ -78,6 +79,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         Map<String, Object> model = this.basicModel(context);
 
+
+        model.put("esHumano", this.getUsuario().getTipoUsuario().equals(RolUsuario.FISICO));
         model.put("heladeras",heladeraList);
 
 

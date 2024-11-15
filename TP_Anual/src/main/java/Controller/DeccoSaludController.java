@@ -33,6 +33,17 @@ public class DeccoSaludController extends Controller {
         context.render("DeccoSaludAPI/personasVulnerablesDeccoSalud.hbs", model);
     }
 
+    public void mostrarReporte(Context context) throws IOException {
+        this.estaLogueado(context);
+
+        String idReporte = context.formParam("idReporte");
+        ReporteSalud reporte = (ReporteSalud) repoSalud.buscar(Integer.parseInt(idReporte));
+
+        Map<String, Object> model = this.basicModel(context);
+        model.put("reporte", reporte);
+
+        context.render("DeccoSaludAPI/detallesReporteSalud.hbs", model);
+    }
 
 }
 
