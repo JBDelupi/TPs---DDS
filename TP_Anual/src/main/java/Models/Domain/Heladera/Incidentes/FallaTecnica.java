@@ -37,7 +37,7 @@ public class FallaTecnica extends Incidente {
     private List<RegistroVisitaTecnica> visitasTecnicas;
 
 
-    @Transient
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaSolucionado;
 
     public FallaTecnica() {
