@@ -3,10 +3,14 @@ package Service.DeccoSaludAPI.Mapper;
 import Service.DeccoSaludAPI.DTO.Reporte.Informacion;
 import Service.DeccoSaludAPI.DTO.Reporte.ReporteSalud;
 import Service.DeccoSaludAPI.DTO.RespuestaDTO;
+import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Getter
 public class ReporteMapper {
     private ReporteSalud reporteSalud;
 
@@ -16,6 +20,7 @@ public class ReporteMapper {
     }
 
     public void init(List<RespuestaDTO> respuestas) {
+        reporteSalud.setFecha(LocalDate.now());
         for(RespuestaDTO respuesta : respuestas) {
             reporteSalud.agregarInformacion(toInfo(respuesta));
         }

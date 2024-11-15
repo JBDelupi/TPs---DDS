@@ -21,7 +21,7 @@ public class ReporteSalud {
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reporte_id")
     List<Informacion> respuestas;
 

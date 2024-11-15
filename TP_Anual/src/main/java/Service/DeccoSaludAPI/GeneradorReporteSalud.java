@@ -27,9 +27,10 @@ public class GeneradorReporteSalud {
         }
          List< RespuestaDTO> r = ServicioDeccoSaludAPI.getInstance().obtenerPersonasVulnerables(listaEnviar);
 
+        System.out.println(r.size());
         ReporteMapper reporteMapper = new ReporteMapper(r);
 
-        repo.agregar(reporteMapper);
+        repo.agregar(reporteMapper.getReporteSalud());
 
     }
 
