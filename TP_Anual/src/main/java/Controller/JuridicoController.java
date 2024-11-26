@@ -78,7 +78,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .tipoJuridico(tipoJuridico)
                 .correoElectronico(correo)
                 .credencialDeAcceso(credencialDeAcceso)
-                .rol(new Colaborador())
+                .rol(new Colaborador(0.0))
                 .sede(direccion)
                 .construir();
 
