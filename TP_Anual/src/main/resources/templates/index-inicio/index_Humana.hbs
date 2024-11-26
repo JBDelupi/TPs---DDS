@@ -28,167 +28,166 @@
                 <h1 class="display-3 text-dark text-center">Acciones Disponibles</h1>
             </div>
         </div>
-    </div>
 
 {{#if colaborador}}
-    <div class="blog_section_2 mt-5">
-    <div class="row justify-content-center">
-        <!-- Cuadros para todos -->
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
-            <a href="/contribuciones" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-hand-holding-heart text-primary mb-4"></i>
-                        <h5 class="text-dark">Generar Contribución</h5>
-                        <p class="text-dark">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
+        <div class="blog_section_2 mt-5">
+            <div class="row justify-content-center">
+            <!-- Cuadros para todos -->
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                <a href="/contribuciones" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-hand-holding-heart text-primary mb-4"></i>
+                            <h5 class="text-dark">Generar Contribución</h5>
+                            <p class="text-dark">Puede realizar una contribución única o periódica para apoyar nuestras causas.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
-            <a href="/heladeras" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
-                        <h5 class="text-dark">Ver Puntos Heladeras</h5>
-                        <p class="text-dark">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                <a href="/heladeras" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
+                            <h5 class="text-dark">Ver Puntos Heladeras</h5>
+                            <p class="text-dark">Consulta los puntos donde puedes encontrar heladeras cercanas para donar o retirar viandas.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
-            <a href="/productos" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-gift text-primary mb-4"></i>
-                        <h5 class="text-dark">Canjear un Producto</h5>
-                        <p class="text-dark">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.3s">
+                <a href="/productos" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-gift text-primary mb-4"></i>
+                            <h5 class="text-dark">Canjear un Producto</h5>
+                            <p class="text-dark">Canjea tus puntos acumulados por productos o servicios disponibles en nuestra plataforma.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
-            <a href="/{{rol}}/{{usuario.id}}/contribuciones" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
-                        <h5 class="text-dark">Ver mis Contribuciones</h5>
-                        <p class="text-dark">Consulta tu historial de contribuciones.</p>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
+                <a href="/{{rol}}/{{usuario.id}}/contribuciones" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-map-marker-alt text-primary mb-4"></i>
+                            <h5 class="text-dark">Ver mis Contribuciones</h5>
+                            <p class="text-dark">Consulta tu historial de contribuciones.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
-            <a href="/registro/incidente" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-exclamation-circle text-primary mb-4"></i>
-                        <h5 class="text-dark">Generar Incidente</h5>
-                        <p class="text-dark">Registra un nuevo incidente o situación que requiera atención.</p>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
+                <a href="/registro/incidente" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-exclamation-circle text-primary mb-4"></i>
+                            <h5 class="text-dark">Generar Incidente</h5>
+                            <p class="text-dark">Registra un nuevo incidente o situación que requiera atención.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
 
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
-            <a href="/incidentes/seguimiento" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-search text-primary mb-4"></i>
-                        <h5 class="text-dark">Seguimiento Incidente</h5>
-                        <p class="text-dark">Realiza el seguimiento de un incidente registrado previamente.</p>
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.1s">
+                <a href="/incidentes/seguimiento" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-search text-primary mb-4"></i>
+                            <h5 class="text-dark">Seguimiento Incidente</h5>
+                            <p class="text-dark">Realiza el seguimiento de un incidente registrado previamente.</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-            <a href="/deccosalud" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-stethoscope text-primary mb-4"></i>
-                        <h5 class="text-dark">Decco Salud</h5>
-                        <p class="text-dark">Ve reportes que brindan información sobre la ubicación de las personas vulnerables.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-            <a href="/{{rol}}/{{usuario.id}}/historialcanjes" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-history text-primary mb-4"></i>
-                        <h5 class="text-dark">Ver Historial de Canjes</h5>
-                        <p class="text-dark">Consulta el historial de productos o servicios canjeados con tus puntos.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-{{/if}}
-
-    <!-- Acciones Generales -->
-    <div class="row justify-content-center">
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-            <a href="/reportes" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
-                        <h5 class="text-dark">Ver Reportes</h5>
-                        <p class="text-dark">Crea reportes que brindan información sobre heladeras, colaboradores y demás.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.4s">
-            <a href="/asignar-rol" class="text-decoration-none w-100">
-                <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                    <div class="p-4">
-                        <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
-                        <h5 class="text-dark">Asignar nuevo rol</h5>
-                        <p class="text-dark">Póngase un nuevo rol para nuestra comunidad.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <!-- Acciones exclusivas para Técnicos -->
-        {{#if tecnico}}
+                </a>
+            </div>
             <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
-                <a href="/tecnico/visita" class="text-decoration-none w-100">
+                <a href="/deccosalud" class="text-decoration-none w-100">
                     <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
-                            <h5 class="text-dark">Generar visita técnica</h5>
-                            <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
+                            <i class="fa fa-3x fa-stethoscope text-primary mb-4"></i>
+                            <h5 class="text-dark">Decco Salud</h5>
+                            <p class="text-dark">Ve reportes que brindan información sobre la ubicación de las personas vulnerables.</p>
                         </div>
                     </div>
                 </a>
             </div>
 
-            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.3s">
-                <a href="/incidentes" class="text-decoration-none w-100">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                <a href="/{{rol}}/{{usuario.id}}/historialcanjes" class="text-decoration-none w-100">
                     <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
-                            <h5 class="text-dark">Consultar estado de fallas</h5>
-                            <p class="text-dark">Visualice las fallas asignadas y consulte su estado.</p>
+                            <i class="fa fa-3x fa-history text-primary mb-4"></i>
+                            <h5 class="text-dark">Ver Historial de Canjes</h5>
+                            <p class="text-dark">Consulta el historial de productos o servicios canjeados con tus puntos.</p>
                         </div>
                     </div>
                 </a>
             </div>
-        {{/if}}
+    {{/if}}
+
+        <!-- Acciones Generales -->
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                <a href="/reportes" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-file-alt text-primary mb-4"></i>
+                            <h5 class="text-dark">Ver Reportes</h5>
+                            <p class="text-dark">Crea reportes que brindan información sobre heladeras, colaboradores y demás.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.4s">
+                <a href="/asignar-rol" class="text-decoration-none w-100">
+                    <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                        <div class="p-4">
+                            <i class="fa fa-3x fa-user-cog text-primary mb-4"></i>
+                            <h5 class="text-dark">Asignar nuevo rol</h5>
+                            <p class="text-dark">Póngase un nuevo rol para nuestra comunidad.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Acciones exclusivas para Técnicos -->
+            {{#if tecnico}}
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.2s">
+                    <a href="/tecnico/visita" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
+                                <h5 class="text-dark">Generar visita técnica</h5>
+                                <p class="text-dark">Genere un reporte en donde detalle el resultado de la visita que realizó.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mt-4" data-wow-delay="0.3s">
+                    <a href="/incidentes" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fa fa-3x fa-exclamation-triangle text-primary mb-4"></i>
+                                <h5 class="text-dark">Consultar estado de fallas</h5>
+                                <p class="text-dark">Visualice las fallas asignadas y consulte su estado.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {{/if}}
+            </div>
+        </div>
+    </div>
     </div>
 </div>
-</div>
-
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
-
 </body>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
