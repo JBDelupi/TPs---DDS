@@ -212,8 +212,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         long heladerasActivas = heladeras.size();
 
-        System.out.println(heladerasActivas);
-
         Map<String, Object> model = new HashMap<>();
         model.put("cantidadHeladerasActivas", heladerasActivas);
 
