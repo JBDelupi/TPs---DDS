@@ -112,7 +112,7 @@ public class HumanoController extends Controller  {
         this.asignarParametros(context);
         repo.agregar(this.usuario);
 
-        context.redirect("/index/fisico");
+        context.redirect("/persona/fisico/" + usuario.getId());
     }
 
     public void asignarParametros(Context context){

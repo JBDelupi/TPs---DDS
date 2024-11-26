@@ -114,7 +114,7 @@ public class Heladera {
         this.capacidadActual --;
         this.registrarViandaDepositada();
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
-        if ( capacidadDeViandas == viandas.size() ) {
+        if ( this.capacidadActual == 0 ) {
             this.estaLlena = true;
         }
     }
@@ -130,7 +130,7 @@ public class Heladera {
         }
 
         Vianda vianda = viandas.remove(0);
-        capacidadActual++;
+        this.capacidadActual++;
 
         sensorMovimiento.chequear();
         this.registrarViandaRetirada();
