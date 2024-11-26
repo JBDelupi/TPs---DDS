@@ -207,4 +207,18 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     }
 
 
+    public void mostrarCantidadHeladerasActivas(Context context) {
+        List<Heladera> heladeras = repo.buscarTodos();
+
+        long heladerasActivas = heladeras.size();
+
+        System.out.println(heladerasActivas);
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("cantidadHeladerasActivas", heladerasActivas);
+
+        context.render("main/index.hbs", model);
+    }
+
+
 }

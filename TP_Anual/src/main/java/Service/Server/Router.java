@@ -11,8 +11,7 @@ import static io.javalin.apibuilder.ApiBuilder.post;
 
 public class Router {
     public static void init(){
-
-        Server.app().get("/",context -> context.render("main/index.hbs"));
+        //Server.app().get("/",context -> context.render("main/index.hbs")); // esto ya esta abajo en controller heladera
         Server.app().get("/contact",context -> context.render("main/Contacto.hbs"));
         Server.app().get("/team",context -> context.render("main/team.hbs"));
         Server.app().get("/about",context -> context.render("main/about.hbs"));
@@ -54,6 +53,7 @@ public class Router {
             get("/juridico/{id}/mis-heladeras", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarMisHeladeras, RolUsuario.JURIDICO);
             get("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarEstadoHeladera);
             post("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::cambiarEstadoHeladera);
+            get("/", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarCantidadHeladerasActivas);
         });
 
         Server.app().routes(()->{
