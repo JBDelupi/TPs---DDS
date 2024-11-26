@@ -8,7 +8,8 @@ public class AppHandlers {
             new AccessDeniedHandler(),
             new InvalidPasswordHandler(),
             new UnauthorizeHandler(),
-            new NoSuchFieldExceptionHandler()
+            new NoSuchFieldExceptionHandler(),
+            new PuntosInsuficientesHandler()
     };
 
     public static void applyHandlers(Javalin app) {

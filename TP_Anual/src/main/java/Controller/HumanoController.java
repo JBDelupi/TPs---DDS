@@ -68,7 +68,7 @@ public class HumanoController extends Controller  {
                 .direccion(direccion)
                 .construir();
 
-        Colaborador colaborador = new Colaborador();
+        Colaborador colaborador = new Colaborador(0.0);
         TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(fisico);
         colaborador.setTarjeta(tarjetaAccesos);
         fisico.agregarRol(colaborador);

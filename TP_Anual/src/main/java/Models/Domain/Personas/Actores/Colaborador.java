@@ -7,6 +7,7 @@ import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProduct
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("Colaborador")
+@NoArgsConstructor
 public class Colaborador extends Rol {
 
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
@@ -35,12 +37,13 @@ public class Colaborador extends Rol {
     @Column(name = "cantidad_viandas_donadas")
     private int cantidadViandasDonadas;
 
-    public Colaborador(){
+    public Colaborador(Double puntaje){
         this.tipo = TipoRol.COLABORADOR;
+        this.puntaje = puntaje;
         this.contribuciones = new ArrayList<>();
         this.historialCanje = new ArrayList<>();
-        this.puntaje = 0.0;
     }
+
 
     public void agregarNuevaDonacion(Contribucion unaDonacion){
         this.contribuciones.add(unaDonacion);
@@ -49,7 +52,7 @@ public class Colaborador extends Rol {
     }
 
     private void sumarPuntaje(Contribucion unaDonacion){
-        puntaje += unaDonacion.generarPuntaje();
+        this.puntaje += unaDonacion.generarPuntaje();
     }
 
 
