@@ -1,5 +1,5 @@
 package Controller;
-
+import Service.Validador.Encriptador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.RepoLogin;
 import Service.Validador.CredencialDeAcceso;
@@ -31,6 +31,11 @@ public class LoginController extends Controller {
     public void manejarInicioSesion(Context context) {
         String nombreUsuario = context.formParam(USERNAME_PARAM);
         String contrasenia = context.formParam(PASSWORD_PARAM);
+
+
+        // PARA ENCRIPTAR LA CONTRA
+        // Encriptador encriptador = new Encriptador();
+        //String contraseniaEncriptada = encriptador.encriptarMD5(contrasenia);
 
         Persona usuario = (Persona) repo.credenciales(new CredencialDeAcceso(nombreUsuario,contrasenia));
 

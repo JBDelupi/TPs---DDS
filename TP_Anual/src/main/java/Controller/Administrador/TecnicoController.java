@@ -12,7 +12,7 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.Punto;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
-
+import Service.Validador.Encriptador;
 import java.util.Map;
 import java.util.random.RandomGenerator;
 
@@ -35,10 +35,14 @@ public class TecnicoController extends Controller {
         String longitud = context.formParam("longitud");
         String radio = context.formParam("radio");
         String correo = context.formParam("correo");
+        String contrasenia = context.formParam("contrasenia");
+
+//        Encriptador encriptador = new Encriptador();
+//        String contraseniaEncriptada = encriptador.encriptarMD5(contrasenia);
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
-                .contrasenia(context.formParam("contrasenia"))
+                .contrasenia(contrasenia)
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
 

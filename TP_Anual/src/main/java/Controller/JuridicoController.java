@@ -8,6 +8,7 @@ import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.RepoPersona;
+import Service.Validador.Encriptador;
 import Service.Server.ICrudViewsHandler;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
@@ -59,6 +60,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         String calle = context.formParam("calle");
         String numero = context.formParam("numero");
         String localidad = context.formParam("localidad");
+        String contrasenia = context.formParam("contrasenia");
 
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);
@@ -66,9 +68,12 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         direccion.setLocalidad(localidad);
 
 
+        //Encriptador encriptador = new Encriptador();
+        //String contraseniaEcriptada = encriptador.encriptarMD5(contrasenia);
+
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
-                .contrasenia(context.formParam("contrasenia"))
+                .contrasenia(contrasenia)
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
 

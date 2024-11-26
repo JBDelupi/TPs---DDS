@@ -10,6 +10,7 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.RepoPersona;
 
+import Service.Validador.Encriptador;
 import Service.Notificacion.Notificacion;
 import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
@@ -44,10 +45,15 @@ public class HumanoController extends Controller  {
         String numero = context.formParam("numero");
         String localidad = context.formParam("localidad");
         TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
+        String contrasenia = context.formParam("contrasenia");
+        Encriptador encriptador = new Encriptador();
+
+        // PARA ENCRIPTAR LA CONTRASEÑA
+        //String contraseniaEnciptada = encriptador.encriptarMD5(contraseniaSinEncriptar);
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
-                .contrasenia(context.formParam("contrasenia"))
+                .contrasenia(contrasenia)
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
 
