@@ -16,7 +16,6 @@ public abstract class Controller {
     Persona usuario;
 
 
-
     public void estaLogueado(Context context){
         if (context.sessionAttribute("usuario") == null) {
             throw new AccessDeniedException();

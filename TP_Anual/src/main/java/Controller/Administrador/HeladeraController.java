@@ -212,9 +212,15 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         long heladerasActivas = heladeras.size();
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("cantidadHeladerasActivas", heladerasActivas);
+        Map<String, Object> model;
 
+        if (context.sessionAttribute("usuario") == null) {
+            model = new HashMap<>();
+        } else {
+            estaLogueado(context);
+            model = this.basicModel(context);
+        }
+        model.put("cantidadHeladerasActivas", heladerasActivas);
         context.render("main/index.hbs", model);
     }
 
