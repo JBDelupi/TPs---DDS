@@ -1,6 +1,8 @@
 package Controller.Administrador;
 
 import Controller.Actores.RolUsuario;
+import Models.Domain.Heladera.Incidentes.FallaTecnica;
+import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Models.Domain.Heladera.Suscripciones.*;
 import Controller.Controller;
 import Models.Domain.Builder.HeladeraBuilder;
@@ -159,7 +161,50 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         context.redirect("/heladeras/"+id);
     }
 
+    public void mostrarMisHeladeras(Context context){
+        this.estaLogueado(context);
 
+        List<Heladera> heladeraList = repo.buscarMisHeladeras(getUsuario().getId());
+
+        Map<String, Object> model = this.basicModel(context);
+
+        model.put("heladeras",heladeraList);
+
+        context.render("heladera/mis-heladeras.hbs", model);
+    }
+
+
+    public void mostrarEstadoHeladera(Context context) {
+        this.estaLogueado(context);
+
+        String idHeladera = context.pathParam("id");
+
+        Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(idHeladera));
+
+        List<FallaTecnica> fallasTecnicas = repo.buscarFallasPorHeladera(Integer.parseInt(idHeladera));
+
+        Map<String, Object> model = this.basicModel(context);
+        model.put("heladera", heladera);
+        model.put("fallasTecnicas", fallasTecnicas);
+
+        context.render("heladera/estadoHeladera.hbs", model);
+    }
+
+    public void cambiarEstadoHeladera(Context context) {
+        this.estaLogueado(context);
+
+        String idHeladera = context.pathParam("id");
+
+        Heladera heladera = (Heladera) repo.buscar(Integer.parseInt(idHeladera));
+
+        boolean nuevoEstado = Boolean.parseBoolean(context.formParam("estado"));
+
+        heladera.setAbierto(nuevoEstado);
+        repo.modificar(heladera);
+
+        context.redirect("/heladeras/" + idHeladera + "/estado");
+
+    }
 
 
 }

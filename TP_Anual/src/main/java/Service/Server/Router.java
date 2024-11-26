@@ -51,7 +51,9 @@ public class Router {
             post("/heladeras/{id}/desuscribir",((HeladeraController) FactoryController.controller("heladeras"))::update);
             get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
             post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
-
+            get("/juridico/{id}/mis-heladeras", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarMisHeladeras, RolUsuario.JURIDICO);
+            get("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarEstadoHeladera);
+            post("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::cambiarEstadoHeladera);
         });
 
         Server.app().routes(()->{

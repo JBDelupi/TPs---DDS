@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estado de la Heladera</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <style>
+        .visitas-row {
+            background-color: #f1f1f1;
+        }
+
+        .visitas-header {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        .success-border {
+            border: 2px solid green !important;
+        }
+
+        .updated-message {
+            color: green;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<div class="container mt-5">
+    <h1 class="text-center">Estado de la Heladera</h1>
+    <h3 class="text-center">ID de la Heladera: {{heladera.id}}</h3>
+    <div class="text-center mt-4">
+        <form id="estadoForm" action="/heladeras/{{heladera.id}}/estado" method="POST" class="d-inline-block">
+            <div class="form-group">
+                <label for="estadoHeladera" class="form-label fw-bold">Estado</label>
+                <select id="estadoHeladera" name="estado" class="form-select" required>
+                    <option value="true" {{#if heladera.abierto}}selected{{/if}}>Abierto</option>
+                    <option value="false" {{#unless heladera.abierto}}selected{{/unless}}>Cerrado</option>
+                </select>
+                <span id="updateMessage" class="updated-message" style="display: none;">¡Actualizado!</span>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Actualizar Estado</button>
+        </form>
+    </div>
+    {{#if fallasTecnicas}}
+        <div class="table-responsive mt-4">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID de Falla</th>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each fallasTecnicas}}
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.fecha}}</td>
+                        <td>{{this.descripcion}}</td>
+                        <td>{{#if this.solucionado}}Cerrada{{else}}Abierta{{/if}}</td>
+                    </tr>
+                    {{#if this.visitasTecnicas}}
+                        <tr class="visitas-header">
+                            <td colspan="4">Visitas Técnicas:</td>
+                        </tr>
+                        <tr class="visitas-row">
+                            <td colspan="4">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>ID de Visita</th>
+                                        <th>Fecha</th>
+                                        <th>Descripción</th>
+                                        <th>Resultado</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each this.visitasTecnicas}}
+                                        <tr>
+                                            <td>{{this.id}}</td>
+                                            <td>{{this.fecha}}</td>
+                                            <td>{{this.descripcion}}</td>
+                                            <td>{{#if this.visitaExitosa}}SOLUCIONADO{{else}}NO SOLUCIONADO{{/if}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {{else}}
+                        <tr class="visitas-row">
+                            <td colspan="4" class="text-center">No hay visitas técnicas registradas para esta falla.</td>
+                        </tr>
+                    {{/if}}
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <p class="text-center mt-4">No hay fallas registradas para esta heladera.</p>
+    {{/if}}
+</div>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.getElementById("estadoForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevenir el envío automático del formulario
+
+        // Cambiar el estado visualmente
+        const selector = document.getElementById("estadoHeladera");
+        const message = document.getElementById("updateMessage");
+
+        // Simular una actualización exitosa
+        fetch(this.action, {
+            method: this.method,
+            body: new URLSearchParams(new FormData(this)),
+        })
+                .then(response => {
+                    if (response.ok) {
+                        // Mostrar borde verde en el selector
+                        selector.classList.add("success-border");
+
+                        // Mostrar mensaje de "¡Actualizado!"
+                        message.style.display = "inline";
+
+                        // Ocultar el mensaje después de 3 segundos
+                        setTimeout(() => {
+                            selector.classList.remove("success-border");
+                            message.style.display = "none";
+                        }, 3000);
+                    } else {
+                        alert("Error al actualizar el estado. Por favor, intente nuevamente.");
+                    }
+                })
+                .catch(error => {
+                    alert("Ocurrió un error al intentar actualizar el estado.");
+                    console.error(error);
+                });
+    });
+</script>
+
+</body>
+</html>

@@ -25,7 +25,7 @@ public class RegistroVisitaTecnica {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Transient // TIEMPO
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fecha;
 
     @Transient

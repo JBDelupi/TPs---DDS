@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Heladeras</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <style>
+        .heladera-row {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+{{> templates/partials/headerColaborador rol=rol id=id}}
+{{> templates/partials/tipografia}}
+
+<div class="container mt-5">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h5 class="section-title ff-secondary text-center text-primary fw-normal">Heladeras</h5>
+        <h1 class="text-center">Listado de Heladeras a mi Cargo</h1>
+    </div>
+
+    <!-- Verificamos si hay heladeras -->
+    {{#if heladeras}}
+        <div class="table-responsive mt-4">
+            <table id="tablaHeladeras" class="table table-bordered table-hover" style="width: 80%; margin: 0 auto;">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Calle</th>
+                    <th>Número</th>
+                    <th>Localidad</th>
+                    <th>Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Listamos las heladeras -->
+                {{#each heladeras}}
+                    <tr class="heladera-row" data-id="{{this.id}}">
+                        <td>{{this.id}}</td>
+                        <td>{{this.direccion.calle}}</td>
+                        <td>{{this.direccion.numero}}</td>
+                        <td>{{this.direccion.localidad}}</td>
+                        <td>{{#if this.abierto}}Abierta{{else}}Cerrada{{/if}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    {{else}}
+        <p class="text-center">No hay heladeras asignadas a tu cargo.</p>
+    {{/if}}
+
+</div>
+
+{{> templates/main/footer}}
+{{> templates/partials/botonBack}}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Hacer que cada fila sea clicable
+    $('.heladera-row').on('click', function() {
+        var idHeladera = $(this).data('id');
+        window.location.href = '/heladeras/' + idHeladera + '/estado';
+    });
+</script>
+
+</body>
+</html>
