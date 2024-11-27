@@ -39,7 +39,7 @@
                 <!-- Listamos las heladeras -->
                 {{#each heladeras}}
                     <tr class="heladera-row" data-id="{{this.id}}">
-                        <td>{{this.id}}</td>
+                        <td><a href="/heladeras/{{this.id}}" class="text-primary">{{this.id}}</a></td>
                         <td>{{this.direccion.calle}}</td>
                         <td>{{this.direccion.numero}}</td>
                         <td>{{this.direccion.localidad}}</td>

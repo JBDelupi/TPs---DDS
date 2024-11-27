@@ -43,7 +43,7 @@
                                 <tbody>
                                 {{#each reporte.items}}
                                     <tr>
-                                        <td>{{this.[0]}}</td> <!-- ID -->
+                                        <td><a href="/heladeras/{{this.[0]}}" class="text-primary">{{this.[0]}}</a></td>  <!-- ID -->
                                         <td>{{this.[1]}}</td> <!-- Direccion -->
                                         <td>{{this.[2]}}</td> <!-- Cantidad de Fallas -->
                                     </tr>
