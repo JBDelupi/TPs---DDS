@@ -25,9 +25,6 @@
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Bienvenido de nuevo</h5>
                 <h1 class="mb-5">Iniciar Sesión</h1>
             </div>
-            {{#if contraseniaError}}
-                <p>Contraseña o usuario Erroneo! Vuelta a intentarlo por favor :) </p>
-            {{/if}}
             <div class="row g-4">
                 <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
                     <h1 class="display-5 text-black-50 animated slideInLeft">Accede a tu cuenta</h1>
@@ -37,7 +34,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-
+                        {{#if contraseniaError}}
+                            <p class="text-primary fw-bolder mb-2 wow shake">Contraseña o usuario Erróneo! Vuelve a intentarlo por favor :)</p>
+                        {{/if}}
                         <form method="POST" action="/login">
                             <div class="row g-3">
                                 <div class="col-md-12">
