@@ -33,11 +33,7 @@ public class RepoContribucion extends Dao{
                 .getResultList();
     }
 
-    public List<Heladera> queryHeladera() {
-        return EntityManagerHelper.getEntityManager()
-                .createQuery("FROM Heladera ", Heladera.class)
-                .getResultList();
-    }
+
 
 
 

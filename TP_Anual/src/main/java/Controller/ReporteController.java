@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ReporteController extends Controller {
 
-    private RepoReporte repo;
+    private final RepoReporte repo;
 
     public ReporteController(RepoReporte repo) {
         this.repo = repo;

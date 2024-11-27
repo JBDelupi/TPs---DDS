@@ -11,7 +11,7 @@ public class LoginController extends Controller {
     private static final String USER_SESSION_KEY = "usuario";
     private static final String USERNAME_PARAM = "usuario";
     private static final String PASSWORD_PARAM = "password";
-    private RepoLogin repo;
+    private final RepoLogin repo;
 
     public LoginController(RepoLogin repo){
         this.repo =  repo;

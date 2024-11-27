@@ -3,6 +3,7 @@ package Controller;
 import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyFactory;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoContribucion;
@@ -36,7 +37,9 @@ public class ContribucionController extends Controller {
     public void create(Context context) {
         this.estaLogueado(context);
         String tipoContribucion = context.queryParam("tipo");
-        context.render("Formas-de-contribucion/"+tipoContribucion+".hbs", this.obtenerModeloContribucion(tipoContribucion,context));
+        Map<String, Object> model = this.basicModel(context);
+        ContribucionStrategyFactory.getStrategy(tipoContribucion).agregarModelo(model,repo);
+        context.render("Formas-de-contribucion/"+tipoContribucion+".hbs",model);
 
     }
 
@@ -71,43 +74,7 @@ public class ContribucionController extends Controller {
     }
 
 
-    private Map<String, Object> obtenerModeloContribucion(String tipoContribucion, Context context) {
-        Map<String,Object> model = this.basicModel(context);
-        switch (tipoContribucion) {
-            case "donarViandas" -> {
-                model.put("heladeras", repo.queryHeladeraDisponible());
-                return model;
-            }
-            case "distribucionViandas" -> {
-                List<Heladera> heladeraList = repo.queryHeladera();
 
-                List<Heladera> heladerasConAlimentos = new ArrayList<>();
-                List<Heladera> heladerasDisponibles = new ArrayList<>();
-
-                for (Heladera heladera : heladeraList) {
-                    if (!heladera.getViandas().isEmpty()) {
-                        heladerasConAlimentos.add(heladera);
-                    }
-                    if (!heladera.getEstaLlena()) {
-                        heladerasDisponibles.add(heladera);
-                    }
-                }
-
-                model.put("heladeras", heladerasConAlimentos);
-                model.put("heladerasDisponible", heladerasDisponibles);
-
-                return model;
-            }
-            case "hacerseCargoHeladera" -> {
-                model.put("heladeras", repo.queryHeladeraDuenia());
-                return model;
-            }
-        }
-
-
-        return model;
-
-    }
 
 
 }

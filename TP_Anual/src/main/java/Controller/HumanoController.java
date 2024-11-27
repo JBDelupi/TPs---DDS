@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class HumanoController extends Controller  {
 
-    private RepoPersona repo;
+    private final RepoPersona repo;
 
     public HumanoController(RepoPersona repo) {
         this.repo = repo;

@@ -145,7 +145,6 @@
                                     <label for="suscripcion">Suscripción</label>
                                     <form action="/heladeras/{{heladera.id}}/desuscribir" method="POST" class="text-center">
                                         <input type="hidden" name="heladeraId" value="{{heladera.id}}">
-                                        <input type="hidden" name="idColaborador" value="{{usuario.id}}">
                                         <input type="hidden" name="idSuscripcion" value="{{this.id}}">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>
                                     </form>

@@ -19,10 +19,11 @@ public class Router {
         Server.app().get("/recuperar",context -> context.render("sesion/recuperar.hbs"));
 
 
-
         Server.app().get("/Asignar-rol",context -> context.render("asignarRol/asignar-rol.hbs"));
         Server.app().get("/Asignar-rol/tecnico",context -> context.render("asignarRol/solicitud-tecnico.hbs"));
         Server.app().get("/Asignar-rol/solicitudExitosa",context -> context.render("asignarRol/solicitud-enviada.hbs"));
+
+
 
 
         Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
@@ -74,7 +75,7 @@ public class Router {
 
         Server.app().routes(()->{
             get("/deccosalud",((DeccoSaludController)FactoryController.controller("deccosalud"))::index);
-            post("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte);
+            get("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte);
         });
 
         Server.app().routes(()->{

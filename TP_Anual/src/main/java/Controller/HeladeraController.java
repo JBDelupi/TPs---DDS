@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {
 
-    private RepoHeladera repo;
+    private final RepoHeladera repo;
 
     public HeladeraController(RepoHeladera repo){
         this.repo = repo;
@@ -75,10 +75,9 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         List<Heladera> heladeraList = repo.buscarTodos(Heladera.class);
 
         Map<String, Object> model = this.basicModel(context);
-
-
         model.put("esHumano", this.getUsuario().getTipoUsuario().equals(RolUsuario.FISICO));
         model.put("heladeras",heladeraList);
+
 
 
         context.render("Heladera/heladeras.hbs", model);
@@ -95,17 +94,14 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         Heladera heladera = repo.buscar(Heladera.class,Integer.parseInt(id));
         Alerta alerta = repo.ultimaAlerta(id);
 
+        List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
+                    .filter(f -> f.getColaborador().equals(this.getUsuario()))
+                    .toList();
 
         Map<String, Object> model = this.basicModel(context);
         model.put("heladera",heladera);
         model.put("alerta",alerta);
         model.put("hayAlerta", alerta != null);
-
-
-        List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
-                    .filter(f -> f.getColaborador().equals(this.getUsuario()))
-                    .toList();
-
         model.put("suscriptores",suscriptores);
 
 
@@ -118,25 +114,14 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     @Override
     public void update(Context context) {
         this.estaLogueado(context);
+        String idSuscripcion = context.formParam("idSuscripcion");
+        String idHeladera = context.formParam("heladeraId");
 
-        String id = context.formParam("heladeraId");
+        ObserverHeladera suscripcion = repo.buscar(ObserverHeladera.class, Integer.parseInt(idSuscripcion));
 
-        Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(id));
+        repo.eliminar(suscripcion);
 
-        String idColaborador = context.formParam("idColaborador");
-
-        System.out.println(context.formParam("idSuscripcion"));
-
-        List<ObserverHeladera> observerHeladeras = heladera.getSuscriptores().stream().filter(
-                f->f.getColaborador().getId() == Integer.parseInt(idColaborador)
-        ).toList();
-
-
-        ObserverHeladera suscripcion = observerHeladeras.get(0);
-
-        heladera.quitarSubscriptor(suscripcion);
-
-        context.redirect("/heladeras/" + id);
+        context.redirect("/heladeras/" + idHeladera);
     }
 
     @Override

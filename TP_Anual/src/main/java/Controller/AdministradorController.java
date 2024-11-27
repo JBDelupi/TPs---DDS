@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class AdministradorController  extends Controller {
-    private RepoPersona repo;
+    private final RepoPersona repo;
 
     public AdministradorController(RepoPersona repo) {
         this.repo = repo;

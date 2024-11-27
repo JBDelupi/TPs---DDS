@@ -1,11 +1,14 @@
 package Models.Domain.FormasDeContribucion.Utilidades;
 
+import Models.Repository.RepoContribucion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -33,5 +36,7 @@ public abstract class Contribucion {
     }
 
     public abstract String getDetalle();
+
+
 }
 

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class TecnicoController extends Controller {
 
-    private RepoTecnico repo;
+    private final RepoTecnico repo;
 
     public TecnicoController(RepoTecnico repo){
         this.repo = repo;

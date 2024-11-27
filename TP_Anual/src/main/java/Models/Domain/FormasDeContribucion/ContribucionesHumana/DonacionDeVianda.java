@@ -3,9 +3,14 @@ package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
+import Models.Repository.RepoContribucion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
@@ -36,5 +41,9 @@ public class DonacionDeVianda extends Contribucion {
         unDetalle += ", Heladera: " + this.getHeladera().getId();
         return unDetalle;
     }
+
+
+
+
 
 }
