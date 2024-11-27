@@ -16,7 +16,8 @@
 {{> templates/partials/headerColaborador rol=rol id=id}}
 {{> templates/partials/tipografia}}
 
-<div class="container mt-5">
+<div class="container-xxl py-5">
+    <div class="container">
     <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
         <h5 class="section-title ff-secondary text-center text-primary fw-normal">Heladeras</h5>
         <h1 class="text-center">Listado de Heladeras a mi Cargo</h1>
@@ -52,14 +53,28 @@
     {{else}}
         <p class="text-center">No hay heladeras asignadas a tu cargo.</p>
     {{/if}}
-
+    </div>
 </div>
 
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
 
+</body>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../../css/lib/wow/wow.min.js"></script>
+<script src="../../css/lib/easing/easing.min.js"></script>
+<script src="../../css/lib/waypoints/waypoints.min.js"></script>
+<script src="../../css/lib/counterup/counterup.min.js"></script>
+<script src="../../css/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="../../js/scripts-header.js"></script>
+<script src="../../js/main.js"></script>
 
 <script>
     // Hacer que cada fila sea clicable
@@ -69,5 +84,5 @@
     });
 </script>
 
-</body>
+
 </html>

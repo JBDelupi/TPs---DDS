@@ -44,6 +44,104 @@
             </div>
         </div>
     </div>
+
+    <form method="POST" action="/registro/heladera">
+        <div class="row g-3">
+
+            <!-- Latitud -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <label for="latitudOption" class="form-label form-control-sm text-muted">Latitud:</label>
+                    <p id="latitudOption" class="form-control">Selecciona un punto en el mapa</p>
+                </div>
+            </div>
+
+            <!-- Longitud -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <label for="longitudOption" class="form-label form-control-sm text-muted">Longitud:</label>
+                    <p id="longitudOption" class="form-control">Selecciona un punto en el mapa</p>
+                </div>
+            </div>
+
+            <!-- Calle -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <label for="calleOption" class="form-label form-control-sm text-muted">Calle:</label>
+                    <p id="calleOption" class="form-control">Selecciona un punto en el mapa</p>
+                </div>
+            </div>
+
+            <!-- Número -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <label for="numeroOption" class="form-label form-control-sm text-muted ">Número:</label>
+                    <p id="numeroOption" class="form-control">Selecciona un punto en el mapa</p>
+                </div>
+            </div>
+
+            <!-- Localidad -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <label for="localidadOption" class="form-label form-control-sm text-muted">Localidad:</label>
+                    <p id="localidadOption" class="form-control ">Selecciona un punto en el mapa</p>
+                </div>
+            </div>
+
+
+            <!-- Campos ocultos para enviar datos -->
+            <input type="hidden" id="latitud" name="latitud">
+            <input type="hidden" id="longitud" name="longitud">
+            <input type="hidden" id="calle" name="calle">
+            <input type="hidden" id="numero" name="numero">
+            <input type="hidden" id="localidad" name="localidad">
+
+            <!-- Estado -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <select class="form-control" id="estado" name="estado" required>
+                        <option value="" disabled selected>Seleccionar Estado</option>
+                        <option value="disponible">DISPONIBLE</option>
+                        <option value="no-disponible">NO DISPONIBLE</option>
+                    </select>
+                    <label for="estado">Estado Actual</label>
+                </div>
+            </div>
+
+            <!-- Temperatura Máxima -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="temperaturaMax" name="temperaturaMax" placeholder="Temperatura Máxima" step="0.1" required>
+                    <label for="temperaturaMax">Temperatura Máxima</label>
+                </div>
+            </div>
+
+            <!-- Temperatura Mínima -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="temperaturaMin" name="temperaturaMin" placeholder="Temperatura Mínima" step="0.1" required>
+                    <label for="temperaturaMin">Temperatura Mínima</label>
+                </div>
+            </div>
+
+            <!-- Capacidad -->
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="capacidad" name="capacidad" placeholder="Capacidad heladera" step="0.1" required>
+                    <label for="capacidad">Capacidad heladera</label>
+                </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <div class="col-12">
+                <button class="btn btn-primary w-100 py-3" type="submit">Registrar Heladera</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
 </main>
 
 <!-- Footer desde tu archivo de plantillas -->
@@ -70,6 +168,7 @@
 
 <!-- Script de Leaflet para cargar el mapa -->
 <script>
+    // Crear el mapa centrado en Buenos Aires
     var map = L.map('map').setView([-34.6037, -58.3816], 13);
 
     // Cargar los tiles de OpenStreetMap
@@ -92,6 +191,63 @@
                 .addTo(map)
                 .bindPopup('Punto estratégico en [' + lat + ', ' + lng + ']');
     });
+
+    map.on('click', function (e) {
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        // Actualizar los textos visibles para latitud y longitud
+        document.getElementById('latitudOption').textContent = `Latitud seleccionada: ${lat.toFixed(6)}`;
+        document.getElementById('longitudOption').textContent = `Longitud seleccionada: ${lng.toFixed(6)}`;
+
+        // Actualizar los campos ocultos
+        document.getElementById('latitud').value = lat.toFixed(6);
+        document.getElementById('longitud').value = lng.toFixed(6);
+
+        // Llamar a la API de Nominatim para obtener más detalles
+        var url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+
+        fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.address) {
+                        var calle = data.address.road || "No disponible";
+                        var numero = data.address.house_number || "No disponible";
+                        var localidad = data.address.city || data.address.town || data.address.village || "No disponible";
+
+                        // Actualizar textos visibles
+                        document.getElementById('calleOption').textContent = `Calle seleccionada: ${calle}`;
+                        document.getElementById('numeroOption').textContent = `Número seleccionado: ${numero}`;
+                        document.getElementById('localidadOption').textContent = `Localidad seleccionada: ${localidad}`;
+
+                        // Actualizar campos ocultos
+                        document.getElementById('calle').value = calle;
+                        document.getElementById('numero').value = numero;
+                        document.getElementById('localidad').value = localidad;
+                    } else {
+                        document.getElementById('calleOption').textContent = "Calle seleccionada: No disponible";
+                        document.getElementById('numeroOption').textContent = "Número seleccionado: No disponible";
+                        document.getElementById('localidadOption').textContent = "Localidad seleccionada: No disponible";
+
+                        document.getElementById('calle').value = "No disponible";
+                        document.getElementById('numero').value = "No disponible";
+                        document.getElementById('localidad').value = "No disponible";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al obtener la información de la calle:", error);
+                    document.getElementById('calleOption').textContent = "Error al obtener datos de ubicación";
+                    document.getElementById('numeroOption').textContent = "Número seleccionado: Error";
+                    document.getElementById('localidadOption').textContent = "Localidad seleccionada: Error";
+
+                    document.getElementById('calle').value = "Error";
+                    document.getElementById('numero').value = "Error";
+                    document.getElementById('localidad').value = "Error";
+                });
+    });
+
+
 </script>
+
 </body>
 </html>
