@@ -36,7 +36,6 @@ public class ReporteController extends Controller {
 
         String tipoReporte = context.queryParam("tipo");
 
-        // busco en la base de datos los reportes del tipo seleccionado en el index.
         List<TemplateReporte> listaReportes = repo.buscarPorTipo(tipoReporte);
         Map<String, Object> model = this.basicModel(context);
         model.put("listaReportes", listaReportes);
@@ -49,12 +48,10 @@ public class ReporteController extends Controller {
     public void reporte(Context context) throws IOException {
         this.estaLogueado(context);
 
-        // en el listado de reportes por fecha, cuando le doy click a uno me pasa el id del reporte.
         String idReporte = context.formParam("idReporte");
         String tipoReporte = context.queryParam("tipo");
 
-        // busco en la base de datos el reporte del idReporte que me pasaron por formParam.
-        TemplateReporte reporte = (TemplateReporte) repo.buscar(Integer.parseInt(idReporte));
+        TemplateReporte reporte = repo.buscar(TemplateReporte.class ,Integer.parseInt(idReporte));
         Map<String, Object> model = this.basicModel(context);
         model.put("reporte",reporte);
 

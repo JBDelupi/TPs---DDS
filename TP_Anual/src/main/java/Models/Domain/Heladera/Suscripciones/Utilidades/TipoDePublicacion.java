@@ -1,4 +1,4 @@
-package Models.Domain.Heladera.Suscripciones;
+package Models.Domain.Heladera.Suscripciones.Utilidades;
 
 public enum TipoDePublicacion {
     FALTAN_N_VIANDAS,

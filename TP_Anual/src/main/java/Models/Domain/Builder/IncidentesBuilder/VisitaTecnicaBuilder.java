@@ -1,13 +1,11 @@
 package Models.Domain.Builder.IncidentesBuilder;
 
-import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
+import Models.Domain.Heladera.Incidentes.Utilidades.RegistroVisitaTecnica;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.Actores.TipoRol;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class VisitaTecnicaBuilder {
     private RegistroVisitaTecnica registroVisitaTecnica;

@@ -1,11 +1,8 @@
-package Controller.Administrador;
+package Controller;
 
-import Controller.Controller;
-import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
-import Service.ImportadorCSV.Mappers.FisicoMapper;
 import Service.ImportadorCSV.Mappers.GeneradorFisico;
 import com.opencsv.exceptions.CsvValidationException;
 import io.javalin.http.Context;
@@ -13,7 +10,6 @@ import io.javalin.http.UploadedFile;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

@@ -1,4 +1,4 @@
-package Models.Domain.Heladera.Incidentes.Utils;
+package Models.Domain.Heladera.Incidentes.Utilidades;
 
 import Models.Domain.Personas.Actores.Tecnico;
 import jakarta.persistence.*;

@@ -27,5 +27,14 @@ public class DonacionDeDinero extends Contribucion {
         this.nombre = "Donacion de Dinero";
     }
 
+    public String getDetalle(){
+        String unDetalle = "";
+        unDetalle += "Monto: " + this.getMonto().toString();
+        unDetalle += ", Frecuencia: " + this.getFrecuencia().toString();
+
+        return unDetalle;
+    }
+
+
 
 }

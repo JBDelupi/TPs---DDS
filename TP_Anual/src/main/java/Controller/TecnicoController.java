@@ -1,6 +1,5 @@
-package Controller.Administrador;
+package Controller;
 
-import Controller.Controller;
 import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
@@ -12,9 +11,8 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.Punto;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
-import Service.Validador.Encriptador;
+
 import java.util.Map;
-import java.util.random.RandomGenerator;
 
 public class TecnicoController extends Controller {
 
@@ -83,6 +81,7 @@ public class TecnicoController extends Controller {
 
 
     public void edit(Context context)  {
+
         String idUsuario = context.formParam("userId");
 
         String cuil = context.formParam("cuil");
@@ -90,8 +89,7 @@ public class TecnicoController extends Controller {
         String longitud = context.formParam("longitud");
         String radio = context.formParam("radio");
 
-
-        Persona persona = (Persona) repo.buscar( Integer.parseInt(idUsuario));
+        Persona persona =  repo.buscar(Persona.class, Integer.parseInt(idUsuario));
 
         Tecnico tecnico = new Tecnico(cuil,new AreaCobertura(new Punto(latitud,longitud),radio));
 

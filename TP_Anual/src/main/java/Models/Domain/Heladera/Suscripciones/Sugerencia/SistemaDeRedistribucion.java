@@ -15,9 +15,9 @@ public class SistemaDeRedistribucion {
 
     public static Sugerencia generarSugerencia(Integer cantidadViandas){
         int n = cantidadViandas;
-        RepoHeladera  repoHeladera = new RepoHeladera(Heladera.class);
+        RepoHeladera  repoHeladera = new RepoHeladera();
         SugerenciaCompuesta sugerencia = new SugerenciaCompuesta();
-        for(Heladera heladera : (List<Heladera>) repoHeladera.buscarTodos()){
+        for(Heladera heladera :  repoHeladera.buscarTodos(Heladera.class) ){
             if(heladera.getEstadoActual().equals(EstadoHeladera.DISPONIBLE)) {
                 int capacidadDisponible = heladera.getCapacidadDeViandas() - heladera.getViandas().size();
                 SugerenciaSimple sugerenciaSimple = new SugerenciaSimple();

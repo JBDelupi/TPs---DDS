@@ -1,8 +1,9 @@
-package Models.Domain.Tarjetas;
+package Models.Domain.Tarjetas.Trazabilidad;
 
 
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Vianda;
+import Models.Domain.Tarjetas.Utilidades.TipoAccion;
 import jakarta.persistence.*;
 import lombok.Getter;
 

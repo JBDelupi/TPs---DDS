@@ -4,6 +4,8 @@ import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.VulnerableBuilder;
 import Models.Domain.Builder.ViandaBuilder;
+import Models.Domain.Excepciones.CapacidadHeladeraException;
+import Models.Domain.Excepciones.HeladeraLlenaException;
 import Models.Domain.Excepciones.NoHaySolicitudExepction;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.Utilidades.TipoFrecuencia;
 import Models.Domain.Personas.Actores.Colaborador;
@@ -16,9 +18,8 @@ import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Producto.Producto;
 import Models.Domain.Producto.TipoRubro;
-import Models.Domain.Tarjetas.SolicitudDeApertura;
+import Models.Domain.Tarjetas.Trazabilidad.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
-import Models.Domain.Tarjetas.TipoAccion;
 import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoContribucion;
 import Service.Server.exceptions.UnauthorizedResponseException;
@@ -33,7 +34,7 @@ public class FactoryContribucion {
 
     private static FactoryContribucion instancia;
     private Persona persona;
-    private final RepoContribucion repo  = new RepoContribucion(Colaborador.class);
+    private final RepoContribucion repo  = new RepoContribucion();
     private String id;
 
     public static FactoryContribucion getInstance(){
@@ -49,7 +50,7 @@ public class FactoryContribucion {
 
     // ------------------- MÉTODOS AUXILIARES -------------------------------------//
     private Colaborador obtenerColaborador() {
-        this.persona = (Persona) repo.search(Persona.class,id);
+        this.persona = repo.buscar(Persona.class, Integer.parseInt(id));
         if (!this.persona.checkRol(TipoRol.COLABORADOR)) {
             throw new UnauthorizedResponseException();
         }
@@ -100,7 +101,7 @@ public class FactoryContribucion {
 
         repo.agregar(vianda);
 
-        Heladera heladera = (Heladera) repo.search(Heladera.class, heladeraId);
+        Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(heladeraId) );
         heladera.agregarVianda(vianda);
 
 
@@ -182,10 +183,10 @@ public class FactoryContribucion {
     private void distribucionDeViandas(CrearContribucionDTO dto) {
 
         String heladeraOrigenId = dto.getParams().get("heladeraOrigen");
-        Heladera heladeraOrigen = EntityManagerHelper.getEntityManager().find(Heladera.class,heladeraOrigenId);
+        Heladera heladeraOrigen = repo.buscar(Heladera.class, Integer.parseInt(heladeraOrigenId));
 
         String heladeraDestinoId = dto.getParams().get("heladeraDestino");
-        Heladera heladeraDestino = EntityManagerHelper.getEntityManager().find(Heladera.class,heladeraDestinoId);
+        Heladera heladeraDestino = repo.buscar(Heladera.class, Integer.parseInt(heladeraDestinoId));
 
         int cantidad = Integer.parseInt(dto.getParams().get("cantidadViandas"));
         String motivo = dto.getParams().get("motivo");
@@ -193,7 +194,14 @@ public class FactoryContribucion {
        // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
         Colaborador colaborador = this.obtenerColaborador();
 
-      //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+        //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
+
+        if(heladeraDestino.getCapacidadActual() < cantidad || heladeraOrigen.getCapacidadActual() < cantidad){
+            throw new CapacidadHeladeraException("No puede llenar la heladera o incosistencia al envio de informacion de la heladera origen");
+        }
+
+        System.out.println("Heladera origen total: " + heladeraOrigen.getViandas().size());
+        System.out.println("Heladera destino total: " + heladeraDestino.getViandas().size());
 
         for (int i = 0; i < cantidad; i++) {
             Vianda vianda = heladeraOrigen.obtenerVianda();
@@ -219,8 +227,8 @@ public class FactoryContribucion {
         String nombreCaracteristico = dto.getParams().get("nombreCaracteristico");
         String idHeladera = dto.getParams().get("heladeraId");
 
-        Heladera heladera = (Heladera) repo.search(Heladera.class,idHeladera);
-        heladera.setResponsable((Persona) repo.search(Persona.class,id));
+        Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(idHeladera));
+        heladera.setResponsable(repo.buscar(Persona.class,Integer.parseInt(id)));
 
         repo.modificar(heladera);
 

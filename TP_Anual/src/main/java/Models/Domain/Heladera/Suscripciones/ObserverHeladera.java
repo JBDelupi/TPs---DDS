@@ -1,6 +1,7 @@
 package Models.Domain.Heladera.Suscripciones;
 
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Suscripciones.Utilidades.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Persona;
 import jakarta.persistence.*;
 

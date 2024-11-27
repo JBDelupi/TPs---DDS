@@ -35,4 +35,11 @@ public class EntregaDeTarjeta extends Contribucion {
         return 1 * 2.0;
     }
 
+    public String  getDetalle(){
+        String unDetalle = "";
+        unDetalle += "Tarjeta Codigo: " + this.getTarjeta().getCodigo();
+
+        return unDetalle;
+    }
+
 }

@@ -7,13 +7,13 @@ import org.json.JSONObject;
 
 public class ActualizacionTemperaturaController implements Publicacion {
 
-    RepoHeladera repoHeladera = new RepoHeladera(Heladera.class);
+    RepoHeladera repoHeladera = new RepoHeladera();
 
     public void handleMessage(JSONObject jsonMessage) {
         String heladeraId = jsonMessage.getString("heladeraId");
         String temperatura = jsonMessage.getString("value");
 
-        Heladera heladera = (Heladera) repoHeladera.buscar(Integer.parseInt(heladeraId) );
+        Heladera heladera = repoHeladera.buscar(Heladera.class,Integer.parseInt(heladeraId) );
         heladera.setTemperaturaActual(Double.parseDouble(temperatura));
         repoHeladera.modificar(heladera);
 

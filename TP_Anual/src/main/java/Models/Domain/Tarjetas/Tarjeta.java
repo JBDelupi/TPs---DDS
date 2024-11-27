@@ -1,7 +1,7 @@
 package Models.Domain.Tarjetas;
 
-import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Tarjetas.Trazabilidad.RegistroDeUso;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

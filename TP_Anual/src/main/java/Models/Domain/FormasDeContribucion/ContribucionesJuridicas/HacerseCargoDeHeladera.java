@@ -23,4 +23,10 @@ public class HacerseCargoDeHeladera extends Contribucion {
     public HacerseCargoDeHeladera() {
         this.nombre = "Hacerse cargo de heladera";
     }
+
+    public String getDetalle(){
+        String unDetalle = " ";
+        unDetalle += "Heladera: " + this.getHeladera().getId();
+        return unDetalle;
+    }
 }

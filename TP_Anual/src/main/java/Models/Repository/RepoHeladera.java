@@ -3,7 +3,6 @@ package Models.Repository;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
-import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
 import Models.Repository.EntityManager.EntityManagerHelper;
 import jakarta.persistence.NoResultException;
 
@@ -11,9 +10,6 @@ import java.util.List;
 
 public class RepoHeladera extends Dao {
 
-    public RepoHeladera(Object type) {
-        super(type);
-    }
 
     public Alerta ultimaAlerta(String id) {
         try {
@@ -28,10 +24,6 @@ public class RepoHeladera extends Dao {
 
     }
 
-    public Object search(Class<?> objeto, String id) {
-        return EntityManagerHelper.getEntityManager().find(objeto,id);
-
-    }
 
     public List<Heladera> buscarMisHeladeras(Integer idUsuario) {
         return EntityManagerHelper.getEntityManager()

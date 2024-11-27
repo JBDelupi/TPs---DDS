@@ -14,9 +14,6 @@ import java.util.List;
 
 public class RepoContribucion extends Dao{
 
-    public RepoContribucion(Object type) {
-        super(type);
-    }
 
     public List<Contribucion> queryContribucion(String idUsuario) {
         Persona persona = EntityManagerHelper.getEntityManager().find(Persona.class, idUsuario);
@@ -43,10 +40,6 @@ public class RepoContribucion extends Dao{
     }
 
 
-    public Object search(Class<?> objeto, String id) {
-        return EntityManagerHelper.getEntityManager().find(objeto,id);
-
-    }
 
 
 }

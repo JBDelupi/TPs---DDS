@@ -30,7 +30,7 @@ public class HumanoController extends Controller  {
 
     public void create(Context context){
 
-        context.render("persona-humana/registroHumana.hbs");
+        context.render("Persona-humana/registroHumana.hbs");
 
     }
 
@@ -96,7 +96,7 @@ public class HumanoController extends Controller  {
         model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
         model.put("tecnico", usuario.checkRol(TipoRol.TECNICO));
 
-        context.render("index-inicio/index_Humana.hbs", model);
+        context.render("Index-inicio/index_Humana.hbs", model);
 
     }
 
@@ -107,7 +107,7 @@ public class HumanoController extends Controller  {
         Map<String, Object> model = this.basicModel(context);
         model.put("humano", model);
 
-        context.render("persona-humana/perfilHumana.hbs", model);
+        context.render("Persona-humana/perfilHumana.hbs", model);
     }
 
 

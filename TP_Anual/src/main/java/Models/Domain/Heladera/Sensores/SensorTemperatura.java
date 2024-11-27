@@ -1,11 +1,10 @@
 package Models.Domain.Heladera.Sensores;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
+import Models.Domain.Heladera.Incidentes.Utilidades.TipoAlerta;
 import Service.TareaDiferida.AdapterChromeTask;
 
 import Service.TareaDiferida.ChromeTask;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 

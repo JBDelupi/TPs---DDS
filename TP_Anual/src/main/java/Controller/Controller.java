@@ -20,10 +20,8 @@ public abstract class Controller {
         if (context.sessionAttribute("usuario") == null) {
             throw new AccessDeniedException();
         }
-
         String id = context.sessionAttribute("idPersona");
         this.usuario = EntityManagerHelper.getEntityManager().find(Persona.class, Integer.parseInt(id));
-
     }
 
     public Map<String, Object> basicModel(Context context){

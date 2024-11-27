@@ -1,4 +1,4 @@
-package Models.Domain.Tarjetas;
+package Models.Domain.Tarjetas.Trazabilidad;
 
 import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 import Models.Domain.Heladera.Heladera;

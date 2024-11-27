@@ -1,9 +1,10 @@
 package Models.Domain.Tarjetas;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Tarjetas.Trazabilidad.RegistroDeUso;
+import Models.Domain.Tarjetas.Trazabilidad.SolicitudDeApertura;
+import Models.Domain.Tarjetas.Utilidades.TipoAccion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

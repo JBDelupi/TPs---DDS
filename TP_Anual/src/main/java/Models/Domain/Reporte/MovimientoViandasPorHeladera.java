@@ -23,8 +23,8 @@ import java.util.List;
 public class MovimientoViandasPorHeladera  extends TemplateReporte{
 
     public  void obtenerListado() {
-        RepoHeladera repoHeladera = new RepoHeladera(Heladera.class);
-        List<Heladera> heladeras = repoHeladera.buscarTodos();
+        RepoHeladera repoHeladera = new RepoHeladera();
+        List<Heladera> heladeras = repoHeladera.buscarTodos(Heladera.class);
 
         for (Heladera heladera : heladeras) {
             String direccion = heladera.getDireccion().getCalle() + " " +

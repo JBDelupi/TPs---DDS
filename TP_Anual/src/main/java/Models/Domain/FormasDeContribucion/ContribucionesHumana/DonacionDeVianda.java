@@ -30,4 +30,11 @@ public class DonacionDeVianda extends Contribucion {
         this.nombre = "Donacion de vianda";
     }
 
+    public String getDetalle(){
+        String unDetalle = " ";
+        unDetalle += "Vianda: " + this.getVianda().getNombre();
+        unDetalle += ", Heladera: " + this.getHeladera().getId();
+        return unDetalle;
+    }
+
 }

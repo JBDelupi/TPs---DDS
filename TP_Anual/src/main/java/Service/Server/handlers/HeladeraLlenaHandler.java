@@ -10,7 +10,7 @@ public class HeladeraLlenaHandler implements IHandler{
     @Override
     public void setHandle(Javalin app) {
         app.exception(HeladeraLlenaException.class, (e, context) -> {
-            context.render("heladera/heladeraLLena.hbs");
+            context.render("heladera/heladeraLlena.hbs");
         });
     }
 }

@@ -9,7 +9,10 @@ public class AppHandlers {
             new InvalidPasswordHandler(),
             new UnauthorizeHandler(),
             new NoSuchFieldExceptionHandler(),
-            new PuntosInsuficientesHandler()
+            new PuntosInsuficientesHandler(),
+            new HeladeraLlenaHandler(),
+            new CapacidadHeladeraHandler(),
+            new SinViandasHandler()
     };
 
     public static void applyHandlers(Javalin app) {

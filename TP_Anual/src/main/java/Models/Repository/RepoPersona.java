@@ -9,9 +9,7 @@ import Models.Repository.EntityManager.EntityManagerHelper;
 import java.util.List;
 
 public class RepoPersona extends Dao {
-    public RepoPersona(Object type) {
-        super(type);
-    }
+
 
     public List<Persona> personasRol(TipoRol rol) {
         return EntityManagerHelper.getEntityManager()

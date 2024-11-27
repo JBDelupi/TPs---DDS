@@ -1,4 +1,4 @@
-package Models.Domain.Tarjetas;
+package Models.Domain.Tarjetas.Utilidades;
 
 public enum TipoAccion {
     AGREGAR,

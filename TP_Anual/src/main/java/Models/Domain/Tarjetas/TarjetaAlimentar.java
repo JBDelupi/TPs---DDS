@@ -7,6 +7,8 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Heladera.Vianda;
+import Models.Domain.Tarjetas.Trazabilidad.RegistroDeUso;
+import Models.Domain.Tarjetas.Utilidades.TipoAccion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

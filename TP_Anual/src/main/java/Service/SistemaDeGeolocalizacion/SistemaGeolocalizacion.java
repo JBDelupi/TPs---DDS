@@ -20,7 +20,7 @@ public class SistemaGeolocalizacion {
 
     private static final SistemaGeolocalizacion INSTANCE = new SistemaGeolocalizacion();
 
-    private final RepoPersona repo = new RepoPersona(Persona.class);
+    private final RepoPersona repo = new RepoPersona();
 
     // Constructor privado para Singleton
     private SistemaGeolocalizacion() {}

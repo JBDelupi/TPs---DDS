@@ -1,10 +1,6 @@
 package Models.Domain.Heladera.Sensores;
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Alerta;
-import Models.Domain.Heladera.Incidentes.Incidente;
-import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
-import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import Models.Domain.Heladera.Incidentes.Utilidades.TipoAlerta;
 
 
 public class SensorMovimiento implements Sensor {

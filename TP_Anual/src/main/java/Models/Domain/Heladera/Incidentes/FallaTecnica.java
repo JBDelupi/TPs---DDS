@@ -2,7 +2,7 @@ package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Builder.IncidentesBuilder.VisitaTecnicaBuilder;
 import Models.Domain.Heladera.EstadoHeladera;
-import Models.Domain.Heladera.Incidentes.Utils.RegistroVisitaTecnica;
+import Models.Domain.Heladera.Incidentes.Utilidades.RegistroVisitaTecnica;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.MensajeTecnico;

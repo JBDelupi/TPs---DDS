@@ -21,7 +21,7 @@ import java.util.random.RandomGenerator;
 
 public class JuridicoController extends Controller implements ICrudViewsHandler {
 
-    private RepoPersona repo;
+    private final RepoPersona repo;
 
     public JuridicoController(RepoPersona repo) {
         this.repo = repo;
@@ -36,7 +36,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
         model.put("tecnico", usuario.checkRol(TipoRol.TECNICO));
 
-        context.render("index-inicio/index_Juridica.hbs", model);
+        context.render("Index-inicio/index_Juridica.hbs", model);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
         Map<String, Object> model = this.basicModel(context);
 
-        context.render("persona-Juridica/perfilJuridico.hbs", model);
+        context.render("Persona-Juridica/perfilJuridico.hbs", model);
     }
 
     public void create(Context context){

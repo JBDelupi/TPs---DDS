@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter
 @Getter
 
@@ -36,4 +39,12 @@ public class DistribucionDeViandas extends Contribucion {
         this.nombre = "Distribucion de viandas";
     }
 
+    public String getDetalle() {
+        String unDetalle = " ";
+        unDetalle += "Heladera Origen: " + this.getHeladeraOrigen().getId();
+        unDetalle += ", Heladera Destino: " + this.getHeladeraDestino().getId();
+        unDetalle += ", Cantidad: " + this.getCantidadDeViandasAMover().toString();
+        unDetalle += ", Fecha de Donación: " + this.getFechaDeDonacion().toString();
+        return unDetalle;
+    }
 }

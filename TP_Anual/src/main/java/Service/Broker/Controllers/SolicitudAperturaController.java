@@ -5,7 +5,7 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.TipoRol;
-import Models.Domain.Tarjetas.SolicitudDeApertura;
+import Models.Domain.Tarjetas.Trazabilidad.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Service.Broker.RabbitMQAdapter;
 import org.json.JSONObject;

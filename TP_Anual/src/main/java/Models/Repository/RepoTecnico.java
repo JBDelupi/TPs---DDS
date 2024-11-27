@@ -7,10 +7,6 @@ import java.util.List;
 
 public class RepoTecnico  extends Dao {
 
-    public RepoTecnico(Object type) {
-        super(type);
-    }
-
     public List<Heladera> queryHeladera() {
         return EntityManagerHelper.getEntityManager()
                 .createQuery("FROM Heladera", Heladera.class)

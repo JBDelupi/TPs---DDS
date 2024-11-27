@@ -1,14 +1,11 @@
 package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Utils.TipoAlerta;
-import Models.Domain.Personas.Actores.Tecnico;
+import Models.Domain.Heladera.Incidentes.Utilidades.TipoAlerta;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

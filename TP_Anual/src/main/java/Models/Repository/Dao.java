@@ -7,23 +7,18 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public abstract class Dao {
-    Object type;
-
-    public Dao(Object type){
-        this.type = type;
-    }
 
 
-    public List buscarTodos() {
+
+    public <T> List<T> buscarTodos(Class<T> type) {
         CriteriaBuilder builder = EntityManagerHelper.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Object> critera = builder.createQuery((Class)this.type);
-        critera.from((Class)this.type);
-        List<Object> entities = EntityManagerHelper.getEntityManager().createQuery(critera).getResultList();
-
-        return entities;
+        CriteriaQuery<T> criteria = builder.createQuery(type);
+        criteria.from(type);
+        return EntityManagerHelper.getEntityManager().createQuery(criteria).getResultList();
     }
-    public Object buscar(int id) {
-        return EntityManagerHelper.getEntityManager().find((Class)type, id);
+
+    public <T> T buscar(Class<T> type, int id) {
+        return EntityManagerHelper.getEntityManager().find(type, id);
     }
 
 

@@ -1,4 +1,4 @@
-INSERT INTO persona (id, tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, medioDeNotificacion, nombreUsuario, numero, tipoUsuario)
+NSERT INTO persona (id, tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, medioDeNotificacion, nombreUsuario, numero, tipoUsuario)
 VALUES
     ('1', 'FISICO', 'Avenida Siempreviva 742', 'juanperez@example.com', 'securePass456', 'juanperez@example.com', '-34.6158', 'Recoleta', '-58.4354', 'Telefono', 'JP', '1133445566', 'FISICO'),
     ('2', 'FISICO', 'Mercedes 123', 'mariafernanda@gmail.com', 'password123', 'mariafernanda@gmail.com', '-34.6037', 'Palermo', '-58.3816', 'Correo', 'MFe', '1102233445', 'FISICO'),

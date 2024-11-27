@@ -1,6 +1,6 @@
 package Models.Domain.Builder;
 
-import Models.Domain.Excepciones.CapacidadHeladeraIgualACeroException;
+import Models.Domain.Excepciones.CapacidadHeladeraException;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Heladera.Heladera;
 
@@ -40,7 +40,7 @@ public class HeladeraBuilder {
 
     public Heladera construir(){
         if(this.heladera.getCapacidadDeViandas() == 0){
-            throw new CapacidadHeladeraIgualACeroException("La capacidad de viandas no puede ser cero ");
+            throw new CapacidadHeladeraException("La capacidad de viandas no puede ser cero ");
         }
         else{
             this.heladera.setCapacidadActual(this.heladera.getCapacidadDeViandas());

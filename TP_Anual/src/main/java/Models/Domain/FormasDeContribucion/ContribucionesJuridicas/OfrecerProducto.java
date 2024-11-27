@@ -25,4 +25,14 @@ public class OfrecerProducto extends Contribucion {
     public OfrecerProducto() {
         this.nombre = "Ofrecer producto";
     }
+
+    public String getDetalle(){
+        String unDetalle = " ";
+        unDetalle += "Producto: " + this.getProducto().getNombre();
+        unDetalle += ", Puntos Necesarios: " + this.getPuntosNecesarios().toString();
+        unDetalle += ", Stock: " + this.getStock().toString();
+
+        return unDetalle;
+    }
+
 }

@@ -1,6 +1,7 @@
 package Models.Repository;
 
 import Models.Repository.EntityManager.EntityManagerHelper;
+import Service.Server.exceptions.InvalidPasswordException;
 import Service.Validador.CredencialDeAcceso;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -9,11 +10,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class RepoLogin extends Dao{
-    private Object type;
 
-    public RepoLogin(Object type){
-        super(type);
-    }
 
     public Object credenciales(CredencialDeAcceso credencialDeAcceso) {
         try{
@@ -23,7 +20,7 @@ public class RepoLogin extends Dao{
                 .getSingleResult();
         }
         catch(NoResultException e){
-            return null;
+            throw new InvalidPasswordException();
         }
     }
 

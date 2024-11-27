@@ -115,19 +115,42 @@
 <script src="../../js/main.js"></script>
 
 <script>
-    // Al seleccionar una heladera de destino, establecer el límite máximo de cantidad
-    document.getElementById('heladeraDestino').addEventListener('change', function () {
-        const selectedOption = this.options[this.selectedIndex];
-        const maxCantidad = selectedOption.getAttribute('data-max');
+    // Referencias a los elementos
+    const heladeraOrigen = document.getElementById('heladeraOrigen');
+    const heladeraDestino = document.getElementById('heladeraDestino');
+    const inputCantidad = document.getElementById('cantidadViandas');
 
-        const inputCantidad = document.getElementById('cantidadViandas');
-        inputCantidad.setAttribute('max', maxCantidad);
-        inputCantidad.value = ""; // Limpia el valor de cantidad al cambiar de heladera
-    });
+    // Lógica para actualizar el máximo permitido basado en la heladera de origen y destino
+    function actualizarLimiteCantidad() {
+        let maxOrigen = 0;
+        let maxDestino = 0;
 
-    document.getElementById('cantidadViandas').addEventListener('input', function () {
-        const max = this.getAttribute('max');
-        if (parseInt(this.value) > parseInt(max)) {
+        // Límite basado en la heladera de origen
+        if (heladeraOrigen.selectedIndex > 0) {
+            const selectedOrigen = heladeraOrigen.options[heladeraOrigen.selectedIndex];
+            maxOrigen = parseInt(selectedOrigen.getAttribute('data-max')) || 0;
+        }
+
+        // Límite basado en la heladera de destino
+        if (heladeraDestino.selectedIndex > 0) {
+            const selectedDestino = heladeraDestino.options[heladeraDestino.selectedIndex];
+            maxDestino = parseInt(selectedDestino.getAttribute('data-max')) || 0;
+        }
+
+        // Determina el menor de los dos valores como límite
+        const maxPermitido = Math.min(maxOrigen, maxDestino);
+        inputCantidad.setAttribute('max', maxPermitido || 0); // Evita valores negativos o nulos
+        inputCantidad.value = ""; // Limpia el valor de cantidad
+    }
+
+    // Eventos para actualizar el máximo al cambiar de heladera
+    heladeraOrigen.addEventListener('change', actualizarLimiteCantidad);
+    heladeraDestino.addEventListener('change', actualizarLimiteCantidad);
+
+    // Verificación en tiempo real al ingresar la cantidad
+    inputCantidad.addEventListener('input', function () {
+        const max = parseInt(this.getAttribute('max')) || 0;
+        if (parseInt(this.value) > max) {
             alert(`La cantidad máxima permitida es ${max}`);
             this.value = max;
         }

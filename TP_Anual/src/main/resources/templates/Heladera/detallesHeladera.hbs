@@ -50,7 +50,7 @@
                                     <p id="estadoHeladera" class="form-control">
                                         {{#if heladera.abierto}}Abierta{{else}}Cerrada{{/if}}
                                     </p>
-                                    <label for="estadoHeladera">Estado de Heladera</label>
+                                    <label for="estadoHeladera">Estado de heladera</label>
                                 </div>
                             </div>
 
@@ -77,22 +77,22 @@
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <p id="capacidadViandas" class="form-control">{{heladera.capacidadDeViandas}}</p>
-                                    <label for="capacidadViandas">Capacidad de Viandas</label>
+                                    <label for="capacidadViandas">Capacidad de viandas</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <div id="llena" class="form-control">
                                         <i class="fas {{#if heladera.estaLlena}}fa-check-circle text-success{{else}}fa-times-circle text-danger{{/if}}" style="font-size: 1.5em;"></i>
-                                        {{#if heladera.llena}}Llena{{else}}No Llena{{/if}}
+                                        {{#if heladera.estaLlena}}Llena{{else}}No llena{{/if}}
                                     </div>
-                                    <label for="llena">Esta Llena</label>
+                                    <label for="llena">Estado de llenado</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <p id="fechaPuestaEnMarcha" class="form-control">{{heladera.fechaDePuestaEnMarcha}}</p>
-                                    <label for="fechaPuestaEnMarcha">Fecha de Puesta en Marcha</label>
+                                    <label for="fechaPuestaEnMarcha">Fecha de puesta en marcha</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -116,7 +116,7 @@
                                             <option value="quedanNViandas">Quedan N viandas disponibles</option>
                                             <option value="desperfecto">Suscribirse a desperfectos</option>
                                         </select>
-                                        <label for="opcionSuscripcion">Opciones de Suscripción</label>
+                                        <label for="opcionSuscripcion">Opciones de suscripción</label>
                                     </div>
                                 </div>
 
@@ -124,7 +124,7 @@
                                 <div class="col-md-12" id="inputNViandas" style="display: none;">
                                     <div class="form-floating">
                                         <input type="number" id="numeroViandas" name="numeroViandas" class="form-control" placeholder="Ingrese el número de viandas" min="1" required>
-                                        <label for="numeroViandas">Número de Viandas</label>
+                                        <label for="numeroViandas">Número de viandas</label>
                                     </div>
                                 </div>
 
@@ -146,6 +146,7 @@
                                     <form action="/heladeras/{{heladera.id}}/desuscribir" method="POST" class="text-center">
                                         <input type="hidden" name="heladeraId" value="{{heladera.id}}">
                                         <input type="hidden" name="idColaborador" value="{{usuario.id}}">
+                                        <input type="hidden" name="idSuscripcion" value="{{this.id}}">
                                         <button type="submit" class="btn btn-danger ms-2">Desuscribirse</button>
                                     </form>
                                 </div>

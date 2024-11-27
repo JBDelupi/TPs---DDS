@@ -1,13 +1,12 @@
 package Models.Domain.Heladera.Suscripciones;
 import Models.Domain.Heladera.Heladera;
+import Models.Domain.Heladera.Suscripciones.Utilidades.TipoDePublicacion;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Notificacion.Mensaje.Mensaje;
 import Service.Notificacion.Mensaje.MensajeSuscripcion;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.random.RandomGenerator;
 
 @Getter
 

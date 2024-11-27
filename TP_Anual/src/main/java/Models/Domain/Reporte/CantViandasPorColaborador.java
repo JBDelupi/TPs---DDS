@@ -20,7 +20,7 @@ public class CantViandasPorColaborador extends TemplateReporte {
 
     public  void obtenerListado() {
 
-        RepoPersona repoPersona = new RepoPersona(Fisico.class);
+        RepoPersona repoPersona = new RepoPersona();
         List<Fisico> fisicos = repoPersona.fisicoRol(TipoRol.COLABORADOR);
 
         for (Fisico fisico : fisicos) {

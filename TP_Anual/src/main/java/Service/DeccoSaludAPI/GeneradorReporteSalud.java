@@ -14,7 +14,7 @@ import java.util.List;
 
 public class GeneradorReporteSalud {
 
-    RepoSalud repo = new RepoSalud(TarjetaAlimentar.class);
+    RepoSalud repo = new RepoSalud();
 
 
     public void generarReporte() throws IOException {

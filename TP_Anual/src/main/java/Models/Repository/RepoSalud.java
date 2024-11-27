@@ -10,9 +10,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class RepoSalud extends Dao{
-    public RepoSalud(Object type) {
-        super(type);
-    }
 
     public List<Tarjeta> getReporte() {
 

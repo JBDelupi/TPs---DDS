@@ -1,24 +1,7 @@
 package TestEntrega2;
 
 
-import Controller.ContribucionController;
-import Models.Domain.Excepciones.LimiteDeTarjetaException;
 import Models.Domain.Excepciones.Permisos;
-import Models.Domain.Excepciones.SinViandasException;
-import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Vianda;
-import Models.Domain.Personas.Actores.*;
-import Models.Domain.Tarjetas.TarjetaAlimentar;
-import Models.Domain.Tarjetas.TipoAccion;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.time.LocalDate;
 /*
 public class TestEntrega2_Tarjeta {
     Colaborador fulano;

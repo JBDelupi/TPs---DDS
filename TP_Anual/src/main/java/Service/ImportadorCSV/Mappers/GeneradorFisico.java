@@ -13,7 +13,7 @@ public class GeneradorFisico {
 
     public static void generar(List<FisicoDTO> fisicoDTOS){
         List<Fisico> fisicos = new ArrayList<>();
-        RepoPersona repo = new RepoPersona(Persona.class);
+        RepoPersona repo = new RepoPersona();
         FisicoMapper mapper = new FisicoMapper();
         for (FisicoDTO fisicoDTO : fisicoDTOS) {
             Fisico fisico = mapper.toEntity(fisicoDTO);

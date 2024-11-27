@@ -2,9 +2,9 @@ package Service.Server;
 
 import Controller.*;
 import Controller.Actores.RolUsuario;
-import Controller.Administrador.AdministradorController;
-import Controller.Administrador.HeladeraController;
-import Controller.Administrador.TecnicoController;
+import Controller.AdministradorController;
+import Controller.HeladeraController;
+import Controller.TecnicoController;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.post;
@@ -16,9 +16,13 @@ public class Router {
         Server.app().get("/team",context -> context.render("main/team.hbs"));
         Server.app().get("/about",context -> context.render("main/about.hbs"));
         Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
-        Server.app().get("/asignar-rol",context -> context.render("asignarRol/asignar-rol.hbs"));
-        Server.app().get("/asignar-rol/tecnico",context -> context.render("asignarRol/solicitud-tecnico.hbs"));
-        Server.app().get("/asignar-rol/solicitudExitosa",context -> context.render("asignarRol/solicitud-enviada.hbs"));
+        Server.app().get("/recuperar",context -> context.render("sesion/recuperar.hbs"));
+
+
+
+        Server.app().get("/Asignar-rol",context -> context.render("asignarRol/asignar-rol.hbs"));
+        Server.app().get("/Asignar-rol/tecnico",context -> context.render("asignarRol/solicitud-tecnico.hbs"));
+        Server.app().get("/Asignar-rol/solicitudExitosa",context -> context.render("asignarRol/solicitud-enviada.hbs"));
 
 
         Server.app().get("registro/puntos",((PuntoCercanoController)FactoryController.controller("puntos"))::index,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
@@ -31,10 +35,6 @@ public class Router {
             post("/login", ((LoginController) FactoryController.controller("login"))::manejarInicioSesion);
         });
 
-
-        Server.app().routes(()->{
-            get("/recuperar", ((RecuperarController) FactoryController.controller("recuperar"))::index); //para el olvide mi contrasena
-        });
 
         Server.app().routes(()->{
             get("/index/juridico", ((JuridicoController) FactoryController.controller("juridico"))::index, RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
@@ -78,8 +78,8 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/tecnico/visita",((VisitaFallaTecnicaController)FactoryController.controller("visitaTecnica"))::create);
-            post("/tecnico/visita",((VisitaFallaTecnicaController)FactoryController.controller("visitaTecnica"))::save);
+            get("/tecnico/visita",((FallaTecnicaController)FactoryController.controller("incidente"))::edit);
+            post("/tecnico/visita",((FallaTecnicaController)FactoryController.controller("incidente"))::update);
         });
 
         Server.app().routes(()->{

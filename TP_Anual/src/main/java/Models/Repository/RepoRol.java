@@ -8,9 +8,6 @@ import java.util.List;
 
 public class RepoRol extends Dao {
 
-    public RepoRol(Object type) {
-        super(type);
-    }
 
     public List<Rol> queryRol() {
         return EntityManagerHelper.getEntityManager()
