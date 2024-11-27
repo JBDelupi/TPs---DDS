@@ -75,7 +75,7 @@ public class Router {
 
         Server.app().routes(()->{
             get("/deccosalud",((DeccoSaludController)FactoryController.controller("deccosalud"))::index);
-            get("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte);
+            post("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte);
         });
 
         Server.app().routes(()->{

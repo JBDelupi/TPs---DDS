@@ -17,7 +17,7 @@ public  class PersonaVulneableMapper {
         Fisico f = (Fisico) t.getTitular();
         List<String> ubicaciones = t.getUsos().stream().map(l->l.getHeladera().getDireccion().getLocalidad()).toList();
         PersonaVulnerableDTO dto = new PersonaVulnerableDTO();
-        dto.setNombre(f.getNombre() + f.getApellido());
+        dto.setNombre(f.getNombre() + ", " + f.getApellido());
         dto.setBarrios(ubicaciones);
 
         return dto;
