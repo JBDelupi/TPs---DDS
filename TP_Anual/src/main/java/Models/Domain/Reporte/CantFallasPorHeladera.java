@@ -27,11 +27,14 @@ public class CantFallasPorHeladera extends TemplateReporte{
             // Obtener cantidad de fallas
             String cantidadDeFallas = String.valueOf(heladera.getCantidadDeFallas());
 
+            // Obtener id
+            String id = String.valueOf(heladera.getId());
+
             // Restablecer las fallas para la siguiente ejecución
             heladera.reestablecerFallas();
 
             // Agregar a la lista de items en el formato adecuado
-            getItems().add(Arrays.asList(direccion, cantidadDeFallas));
+            getItems().add(Arrays.asList(id,direccion, cantidadDeFallas));
         }
         repoHeladera.agregar(this);
     }

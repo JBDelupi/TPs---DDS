@@ -32,11 +32,12 @@ public class MovimientoViandasPorHeladera  extends TemplateReporte{
                     heladera.getDireccion().getLocalidad();
             String cantidadDeViandasDepositadas = String.valueOf(heladera.getCantidadDeviandasDepositadas());
             String cantidadDeViandasRetiradas = String.valueOf(heladera.getCantidadDeviandasRetiradas());
+            String id = String.valueOf(heladera.getId());
             heladera.reestablecerViandasRetiradas();
             heladera.reestablecerViandasDepositadas();
 
             // Agrega cada fila como una lista de strings
-            getItems().add(Arrays.asList(direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas));
+            getItems().add(Arrays.asList(id, direccion, cantidadDeViandasDepositadas, cantidadDeViandasRetiradas));
         }
         repoHeladera.agregar(this);
 

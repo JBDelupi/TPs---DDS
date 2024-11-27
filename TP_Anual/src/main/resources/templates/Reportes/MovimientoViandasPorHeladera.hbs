@@ -35,6 +35,7 @@
                             <table class="table table-bordered table-hover">
                                 <thead class="table-primary">
                                 <tr>
+                                    <th>ID de heladera</th>
                                     <th>Dirección de la Heladera</th> <!-- Asumimos que el ID es la dirección -->
                                     <th>Viandas Colocadas</th>
                                     <th>Viandas Retiradas</th>
@@ -43,9 +44,10 @@
                                 <tbody>
                                 {{#each reporte.items}}
                                     <tr>
-                                        <td>{{this.[0]}}</td> <!-- Dirección de la Heladera -->
-                                        <td>{{this.[1]}}</td> <!-- Viandas Colocadas -->
-                                        <td>{{this.[2]}}</td> <!-- Viandas Retiradas -->
+                                        <td>{{this.[0]}}</td> <!-- ID de Heladera -->
+                                        <td>{{this.[1]}}</td> <!-- Dirección de la Heladera -->
+                                        <td>{{this.[2]}}</td> <!-- Viandas Colocadas -->
+                                        <td>{{this.[3]}}</td> <!-- Viandas Retiradas -->
                                     </tr>
                                 {{/each}}
                                 </tbody>

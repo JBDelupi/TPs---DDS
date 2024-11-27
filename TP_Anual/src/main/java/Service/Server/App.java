@@ -40,9 +40,9 @@ public class App {
         repo.agregar(admin);
      */
         // Configuración del programador de tareas
-      // ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         // Programar el reporte para ejecutarse cada 7 días
-     //   executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
+        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
 
     }
 
@@ -54,9 +54,9 @@ public class App {
 
 
 
-      //  reporte1.obtenerListado();
-      //  reporte2.obtenerListado();
-      //  reporte3.obtenerListado();
+        reporte1.obtenerListado();
+        reporte2.obtenerListado();
+        reporte3.obtenerListado();
         try {
             reporteSalud.generarReporte();
         } catch (Exception e) {

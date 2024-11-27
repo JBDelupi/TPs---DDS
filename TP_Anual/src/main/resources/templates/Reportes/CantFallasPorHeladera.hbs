@@ -35,6 +35,7 @@
                             <table class="table table-bordered table-hover">
                                 <thead class="table-primary">
                                 <tr>
+                                    <th>ID de heladera</th>
                                     <th>Direccion</th>
                                     <th>Cantidad de Fallas</th>
                                 </tr>
@@ -42,8 +43,9 @@
                                 <tbody>
                                 {{#each reporte.items}}
                                     <tr>
-                                        <td>{{this.[0]}}</td> <!-- Direccion -->
-                                        <td>{{this.[1]}}</td> <!-- Cantidad de Fallas -->
+                                        <td>{{this.[0]}}</td> <!-- ID -->
+                                        <td>{{this.[1]}}</td> <!-- Direccion -->
+                                        <td>{{this.[2]}}</td> <!-- Cantidad de Fallas -->
                                     </tr>
                                 {{/each}}
                                 </tbody>
