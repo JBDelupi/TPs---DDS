@@ -15,8 +15,10 @@ public class ContribucionStrategyFactory {
     public static ContribucionStrategy getStrategy(String tipoContribucion) {
         ContribucionStrategy strategy = strategies.get(tipoContribucion);
         if (strategy == null) {
-            throw new IllegalArgumentException("Tipo de contribución no válido: " + tipoContribucion);
+            strategy = new OtrosStrategy();
         }
+
+
         return strategy;
     }
 }
