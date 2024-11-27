@@ -38,7 +38,9 @@ public class ContribucionController extends Controller {
         this.estaLogueado(context);
         String tipoContribucion = context.queryParam("tipo");
         Map<String, Object> model = this.basicModel(context);
+
         ContribucionStrategyFactory.getStrategy(tipoContribucion).agregarModelo(model,repo);
+
         context.render("Formas-de-contribucion/"+tipoContribucion+".hbs",model);
 
     }
