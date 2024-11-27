@@ -34,11 +34,11 @@ public class FactoryContribucion {
 
     private static FactoryContribucion instancia;
     private Persona persona;
-    private final RepoContribucion repo  = new RepoContribucion();
+    private final RepoContribucion repo = new RepoContribucion();
     private String id;
 
-    public static FactoryContribucion getInstance(){
-        if(instancia == null ){
+    public static FactoryContribucion getInstance() {
+        if (instancia == null) {
             instancia = new FactoryContribucion();
         }
         return instancia;
@@ -78,8 +78,7 @@ public class FactoryContribucion {
     // ------------------- CREAR CONTRIBUCIONES -----------------------------------//
 
 
-
-    private void DonacionDeVianda(CrearContribucionDTO dto){
+    private void DonacionDeVianda(CrearContribucionDTO dto) {
 
         String nombre = dto.getParams().get("nombre");
         LocalDate fechaCaducidad = LocalDate.parse(dto.getParams().get("fechaDeCaducidad"));
@@ -101,7 +100,7 @@ public class FactoryContribucion {
 
         repo.agregar(vianda);
 
-        Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(heladeraId) );
+        Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(heladeraId));
         heladera.agregarVianda(vianda);
 
 
@@ -139,14 +138,14 @@ public class FactoryContribucion {
         String calle = dto.getParams().get("calle");
         String numero = dto.getParams().get("numero");
         String localidad = dto.getParams().get("localidad");
-        String documento  = dto.getParams().get("documento");
+        String documento = dto.getParams().get("documento");
         TipoDeDocumento tipoDocumento = TipoDeDocumento.valueOf(dto.getParams().get("tipoDocumento"));
-        LocalDate fechaNacimiento = LocalDate.parse( dto.getParams().get("fechaNacimiento"));
+        LocalDate fechaNacimiento = LocalDate.parse(dto.getParams().get("fechaNacimiento"));
         String apellido = dto.getParams().get("apellido");
         String nombre = dto.getParams().get("nombre");
 
 
-        if(dto.getParams().get("menoresACargo").equals("si")){
+        if (dto.getParams().get("menoresACargo").equals("si")) {
             cantidadMenores = Integer.parseInt(dto.getParams().get("cantidadMenores"));
         }
 
@@ -191,12 +190,12 @@ public class FactoryContribucion {
         int cantidad = Integer.parseInt(dto.getParams().get("cantidadViandas"));
         String motivo = dto.getParams().get("motivo");
 
-       // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
+        // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
         Colaborador colaborador = this.obtenerColaborador();
 
         //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
-        if(heladeraDestino.getCapacidadActual() < cantidad || heladeraOrigen.getCapacidadActual() < cantidad){
+        if (heladeraDestino.getCapacidadActual() < cantidad || heladeraOrigen.getCapacidadActual() < cantidad) {
             throw new CapacidadHeladeraException("No puede llenar la heladera o incosistencia al envio de informacion de la heladera origen");
         }
 
@@ -228,7 +227,7 @@ public class FactoryContribucion {
         String idHeladera = dto.getParams().get("heladeraId");
 
         Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(idHeladera));
-        heladera.setResponsable(repo.buscar(Persona.class,Integer.parseInt(id)));
+        heladera.setResponsable(repo.buscar(Persona.class, Integer.parseInt(id)));
 
         repo.modificar(heladera);
 
@@ -287,6 +286,7 @@ public class FactoryContribucion {
             case ENTREGA_TARJETAS -> registrarTarjeta(dto);
             case OFRECER_PRODUCTO -> ofrecerProducto(dto);
             default -> throw new IllegalArgumentException("Tipo de donación no soportado");
-        };
+        }
+        ;
     }
 }

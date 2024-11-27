@@ -38,9 +38,9 @@
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <form method="POST" action="/registro/heladera">
                             <div class="row g-3">
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <select class="form-control" id="localidad" name="localidad" required onchange="actualizarCoordenadas()">
+                                <div class="col-md-12 d-flex align-items-center">
+                                    <div class="form-floating me-2" style="flex: 1;">
+                                        <select class="form-control form-control-sm" id="localidad" name="localidad" required onchange="actualizarCoordenadas()">
                                             <option value="" disabled selected>Seleccionar Localidad</option>
                                             <option value="belgrano">Belgrano</option>
                                             <option value="palermo">Palermo</option>
@@ -74,6 +74,7 @@
                                         <label for="localidad">Localidad</label>
                                     </div>
                                 </div>
+
                                 <input type="hidden" id="latitud" name="latitud">
                                 <input type="hidden" id="longitud" name="longitud">
                                 <div class="col-md-6">
@@ -116,8 +117,23 @@
                                         <label for="capacidad">Capacidad heladera</label>
                                     </div>
                                 </div>
+                                {{#unless esAdmin}}
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-control" id="hacerseCargo" name="hacerseCargo" required>
+                                            <option value="" disabled selected>Seleccionar Opción</option>
+                                            <option value="si">Sí</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                        <label for="hacerseCargo">¿Desea hacerse cargo de la heladera?</label>
+                                    </div>
+                                </div>
+                                {{/unless}}
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Registrar Heladera</button>
+                                </div>
+                                <div class="col-12">
+                                <a href="/registro/puntos" class= "btn btn-outline-warning w-100 py-3">¡Buscar puntos estratégicos para tu heladera!</a>
                                 </div>
                             </div>
                         </form>

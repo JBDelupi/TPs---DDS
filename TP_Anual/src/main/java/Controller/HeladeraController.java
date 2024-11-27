@@ -1,12 +1,19 @@
 package Controller;
 
 import Controller.Actores.RolUsuario;
+import Controller.DTO.CrearContribucionDTO;
+import Models.Domain.Builder.ContribucionBuilder.HacerseCargoDeHeladeraBuilder;
+import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
+import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyFactory;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.Utilidades.StrategySuscripcion;
+import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.APIPuntos.Punto;
@@ -16,6 +23,7 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HeladeraController extends Controller implements ICrudViewsHandler {
 
@@ -30,11 +38,16 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     public void create(Context context) {
         this.estaLogueado(context);
 
-        context.render("Heladera/registroHeladera.hbs",this.basicModel(context));
+        Map<String, Object> model = this.basicModel(context);
+        model.put("esAdmin", this.usuario.getTipoUsuario().equals(RolUsuario.ADMINISTRADOR));
+
+        context.render("Heladera/registroHeladera.hbs",model);
     }
 
     @Override
     public void save(Context context) {
+        this.estaLogueado(context);
+
         String calle = context.formParam("calle");
         String numero = context.formParam("numero");
         String localidad = context.formParam("localidad");
@@ -43,6 +56,8 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         double temperaturaMin = Double.parseDouble(context.formParam("temperaturaMin"));
         String longitud = context.formParam("longitud");
         String latitud = context.formParam("latitud");
+        String hacerseCargoParam = context.formParam("hacerseCargo");
+        boolean hacerseCargo = "si".equalsIgnoreCase(hacerseCargoParam);
 
         System.out.println(temperaturaMax);
         System.out.println(temperaturaMin);
@@ -64,6 +79,19 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                 .construir();
 
         repo.agregar(heladera);
+
+        if(hacerseCargo){
+            Map<String, String> singleValueParams = context.formParamMap().entrySet().stream()
+                    .collect(Collectors.toMap(
+                            Map.Entry::getKey,
+                            entry -> entry.getValue().get(0)
+                    ));
+
+            singleValueParams.putIfAbsent("heladeraId", String.valueOf(heladera.getId()));
+
+            CrearContribucionDTO dto = new CrearContribucionDTO("HACERSE_CARGO_DE_HELADERA", singleValueParams);
+            FactoryContribucion.getInstance().factoryMethod( context.sessionAttribute("idPersona") , dto );
+        }
 
         context.redirect("/heladeras");
     }
