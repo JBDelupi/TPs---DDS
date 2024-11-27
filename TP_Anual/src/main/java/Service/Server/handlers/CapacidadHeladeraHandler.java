@@ -10,7 +10,7 @@ public class CapacidadHeladeraHandler extends Controller implements IHandler{
     public void setHandle(Javalin app) {
         app.exception(CapacidadHeladeraException.class, (e, context) -> {
             this.estaLogueado(context);
-            context.render("heladera/contribucionFallida.hbs",this.basicModel(context));
+            context.render("Formas-de-contribucion/contribucionFallida.hbs",this.basicModel(context));
         });
     }
 }
