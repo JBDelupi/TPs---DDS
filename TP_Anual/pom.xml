@@ -12,6 +12,9 @@
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- SonarQube -->
+        <sonar.organization>decco</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
@@ -146,7 +149,6 @@
             <artifactId>pac4j-oauth</artifactId>
             <version>5.7.1</version>
         </dependency>
-
 
     </dependencies>
 </project>
