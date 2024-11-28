@@ -39,9 +39,6 @@
 
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="/sso/login" class="py-3 d-flex align-items-center justify-content-center">
-                            <i class="lab la-google-plus-g fa-2x me-2" style="line-height: 1;"></i> Iniciar sesión con Google
-                        </a>
                         {{#if contraseniaError}}
                             <p class="text-primary fw-bolder mb-2 wow shake">Contraseña o usuario Erróneo! Vuelve a intentarlo por favor :)</p>
                         {{/if}}
@@ -61,6 +58,13 @@
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit">Iniciar Sesión</button>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn w-100 py-3 border-primary">
+                                        <a href="/sso/login" class="d-flex align-items-center w-100 justify-content-center ">
+                                            <i class="lab la-google-plus-g fa-2x me-2" style="line-height: 1;"></i> Iniciar sesión con Google
+                                        </a>
+                                    </button>
                                 </div>
                                 <div class="col-12 text-center">
                                     <button class="btn btn-secondary w-100 py-3" type="button" onclick="window.location.href='/registro';">Registrarse</button>

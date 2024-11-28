@@ -13,7 +13,6 @@ import io.javalin.http.Context;
 
 public class LoginSSOController extends Controller {
     private final RepoPersona repo;
-
     public LoginSSOController(RepoPersona repoColaborador) {
         this.repo = repoColaborador;
     }
