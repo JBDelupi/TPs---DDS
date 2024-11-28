@@ -12,9 +12,9 @@ public class UsuarioYaTieneRolHandler extends Controller implements IHandler{
     public void setHandle(Javalin app) {
         app.exception(UsuarioYaTieneRolException.class, (e, context) -> {
             this.estaLogueado(context);
-            Map<String, Object> model = new HashMap<>();
+            Map<String, Object> model = this.basicModel(context);
             model.put("yaTieneRol", true);
-            context.render("Tecnico/asignar_rol_tecnico.hbs",this.basicModel(context));
+            context.render("Tecnico/asignar_rol_tecnico.hbs",model);
         });
     }
 }

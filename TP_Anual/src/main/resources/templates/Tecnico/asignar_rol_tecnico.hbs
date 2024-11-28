@@ -29,6 +29,9 @@
             {{#if Error}}
                 <p class="text-danger text-center mt-3">ID INVÁLIDO. REINGRESE NUEVAMENTE EL ID.</p>
             {{/if}}
+            {{#if yaTieneRol}}
+                <p class="text-danger text-center mt-3">El usuario ingresado ya tiene el rol asignado.</p>
+            {{/if}}
             <form action="/registro/rol/tecnico" method="POST">
                 <div class="mb-3">
                     <label for="userId" class="form-label text-dark">ID de Usuario</label>

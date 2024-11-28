@@ -12,7 +12,8 @@ public class AppHandlers {
             new PuntosInsuficientesHandler(),
             new HeladeraLlenaHandler(),
             new CapacidadHeladeraHandler(),
-            new SinViandasHandler()
+            new SinViandasHandler(),
+            new UsuarioYaTieneRolHandler()
     };
 
     public static void applyHandlers(Javalin app) {

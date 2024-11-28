@@ -89,7 +89,7 @@ public class TecnicoController extends Controller {
         String longitud = context.formParam("longitud");
         String radio = context.formParam("radio");
 
-        Persona persona =  repo.buscar(Persona.class, Integer.parseInt(idUsuario));
+        Persona persona =  repo.buscarChequeandoRol(Persona.class, Integer.parseInt(idUsuario));
 
         Tecnico tecnico = new Tecnico(cuil,new AreaCobertura(new Punto(latitud,longitud),radio));
 

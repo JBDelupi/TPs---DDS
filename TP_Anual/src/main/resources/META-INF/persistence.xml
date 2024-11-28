@@ -13,6 +13,5 @@
             <property name="jakarta.persistence.jdbc.password" value="123456"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
         </properties>
-
     </persistence-unit>
 </persistence>
