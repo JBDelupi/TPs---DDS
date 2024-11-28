@@ -13,9 +13,10 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- SonarQube -->
-        <sonar.organization>decco</sonar.organization>
+        <sonar.organization>lucassiturrioz</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -39,7 +40,7 @@
             <version>10.5.0</version>
             <scope>compile</scope>
         </dependency>
-        <!-- TESTING-->
+        <!-- TESTING -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -63,7 +64,6 @@
             <artifactId>converter-gson</artifactId>
             <version>2.9.0</version>
         </dependency>
-            <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
@@ -101,14 +101,12 @@
             <artifactId>amqp-client</artifactId>
             <version>5.21.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
         <!-- SMS -->
-        <!-- https://mvnrepository.com/artifact/com.vonage/client -->
         <dependency>
             <groupId>com.vonage</groupId>
             <artifactId>client</artifactId>
@@ -125,20 +123,17 @@
             <artifactId>jakarta.persistence-api</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <!-- MySQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-
         <!-- SSO -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.15.1</version> <!-- Asegúrate de usar la misma versión -->
+            <version>2.15.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>javalin-pac4j</artifactId>
@@ -149,6 +144,5 @@
             <artifactId>pac4j-oauth</artifactId>
             <version>5.7.1</version>
         </dependency>
-
     </dependencies>
 </project>
