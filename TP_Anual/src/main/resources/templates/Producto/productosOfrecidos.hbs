@@ -21,33 +21,37 @@
 {{> templates/partials/headerColaborador rol=rol id=id}}  <!-- Incluye el partial header aquí -->
 {{> templates/partials/tipografia}}  <!-- Incluye el partial tipografia aquí -->
 
-<!-- Productos Ofrecidos Start -->
-<section class="container-xxl py-5">
+<!-- Productos Ofrecidos Start --><section class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h5 class="section-title ff-secondary text-center text-primary fw-normal">Ofertas</h5>
             <h1 class="mb-5">Últimos Agregados</h1>
         </div>
         <div class="row g-4">
-            {{#each productos}}
-                <div class="col-lg-6">
-                    <div class="d-flex align-items-center">
-                     <!--   <img class="flex-shrink-0 img-fluid rounded" src="{{this.producto.imagen}}" alt="" style="width: 80px;"> -->
-                        <img class="flex-shrink-0 img-fluid rounded" src="https://upload.wikimedia.org/wikipedia/commons/d/da/Imagen_no_disponible.svg" alt="" style="width: 80px;">
-
-                        <div class="w-100 d-flex flex-column text-start ps-4">
-                            <h5 class="d-flex justify-content-between border-bottom pb-2">
-                                <span>{{this.producto.nombre}}</span>
-                                <a href="/productos/{{this.id}}" class="btn btn-primary">Ver Detalles</a>
-                            </h5>
-                            <small class="fst-italic">{{this.producto.descripcion}}</small>
+            {{#if productos.length}}
+                {{#each productos}}
+                    <div class="col-lg-6">
+                        <div class="d-flex align-items-center">
+                            <img class="flex-shrink-0 img-fluid rounded" src="https://upload.wikimedia.org/wikipedia/commons/d/da/Imagen_no_disponible.svg" alt="" style="width: 80px;">
+                            <div class="w-100 d-flex flex-column text-start ps-4">
+                                <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                    <span>{{this.producto.nombre}}</span>
+                                    <a href="/productos/{{this.id}}" class="btn btn-primary">Ver Detalles</a>
+                                </h5>
+                                <small class="fst-italic">{{this.producto.descripcion}}</small>
+                            </div>
                         </div>
                     </div>
+                {{/each}}
+            {{else}}
+                <div class="text-center">
+                    <p class="text-muted fst-italic">No hay productos publicados en este momento.</p>
                 </div>
-            {{/each}}
+            {{/if}}
         </div>
     </div>
 </section>
+
 
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
