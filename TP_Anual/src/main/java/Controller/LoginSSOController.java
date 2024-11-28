@@ -13,6 +13,7 @@ import io.javalin.http.Context;
 
 public class LoginSSOController extends Controller {
     private final RepoPersona repo;
+    private final AdapterGoogleSSO ssoService = new AdapterGoogleSSO(new GoogleAdaptado("", "", ""));
     public LoginSSOController(RepoPersona repoColaborador) {
         this.repo = repoColaborador;
     }
