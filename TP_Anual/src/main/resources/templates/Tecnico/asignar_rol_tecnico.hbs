@@ -17,18 +17,18 @@
 </head>
 <body>
 
-{{> templates/partials/header esHumano=esHumano id=id}}
+{{> templates/partials/headerColaborador rol=rol id=id}}
 {{> templates/partials/tipografia}}
 
 <div class="contact_section layout_padding">
     <div class="container mt-5 d-flex justify-content-center">
         <div class="text-center" style="max-width: 500px;">
-            <h1 class="display-5 text-dark">Asignar Rol de Técnico</h1>
+            <h5 class="section-title ff-secondary text-center text-primary fw-normal">Asigna el rol tecnico</h5>
+            <h1 class="display-5 text-dark">Asignar Rol</h1>
 
             {{#if Error}}
                 <p class="text-danger text-center mt-3">ID INVÁLIDO. REINGRESE NUEVAMENTE EL ID.</p>
             {{/if}}
-
             <form action="/registro/rol/tecnico" method="POST">
                 <div class="mb-3">
                     <label for="userId" class="form-label text-dark">ID de Usuario</label>
@@ -105,7 +105,7 @@
                 <input type="hidden" id="latitud" name="latitud">
                 <input type="hidden" id="longitud" name="longitud">
 
-                <button type="submit" class="btn btn-warning w-100">Asignar Rol</button>
+                <button class="btn btn-primary w-100 py-3 zoom-btn" type="submit">Asignar Rol</button>
             </form>
 
             <div class="mt-3">

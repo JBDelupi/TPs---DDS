@@ -1,5 +1,7 @@
 package Controller;
 
+import Controller.Actores.RolUsuario;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;
@@ -23,6 +25,7 @@ public class AdministradorController  extends Controller {
 
     public void index(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         context.render("Administrador/index_Admin.hbs", this.basicModel(context));
     }

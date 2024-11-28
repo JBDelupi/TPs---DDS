@@ -94,7 +94,7 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         Map<String, Object> model = this.basicModel(context);
         model.put("heladeras", repo.queryHeladera() );
 
-        List<Incidente> incidentesAbiertos = repo.buscarTodos(Incidente.class).stream()
+        List<Incidente> incidentesAbiertos = repo.buscarTodos(FallaTecnica.class).stream()
                 .filter(incidente -> ! incidente.getSolucionado())
                 .collect(Collectors.toList());
 
