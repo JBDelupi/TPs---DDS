@@ -129,5 +129,24 @@
             <version>8.0.33</version>
         </dependency>
 
+        <!-- SSO -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.1</version> <!-- Asegúrate de usar la misma versión -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>javalin-pac4j</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pac4j</groupId>
+            <artifactId>pac4j-oauth</artifactId>
+            <version>5.7.1</version>
+        </dependency>
+
+
     </dependencies>
 </project>

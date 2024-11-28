@@ -17,6 +17,7 @@ public class GeneradorFisico {
         FisicoMapper mapper = new FisicoMapper();
         for (FisicoDTO fisicoDTO : fisicoDTOS) {
             Fisico fisico = mapper.toEntity(fisicoDTO);
+            repo.existeUsuario(fisico.getCredencialDeAcceso().getNombreUsuario());
             fisicos.add(fisico);
             repo.agregar(fisico);
         }

@@ -29,6 +29,7 @@ public class FactoryController {
           case "tecnico": controller = new TecnicoController( new RepoTecnico()); break;
           case "reporte": controller = new ReporteController( new RepoReporte()); break;
           case "deccosalud": controller = new DeccoSaludController( new RepoSalud()); break;
+          case "loginSSO": controller = new LoginSSOController(new RepoPersona()); break;
         }
         return controller;
     }

@@ -13,6 +13,10 @@
     <link href="../../css/lib/animate/animate.min.css" rel="stylesheet">
     <link href="../../css/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../../css/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+
+    <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
+
 </head>
 
 <body>
@@ -32,8 +36,12 @@
                         Ingresa tus credenciales para continuar. Si aún no tienes una cuenta, regístrate para unirte a nuestra comunidad.
                     </p>
                 </div>
+
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <a href="/sso/login" class="py-3 d-flex align-items-center justify-content-center">
+                            <i class="lab la-google-plus-g fa-2x me-2" style="line-height: 1;"></i> Iniciar sesión con Google
+                        </a>
                         {{#if contraseniaError}}
                             <p class="text-primary fw-bolder mb-2 wow shake">Contraseña o usuario Erróneo! Vuelve a intentarlo por favor :)</p>
                         {{/if}}
@@ -64,16 +72,18 @@
                             <a href="/recuperar" class="text-primary">¿Olvidó su contraseña?</a>
                         </div>
                     </div>
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
-
 </main>
 {{> templates/main/footer}}
 {{> templates/partials/botonBack}}
-</body>
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -86,11 +96,10 @@
 <script src="../../css/lib/tempusdominus/js/moment-timezone.min.js"></script>
 <script src="../../css/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-
 <!-- Template Javascript -->
 <script src="../../js/main.js"></script>
 <script src="../../js/scripts-index.js"></script>
 <script src="../../js/scripts-header.js"></script>
 
-
+</body>
 </html>

@@ -51,6 +51,8 @@ public class HumanoController extends Controller  {
         // PARA ENCRIPTAR LA CONTRASEÑA
         //String contraseniaEnciptada = encriptador.encriptarMD5(contraseniaSinEncriptar);
 
+        repo.existeUsuario(context.formParam("nombre_usuario"));
+
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
                 .contrasenia(contrasenia)

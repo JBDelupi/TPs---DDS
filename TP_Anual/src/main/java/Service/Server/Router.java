@@ -5,6 +5,8 @@ import Controller.Actores.RolUsuario;
 import Controller.AdministradorController;
 import Controller.HeladeraController;
 import Controller.TecnicoController;
+import Models.Repository.RepoPersona;
+import Service.SSO.GoogleAdaptado;
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.post;
@@ -117,6 +119,12 @@ public class Router {
             get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
             get("/reportes/listadoReportes",((ReporteController)FactoryController.controller("reporte"))::show);
             post("/reportes/detalles",((ReporteController)FactoryController.controller("reporte"))::reporte);
+        });
+
+
+        Server.app().routes(() -> {
+            get("/sso/login", ((LoginSSOController)FactoryController.controller("loginSSO"))::redirectToSSO);
+           get("/oauth/callback", ((LoginSSOController)FactoryController.controller("loginSSO"))::handleCallback);
         });
 
 

@@ -62,6 +62,9 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         String localidad = context.formParam("localidad");
         String contrasenia = context.formParam("contrasenia");
 
+        repo.existeUsuario(context.formParam("nombre_usuario"));
+
+
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);
         direccion.setNumero(numero);

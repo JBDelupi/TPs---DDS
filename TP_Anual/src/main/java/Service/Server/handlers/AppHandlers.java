@@ -13,7 +13,8 @@ public class AppHandlers {
             new HeladeraLlenaHandler(),
             new CapacidadHeladeraHandler(),
             new SinViandasHandler(),
-            new UsuarioYaTieneRolHandler()
+            new UsuarioYaTieneRolHandler(),
+            new UserAlreadyExistsHandler()
     };
 
     public static void applyHandlers(Javalin app) {
