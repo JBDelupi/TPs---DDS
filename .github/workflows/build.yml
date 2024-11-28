@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Deshabilita clones superficiales para un análisis más completo
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu'
-      - name: Cache SonarCloud packages
+          distribution: 'zulu' # Alternative distribution options are available.
+      - name: Cache SonarQube Cloud packages
         uses: actions/cache@v4
         with:
           path: ~/.sonar/cache
@@ -32,6 +32,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lucassiturrioz_TPs---DDS
+        run: |
+          cd TP_Anual   # Cambia al subdirectorio donde está el archivo pom.xml
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lucassiturrioz_TPs---DDS
