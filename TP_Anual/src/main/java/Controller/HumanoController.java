@@ -4,6 +4,7 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -16,6 +17,7 @@ import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 public class HumanoController extends Controller  {
@@ -100,6 +102,16 @@ public class HumanoController extends Controller  {
 
         context.render("Index-inicio/index_Humana.hbs", model);
 
+    }
+
+    public void asignarRol(Context context){
+        this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
+
+        model.put("tecnico", usuario.checkRol(TipoRol.TECNICO));
+        model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
+
+        context.render("Asignar-rol/asignar-rol.hbs", model);
     }
 
 
