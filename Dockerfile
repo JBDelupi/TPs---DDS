@@ -8,7 +8,7 @@ RUN mvn clean package assembly:single -DskipTests
 # Fase de ejecución
 FROM openjdk:18-jdk-slim
 WORKDIR /app
-COPY --from=build /app/TP_Anual/target/HeladeraTest-1.0-SNAPSHOT-jar-with-dependencies.jar DeccoColaboracion.jar
+COPY --from=build /app/TP_Anual/target/TPs---DDS-1.0-SNAPSHOT-jar-with-dependencies.jar DeccoColaboracion.jar
 
 ENV PORT=8080
 EXPOSE 8080
