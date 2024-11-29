@@ -1,8 +1,8 @@
 # Fase de construcción
 FROM maven:3.8.6-openjdk-18 AS build
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+COPY TP_Anual/pom.xml .
+COPY TP_Anual/src ./src
 RUN mvn clean package assembly:single -DskipTests
 
 # Fase de ejecución
