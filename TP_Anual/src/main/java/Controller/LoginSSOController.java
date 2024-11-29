@@ -13,7 +13,13 @@ import io.javalin.http.Context;
 
 public class LoginSSOController extends Controller {
     private final RepoPersona repo;
-    private final AdapterGoogleSSO ssoService = new AdapterGoogleSSO(new GoogleAdaptado("", "", ""));
+    private final AdapterGoogleSSO ssoService = new AdapterGoogleSSO(
+                new GoogleAdaptado(
+                        System.getenv("GOOGLE_CLIENT_ID"), // Obtiene el Client ID desde las variables de entorno
+                        System.getenv("GOOGLE_CLIENT_SECRET"), // Obtiene el Client Secret desde las variables de entorno
+                        System.getenv("GOOGLE_CALLBACK_URL") // Obtiene el Callback URL desde las variables de entorno
+                )
+    );
     public LoginSSOController(RepoPersona repoColaborador) {
         this.repo = repoColaborador;
     }
