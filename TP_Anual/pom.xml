@@ -18,11 +18,7 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-        </dependency>
+
         <!-- NOTIFICACION -->
         <dependency>
             <groupId>com.sun.mail</groupId>
@@ -150,7 +146,17 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.4</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>4.0.0-beta-1</version>
+        </dependency>
     </dependencies>
 
     <!-- DEPLOY -->
@@ -158,24 +164,8 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>18</source>
-                    <target>18</target>
-                    <annotationProcessorPaths>
-                        <annotationProcessorPath>
-                            <groupId>io.javalin.community.openapi</groupId>
-                            <artifactId>openapi-annotation-processor</artifactId>
-                            <version>6.3.0</version>
-                        </annotationProcessorPath>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.7.1</version>
                 <configuration>
                     <archive>
                         <manifest>
