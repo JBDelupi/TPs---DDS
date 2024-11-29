@@ -21,7 +21,6 @@ public class Router {
         Server.app().get("/recuperar",context -> context.render("sesion/recuperar.hbs"));
 
 
-        Server.app().get("/asignar-rol",context -> context.render("Asignar-rol/asignar-rol.hbs"));
         Server.app().get("/asignar-rol/tecnico",context -> context.render("Asignar-rol/solicitud-tecnico.hbs"));
         Server.app().get("/asignar-rol/solicitudExitosa",context -> context.render("Asignar-rol/solicitud-enviada.hbs"));
 
@@ -65,6 +64,7 @@ public class Router {
             post("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::update, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
             post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
             get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR );
+            get("/asignar-rol", ((HumanoController) FactoryController.controller("humano")):: asignarRol);
         });
 
         Server.app().routes(()->{

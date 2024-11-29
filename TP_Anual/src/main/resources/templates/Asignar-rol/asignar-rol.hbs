@@ -21,8 +21,8 @@
 {{> templates/partials/headerColaborador rol=rol id=id}}
 {{> templates/partials/tipografia}}
 
-<div class="contact_section layout_padding">
-    <div class="container mt-5">
+<div class="container-xxl py-5">
+    <div class="container">
         <div class="row">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h5 class="section-title ff-secondary text-center text-primary fw-normal">Asignación de Roles</h5>
@@ -31,18 +31,21 @@
         </div>
         <div class="blog_section_2 mt-5">
             <div class="row justify-content-center">
-                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
-                    <a href="/asignar-rol/tecnico" class="text-decoration-none w-100">
-                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
-                            <div class="p-4">
-                                <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
-                                <h5 class="text-dark">Técnico</h5>
-                                <p class="text-dark">Asigna el rol de Técnico para realizar y gestionar visitas técnicas.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
 
+                {{#unless tecnico}}
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.1s">
+                        <a href="/asignar-rol/tecnico" class="text-decoration-none w-100">
+                            <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                                <div class="p-4">
+                                    <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
+                                    <h5 class="text-dark">Técnico</h5>
+                                    <p class="text-dark">Asigna el rol de Técnico para realizar y gestionar visitas técnicas.</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {{/unless}}
+                {{#unless colaborador}}
                 <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch" data-wow-delay="0.2s">
                     <a href="#" class="text-decoration-none w-100" onclick="confirmarColaborador(event)">
                         <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
@@ -54,13 +57,20 @@
                         </div>
                     </a>
                 </div>
+                {{/unless}}
+                {{#if colaborador}}
+                    {{#if tecnico}}
+                    <p class="text-center">Ya tiene asignado todos los roles disponibles.</p>
+                    {{/if}}
+                {{/if}}
             </div>
         </div>
     </div>
 </div>
 
-{{> templates/main/footer}}
+
 {{> templates/partials/botonBack}}
+{{> templates/main/footer}}
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
