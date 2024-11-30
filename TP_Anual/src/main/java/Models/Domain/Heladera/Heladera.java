@@ -110,10 +110,8 @@ public class Heladera {
         if (this.estaLlena) {
             throw new HeladeraLlenaException("Esta llena la heladera");
         }
-        registrarViandaDepositada();
-        Collections.addAll(this.viandas, vianda);
-        this.capacidadActual --;
         this.registrarViandaDepositada();
+        Collections.addAll(this.viandas, vianda);
         generarNuevaPublicacion(TipoDePublicacion.FALTAN_N_VIANDAS);
         if ( this.capacidadActual == 0 ) {
             this.estaLlena = true;
@@ -131,12 +129,10 @@ public class Heladera {
         }
 
         Vianda vianda = this.viandas.remove(0);
-        this.capacidadActual++;
         this.sensorMovimiento.chequear();
         this.registrarViandaRetirada();
 
         generarNuevaPublicacion(TipoDePublicacion.N_VIANDAS_DISPONIBLES);
-        registrarViandaRetirada();
 
         return vianda;
     }
@@ -149,8 +145,14 @@ public class Heladera {
     public void registrarAlerta(){ this.cantidadDeFallas++; }
     public void reestablecerFallas() { this.cantidadDeFallas = 0; }
 
-    public void registrarViandaDepositada(){this.cantidadDeviandasDepositadas++;}
-    public void registrarViandaRetirada(){ this.cantidadDeviandasRetiradas++; }
+    public void registrarViandaDepositada(){
+        this.cantidadDeviandasDepositadas++;
+        this.capacidadActual --;
+    }
+    public void registrarViandaRetirada(){
+        this.cantidadDeviandasRetiradas++;
+        this.capacidadActual ++;
+    }
     public void reestablecerViandasRetiradas(){ this.cantidadDeviandasRetiradas = 0; }
     public void reestablecerViandasDepositadas(){ this.cantidadDeviandasDepositadas = 0; }
 

@@ -1,6 +1,7 @@
 package Service.Server;
 
 import Controller.Actores.RolUsuario;
+import Models.Domain.Excepciones.*;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Reporte.CantFallasPorHeladera;
@@ -13,11 +14,19 @@ import Service.DeccoSaludAPI.GeneradorReporteSalud;
 import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Observabilidad.DDMetricsUtils;
 import Service.Observabilidad.MetricsRegistry;
+import Service.Server.exceptions.AccessDeniedException;
+import Service.Server.exceptions.InvalidPasswordException;
+import Service.Server.exceptions.UnauthorizedResponseException;
+import Service.Server.exceptions.UserAlreadyExistsException;
+import Service.Server.handlers.AccessDeniedHandler;
+import Service.Server.handlers.PuntosInsuficientesHandler;
 import Service.TareaDiferida.ChromeTask;
 import Service.Validador.CredencialDeAcceso;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;

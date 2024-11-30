@@ -206,12 +206,9 @@ public class FactoryContribucion {
 
         //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
-        if (heladeraDestino.getCapacidadActual() < cantidad || heladeraOrigen.getCapacidadActual() < cantidad) {
+        if (!(heladeraDestino.getCapacidadActual() >= cantidad || heladeraOrigen.getCapacidadDeViandas() - heladeraOrigen.getCapacidadActual() >= cantidad)) {
             throw new CapacidadHeladeraException("No puede llenar la heladera o incosistencia al envio de informacion de la heladera origen");
         }
-
-        System.out.println("Heladera origen total: " + heladeraOrigen.getViandas().size());
-        System.out.println("Heladera destino total: " + heladeraDestino.getViandas().size());
 
         for (int i = 0; i < cantidad; i++) {
             Vianda vianda = heladeraOrigen.obtenerVianda();

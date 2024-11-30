@@ -236,6 +236,11 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
             model.put("estaSesion",true);
         }
         model.put("cantidadHeladerasActivas", heladerasActivas);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.accesosIndex").increment();
+
         context.render("Main/index.hbs", model);
     }
 
