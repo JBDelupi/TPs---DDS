@@ -6,8 +6,10 @@ import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoIncidente;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -55,6 +57,9 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
 
         repo.agregar(fallaTecnica);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.fallasTecnicasCreadas").increment();
 
         context.redirect("/incidentes");
     }

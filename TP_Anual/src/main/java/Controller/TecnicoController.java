@@ -9,8 +9,10 @@ import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.Punto;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Map;
 
@@ -59,6 +61,10 @@ public class TecnicoController extends Controller {
 
         repo.agregar(fisico);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.tecnicosCreados").increment();
+
         context.redirect("/index/administrador");
     }
 
@@ -96,6 +102,10 @@ public class TecnicoController extends Controller {
         persona.agregarRol(tecnico);
 
         repo.modificar(persona);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.rolTecnicoAgregado").increment();
 
         context.redirect("/index/administrador");
 

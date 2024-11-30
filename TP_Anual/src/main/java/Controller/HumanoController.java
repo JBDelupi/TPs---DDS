@@ -11,11 +11,14 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.RepoPersona;
 
+import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.Encriptador;
 import Service.Notificacion.Notificacion;
 import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +88,10 @@ public class HumanoController extends Controller  {
         //  new MensajeBienvenida(persona.getCorreElectronico(), tarjetaAccesos.getCodigo());
 
         repo.agregar(fisico);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.usuariosFisicosCreados").increment();
 
         context.redirect("/login");
     }

@@ -22,7 +22,9 @@ import Models.Domain.Tarjetas.Trazabilidad.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoContribucion;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Server.exceptions.UnauthorizedResponseException;
+import io.micrometer.core.instrument.MeterRegistry;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -112,6 +114,9 @@ public class FactoryContribucion {
 
         repo.modificar(colaborador);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.donacionesDeVianda").increment();
 
     }
 
@@ -128,6 +133,9 @@ public class FactoryContribucion {
 
         repo.modificar(colaborador);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.donacionesDeDinero").increment();
 
     }
 
@@ -176,6 +184,9 @@ public class FactoryContribucion {
         repo.agregar(persona);
         repo.modificar(colaborador);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.registrosDeTarjeta").increment();
     }
 
     // Distribución de Viandas
@@ -218,6 +229,9 @@ public class FactoryContribucion {
 
         repo.modificar(colaborador);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.distribucionesDeVianda").increment();
     }
 
     // Hacerse Cargo de una Heladera
@@ -240,6 +254,9 @@ public class FactoryContribucion {
 
         repo.modificar(colaborador);
 
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.hacerseCargoDeHeladera").increment();
     }
 
     private void ofrecerProducto(CrearContribucionDTO dto) {
@@ -271,7 +288,9 @@ public class FactoryContribucion {
 
         repo.modificar(colaborador);
 
-
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucion.productosOfrecidos").increment();
     }
 
     // ------------------- FACTORY METHOD ----------------------------------------//

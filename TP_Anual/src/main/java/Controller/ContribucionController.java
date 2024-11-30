@@ -7,8 +7,10 @@ import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyF
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoContribucion;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,10 @@ public class ContribucionController extends Controller {
 
         CrearContribucionDTO dto = new CrearContribucionDTO(context.formParam("tipo"), singleValueParams );
         FactoryContribucion.getInstance().factoryMethod( context.sessionAttribute("idPersona") , dto );
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.contribucionesCreadas").increment();
 
         context.render("Formas-de-contribucion/contribucionExitosa.hbs", this.basicModel(context));
     }

@@ -4,7 +4,9 @@ import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Reporte.*;
 import Models.Repository.RepoReporte;
+import Service.Observabilidad.MetricsRegistry;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.io.IOException;
 import java.util.List;
@@ -40,6 +42,10 @@ public class ReporteController extends Controller {
         Map<String, Object> model = this.basicModel(context);
         model.put("listaReportes", listaReportes);
         model.put("tipoReporte", tipoReporte);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.consultasAReportes").increment();
 
         context.render("Reportes/listadoReportes.hbs", model);
     }

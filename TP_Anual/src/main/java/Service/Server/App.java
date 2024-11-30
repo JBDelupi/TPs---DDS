@@ -11,6 +11,8 @@ import Models.Repository.Dao;
 import Models.Repository.RepoPersona;
 import Service.DeccoSaludAPI.GeneradorReporteSalud;
 import Service.Notificacion.Correo.CorreoAdapter;
+import Service.Observabilidad.DDMetricsUtils;
+import Service.Observabilidad.MetricsRegistry;
 import Service.TareaDiferida.ChromeTask;
 import Service.Validador.CredencialDeAcceso;
 import lombok.SneakyThrows;
@@ -44,6 +46,10 @@ public class App {
         // Programar el reporte para ejecutarse cada 7 días
         //executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
 
+        DDMetricsUtils metricsUtils = new DDMetricsUtils("App-Decco");
+        MetricsRegistry.initialize(metricsUtils.getRegistry());
+
+        System.out.println("Métricas básicas inicializadas.");
     }
 
     public static void generarReporte()  {

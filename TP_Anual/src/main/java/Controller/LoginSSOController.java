@@ -2,6 +2,7 @@ package Controller;
 
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Repository.RepoPersona;
+import Service.Observabilidad.MetricsRegistry;
 import Service.SSO.AdapterGoogleSSO;
 import Service.SSO.GoogleAdaptado;
 import Service.SSO.Sso;
@@ -10,6 +11,7 @@ import Models.Domain.Personas.Actores.Persona;
 import Service.Validador.CredencialDeAcceso;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 public class LoginSSOController extends Controller {
     private final RepoPersona repo;
@@ -45,6 +47,10 @@ public class LoginSSOController extends Controller {
             context.sessionAttribute("idPersona", Integer.toString(persona.getId()));
             context.sessionAttribute("rolTipo", persona.getTipoUsuario().toString());
 
+            //Incremento la metrica
+            MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+            registry.counter("dds.iniciosDeSesion").increment();
+
             context.redirect("/index/" + persona.getTipoUsuario().toString().toLowerCase());
         } else {
             context.status(500).result("Error al obtener el token.");
@@ -70,6 +76,10 @@ public class LoginSSOController extends Controller {
         persona.agregarRol(colaborador);
 
         repo.agregar(persona);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.usuariosFisicosCreados").increment();
 
         return persona;
     }

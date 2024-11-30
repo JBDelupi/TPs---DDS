@@ -5,7 +5,10 @@ import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Producto.Canje;
 import Models.Repository.RepoContribucion;
+import Service.Observabilidad.MetricsRegistry;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
+
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +59,10 @@ public class ProductoController extends Controller {
         colaborador.realizarCanje(producto,cantidad);
 
         repo.modificar(colaborador);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.canjes").increment();
 
         context.render("Producto/canjeExitoso.hbs");
     }

@@ -8,10 +8,12 @@ import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
 import Models.Repository.RepoPersona;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.Encriptador;
 import Service.Server.ICrudViewsHandler;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Map;
 import java.util.random.RandomGenerator;
@@ -91,6 +93,10 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
                 .construir();
 
         repo.agregar(juridico);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.usuariosJuridicosCreados").increment();
 
         context.redirect("/login");
     }

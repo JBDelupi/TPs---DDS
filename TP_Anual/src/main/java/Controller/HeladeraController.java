@@ -17,8 +17,10 @@ import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.APIPuntos.Punto;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.HashMap;
 import java.util.List;
@@ -92,6 +94,10 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
             CrearContribucionDTO dto = new CrearContribucionDTO("HACERSE_CARGO_DE_HELADERA", singleValueParams);
             FactoryContribucion.getInstance().factoryMethod( context.sessionAttribute("idPersona") , dto );
         }
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.heladerasCreadas").increment();
 
         context.redirect("/heladeras");
     }

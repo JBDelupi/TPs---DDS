@@ -1,9 +1,11 @@
 package Controller;
+import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.Encriptador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.RepoLogin;
 import Service.Validador.CredencialDeAcceso;
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.MeterRegistry;
 import jakarta.servlet.http.HttpSession;
 
 public class LoginController extends Controller {
@@ -37,6 +39,11 @@ public class LoginController extends Controller {
         context.sessionAttribute(USER_SESSION_KEY, usuario);
         context.sessionAttribute("idPersona", Integer.toString(usuario.getId()));
         context.sessionAttribute("rolTipo", usuario.getTipoUsuario().toString());
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.iniciosDeSesion").increment();
+
         context.redirect("/index/" + usuario.getTipoUsuario().toString().toLowerCase());
 
 
@@ -45,6 +52,11 @@ public class LoginController extends Controller {
     public void manejarCierreSesion(Context context) {
         HttpSession httpSession = context.req().getSession();
         httpSession.removeAttribute(USER_SESSION_KEY);
+
+        //Incremento la metrica
+        MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
+        registry.counter("dds.cierresDeSesion").increment();
+
         context.redirect("/login");
     }
 }
