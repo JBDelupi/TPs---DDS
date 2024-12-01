@@ -58,7 +58,7 @@ public class App {
         DDMetricsUtils metricsUtils = new DDMetricsUtils("App-Decco");
         MetricsRegistry.initialize(metricsUtils.getRegistry());
 
-        System.out.println("Métricas básicas inicializadas.");
+      //  System.out.println("Métricas básicas inicializadas.");
     }
 
     public static void generarReporte()  {
