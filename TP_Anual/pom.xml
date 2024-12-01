@@ -13,7 +13,7 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- SonarQube -->
-        <sonar.organization>decco</sonar.organization>
+        <sonar.organization>lucassiturrioz</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <javalin.version>6.1.3</javalin.version>
         <micrometer.version>1.13.0</micrometer.version>
