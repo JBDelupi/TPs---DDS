@@ -27,12 +27,8 @@ public class Validador {
 
     public static Validador getInstancia() {
         if (instancia == null) {
-            synchronized (Validador.class) {
-                if (instancia == null) {
                     instancia = new Validador();
-                }
             }
-        }
         return instancia;
     }
 

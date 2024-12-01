@@ -20,13 +20,9 @@ public class Encriptador {
     }
 
     public static Encriptador getInstancia() {
-        if (instancia == null) {
-            synchronized (Encriptador.class) {
                 if (instancia == null) {
                     instancia = new Encriptador();
                 }
-            }
-        }
         return instancia;
     }
 
