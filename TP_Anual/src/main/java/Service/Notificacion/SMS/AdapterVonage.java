@@ -7,7 +7,10 @@ import com.vonage.client.sms.messages.TextMessage;
 
 public class AdapterVonage {
 
-    VonageClient client = VonageClient.builder().apiKey("cbadfce7").apiSecret("19meFVarHVb4Gohe").build();
+    String apiKey = System.getenv("SMS_ADAPTER_KEY");
+    String apiSecret = System.getenv("SMS_ADAPTER_SECRET");
+
+    VonageClient client = VonageClient.builder().apiKey(apiKey).apiSecret(apiSecret).build();
 
     public void Notificar(String usuario, String contenido) {
         TextMessage message = new TextMessage("API SMS",

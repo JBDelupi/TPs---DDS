@@ -9,8 +9,8 @@ public class AdapterBotWhatsapp {
 
     // Find your Account SID and Auth Token at twilio.com/console
     // and set the environment variables. See http://twil.io/secure
-    public static final String ACCOUNT_SID = "";
-    public static final String AUTH_TOKEN = "";
+    public static final String ACCOUNT_SID = System.getenv("WHATSAPP_ADAPTER_SID");
+    public static final String AUTH_TOKEN = System.getenv("WHATSAPP_ADAPTER_TOKEN");
 
 
     //private String numero = "+12673812069"; Esta hardcodeado, es el segundo numero
@@ -27,7 +27,6 @@ public class AdapterBotWhatsapp {
 
         System.out.println(message.getBody());
     }
-
 }
 
 

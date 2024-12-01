@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AdapterBotTelegram extends TelegramLongPollingBot {
     private final String botUsername = "Decco_ok_bot"; // Nombre de usuario del bot
-    private final String botToken = "7216777994:AAHix0RbtnJv-c0c0zUx5IWUyoxffqKFoj8";     // Token del bot
+    private final String botToken = System.getenv("TELEGRAM_ADAPTER_TOKEN");     // Token del bot
 
 
     public void Notificar(String usuario, String contenido) {
