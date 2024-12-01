@@ -52,7 +52,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     }
 
     public void create(Context context){
-        context.render("Persona-Juridica/registroJuridica.hbs");
+        context.render("Persona-juridica/registroJuridica.hbs");
     }
 
     public void save(Context context) {
