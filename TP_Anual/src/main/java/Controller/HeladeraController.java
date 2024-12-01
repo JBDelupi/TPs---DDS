@@ -241,7 +241,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.accesosIndex").increment();
 
-        context.render("Main/index.hbs", model);
+        context.render("main/index.hbs", model);
     }
 
 
