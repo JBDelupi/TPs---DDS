@@ -11,6 +11,7 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.APIPuntos.Punto;
 import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Encriptador;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
@@ -37,12 +38,13 @@ public class TecnicoController extends Controller {
         String correo = context.formParam("correo");
         String contrasenia = context.formParam("contrasenia");
 
-//        Encriptador encriptador = new Encriptador();
-//        String contraseniaEncriptada = encriptador.encriptarMD5(contrasenia);
+        // PARA ENCRIPTAR
+        Encriptador encriptador = Encriptador.getInstancia();
+        String contraseniaEncriptada = encriptador.encriptarMD5(contrasenia);
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
-                .contrasenia(contrasenia)
+                .contrasenia(contraseniaEncriptada)
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
 

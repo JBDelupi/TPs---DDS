@@ -3,6 +3,7 @@ package Service.Validador;
 import java.security.MessageDigest;
 
 public class Encriptador {
+    private static Encriptador instancia;
 
     public String encriptarMD5(String input) {
         try {
@@ -16,6 +17,17 @@ public class Encriptador {
         } catch (Exception e) {
             throw new RuntimeException("Error al encriptar la contraseña", e);
         }
+    }
+
+    public static Encriptador getInstancia() {
+        if (instancia == null) {
+            synchronized (Encriptador.class) {
+                if (instancia == null) {
+                    instancia = new Encriptador();
+                }
+            }
+        }
+        return instancia;
     }
 
 }

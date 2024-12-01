@@ -65,7 +65,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         String localidad = context.formParam("localidad");
         String contrasenia = context.formParam("contrasenia");
 
-
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
                 .contrasenia(contrasenia)
@@ -76,16 +75,16 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
         Validador.getInstancia().validar(credencialDeAcceso);
 
+        // ENCRIPTADOR
+        Encriptador encriptador = Encriptador.getInstancia();
+        String contraseniaEcriptada = encriptador.encriptarMD5(contrasenia);
+
+        credencialDeAcceso.setContrasenia(contraseniaEcriptada);
 
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);
         direccion.setNumero(numero);
         direccion.setLocalidad(localidad);
-
-
-        //Encriptador encriptador = new Encriptador();
-        //String contraseniaEcriptada = encriptador.encriptarMD5(contrasenia);
-
 
         JuridicoBuilder juridicoBuilder = new JuridicoBuilder();
         Juridico juridico = juridicoBuilder

@@ -11,6 +11,7 @@ import Service.SSO.Sso;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Encriptador;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -58,13 +59,15 @@ public class LoginSSOController extends Controller {
             context.status(500).result("Error al obtener el token.");
         }
     }
+
     private Persona crearPersonaDesdeSSO(JsonNode userInfo) {
 
         String nombre = userInfo.get("given_name").asText();
         String correo = userInfo.get("email").asText();
         String apellido = userInfo.get("family_name").asText();
 
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(correo, "1");
+        Encriptador encriptador = Encriptador.getInstancia();
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(correo, encriptador.encriptarMD5("1"));
 
         FisicoBuilder builder = new FisicoBuilder();
         Persona persona = builder

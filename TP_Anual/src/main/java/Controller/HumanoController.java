@@ -53,14 +53,8 @@ public class HumanoController extends Controller  {
         String localidad = context.formParam("localidad");
         TipoDeDocumento tipoDeDocumento = TipoDeDocumento.valueOf(context.formParam("tipo_documento"));
         String contrasenia = context.formParam("contrasenia");
-        Encriptador encriptador = new Encriptador();
-
-        // PARA ENCRIPTAR LA CONTRASEÑA
-        //String contraseniaEnciptada = encriptador.encriptarMD5(contraseniaSinEncriptar);
 
         repo.existeUsuario(context.formParam("nombre_usuario"));
-
-
 
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
@@ -70,6 +64,11 @@ public class HumanoController extends Controller  {
 
         Validador.getInstancia().validar(credencialDeAcceso);
 
+        // PARA ENCRIPTAR LA CONTRASEÑA
+        Encriptador encriptador = Encriptador.getInstancia();
+        String contraseniaEnciptada = encriptador.encriptarMD5(contrasenia);
+
+        credencialDeAcceso.setContrasenia(contraseniaEnciptada);
 
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);
