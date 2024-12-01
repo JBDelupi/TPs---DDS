@@ -17,6 +17,7 @@ import Service.Validador.Encriptador;
 import Service.Notificacion.Notificacion;
 import Service.Notificacion.StrategyMedioDeNotificacion;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Validador;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
@@ -59,11 +60,16 @@ public class HumanoController extends Controller  {
 
         repo.existeUsuario(context.formParam("nombre_usuario"));
 
+
+
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
                 .contrasenia(contrasenia)
                 .nombreUsuario(context.formParam("nombre_usuario"))
                 .construir();
+
+        Validador.getInstancia().validar(credencialDeAcceso);
+
 
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);

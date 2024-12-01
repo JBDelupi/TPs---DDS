@@ -1,21 +1,45 @@
 package Service.Validador;
 
+import Service.Server.exceptions.UserAlreadyExistsException;
+import Service.Validador.politicasNIST.Longitud;
+import Service.Validador.politicasNIST.TieneCaracterEspecial;
+import Service.Validador.politicasNIST.TieneMayuscula;
+import Service.Validador.politicasNIST.TieneNumero;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Validador {
-    private List<Validacion> validaciones;
+    private static Validador instancia;
+    private final List<Validacion> validaciones;
 
-    public Validador() {
-        validaciones = new ArrayList<>();
+    // Constructor privado: inicializa las validaciones una sola vez
+    private Validador() {
+        validaciones = Arrays.asList(
+                new EsDebil(),
+                new Longitud(),
+                new TieneCaracterEspecial(),
+                new TieneNumero(),
+                new TieneMayuscula()
+        );
     }
 
-    public void setValidaciones(Validacion ... validacion){
-        validaciones = Arrays.asList(validacion);
+    public static Validador getInstancia() {
+        if (instancia == null) {
+            synchronized (Validador.class) {
+                if (instancia == null) {
+                    instancia = new Validador();
+                }
+            }
+        }
+        return instancia;
     }
 
-    public boolean validar(CredencialDeAcceso credencialDeAcceso) {
-        return validaciones.stream().allMatch(v -> v.validar(credencialDeAcceso));
+    public void validar(CredencialDeAcceso credencialDeAcceso) {
+        if (!validaciones.stream().allMatch(v -> v.validar(credencialDeAcceso))) {
+            throw new UserAlreadyExistsException();
+        }
     }
 }
+

@@ -12,6 +12,7 @@ import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.Encriptador;
 import Service.Server.ICrudViewsHandler;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Validador;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
@@ -64,7 +65,16 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         String localidad = context.formParam("localidad");
         String contrasenia = context.formParam("contrasenia");
 
+
+        CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
+        CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
+                .contrasenia(contrasenia)
+                .nombreUsuario(context.formParam("nombre_usuario"))
+                .construir();
+
         repo.existeUsuario(context.formParam("nombre_usuario"));
+
+        Validador.getInstancia().validar(credencialDeAcceso);
 
 
         Direccion direccion = new Direccion();
@@ -76,11 +86,6 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         //Encriptador encriptador = new Encriptador();
         //String contraseniaEcriptada = encriptador.encriptarMD5(contrasenia);
 
-        CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
-        CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
-                .contrasenia(contrasenia)
-                .nombreUsuario(context.formParam("nombre_usuario"))
-                .construir();
 
         JuridicoBuilder juridicoBuilder = new JuridicoBuilder();
         Juridico juridico = juridicoBuilder
