@@ -17,8 +17,8 @@ public class Router {
         Server.app().get("/contact",context -> context.render("main/Contacto.hbs"));
         Server.app().get("/team",context -> context.render("main/team.hbs"));
         Server.app().get("/about",context -> context.render("main/about.hbs"));
-        Server.app().get("/registro",context -> context.render("sesion/registro.hbs"));
-        Server.app().get("/recuperar",context -> context.render("sesion/recuperar.hbs"));
+        Server.app().get("/registro",context -> context.render("Sesion/registro.hbs"));
+        Server.app().get("/recuperar",context -> context.render("Sesion/recuperar.hbs"));
 
 
         Server.app().get("/asignar-rol/tecnico",context -> context.render("Asignar-rol/solicitud-tecnico.hbs"));
