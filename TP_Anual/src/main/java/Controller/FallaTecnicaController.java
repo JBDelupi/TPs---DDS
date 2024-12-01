@@ -61,7 +61,7 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.fallasTecnicasCreadas").increment();
 
-        context.redirect("/incidentes");
+        context.redirect("/incidentes/"+fallaTecnica.getId());
     }
 
     @Override

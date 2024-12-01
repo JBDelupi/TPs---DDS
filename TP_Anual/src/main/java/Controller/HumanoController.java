@@ -65,8 +65,7 @@ public class HumanoController extends Controller  {
         Validador.getInstancia().validar(credencialDeAcceso);
 
         // PARA ENCRIPTAR LA CONTRASEÑA
-        Encriptador encriptador = Encriptador.getInstancia();
-        String contraseniaEnciptada = encriptador.encriptarMD5(contrasenia);
+        String contraseniaEnciptada = Encriptador.getInstancia().encriptarMD5(contrasenia);
 
         credencialDeAcceso.setContrasenia(contraseniaEnciptada);
 
@@ -92,9 +91,9 @@ public class HumanoController extends Controller  {
         colaborador.setTarjeta(tarjetaAccesos);
         fisico.agregarRol(colaborador);
 
-        new MensajeBienvenida(fisico.getCorreElectronico(), String.valueOf(tarjetaAccesos.getCodigo()) );
-
         repo.agregar(fisico);
+
+        new MensajeBienvenida(fisico.getCorreElectronico(), String.valueOf(tarjetaAccesos.getCodigo()) );
 
         //Incremento la metrica
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();

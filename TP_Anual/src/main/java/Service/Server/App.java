@@ -10,6 +10,7 @@ import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
 import Models.Repository.Dao;
 import Models.Repository.RepoPersona;
+import Service.Broker.RabbitMQAdapter;
 import Service.DeccoSaludAPI.GeneradorReporteSalud;
 import Service.Notificacion.Correo.CorreoAdapter;
 import Service.Observabilidad.DDMetricsUtils;
@@ -22,6 +23,7 @@ import Service.Server.handlers.AccessDeniedHandler;
 import Service.Server.handlers.PuntosInsuficientesHandler;
 import Service.TareaDiferida.ChromeTask;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Encriptador;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.SneakyThrows;
 
@@ -35,9 +37,9 @@ import java.util.concurrent.TimeUnit;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Server.init();
-        /*
+
         Fisico admin = new Fisico();
         admin.setNombre("Decco");
         admin.setApellido("Colaboraciones");
@@ -45,20 +47,22 @@ public class App {
         admin.setMedioDeNotificacion(new CorreoAdapter());
         admin.setCodigoDeNotificacion("admin.decco@gmail.com");
         admin.setTipoDeDocumento(TipoDeDocumento.DNI);
-        admin.setCredencialDeAcceso(new CredencialDeAcceso("admin","admin"));
+        admin.setCredencialDeAcceso(new CredencialDeAcceso("admin", Encriptador.getInstancia().encriptarMD5("admin")));
         admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
-        Dao repo = new RepoPersona(Fisico.class);
+        Dao repo = new RepoPersona();
         repo.agregar(admin);
-     */
+
         // Configuración del programador de tareas
-        //ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
         // Programar el reporte para ejecutarse cada 7 días
-        //executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
+        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
 
         DDMetricsUtils metricsUtils = new DDMetricsUtils("App-Decco");
         MetricsRegistry.initialize(metricsUtils.getRegistry());
 
-      //  System.out.println("Métricas básicas inicializadas.");
+        System.out.println("Métricas básicas inicializadas.");
+
+        RabbitMQAdapter.getInstance().init();
     }
 
     public static void generarReporte()  {

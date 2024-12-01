@@ -14,7 +14,7 @@ public class RepoHeladera extends Dao {
     public Alerta ultimaAlerta(String id) {
         try {
             return  (Alerta) EntityManagerHelper.getEntityManager()
-                    .createQuery("SELECT p FROM Alerta p WHERE p.id = :id AND p.solucionado = false")
+                    .createQuery("SELECT p FROM Alerta p WHERE p.heladera.id = :id AND p.solucionado = false")
                     .setParameter("id", id)
                     .setMaxResults(1)
                     .getSingleResult();

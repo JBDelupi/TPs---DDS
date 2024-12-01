@@ -66,8 +66,7 @@ public class LoginSSOController extends Controller {
         String correo = userInfo.get("email").asText();
         String apellido = userInfo.get("family_name").asText();
 
-        Encriptador encriptador = Encriptador.getInstancia();
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(correo, encriptador.encriptarMD5("1"));
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(correo, Encriptador.getInstancia().encriptarMD5("1"));
 
         FisicoBuilder builder = new FisicoBuilder();
         Persona persona = builder

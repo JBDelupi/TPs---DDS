@@ -76,8 +76,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
         Validador.getInstancia().validar(credencialDeAcceso);
 
         // ENCRIPTADOR
-        Encriptador encriptador = Encriptador.getInstancia();
-        String contraseniaEcriptada = encriptador.encriptarMD5(contrasenia);
+        String contraseniaEcriptada = Encriptador.getInstancia().encriptarMD5(contrasenia);
 
         credencialDeAcceso.setContrasenia(contraseniaEcriptada);
 

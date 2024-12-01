@@ -33,10 +33,7 @@ public class LoginController extends Controller {
     public void manejarInicioSesion(Context context) {
         String nombreUsuario = context.formParam(USERNAME_PARAM);
         String contrasenia = context.formParam(PASSWORD_PARAM);
-
-        // PARA CONTRASEÑA ENCRIPTADA
-        Encriptador encriptador = new Encriptador();
-        String contraseniaEncriptada = encriptador.encriptarMD5(contrasenia);
+        String contraseniaEncriptada = Encriptador.getInstancia().encriptarMD5(contrasenia);
 
         Persona usuario = (Persona) repo.credenciales(new CredencialDeAcceso(nombreUsuario,contraseniaEncriptada));
 

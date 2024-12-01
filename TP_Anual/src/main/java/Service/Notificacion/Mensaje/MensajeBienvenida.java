@@ -24,7 +24,7 @@ public class MensajeBienvenida implements Mensaje {
                 + "<p>Nos alegra que formes parte de nuestra comunidad. "
                 + "Tu tarjeta de acceso a las heladeras es: <strong>" + informacion + "</strong></p>"
                 + "<p>Consulta si tienes alguna duda o necesitas más información.</p>"
-                + "<p><img src='https://i.ibb.co/hD9SKXr/De-Watermark-ai-1729225536715.png' alt='Logo Decco' width='200'></p>"
+                + "<p><img src='https://i.ibb.co/9tvChzm/presentacion.png' alt='Logo Decco' width='200'></p>"
                 + "<p>Saludos cordiales,<br>El equipo de Decco Colaboraciones</p>";
 
         // Aquí invocas al adaptador de correo para enviar la notificación
