@@ -11,6 +11,7 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.RepoPersona;
 
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Observabilidad.MetricsRegistry;
 import Service.Validador.Encriptador;
 import Service.Notificacion.Notificacion;
@@ -85,7 +86,8 @@ public class HumanoController extends Controller  {
         TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(fisico);
         colaborador.setTarjeta(tarjetaAccesos);
         fisico.agregarRol(colaborador);
-        //  new MensajeBienvenida(persona.getCorreElectronico(), tarjetaAccesos.getCodigo());
+
+        new MensajeBienvenida(fisico.getCorreElectronico(), String.valueOf(tarjetaAccesos.getCodigo()) );
 
         repo.agregar(fisico);
 

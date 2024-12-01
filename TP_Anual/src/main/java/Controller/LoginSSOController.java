@@ -1,7 +1,9 @@
 package Controller;
 
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
+import Models.Domain.Tarjetas.TarjetaAccesos;
 import Models.Repository.RepoPersona;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Observabilidad.MetricsRegistry;
 import Service.SSO.AdapterGoogleSSO;
 import Service.SSO.GoogleAdaptado;
@@ -73,9 +75,15 @@ public class LoginSSOController extends Controller {
                 .construir();
 
         Colaborador colaborador = new Colaborador(0.0);
+        TarjetaAccesos tarjetaAccesos = new TarjetaAccesos(persona);
+        colaborador.setTarjeta(tarjetaAccesos);
+
         persona.agregarRol(colaborador);
 
         repo.agregar(persona);
+
+        new MensajeBienvenida(persona.getCorreElectronico(), String.valueOf(tarjetaAccesos.getCodigo()) );
+
 
         //Incremento la metrica
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();

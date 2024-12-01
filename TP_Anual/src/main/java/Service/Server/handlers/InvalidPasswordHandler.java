@@ -20,7 +20,7 @@ public class InvalidPasswordHandler implements IHandler{
             MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
             registry.counter("dds.exception.invalidPassword").increment();
 
-            context.render("sesion/login.hbs",model);
+            context.render("Sesion/login.hbs",model);
         });
     }
 }
