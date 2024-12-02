@@ -19,7 +19,7 @@ public class PuntosInsuficientesHandler extends Controller implements IHandler {
             MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
             registry.counter("dds.exception.puntosInsuficientes").increment();
 
-            context.render("producto/sinPuntos.hbs", this.basicModel(context));
+            context.render("Producto/sinPuntos.hbs", this.basicModel(context));
         });
     }
 }

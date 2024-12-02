@@ -82,6 +82,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
+                                    <p id="capacidadActual" class="form-control">{{heladera.capacidadActual}}</p>
+                                    <label for="capacidadActual">Capacidad de viandas actual</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
                                     <div id="llena" class="form-control">
                                         <i class="fas {{#if heladera.estaLlena}}fa-check-circle text-success{{else}}fa-times-circle text-danger{{/if}}" style="font-size: 1.5em;"></i>
                                         {{#if heladera.estaLlena}}Llena{{else}}No llena{{/if}}

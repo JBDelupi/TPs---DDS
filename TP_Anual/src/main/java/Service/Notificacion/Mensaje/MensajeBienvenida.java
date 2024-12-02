@@ -42,12 +42,13 @@ public class MensajeBienvenida implements Mensaje {
                 "            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n" +
                 "        }\n" +
                 "        .email-header {\n" +
-                "            background-color: #0047ab;\n" +
-                "            color: white;\n" +
+                "            background-color: #0F172B;\n" +
+                "            color: #FEA116;\n" +
                 "            text-align: center;\n" +
                 "            padding: 20px;\n" +
                 "        }\n" +
                 "        .email-header h1 {\n" +
+                "            background-color: #0F172B;\n" +
                 "            margin: 0;\n" +
                 "            font-size: 24px;\n" +
                 "        }\n" +
@@ -68,7 +69,7 @@ public class MensajeBienvenida implements Mensaje {
                 "            margin: 20px 0;\n" +
                 "        }\n" +
                 "        .email-logo img {\n" +
-                "            width: 200px;\n" +
+                "            width: 400px;\n" +
                 "            border: none;\n" +
                 "        }\n" +
                 "        .email-footer {\n" +
@@ -90,7 +91,7 @@ public class MensajeBienvenida implements Mensaje {
                 "            <p>Tu tarjeta de acceso a las heladeras es: <strong>"+ informacion +"</strong></p>\n" +
                 "            <p>Consulta si tienes alguna duda o necesitas más información.</p>\n" +
                 "            <div class=\"email-logo\">\n" +
-                "                <img src=\"https://i.ibb.co/9tvChzm/presentacion.png\" alt=\"Logo Decco\">\n" +
+                "                <img src=\"https://i.ibb.co/jgRgWpW/a.png\" alt=\"Logo Decco\">\n" +
                 "            </div>\n" +
                 "            <p>Saludos cordiales,<br>El equipo de Decco Colaboraciones</p>\n" +
                 "        </div>\n" +
@@ -100,6 +101,7 @@ public class MensajeBienvenida implements Mensaje {
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>\n";
+
 
         // Aquí invocas al adaptador de correo para enviar la notificación
         Notificacion correoAdapter = new CorreoAdapter();

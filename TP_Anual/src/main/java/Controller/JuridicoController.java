@@ -48,7 +48,7 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
         Map<String, Object> model = this.basicModel(context);
 
-        context.render("Persona-Juridica/perfilJuridico.hbs", model);
+        context.render("Persona-juridica/perfilJuridico.hbs", model);
     }
 
     public void create(Context context){
