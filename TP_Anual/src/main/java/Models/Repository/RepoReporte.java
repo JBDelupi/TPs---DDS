@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,4 +30,15 @@ public class RepoReporte extends Dao {
         return entities;
     }
 
+    public static boolean generoElReporte() {
+
+        LocalDate haceSieteDias = LocalDate.now().minusDays(7); // Calcula la fecha de hace 7 días
+
+        List<?> resultados = EntityManagerHelper.getEntityManager().createQuery(
+                        "SELECT p FROM TemplateReporte p WHERE p.fecha >= :haceSieteDias", TemplateReporte.class)
+                .setParameter("haceSieteDias", haceSieteDias)
+                .getResultList();
+
+        return !resultados.isEmpty(); // Devuelve true si hay reportes en los últimos 7 días
+    }
 }

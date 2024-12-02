@@ -10,6 +10,7 @@ import Models.Domain.Reporte.MovimientoViandasPorHeladera;
 import Models.Domain.Reporte.TemplateReporte;
 import Models.Repository.Dao;
 import Models.Repository.RepoPersona;
+import Models.Repository.RepoReporte;
 import Service.Broker.RabbitMQAdapter;
 import Service.DeccoSaludAPI.GeneradorReporteSalud;
 import Service.Notificacion.Correo.CorreoAdapter;
@@ -29,6 +30,7 @@ import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.io.InvalidClassException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -39,50 +41,39 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         Server.init();
-
-//        Fisico admin = new Fisico();
-//        admin.setNombre("Decco");
-//        admin.setApellido("Colaboraciones");
-//        admin.setNumeroDocumento("25102024");
-//        admin.setMedioDeNotificacion(new CorreoAdapter());
-//        admin.setCodigoDeNotificacion("admin.decco@gmail.com");
-//        admin.setTipoDeDocumento(TipoDeDocumento.DNI);
-//        admin.setCredencialDeAcceso(new CredencialDeAcceso("admin", Encriptador.getInstancia().encriptarMD5("admin")));
-//        admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
-//        Dao repo = new RepoPersona();
-//        repo.agregar(admin);
-
-        // Configuración del programador de tareas
-        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-        // Programar el reporte para ejecutarse cada 7 días
-        executorService.scheduleAtFixedRate(App::generarReporte, 0, 7, TimeUnit.DAYS);
-
+        RabbitMQAdapter.getInstance().init();
         DDMetricsUtils metricsUtils = new DDMetricsUtils("App-Decco");
         MetricsRegistry.initialize(metricsUtils.getRegistry());
-
         System.out.println("Métricas básicas inicializadas.");
 
-        RabbitMQAdapter.getInstance().init();
+        generarReporte();
+
+
+
+        System.out.println( System.getenv("DDMETRICS_TOKEN"));
+
     }
 
     public static void generarReporte()  {
-        TemplateReporte reporte1 = new CantFallasPorHeladera();
-        TemplateReporte reporte2 = new CantViandasPorColaborador();
-        TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
-        GeneradorReporteSalud reporteSalud = new GeneradorReporteSalud();
 
 
+        if(!RepoReporte.generoElReporte()){
 
-        reporte1.obtenerListado();
-        reporte2.obtenerListado();
-        reporte3.obtenerListado();
-        try {
-            reporteSalud.generarReporte();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            TemplateReporte reporte1 = new CantFallasPorHeladera();
+            TemplateReporte reporte2 = new CantViandasPorColaborador();
+            TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
+            GeneradorReporteSalud reporteSalud = new GeneradorReporteSalud();
+
+            reporte1.obtenerListado();
+            reporte2.obtenerListado();
+            reporte3.obtenerListado();
+            try {
+                reporteSalud.generarReporte();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
-
 
 }
