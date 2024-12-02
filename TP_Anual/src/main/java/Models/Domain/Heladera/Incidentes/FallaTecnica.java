@@ -47,10 +47,10 @@ public class FallaTecnica extends Incidente {
 
     public void avisarATecnico() {
         Persona tecnicoMasCercano =  SistemaGeolocalizacion.getInstance().masCercanoAPunto(heladera.getDireccion().getCentro());
-        if(tecnicoMasCercano != null){
-            tecnicoMasCercano.getMedioDeNotificacion().Notificar(new MensajeTecnico(tecnicoMasCercano.getCodigoDeNotificacion(), "Falla Tecnica en la localidad de: " + this.heladera.getDireccion().getLocalidad() + ".Direccion: " + this.heladera.getDireccion().getCalle() + this.heladera.getDireccion().getCalle()));
-        }
 
+        if(tecnicoMasCercano != null){
+            tecnicoMasCercano.getMedioDeNotificacion().Notificar(new MensajeTecnico(tecnicoMasCercano.getCodigoDeNotificacion(),this.heladera.getDireccion().getLocalidad() + "," + this.heladera.getDireccion().getCalle() + "," + this.descripcion));
+        }
     }
 
     public void crearRegistroDeVisita(Persona tecnico, String descripcion, Boolean solucionado, String imagen) {

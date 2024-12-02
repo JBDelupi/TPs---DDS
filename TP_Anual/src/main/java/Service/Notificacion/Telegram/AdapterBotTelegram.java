@@ -3,6 +3,7 @@ package Service.Notificacion.Telegram;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class AdapterBotTelegram extends TelegramLongPollingBot {
@@ -15,6 +16,7 @@ public class AdapterBotTelegram extends TelegramLongPollingBot {
         SendMessage message = new SendMessage();
         message.setChatId(usuario); // ID del chat (puede ser número de chat)
         message.setText(contenido); // Contenido del mensaje
+
         System.out.println(contenido);
         try {
             execute(message); // Enviar mensaje

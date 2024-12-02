@@ -40,17 +40,17 @@ public class App {
     public static void main(String[] args) throws Exception {
         Server.init();
 
-        Fisico admin = new Fisico();
-        admin.setNombre("Decco");
-        admin.setApellido("Colaboraciones");
-        admin.setNumeroDocumento("25102024");
-        admin.setMedioDeNotificacion(new CorreoAdapter());
-        admin.setCodigoDeNotificacion("admin.decco@gmail.com");
-        admin.setTipoDeDocumento(TipoDeDocumento.DNI);
-        admin.setCredencialDeAcceso(new CredencialDeAcceso("admin", Encriptador.getInstancia().encriptarMD5("admin")));
-        admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
-        Dao repo = new RepoPersona();
-        repo.agregar(admin);
+//        Fisico admin = new Fisico();
+//        admin.setNombre("Decco");
+//        admin.setApellido("Colaboraciones");
+//        admin.setNumeroDocumento("25102024");
+//        admin.setMedioDeNotificacion(new CorreoAdapter());
+//        admin.setCodigoDeNotificacion("admin.decco@gmail.com");
+//        admin.setTipoDeDocumento(TipoDeDocumento.DNI);
+//        admin.setCredencialDeAcceso(new CredencialDeAcceso("admin", Encriptador.getInstancia().encriptarMD5("admin")));
+//        admin.setTipoUsuario(RolUsuario.ADMINISTRADOR);
+//        Dao repo = new RepoPersona();
+//        repo.agregar(admin);
 
         // Configuración del programador de tareas
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);

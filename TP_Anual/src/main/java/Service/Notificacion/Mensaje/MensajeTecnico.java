@@ -16,8 +16,17 @@ public class MensajeTecnico implements Mensaje {
 
     @Override
     public void generarMensaje(String informacion) {
-        this.contenido = "DECCO COLABORACIONES INFORMA:" +
-                "HAY UNA FALLA TECNICA DE UNA HELADERA DENTRO DE SU RADIO DE COBERTURA: " + informacion;
+        String[] info = informacion.split(",");
+        this.contenido =
+                "DECCO COLABORACIONES INFORMA: HAY UNA FALLA TECNICA DE UNA HELADERA DENTRO DE SU RADIO DE COBERTURA\n" +
+                "\n" +
+                "Falla técnica Reportada\n" +
+                "Localidad: " + info[0] + "\n" +
+                "Dirección: " + info[1] + "\n" +
+                "Descripcion de la falla: " + info[2] + "\n" +
+                "\n" +
+                "Por favor, atienda esta falla lo antes posible.";
+
 
     }
 }
