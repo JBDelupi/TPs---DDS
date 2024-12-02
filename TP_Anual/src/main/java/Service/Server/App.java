@@ -49,9 +49,6 @@ public class App {
         generarReporte();
 
 
-
-        System.out.println( System.getenv("DDMETRICS_TOKEN"));
-
     }
 
     public static void generarReporte()  {
