@@ -27,7 +27,7 @@ public class DDMetricsUtils {
 
             @Override
             public String apiKey() {
-                return "8a7955f806b6e5db6959e10041efb7a8";
+                return System.getenv("DDMETRICS_TOKEN");
             }
 
             @Override
