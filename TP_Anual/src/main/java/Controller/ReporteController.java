@@ -5,6 +5,7 @@ import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Reporte.*;
 import Models.Repository.RepoReporte;
 import Service.Observabilidad.MetricsRegistry;
+import Service.Server.App;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
@@ -62,6 +63,15 @@ public class ReporteController extends Controller {
         model.put("reporte",reporte);
 
         context.render("Reportes/" + tipoReporte + ".hbs", model);
+    }
+
+    public void generarManualmente(Context context) {
+        this.estaLogueado(context);
+
+        App.generacionManual();
+
+        String rolTipo = usuario.getTipoUsuario().toString().toLowerCase();
+        context.redirect("/index/" + rolTipo);
     }
 
 

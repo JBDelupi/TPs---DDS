@@ -52,25 +52,25 @@ public class App {
     }
 
     public static void generarReporte()  {
-
-
         if(!RepoReporte.generoElReporte()){
-
-            TemplateReporte reporte1 = new CantFallasPorHeladera();
-            TemplateReporte reporte2 = new CantViandasPorColaborador();
-            TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
-            GeneradorReporteSalud reporteSalud = new GeneradorReporteSalud();
-
-            reporte1.obtenerListado();
-            reporte2.obtenerListado();
-            reporte3.obtenerListado();
-            try {
-                reporteSalud.generarReporte();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            generacionManual();
         }
+    }
 
+    public static void generacionManual(){
+        TemplateReporte reporte1 = new CantFallasPorHeladera();
+        TemplateReporte reporte2 = new CantViandasPorColaborador();
+        TemplateReporte reporte3 = new MovimientoViandasPorHeladera();
+        GeneradorReporteSalud reporteSalud = new GeneradorReporteSalud();
+
+        reporte1.obtenerListado();
+        reporte2.obtenerListado();
+        reporte3.obtenerListado();
+        try {
+            reporteSalud.generarReporte();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

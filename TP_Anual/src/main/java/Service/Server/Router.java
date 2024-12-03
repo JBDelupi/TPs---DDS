@@ -119,6 +119,7 @@ public class Router {
             get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
             get("/reportes/listadoReportes",((ReporteController)FactoryController.controller("reporte"))::show);
             post("/reportes/detalles",((ReporteController)FactoryController.controller("reporte"))::reporte);
+            get("/reportes/manual",((ReporteController)FactoryController.controller("reporte"))::generarManualmente);
         });
 
 

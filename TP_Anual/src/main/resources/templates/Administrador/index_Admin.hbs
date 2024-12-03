@@ -94,6 +94,21 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- Generar reportes manualmente -->
+                <div class="col-lg-3 col-sm-6 wow fadeInUp d-flex align-items-stretch mb-4" data-wow-delay="0.6s">
+                    <a id="generarReportes" href="/reportes/manual" class="text-decoration-none w-100">
+                        <div class="service-item rounded pt-3 text-center d-flex flex-column justify-content-center h-100">
+                            <div class="p-4">
+                                <i class="fas fa-3x fa-file-alt text-primary mb-4"></i>
+                                <h5 class="text-dark">Generar reportes manualmente</h5>
+                                <p class="text-dark">Cree reportes detallados según sus necesidades específicas.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -117,5 +132,18 @@
 
 <script src="../../js/scripts-header.js"></script>
 <script src="../../js/main.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const generarReportes = document.getElementById("generarReportes");
+        generarReportes.addEventListener("click", function (event) {
+            const confirmar = confirm("¿Está seguro de que desea generar reportes manualmente?");
+            if (!confirmar) {
+                event.preventDefault(); // Cancela la redirección si el usuario no confirma
+            }
+        });
+    });
+</script>
+
 
 </html>
