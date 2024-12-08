@@ -1,5 +1,6 @@
 package Models.Domain.Reporte;
 
+import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
@@ -21,7 +22,7 @@ public class CantViandasPorColaborador extends TemplateReporte {
     public  void obtenerListado() {
 
         RepoPersona repoPersona = new RepoPersona();
-        List<Fisico> fisicos = repoPersona.fisicoRol(TipoRol.COLABORADOR);
+        List<Fisico> fisicos = repoPersona.fisicoRol(TipoRol.COLABORADOR).stream().filter(f->f.getTipoUsuario() != RolUsuario.ADMINISTRADOR).toList();
 
         for (Fisico fisico : fisicos) {
             String nombre = fisico.getNombre();
