@@ -6,6 +6,8 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyFactory;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.SistemaPermisos;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoContribucion;
 import Service.Observabilidad.MetricsRegistry;
 import Service.Server.ICrudViewsHandler;
@@ -39,9 +41,11 @@ public class ContribucionController extends Controller {
     public void create(Context context) {
         this.estaLogueado(context);
         String tipoContribucion = context.queryParam("tipo");
-        Map<String, Object> model = this.basicModel(context);
+        SistemaPermisos.check(this.usuario, TipoRol.COLABORADOR,tipoContribucion);
 
+        Map<String, Object> model = this.basicModel(context);
         ContribucionStrategyFactory.getStrategy(tipoContribucion).agregarModelo(model,repo);
+
 
         context.render("Formas-de-contribucion/"+tipoContribucion+".hbs",model);
 

@@ -20,7 +20,7 @@ public abstract class Dao {
 
     public <T> T buscar(Class<T> type, int id) {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        em.clear(); // Limpia el contexto persistente antes de la consulta
+        em.clear();
         return em.find(type, id);
     }
 

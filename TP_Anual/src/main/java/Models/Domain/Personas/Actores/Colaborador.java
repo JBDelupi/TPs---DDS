@@ -57,9 +57,6 @@ public class Colaborador extends Rol {
 
 
     public void realizarCanje(OfrecerProducto producto, Integer cantidad){
-        System.out.print("Puntaje: " + puntaje );
-        System.out.print("cantidad: " + cantidad );
-        System.out.print("ptsNecesarios: " + producto.getPuntosNecesarios());
         if (!(puntaje >= producto.getPuntosNecesarios()*cantidad && cantidad <=producto.getStock())){
             throw new NoTienePuntosCanjeException("No tiene suficiente Puntos");
         }
@@ -71,5 +68,18 @@ public class Colaborador extends Rol {
     }
 
     public void reestablecerViandas(){this.cantidadViandasDonadas = 0;}
+
+
+    public List<String> getPermisos(Persona persona) {
+        List<String> permisos = new ArrayList<>(List.of("donarDinero"));
+        if (persona instanceof Fisico) {
+            permisos.addAll(List.of("donarViandas", "registrarPersonaVulnerable", "distribucionViandas"));
+        } else {
+            permisos.addAll(List.of("hacerseCargoHeladera", "ofrecerProducto"));
+        }
+        return permisos;
+    }
+
+
 
 }

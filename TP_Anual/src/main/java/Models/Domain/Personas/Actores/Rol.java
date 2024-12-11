@@ -5,6 +5,8 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 
@@ -19,5 +21,8 @@ public abstract class Rol {
 
     @Enumerated(EnumType.STRING)
     protected TipoRol tipo;
+
+    public abstract List<String> getPermisos(Persona persona);
+
 
 }

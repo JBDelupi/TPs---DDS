@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Setter @Getter
 @Entity
 @DiscriminatorValue("Tecnico")
@@ -25,5 +28,12 @@ public class Tecnico extends Rol {
         this.tipo = TipoRol.TECNICO;
         this.cuil = cuil;
         this.area = area;
+    }
+
+
+    public List<String> getPermisos(Persona persona) {
+        List<String> permisos = new ArrayList<>(List.of("incidentes"));
+
+        return permisos;
     }
 }

@@ -5,6 +5,8 @@ import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.SistemaPermisos;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoIncidente;
 import Service.Observabilidad.MetricsRegistry;
 import Service.Server.ICrudViewsHandler;
@@ -69,6 +71,10 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
         this.estaLogueado(context);
 
         List<FallaTecnica> fallasTecnicas = repo.buscarTodos(FallaTecnica.class);
+
+        SistemaPermisos.check(this.usuario, TipoRol.TECNICO,"incidentes");
+
+
 
         Map<String, Object> model = this.basicModel(context);
         model.put("fallasTecnicas",fallasTecnicas);

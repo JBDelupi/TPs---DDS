@@ -51,18 +51,18 @@ public class ProductoController extends Controller {
 
     public void canjeExitoso(Context context) {
 
-
         String idProducto = context.formParam("idProducto");
         OfrecerProducto producto = repo.buscar(OfrecerProducto.class, Integer.parseInt(idProducto));
         Integer cantidad = Integer.valueOf(context.formParam("cantidadCanjear"));
 
         String id = context.sessionAttribute("idPersona");
-        this.usuario = EntityManagerHelper.getEntityManager().find(Persona.class, Integer.parseInt(id));
-
+        this.usuario = repo.buscar(Persona.class,Integer.parseInt(id));
         Colaborador colaborador = (Colaborador) getUsuario().getRol(TipoRol.COLABORADOR);
         colaborador.realizarCanje(producto,cantidad);
 
+
         repo.modificar(colaborador);
+        repo.modificar(producto);
 
         //Incremento la metrica
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
@@ -77,9 +77,7 @@ public class ProductoController extends Controller {
         Map<String, Object> model = this.basicModel(context);
 
         Colaborador colaborador = ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR));
-        List<Canje> canjes = colaborador.getHistorialCanje();
-
-        model.put("canjes",canjes);
+        model.put("canjes",colaborador.getHistorialCanje());
 
         context.render("Producto/historialCanjes.hbs", model);
     }

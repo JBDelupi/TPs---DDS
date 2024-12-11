@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Setter
 @Getter
@@ -32,5 +33,10 @@ public class PersonaVulnerable extends Rol {
 
     public Boolean tieneMenoresACargo(){
         return menoresACargo>0;
+    }
+
+    @Override
+    public List<String> getPermisos(Persona persona) {
+        return List.of();
     }
 }
