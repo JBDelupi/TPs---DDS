@@ -25,7 +25,6 @@ public class AdapterBotWhatsapp {
                         contenido)
                 .create();
 
-        System.out.println(message.getBody());
     }
 }
 

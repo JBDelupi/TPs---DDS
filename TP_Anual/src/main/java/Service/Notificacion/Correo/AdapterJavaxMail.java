@@ -51,9 +51,7 @@ public class AdapterJavaxMail {
             // Envío del mensaje
             Transport.send(message);
 
-            System.out.println("El correo electrónico ha sido enviado exitosamente.");
         } catch (MessagingException e) {
-            System.out.println("Error al enviar el correo electrónico: " + e.getMessage());
         }
     }
 
