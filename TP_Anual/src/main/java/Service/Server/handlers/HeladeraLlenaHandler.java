@@ -8,12 +8,13 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import java.util.Map;
 
+
+
 public class HeladeraLlenaHandler implements IHandler{
     @Override
     public void setHandle(Javalin app) {
         app.exception(HeladeraLlenaException.class, (e, context) -> {
 
-            //Incremento la metrica
             MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
             registry.counter("dds.exception.heladeraLlena").increment();
 

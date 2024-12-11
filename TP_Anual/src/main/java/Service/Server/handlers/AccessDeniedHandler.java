@@ -5,6 +5,8 @@ import Service.Server.exceptions.AccessDeniedException;
 import io.javalin.Javalin;
 import io.micrometer.core.instrument.MeterRegistry;
 
+
+
 public class AccessDeniedHandler implements IHandler{
 
     @Override

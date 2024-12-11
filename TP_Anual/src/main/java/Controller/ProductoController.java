@@ -2,8 +2,10 @@ package Controller;
 
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Actores.Colaborador;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Producto.Canje;
+import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoContribucion;
 import Service.Observabilidad.MetricsRegistry;
 import io.javalin.http.Context;
@@ -48,12 +50,14 @@ public class ProductoController extends Controller {
     }
 
     public void canjeExitoso(Context context) {
-        this.estaLogueado(context);
+
 
         String idProducto = context.formParam("idProducto");
         OfrecerProducto producto = repo.buscar(OfrecerProducto.class, Integer.parseInt(idProducto));
         Integer cantidad = Integer.valueOf(context.formParam("cantidadCanjear"));
 
+        String id = context.sessionAttribute("idPersona");
+        this.usuario = EntityManagerHelper.getEntityManager().find(Persona.class, Integer.parseInt(id));
 
         Colaborador colaborador = (Colaborador) getUsuario().getRol(TipoRol.COLABORADOR);
         colaborador.realizarCanje(producto,cantidad);

@@ -12,9 +12,10 @@ import java.util.Map;
 
 @Setter
 @Getter
+
+
 public abstract class Controller {
     Persona usuario;
-
 
     public void estaLogueado(Context context){
         if (context.sessionAttribute("usuario") == null) {
@@ -30,7 +31,4 @@ public abstract class Controller {
         model.put("usuario", this.usuario);
         return model;
     }
-
-
-
 }
