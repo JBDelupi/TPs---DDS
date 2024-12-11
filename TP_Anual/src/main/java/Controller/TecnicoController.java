@@ -6,7 +6,6 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoPersona;
-import Models.Repository.RepoTecnico;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -41,7 +40,7 @@ public class TecnicoController extends Controller {
         String contrasenia = context.formParam("contrasenia");
         String usuario = context.formParam("nombre_usuario");
 
-        repo.
+        repo.existeUsuario(usuario);
 
         // PARA ENCRIPTAR
         Encriptador encriptador = Encriptador.getInstancia();

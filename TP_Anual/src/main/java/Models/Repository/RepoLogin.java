@@ -5,7 +5,6 @@ import Service.Server.exceptions.InvalidPasswordException;
 import Service.Validador.CredencialDeAcceso;
 import jakarta.persistence.NoResultException;
 
-import java.util.List;
 
 public class RepoLogin extends Dao{
 
