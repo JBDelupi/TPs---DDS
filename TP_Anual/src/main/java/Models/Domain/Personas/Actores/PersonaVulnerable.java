@@ -2,7 +2,6 @@ package Models.Domain.Personas.Actores;
 
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,5 +1,5 @@
 package Service.Server.handlers;
-import Service.Server.exceptions.UnauthorizedResponseException;
+
 import io.javalin.Javalin;
 import java.util.Arrays;
 

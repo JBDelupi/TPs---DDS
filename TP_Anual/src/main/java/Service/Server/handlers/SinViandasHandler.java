@@ -6,7 +6,6 @@ import Service.Observabilidad.MetricsRegistry;
 import io.javalin.Javalin;
 import io.micrometer.core.instrument.MeterRegistry;
 
-import java.util.Map;
 
 public class SinViandasHandler extends Controller implements IHandler {
     @Override

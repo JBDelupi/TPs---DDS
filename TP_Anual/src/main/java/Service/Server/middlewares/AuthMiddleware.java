@@ -1,8 +1,6 @@
 package Service.Server.middlewares;
 
 import Controller.Actores.RolUsuario;
-import Models.Domain.Personas.Actores.TipoRol;
-import Service.Server.exceptions.AccessDeniedException;
 import Service.Server.exceptions.UnauthorizedResponseException;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;

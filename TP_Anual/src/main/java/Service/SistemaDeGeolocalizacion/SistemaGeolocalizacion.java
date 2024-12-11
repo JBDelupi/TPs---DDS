@@ -1,10 +1,8 @@
 package Service.SistemaDeGeolocalizacion;
 
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.Tecnico;
 import Models.Domain.Personas.Actores.TipoRol;
-import Models.Repository.RepoHeladera;
 import Models.Repository.RepoPersona;
 import Service.APIPuntos.AreaCobertura;
 import Service.APIPuntos.Punto;

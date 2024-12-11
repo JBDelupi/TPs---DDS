@@ -1,16 +1,12 @@
 package Service.SSO;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import com.github.scribejava.apis.GoogleApi20;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.oauth.OAuth20Service;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.json.JSONObject;
+
 
 public class GoogleAdaptado implements Sso{
     private final OAuth20Service service;

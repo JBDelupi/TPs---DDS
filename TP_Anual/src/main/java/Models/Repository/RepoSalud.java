@@ -1,11 +1,9 @@
 package Models.Repository;
 
-import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.TipoRol;
+
 import Models.Domain.Tarjetas.Tarjeta;
 import Models.Repository.EntityManager.EntityManagerHelper;
 
-import javax.validation.constraints.Future;
 import java.time.LocalDate;
 import java.util.List;
 

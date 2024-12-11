@@ -1,8 +1,6 @@
 package Models.Domain.FormasDeContribucion.ContribucionesHumana;
 
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import jakarta.persistence.*;
 import lombok.Getter;

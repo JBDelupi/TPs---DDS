@@ -1,6 +1,5 @@
 package Service.DeccoSaludAPI.DTO.Reporte;
 
-import Service.DeccoSaludAPI.DTO.RespuestaDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

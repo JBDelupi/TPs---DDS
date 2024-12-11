@@ -1,7 +1,6 @@
 package Service.Notificacion.Mensaje;
 
-import Service.Notificacion.Correo.CorreoAdapter;
-import Service.Notificacion.Notificacion;
+
 import lombok.Getter;
 
 @Getter

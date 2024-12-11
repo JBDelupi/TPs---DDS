@@ -4,10 +4,7 @@ import Models.Domain.FormasDeContribucion.ContribucionesGenerales.DonacionDeDine
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.DistribucionDeViandas;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.DonacionDeVianda;
 import Models.Domain.FormasDeContribucion.ContribucionesHumana.EntregaDeTarjeta;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.HacerseCargoDeHeladera;
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.FormasDeContribucion.Utilidades.TipoDonacion;
 
 public class FactoryContribucionDTO {
 

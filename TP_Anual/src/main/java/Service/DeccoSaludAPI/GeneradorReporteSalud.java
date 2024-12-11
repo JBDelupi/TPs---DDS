@@ -1,7 +1,6 @@
 package Service.DeccoSaludAPI;
 
 import Models.Domain.Tarjetas.Tarjeta;
-import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Repository.RepoSalud;
 import Service.DeccoSaludAPI.DTO.PersonaVulnerableDTO;
 import Service.DeccoSaludAPI.DTO.RespuestaDTO;

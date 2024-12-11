@@ -1,7 +1,6 @@
 package Service.Broker.Controllers;
 
 import Models.Domain.Heladera.Heladera;
-import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoHeladera;
 import org.json.JSONObject;
 

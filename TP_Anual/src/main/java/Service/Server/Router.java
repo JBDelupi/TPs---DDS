@@ -5,8 +5,7 @@ import Controller.Actores.RolUsuario;
 import Controller.AdministradorController;
 import Controller.HeladeraController;
 import Controller.TecnicoController;
-import Models.Repository.RepoPersona;
-import Service.SSO.GoogleAdaptado;
+
 
 import static io.javalin.apibuilder.ApiBuilder.get;
 import static io.javalin.apibuilder.ApiBuilder.post;

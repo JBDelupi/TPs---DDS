@@ -7,7 +7,6 @@ import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Observabilidad.MetricsRegistry;
 import Service.SSO.AdapterGoogleSSO;
 import Service.SSO.GoogleAdaptado;
-import Service.SSO.Sso;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Service.Validador.CredencialDeAcceso;

@@ -1,12 +1,6 @@
 package Service.DeccoSaludAPI;
 
-import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Domain.Tarjetas.Tarjeta;
-import Service.APIPuntos.Punto;
-import Service.APIPuntos.ServicioPuntosAPI;
-import Service.APIPuntos.ServicioPuntosAPIAdapter;
+
 import Service.DeccoSaludAPI.DTO.PersonaVulnerableDTO;
 import Service.DeccoSaludAPI.DTO.RespuestaDTO;
 import retrofit2.Call;

@@ -4,8 +4,6 @@ import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProduct
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
-import Models.Domain.Producto.Canje;
-import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoContribucion;
 import Service.Observabilidad.MetricsRegistry;
 import io.javalin.http.Context;

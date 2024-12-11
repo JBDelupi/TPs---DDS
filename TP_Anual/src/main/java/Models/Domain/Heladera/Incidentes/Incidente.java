@@ -2,12 +2,10 @@ package Models.Domain.Heladera.Incidentes;
 
 import Models.Domain.Heladera.Heladera;
 
-import Service.Notificacion.Mensaje.MensajeBienvenida;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 

@@ -4,11 +4,9 @@ import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.EntityManager.EntityManagerHelper;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
+
 
 import java.util.List;
 

@@ -1,7 +1,10 @@
 package Controller.DTO;
 
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class CrearContribucionDTO {
     private String tipoDonacion;
     private Map<String, String> params;
@@ -11,11 +14,4 @@ public class CrearContribucionDTO {
         this.params = params;
     }
 
-    public String getTipoDonacion() {
-        return tipoDonacion;
-    }
-
-    public Map<String, String> getParams() {
-        return params;
-    }
 }

@@ -1,7 +1,6 @@
 package Service.Server.handlers;
 
-import Controller.Controller;
-import Models.Domain.Excepciones.CapacidadHeladeraException;
+
 import Service.Observabilidad.MetricsRegistry;
 import Service.Server.exceptions.UserAlreadyExistsException;
 import io.javalin.Javalin;

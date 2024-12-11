@@ -1,6 +1,5 @@
 package Models.Repository;
 
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Rol;
 import Models.Repository.EntityManager.EntityManagerHelper;
 

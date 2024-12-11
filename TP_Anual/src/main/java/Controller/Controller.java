@@ -27,7 +27,7 @@ public abstract class Controller {
 
     public Map<String, Object> basicModel(Context context){
         Map<String, Object> model = new HashMap<>();
-        model.put("rol", usuario.getTipoUsuario().toString().toLowerCase());
+        model.put("rol", context.sessionAttribute("rolTipo").toString().toLowerCase());
         model.put("usuario", this.usuario);
         return model;
     }

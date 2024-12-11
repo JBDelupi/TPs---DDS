@@ -1,5 +1,5 @@
 package Service.APIPuntos;
-import Service.APIPuntos.Punto;
+
 import lombok.Getter;
 import lombok.Setter;
 

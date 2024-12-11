@@ -1,6 +1,5 @@
 package Service.Server.handlers;
 
-import Controller.Controller;
 import Models.Domain.Excepciones.HeladeraLlenaException;
 import Service.Observabilidad.MetricsRegistry;
 import io.javalin.Javalin;

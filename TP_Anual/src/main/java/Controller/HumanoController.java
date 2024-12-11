@@ -4,7 +4,6 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Rol;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -22,7 +21,6 @@ import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 public class HumanoController extends Controller  {

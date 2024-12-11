@@ -14,10 +14,8 @@ import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
 public class FallaTecnicaController extends Controller implements ICrudViewsHandler {
@@ -102,6 +100,9 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
     public void edit(Context context) {
         this.estaLogueado(context);
 
+
+
+
         Map<String, Object> model = this.basicModel(context);
         model.put("heladeras", repo.queryHeladera() );
 
@@ -117,6 +118,9 @@ public class FallaTecnicaController extends Controller implements ICrudViewsHand
     @Override
     public void update(Context context) {
         this.estaLogueado(context);
+
+        SistemaPermisos.check(this.usuario, TipoRol.TECNICO,"incidentes");
+
 
         String descripcion = context.formParam("descripcion");
         String imagen = context.formParam("imagenAdjunta");

@@ -4,8 +4,6 @@ import Models.Repository.EntityManager.EntityManagerHelper;
 import Service.Server.exceptions.InvalidPasswordException;
 import Service.Validador.CredencialDeAcceso;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 
 import java.util.List;
 

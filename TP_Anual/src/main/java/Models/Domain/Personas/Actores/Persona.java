@@ -5,7 +5,6 @@ import Controller.Actores.RolUsuario;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.Converter.MedioDeNotificacionAtributeConverter;
 import Service.Notificacion.Mensaje.Mensaje;
-import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Notificacion.Notificacion;
 import Service.Validador.CredencialDeAcceso;
 import jakarta.persistence.*;

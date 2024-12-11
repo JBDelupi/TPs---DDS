@@ -9,7 +9,6 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static Models.Repository.EntityManager.EntityManagerHelper.createQuery;

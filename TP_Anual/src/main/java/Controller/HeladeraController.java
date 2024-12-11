@@ -2,18 +2,13 @@ package Controller;
 
 import Controller.Actores.RolUsuario;
 import Controller.DTO.CrearContribucionDTO;
-import Models.Domain.Builder.ContribucionBuilder.HacerseCargoDeHeladeraBuilder;
-import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
-import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyFactory;
 import Models.Domain.Heladera.Incidentes.FallaTecnica;
 import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.Utilidades.StrategySuscripcion;
-import Models.Domain.Personas.Actores.Colaborador;
-import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.APIPuntos.Punto;
@@ -61,8 +56,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         String hacerseCargoParam = context.formParam("hacerseCargo");
         boolean hacerseCargo = "si".equalsIgnoreCase(hacerseCargoParam);
 
-        System.out.println(temperaturaMax);
-        System.out.println(temperaturaMin);
 
         Direccion direccion = new Direccion();
         direccion.setNumero(numero);

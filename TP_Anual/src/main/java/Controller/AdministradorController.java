@@ -1,7 +1,5 @@
 package Controller;
 
-import Controller.Actores.RolUsuario;
-import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.ImportadorCSV;

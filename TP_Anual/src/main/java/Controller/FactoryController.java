@@ -1,15 +1,9 @@
 package Controller;
 
-import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
-import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
-import Models.Domain.Heladera.Heladera;
-import Models.Domain.Heladera.Incidentes.Incidente;
-import Models.Domain.Personas.Actores.Persona;
-import Models.Domain.Reporte.TemplateReporte;
+
 import Models.Repository.RepoReporte;
 import Models.Repository.RepoPersona;
 import Models.Repository.*;
-import Service.DeccoSaludAPI.DTO.Reporte.ReporteSalud;
 
 
 public class FactoryController {

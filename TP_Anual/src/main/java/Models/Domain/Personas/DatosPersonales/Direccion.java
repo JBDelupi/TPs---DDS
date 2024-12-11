@@ -4,7 +4,6 @@ import Service.APIPuntos.Punto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
-import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 

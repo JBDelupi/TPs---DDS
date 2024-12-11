@@ -4,17 +4,14 @@ import Controller.DTO.CrearContribucionDTO;
 import Models.Domain.FormasDeContribucion.Utilidades.FactoryContribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.Utilidades.Model.ContribucionStrategyFactory;
-import Models.Domain.Heladera.Heladera;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.SistemaPermisos;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoContribucion;
 import Service.Observabilidad.MetricsRegistry;
-import Service.Server.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

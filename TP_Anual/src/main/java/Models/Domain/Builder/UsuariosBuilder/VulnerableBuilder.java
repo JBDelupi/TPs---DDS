@@ -1,7 +1,6 @@
 package Models.Domain.Builder.UsuariosBuilder;
 
 import Models.Domain.Personas.Actores.PersonaVulnerable;
-import Models.Domain.Personas.Actores.TipoRol;
 
 import java.time.LocalDate;
 

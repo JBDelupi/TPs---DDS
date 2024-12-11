@@ -1,7 +1,6 @@
 package Service.ImportadorCSV.Mappers;
 
 import Models.Domain.Personas.Actores.Fisico;
-import Models.Domain.Personas.Actores.Persona;
 import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 
