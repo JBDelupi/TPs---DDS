@@ -20,8 +20,8 @@ public class Router {
         Server.app().get("/recuperar",context -> context.render("Sesion/recuperar.hbs"));
 
 
-        Server.app().get("/asignar-rol/tecnico",context -> context.render("Asignar-rol/solicitud-tecnico.hbs"));
-        Server.app().get("/asignar-rol/solicitudExitosa",context -> context.render("Asignar-rol/solicitud-enviada.hbs"));
+        Server.app().get("/asignar-rol/tecnico",context -> context.render("Asignar-rol/solicitud-tecnico.hbs"), RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+        Server.app().get("/asignar-rol/solicitudExitosa",context -> context.render("Asignar-rol/solicitud-enviada.hbs"), RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
 
 
 
@@ -46,13 +46,13 @@ public class Router {
 
         Server.app().routes(()->{
             get("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::create, RolUsuario.ADMINISTRADOR, RolUsuario.JURIDICO);
-            get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index);
+            get("/heladeras",((HeladeraController) FactoryController.controller("heladeras"))::index,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
             post("/heladeras/{id}/suscribir",((HeladeraController) FactoryController.controller("heladeras"))::edit);
             post("/heladeras/{id}/desuscribir",((HeladeraController) FactoryController.controller("heladeras"))::update);
-            get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show);
+            get("/heladeras/{id}",((HeladeraController) FactoryController.controller("heladeras"))::show,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
             post("/registro/heladera",((HeladeraController) FactoryController.controller("heladeras"))::save);
-            get("/juridico/{id}/mis-heladeras", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarMisHeladeras, RolUsuario.JURIDICO);
-            get("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarEstadoHeladera);
+            get("/juridico/{id}/mis-heladeras", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarMisHeladeras, RolUsuario.JURIDICO,RolUsuario.ADMINISTRADOR);
+            get("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarEstadoHeladera,RolUsuario.JURIDICO,RolUsuario.ADMINISTRADOR);
             post("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::cambiarEstadoHeladera);
             get("/", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarCantidadHeladerasActivas);
         });
@@ -67,34 +67,34 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index, RolUsuario.ADMINISTRADOR, RolUsuario.FISICO);
+            get("/incidentes",((FallaTecnicaController) FactoryController.controller("incidente"))::index, RolUsuario.ADMINISTRADOR, RolUsuario.FISICO, RolUsuario.JURIDICO);
             get("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::create, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
             post("/registro/incidente",((FallaTecnicaController)FactoryController.controller("incidente"))::save );
             get("/incidentes/seguimiento", ((FallaTecnicaController)FactoryController.controller("incidente"))::verSeguimiento, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
-            get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
+            get("/incidentes/{id}", ((FallaTecnicaController)FactoryController.controller("incidente"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR, RolUsuario.JURIDICO);
         });
 
         Server.app().routes(()->{
-            get("/deccosalud",((DeccoSaludController)FactoryController.controller("deccosalud"))::index);
-            post("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte);
+            get("/deccosalud",((DeccoSaludController)FactoryController.controller("deccosalud"))::index,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+            post("/deccosalud/detalles",((DeccoSaludController)FactoryController.controller("deccosalud"))::mostrarReporte,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
         });
 
         Server.app().routes(()->{
-            get("/tecnico/visita",((FallaTecnicaController)FactoryController.controller("incidente"))::edit);
+            get("/tecnico/visita",((FallaTecnicaController)FactoryController.controller("incidente"))::edit,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
             post("/tecnico/visita",((FallaTecnicaController)FactoryController.controller("incidente"))::update);
         });
 
         Server.app().routes(()->{
-            get("/productos",((ProductoController)FactoryController.controller("producto"))::index);
-            get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show);
+            get("/productos",((ProductoController)FactoryController.controller("producto"))::index,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+            get("/productos/{id}",((ProductoController)FactoryController.controller("producto"))::show,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
             post("/canjeExitoso",((ProductoController)FactoryController.controller("producto"))::canjeExitoso);
-            get("{rol}/{userId}/historialcanjes",((ProductoController)FactoryController.controller("producto"))::historialCanjes);
+            get("{rol}/{userId}/historialcanjes",((ProductoController)FactoryController.controller("producto"))::historialCanjes,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
         });
 
        Server.app().routes(()->{
-           get("{rol}/{userId}/contribuciones", ((ContribucionController) FactoryController.controller("Contribucion"))::consultarContribuciones);
-           get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index);
-           get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create);
+           get("{rol}/{userId}/contribuciones", ((ContribucionController) FactoryController.controller("Contribucion"))::consultarContribuciones,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+           get("/contribuciones",((ContribucionController)FactoryController.controller("Contribucion"))::index,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+           get("/contribuciones/{id}",((ContribucionController)FactoryController.controller("Contribucion"))::create,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
            post("/contribucionExitosa", ((ContribucionController)FactoryController.controller("Contribucion"))::save);
        });
 
@@ -107,18 +107,18 @@ public class Router {
         });
 
         Server.app().routes(()->{
-            get("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::create);
+            get("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::create,RolUsuario.ADMINISTRADOR);
             post("/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::save);
-            get("/index/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::index);
-            get("/registro/rol/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::update);
+            get("/index/registro/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::index,RolUsuario.ADMINISTRADOR);
+            get("/registro/rol/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::update,RolUsuario.ADMINISTRADOR);
             post("/registro/rol/tecnico",((TecnicoController)FactoryController.controller("tecnico"))::edit);
         });
 
         Server.app().routes(()->{
-            get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index);
-            get("/reportes/listadoReportes",((ReporteController)FactoryController.controller("reporte"))::show);
+            get("/reportes",((ReporteController)FactoryController.controller("reporte"))::index,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
+            get("/reportes/listadoReportes",((ReporteController)FactoryController.controller("reporte"))::show,RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO,RolUsuario.FISICO);
             post("/reportes/detalles",((ReporteController)FactoryController.controller("reporte"))::reporte);
-            get("/reportes/manual",((ReporteController)FactoryController.controller("reporte"))::generarManualmente);
+            get("/reportes/manual",((ReporteController)FactoryController.controller("reporte"))::generarManualmente,RolUsuario.ADMINISTRADOR);
         });
 
 
