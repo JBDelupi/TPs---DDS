@@ -122,7 +122,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         Alerta alerta = repo.ultimaAlerta(id);
 
         List<ObserverHeladera> suscriptores = heladera.getSuscriptores().stream()
-                    .filter(f -> f.getColaborador().equals(this.getUsuario()))
+                    .filter(f -> f.getColaborador().getId().equals(this.getUsuario().getId()))
                     .toList();
 
         Map<String, Object> model = this.basicModel(context);

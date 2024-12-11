@@ -66,7 +66,7 @@ public class ProductoController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.canjes").increment();
 
-        context.render("Producto/canjeExitoso.hbs");
+        context.render("Producto/canjeExitoso.hbs",this.basicModel(context));
     }
 
     public void historialCanjes(Context context) {
