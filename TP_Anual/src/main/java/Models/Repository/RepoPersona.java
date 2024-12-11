@@ -1,5 +1,6 @@
 package Models.Repository;
 
+import Models.Domain.Excepciones.UsuarioYaTieneRolException;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
@@ -48,6 +49,14 @@ public class RepoPersona extends Dao {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public Persona buscarChequeandoRol(TipoRol tipoRol , int id) {
+        Persona persona = this.buscar(Persona.class,id);
+        if (persona.checkRol(tipoRol)){
+            throw new UsuarioYaTieneRolException("Usuario ya tiene rol tecnico");
+        }
+        else return persona;
     }
 
 

@@ -20,8 +20,11 @@ import Models.Domain.Producto.TipoRubro;
 import Models.Domain.Tarjetas.Trazabilidad.SolicitudDeApertura;
 import Models.Domain.Tarjetas.TarjetaAlimentar;
 import Models.Repository.RepoContribucion;
+import Models.Repository.RepoPersona;
 import Service.Observabilidad.MetricsRegistry;
 import Service.Server.exceptions.UnauthorizedResponseException;
+import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Encriptador;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.Getter;
 
@@ -34,7 +37,7 @@ public class FactoryContribucion {
 
     private static FactoryContribucion instancia;
     private Persona persona;
-    private final RepoContribucion repo = new RepoContribucion();
+        private final RepoPersona repo = new RepoPersona();
     private String id;
 
     public static FactoryContribucion getInstance() {
@@ -149,6 +152,9 @@ public class FactoryContribucion {
         LocalDate fechaNacimiento = LocalDate.parse(dto.getParams().get("fechaNacimiento"));
         String apellido = dto.getParams().get("apellido");
         String nombre = dto.getParams().get("nombre");
+        Boolean situacionCalle = dto.getParams().get("situacionCalle").equals("Sí");
+
+        repo.existeUsuario(documento);
 
 
         if (dto.getParams().get("menoresACargo").equals("si")) {
@@ -156,12 +162,15 @@ public class FactoryContribucion {
         }
 
         VulnerableBuilder vulnerableBuilder = new VulnerableBuilder();
-        PersonaVulnerable rolVulnerable = vulnerableBuilder.menoresACargo(cantidadMenores).construir();
+        PersonaVulnerable rolVulnerable = vulnerableBuilder.menoresACargo(cantidadMenores).fechaRegistro(LocalDate.now()).flagSituacionDeCalle(situacionCalle).construir();
 
         Direccion direccion = new Direccion();
         direccion.setNumero(numero);
         direccion.setLocalidad(localidad);
         direccion.setCalle(calle);
+
+
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(documento, Encriptador.getInstancia().encriptarMD5(documento));
 
         FisicoBuilder personaVulnerableBuilder = new FisicoBuilder();
         Fisico persona = personaVulnerableBuilder
@@ -172,7 +181,10 @@ public class FactoryContribucion {
                 .direccion(direccion)
                 .fechaNacimiento(fechaNacimiento)
                 .rol(rolVulnerable)
+                .credencialDeAcceso(credencialDeAcceso)
                 .construir();
+
+
 
         TarjetaAlimentar tarjetaAlimentar = new TarjetaAlimentar(persona);
         Contribucion donacion = new EntregaDeTarjeta(tarjetaAlimentar);

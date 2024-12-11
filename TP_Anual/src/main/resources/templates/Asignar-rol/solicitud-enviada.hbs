@@ -30,7 +30,26 @@
             <p class="text-dark animated slideInLeft mb-4 pb-3 text-center">
                 ¡Tu solicitud ha sido enviada exitosamente! Te contactaremos pronto con más detalles.
             </p>
-            <a href="/" class="btn btn-primary py-2 px-4">Volver al inicio</a>
+            </p>
+            <a href="javascript:history.back()" class="btn btn-danger py-2 px-4">Volver</a>
+
+            <p class="text-danger">
+                Será redirigido en <span id="redirect-timer">5</span> segundos...
+            </p>
+            <script>
+                let seconds = 5;
+                const timerSpan = document.getElementById('redirect-timer');
+
+                const countdown = setInterval(() => {
+                    seconds--;
+                    timerSpan.textContent = seconds;
+                    if (seconds === 0) {
+                        clearInterval(countdown);
+                        // Redirige a la página deseada
+                        window.location.href = "javascript:history.back()";
+                    }
+                }, 1000);
+            </script>
         </div>
     </div>
 </main>

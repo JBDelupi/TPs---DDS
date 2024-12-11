@@ -4,6 +4,8 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
+import Models.Repository.RepoPersona;
 import Models.Repository.RepoTecnico;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
@@ -19,9 +21,9 @@ import java.util.Map;
 
 public class TecnicoController extends Controller {
 
-    private final RepoTecnico repo;
+    private final RepoPersona repo;
 
-    public TecnicoController(RepoTecnico repo){
+    public TecnicoController(RepoPersona repo){
         this.repo = repo;
     }
 
@@ -37,6 +39,9 @@ public class TecnicoController extends Controller {
         String radio = context.formParam("radio");
         String correo = context.formParam("correo");
         String contrasenia = context.formParam("contrasenia");
+        String usuario = context.formParam("nombre_usuario");
+
+        repo.
 
         // PARA ENCRIPTAR
         Encriptador encriptador = Encriptador.getInstancia();
@@ -45,7 +50,7 @@ public class TecnicoController extends Controller {
         CredencialDeAccesoBuilder credencialDeAccesoBuilder = new CredencialDeAccesoBuilder();
         CredencialDeAcceso credencialDeAcceso = credencialDeAccesoBuilder
                 .contrasenia(contraseniaEncriptada)
-                .nombreUsuario(context.formParam("nombre_usuario"))
+                .nombreUsuario(usuario)
                 .construir();
 
         Tecnico tecnico = new Tecnico(cuil, new AreaCobertura(new Punto(latitud,longitud),radio) );
@@ -97,7 +102,7 @@ public class TecnicoController extends Controller {
         String longitud = context.formParam("longitud");
         String radio = context.formParam("radio");
 
-        Persona persona =  repo.buscarChequeandoRol(Persona.class, Integer.parseInt(idUsuario));
+        Persona persona =  repo.buscarChequeandoRol(TipoRol.TECNICO,Integer.parseInt(idUsuario));
 
         Tecnico tecnico = new Tecnico(cuil,new AreaCobertura(new Punto(latitud,longitud),radio));
 

@@ -62,10 +62,7 @@ public class HumanoController extends Controller  {
 
         Validador.getInstancia().validar(credencialDeAcceso);
 
-        // PARA ENCRIPTAR LA CONTRASEÑA
-        String contraseniaEnciptada = Encriptador.getInstancia().encriptarMD5(contrasenia);
-
-        credencialDeAcceso.setContrasenia(contraseniaEnciptada);
+        credencialDeAcceso.setContrasenia(Encriptador.getInstancia().encriptarMD5(contrasenia));
 
         Direccion direccion = new Direccion();
         direccion.setCalle(calle);

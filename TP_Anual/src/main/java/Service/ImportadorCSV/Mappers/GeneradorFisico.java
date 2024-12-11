@@ -4,20 +4,17 @@ import Models.Domain.Personas.Actores.Fisico;
 import Models.Repository.RepoPersona;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GeneradorFisico {
 
 
     public static void generar(List<FisicoDTO> fisicoDTOS){
-        List<Fisico> fisicos = new ArrayList<>();
         RepoPersona repo = new RepoPersona();
         FisicoMapper mapper = new FisicoMapper();
+        fisicoDTOS.forEach(f->repo.existeUsuario(f.getNumDocumento()));
         for (FisicoDTO fisicoDTO : fisicoDTOS) {
             Fisico fisico = mapper.toEntity(fisicoDTO);
-            repo.existeUsuario(fisico.getCredencialDeAcceso().getNombreUsuario());
-            fisicos.add(fisico);
             repo.agregar(fisico);
         }
     }
