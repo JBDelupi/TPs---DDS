@@ -14,6 +14,7 @@ import Service.ImportadorCSV.DTO.FactoryContribucionDTO;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
 import Service.Validador.CredencialDeAcceso;
+import Service.Validador.Encriptador;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +26,7 @@ public class FisicoMapper {
     public  Fisico  toEntity(FisicoDTO dto) {
 
         FisicoBuilder fisicoBuilder = new FisicoBuilder();
-        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(dto.getMail(), dto.getNumDocumento());
+        CredencialDeAcceso credencialDeAcceso = new CredencialDeAcceso(dto.getMail(), Encriptador.getInstancia().encriptarMD5(dto.getNumDocumento()) );
 
         Fisico fisico = fisicoBuilder
                 .nombre(dto.getNombre())
