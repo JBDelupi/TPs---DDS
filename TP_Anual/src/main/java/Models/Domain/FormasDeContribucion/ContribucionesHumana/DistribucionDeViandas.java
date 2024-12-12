@@ -38,13 +38,14 @@ public class DistribucionDeViandas extends Contribucion {
     }
 
     public String getDetalle() {
-        String unDetalle = " ";
-        unDetalle += "Heladera Origen: " + this.getHeladeraOrigen().getId();
-        unDetalle += ", Heladera Destino: " + this.getHeladeraDestino().getId();
-        unDetalle += ", Cantidad: " + this.getCantidadDeViandasAMover().toString();
-        unDetalle += ", Fecha de Donación: " + this.getFechaDeDonacion().toString();
+        String unDetalle = "";
+        unDetalle += "Heladera Origen: " + (this.getHeladeraOrigen() != null && this.getHeladeraOrigen().getId() != null ? this.getHeladeraOrigen().getId() : "null");
+        unDetalle += ", Heladera Destino: " + (this.getHeladeraDestino() != null && this.getHeladeraDestino().getId() != null ? this.getHeladeraDestino().getId() : "null");
+        unDetalle += ", Cantidad: " + (this.getCantidadDeViandasAMover() != null ? this.getCantidadDeViandasAMover().toString() : "null");
+        unDetalle += ", Fecha de Donación: " + (this.getFechaDeDonacion() != null ? this.getFechaDeDonacion().toString() : "null");
         return unDetalle;
     }
+
 
 
 

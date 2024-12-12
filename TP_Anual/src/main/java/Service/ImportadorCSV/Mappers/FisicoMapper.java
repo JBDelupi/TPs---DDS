@@ -38,9 +38,13 @@ public class FisicoMapper {
 
         fisico.setCodigoDeNotificacion(dto.getMail());
 
+
+
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();
         Colaborador colaborador = colaboradorBuilder
                 .construir(fisico);
+
+        fisico.agregarRol(colaborador);
 
         Double puntaje = 0.0;
 
@@ -56,8 +60,6 @@ public class FisicoMapper {
         }
 
         colaborador.setPuntaje(puntaje);
-
-
 
 
         return fisico;

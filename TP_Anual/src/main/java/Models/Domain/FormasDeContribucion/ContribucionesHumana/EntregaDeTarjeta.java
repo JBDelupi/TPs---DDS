@@ -33,11 +33,11 @@ public class EntregaDeTarjeta extends Contribucion {
         return 1 * 2.0;
     }
 
-    public String  getDetalle(){
+    public String getDetalle() {
         String unDetalle = "";
-        unDetalle += "Tarjeta Codigo: " + this.getTarjeta().getCodigo();
-
+        unDetalle += "Tarjeta Codigo: " + (this.getTarjeta() != null && this.getTarjeta().getCodigo() != null ? this.getTarjeta().getCodigo() : "null");
         return unDetalle;
     }
+
 
 }

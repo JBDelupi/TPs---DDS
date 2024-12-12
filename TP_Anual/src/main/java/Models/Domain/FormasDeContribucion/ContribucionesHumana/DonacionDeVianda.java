@@ -31,12 +31,13 @@ public class DonacionDeVianda extends Contribucion {
         this.nombre = "Donacion de vianda";
     }
 
-    public String getDetalle(){
-        String unDetalle = " ";
-        unDetalle += "Vianda: " + this.getVianda().getNombre();
-        unDetalle += ", Heladera: " + this.getHeladera().getId();
+    public String getDetalle() {
+        String unDetalle = "";
+        unDetalle += "Vianda: " + (this.getVianda() != null && this.getVianda().getNombre() != null ? this.getVianda().getNombre() : "null");
+        unDetalle += ", Heladera: " + (this.getHeladera() != null && this.getHeladera().getId() != null ? this.getHeladera().getId() : "null");
         return unDetalle;
     }
+
 
 
 
