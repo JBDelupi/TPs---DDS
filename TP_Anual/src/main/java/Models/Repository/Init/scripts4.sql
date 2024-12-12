@@ -8,7 +8,7 @@ VALUES
 -- Inserting data into producto
 INSERT INTO producto (id, descripcion, imagen, nombre, rubro)
 VALUES
-    (1, 'MacBook Pro 13" M2 Chip 8 Core CPU 10 Core GPU 512GB SSD Space Grey', '', 'Apple MacBook Pro 13', 'ELECTRONICA');
+    (1, 'MacBook Pro 13" M2 Chip 8 Core CPU 10 Core GPU 512GB SSD Space Grey', 'macBook.png', 'Apple MacBook Pro 13', 'ELECTRONICA');
 
 -- Inserting data into rol
 INSERT INTO rol (id, id_persona, tipo)
