@@ -27,8 +27,8 @@ public class ContribucionController extends Controller {
 
     public void index(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
+
         model.put("esHumano", this.usuario instanceof Fisico );
         context.render("Formas-de-contribucion/index.hbs", model);
 
@@ -37,12 +37,13 @@ public class ContribucionController extends Controller {
 
     public void create(Context context) {
         this.estaLogueado(context);
-        String tipoContribucion = context.queryParam("tipo");
-
-        SistemaPermisos.check(this.usuario, TipoRol.COLABORADOR,tipoContribucion);
-
         Map<String, Object> model = this.basicModel(context);
+
+
+        String tipoContribucion = context.queryParam("tipo");
+        SistemaPermisos.check(this.usuario, TipoRol.COLABORADOR,tipoContribucion);
         ContribucionStrategyFactory.getStrategy(tipoContribucion).agregarModelo(model,repo);
+
 
 
         context.render("Formas-de-contribucion/"+tipoContribucion+".hbs",model);
@@ -52,6 +53,7 @@ public class ContribucionController extends Controller {
 
     public void save(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         Map<String, String> singleValueParams = context.formParamMap().entrySet().stream()
                 .collect(Collectors.toMap(
@@ -66,7 +68,7 @@ public class ContribucionController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.contribucionesCreadas").increment();
 
-        context.render("Formas-de-contribucion/contribucionExitosa.hbs", this.basicModel(context));
+        context.render("Formas-de-contribucion/contribucionExitosa.hbs", model);
     }
 
 

@@ -102,7 +102,6 @@ public class HumanoController extends Controller  {
 
     public void index(Context context){
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
         model.put("colaborador", usuario.checkRol(TipoRol.COLABORADOR));
@@ -125,8 +124,8 @@ public class HumanoController extends Controller  {
 
     public void show(Context context){
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
+
         model.put("humano", model);
 
         context.render("Persona-humana/perfilHumana.hbs", model);
@@ -135,8 +134,8 @@ public class HumanoController extends Controller  {
 
     public void update(Context context){
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
+
         this.asignarParametros(context);
         repo.agregar(this.usuario);
 

@@ -44,8 +44,8 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
     @Override
     public void show(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
+
 
         context.render("Persona-juridica/perfilJuridico.hbs", model);
     }

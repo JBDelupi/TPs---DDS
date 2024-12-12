@@ -35,6 +35,10 @@ public class AdministradorController  extends Controller {
     }
 
     public void saveImportarColaborador(Context context) throws CsvValidationException, IOException {
+        this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
+
+
         UploadedFile file = context.uploadedFile("csvFileInput");
         String token = context.formParam("token");
 
@@ -44,7 +48,6 @@ public class AdministradorController  extends Controller {
         GeneradorFisico.generar(importadosCSV.stream().toList());
 
 
-        Map<String, Object> model = new HashMap<>();
 
         model.put("colaboradores",importadosCSV);
 
@@ -53,8 +56,9 @@ public class AdministradorController  extends Controller {
 
     public void show(Context context){
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
-        context.render("Administrador/perfilAdministrador.hbs",this.basicModel(context));
+        context.render("Administrador/perfilAdministrador.hbs",model);
     }
 
 

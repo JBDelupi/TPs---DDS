@@ -120,10 +120,9 @@ public class TecnicoController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.rolTecnicoAgregado").increment();
 
-        Map<String,Object> model = new HashMap<>();
+        Map<String,Object> model = this.basicModel(context);
         model.put("persona",persona);
         model.put("fecha_actual", LocalDate.now());
-        model = this.basicModel(context);
 
         context.render("Tecnico/rol_exito_asignado.hbs",model);
 
@@ -132,7 +131,6 @@ public class TecnicoController extends Controller {
 
     public void update(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
         context.render("Tecnico/asignar_rol_tecnico.hbs",model);

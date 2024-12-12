@@ -43,7 +43,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     @Override
     public void save(Context context) {
-        this.estaLogueado(context);
+
 
         String calle = context.formParam("calle");
         String numero = context.formParam("numero");
@@ -61,6 +61,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         direccion.setNumero(numero);
         direccion.setLocalidad(localidad);
         direccion.setCalle(calle);
+
         Punto punto = new Punto(latitud, longitud);
         direccion.setCentro(punto);
 
@@ -98,10 +99,10 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     public void index(Context context){
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         List<Heladera> heladeraList = repo.buscarTodos(Heladera.class);
 
-        Map<String, Object> model = this.basicModel(context);
         model.put("esHumano", this.getUsuario().getTipoUsuario().equals(RolUsuario.FISICO));
         model.put("heladeras",heladeraList);
 
@@ -114,6 +115,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     @Override
     public void show(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         // <-- HELADERA -->
         String id = context.pathParam("id");
@@ -125,7 +127,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
                     .filter(f -> f.getColaborador().getId().equals(this.getUsuario().getId()))
                     .toList();
 
-        Map<String, Object> model = this.basicModel(context);
         model.put("heladera",heladera);
         model.put("alerta",alerta);
         model.put("hayAlerta", alerta != null);
@@ -171,10 +172,9 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     public void mostrarMisHeladeras(Context context){
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         List<Heladera> heladeraList = repo.buscarMisHeladeras(getUsuario().getId());
-
-        Map<String, Object> model = this.basicModel(context);
         model.put("heladeras",heladeraList);
 
         context.render("Heladera/mis-heladeras.hbs", model);
@@ -183,6 +183,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     public void mostrarEstadoHeladera(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         String idHeladera = context.pathParam("id");
 
@@ -190,7 +191,6 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         List<FallaTecnica> fallasTecnicas = repo.buscarFallasPorHeladera(Integer.parseInt(idHeladera));
 
-        Map<String, Object> model = this.basicModel(context);
         model.put("heladera", heladera);
         model.put("fallasTecnicas", fallasTecnicas);
 

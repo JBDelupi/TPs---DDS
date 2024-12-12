@@ -24,18 +24,17 @@ public class ProductoController extends Controller {
 
     public void index(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         List<OfrecerProducto> productos = repo.buscarTodos(OfrecerProducto.class);
-
-        Map<String, Object> model = this.basicModel(context);
         model.put("productos",productos);
+
 
         context.render("Producto/productosOfrecidos.hbs", model);
     }
 
     public void show(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
         String id = context.pathParam("id");
@@ -71,7 +70,6 @@ public class ProductoController extends Controller {
 
     public void historialCanjes(Context context) {
         this.estaLogueado(context);
-
         Map<String, Object> model = this.basicModel(context);
 
         Colaborador colaborador = ((Colaborador) getUsuario().getRol(TipoRol.COLABORADOR));

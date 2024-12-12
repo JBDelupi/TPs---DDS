@@ -24,10 +24,8 @@ public class ReporteController extends Controller {
 
     public void index(Context context) {
         this.estaLogueado(context);
-
-        Persona usuario = context.sessionAttribute("usuario");
         Map<String, Object> model = this.basicModel(context);
-        model.put("usuario", usuario);
+
         model.put("esHumano", usuario.getTipoUsuario().compareTo(RolUsuario.FISICO));
 
 
@@ -36,11 +34,11 @@ public class ReporteController extends Controller {
 
     public void show(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
+
 
         String tipoReporte = context.queryParam("tipo");
-
         List<TemplateReporte> listaReportes = repo.buscarPorTipo(tipoReporte);
-        Map<String, Object> model = this.basicModel(context);
         model.put("listaReportes", listaReportes);
         model.put("tipoReporte", tipoReporte);
 
@@ -54,12 +52,12 @@ public class ReporteController extends Controller {
 
     public void reporte(Context context) throws IOException {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         String idReporte = context.formParam("idReporte");
         String tipoReporte = context.queryParam("tipo");
 
         TemplateReporte reporte = repo.buscar(TemplateReporte.class ,Integer.parseInt(idReporte));
-        Map<String, Object> model = this.basicModel(context);
         model.put("reporte",reporte);
 
         context.render("Reportes/" + tipoReporte + ".hbs", model);
@@ -67,6 +65,7 @@ public class ReporteController extends Controller {
 
     public void generarManualmente(Context context) {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         App.generacionManual();
 

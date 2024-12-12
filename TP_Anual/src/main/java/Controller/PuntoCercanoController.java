@@ -20,6 +20,7 @@ public class PuntoCercanoController extends Controller {
 
     public void cargarPuntos(Context context) throws IOException {
         this.estaLogueado(context);
+        Map<String, Object> model = this.basicModel(context);
 
         String latitud = context.formParam("latitud");
         String longitud = context.formParam("longitud");
@@ -27,7 +28,6 @@ public class PuntoCercanoController extends Controller {
 
         List<Punto> puntoList = ServicioPuntosAPI.getInstance().obtenerPuntosEstrategicos(new Punto(latitud,longitud), radio);
 
-        Map<String, Object> model = this.basicModel(context);
 
         model.put("puntos", puntoList);
 
