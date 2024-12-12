@@ -5,6 +5,7 @@ import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
 import Models.Domain.Personas.Actores.Fisico;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
+import Models.Repository.EntityManager.EntityManagerHelper;
 import Models.Repository.RepoPersona;
 import Service.APIPuntos.AreaCobertura;
 import Models.Domain.Personas.Actores.Tecnico;
@@ -16,6 +17,8 @@ import Service.Validador.Encriptador;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TecnicoController extends Controller {
@@ -71,7 +74,11 @@ public class TecnicoController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.tecnicosCreados").increment();
 
-        context.redirect("/index/administrador");
+        Map<String,Object> model = new HashMap<>();
+        model.put("persona",fisico);
+        model.put("fecha_actual", LocalDate.now());
+        model = this.basicModel(context);
+        context.render("Tecnico/registro_exitoso.hbs",model);
     }
 
 
@@ -113,7 +120,12 @@ public class TecnicoController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.rolTecnicoAgregado").increment();
 
-        context.redirect("/index/administrador");
+        Map<String,Object> model = new HashMap<>();
+        model.put("persona",persona);
+        model.put("fecha_actual", LocalDate.now());
+        model = this.basicModel(context);
+
+        context.render("Tecnico/rol_exito_asignado.hbs",model);
 
 
     }
