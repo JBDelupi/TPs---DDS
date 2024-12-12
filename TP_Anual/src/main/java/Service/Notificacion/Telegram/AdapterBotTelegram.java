@@ -16,7 +16,6 @@ public class AdapterBotTelegram extends TelegramLongPollingBot {
         message.setChatId(usuario); // ID del chat (puede ser número de chat)
         message.setText(contenido); // Contenido del mensaje
 
-        System.out.println(contenido);
         try {
             execute(message); // Enviar mensaje
         } catch (TelegramApiException e) {

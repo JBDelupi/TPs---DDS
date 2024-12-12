@@ -13,7 +13,7 @@ public class AdapterVonage {
     VonageClient client = VonageClient.builder().apiKey(apiKey).apiSecret(apiSecret).build();
 
     public void Notificar(String usuario, String contenido) {
-        TextMessage message = new TextMessage("API SMS",
+        TextMessage message = new TextMessage("Decco colaboraciones",
                 usuario,
                 contenido
         );

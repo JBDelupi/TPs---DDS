@@ -38,6 +38,7 @@ public class ContribucionController extends Controller {
     public void create(Context context) {
         this.estaLogueado(context);
         String tipoContribucion = context.queryParam("tipo");
+
         SistemaPermisos.check(this.usuario, TipoRol.COLABORADOR,tipoContribucion);
 
         Map<String, Object> model = this.basicModel(context);
