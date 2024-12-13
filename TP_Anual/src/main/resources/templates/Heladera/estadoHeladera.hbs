@@ -24,10 +24,20 @@
             font-weight: bold;
             margin-left: 10px;
         }
+
+        .btn-alert {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-alert-disabled {
+            background-color: grey;
+            color: white;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-
 {{> templates/partials/headerColaborador rol=rol id=id}}
 {{> templates/partials/tipografia}}
 
@@ -43,40 +53,40 @@
                     <option value="false" {{#unless heladera.abierto}}selected{{/unless}}>Cerrado</option>
                 </select>
                 <span id="updateMessage" class="updated-message" style="display: none;">
-                    ¡Actualizado!
-                    <span id="countdown">3</span>
-                </span>
+                        ¡Actualizado!
+                        <span id="countdown">3</span>
+                    </span>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Actualizar Estado</button>
         </form>
     </div>
-    {{#if fallasTecnicas}}
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>ID de Falla</th>
-                    <th>Fecha</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Colaborador informante</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each fallasTecnicas}}
-                    <tr>
-                        <td>{{this.id}}</td>
-                        <td>{{this.fecha}}</td>
-                        <td>{{this.descripcion}}</td>
-                        <td>{{#if this.solucionado}}Cerrada{{else}}Abierta{{/if}}</td>
-                        <td>{{this.colaborador.id}}</td>
-                    </tr>
-                    {{#if this.visitasTecnicas}}
-                        <tr class="visitas-header">
-                            <td colspan="5">Visitas Técnicas:</td>
-                        </tr>
-                        <tr class="visitas-row">
-                            <td colspan="5">
+
+<div class="text-center mt-4">
+<form action="/heladeras/{{heladera.id}}/quitar-alerta" method="POST" class="d-inline-block">
+        <input type="hidden" id="estado-alerta" name="estado-alerta" value="true">
+        <button type="submit" class="btn btn-alert {{#if hayAlerta}}btn-success{{else}}btn-alert-disabled disabled{{/if}}">
+            {{#if hayAlerta}}Quitar Alerta{{else}}Sin Alerta{{/if}}
+    </button>
+</form>
+</div>
+
+{{#if fallasTecnicas}}
+        <div class="accordion mt-4" id="accordionFallas">
+            {{#each fallasTecnicas}}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFalla{{this.id}}">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFalla{{this.id}}" aria-expanded="true" aria-controls="collapseFalla{{this.id}}">
+                            Falla ID: {{this.id}} - {{this.descripcion}}
+                        </button>
+                    </h2>
+                    <div id="collapseFalla{{this.id}}" class="accordion-collapse collapse" aria-labelledby="headingFalla{{this.id}}" data-bs-parent="#accordionFallas">
+                        <div class="accordion-body">
+                            <p><strong>Fecha:</strong> {{this.fecha}}</p>
+                            <p><strong>Estado:</strong> {{#if this.solucionado}}Cerrada{{else}}Abierta{{/if}}</p>
+                            <p><strong>Colaborador informante:</strong> {{this.colaborador.id}}</p>
+
+                            {{#if this.visitasTecnicas}}
+                                <h5 class="mt-3">Visitas Técnicas:</h5>
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -84,7 +94,7 @@
                                         <th>Fecha</th>
                                         <th>Descripción</th>
                                         <th>Resultado</th>
-                                        <th>Tecnico asignado</th>
+                                        <th>Técnico asignado</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -99,20 +109,17 @@
                                     {{/each}}
                                     </tbody>
                                 </table>
-                            </td>
-                        </tr>
-                    {{else}}
-                        <tr class="visitas-row">
-                            <td colspan="4" class="text-center">No hay visitas técnicas registradas para esta falla.</td>
-                        </tr>
-                    {{/if}}
-                {{/each}}
-                </tbody>
-            </table>
+                            {{else}}
+                                <p class="text-muted">No hay visitas técnicas registradas para esta falla.</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
         </div>
-    {{else}}
+{{else}}
         <p class="text-center mt-4">No hay fallas registradas para esta heladera.</p>
-    {{/if}}
+{{/if}}
 </div>
 
 {{> templates/main/footer}}
@@ -175,8 +182,7 @@
                     console.error(error);
                 });
     });
-
 </script>
-
 </body>
+
 </html>

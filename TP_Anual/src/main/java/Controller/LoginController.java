@@ -35,7 +35,7 @@ public class LoginController extends Controller {
         String contrasenia = context.formParam(PASSWORD_PARAM);
         String contraseniaEncriptada = Encriptador.getInstancia().encriptarMD5(contrasenia);
 
-        Persona usuario = (Persona) repo.credenciales(new CredencialDeAcceso(nombreUsuario,contraseniaEncriptada));
+        Persona usuario = repo.credenciales(new CredencialDeAcceso(nombreUsuario,contraseniaEncriptada));
 
         context.sessionAttribute(USER_SESSION_KEY, usuario);
         context.sessionAttribute("idPersona", Integer.toString(usuario.getId()));

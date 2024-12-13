@@ -42,6 +42,7 @@ public class Router {
             get("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::create);
             post("/registro/juridico", ((JuridicoController) FactoryController.controller("juridico"))::save);
             get("/persona/juridico/{id}", ((JuridicoController) FactoryController.controller("juridico"))::show,  RolUsuario.ADMINISTRADOR , RolUsuario.JURIDICO);
+            post("/registro/darse-de-baja", ((JuridicoController) FactoryController.controller("juridico"))::delete);
         });
 
         Server.app().routes(()->{
@@ -55,6 +56,7 @@ public class Router {
             get("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarEstadoHeladera,RolUsuario.JURIDICO,RolUsuario.ADMINISTRADOR);
             post("/heladeras/{id}/estado", ((HeladeraController) FactoryController.controller("heladeras"))::cambiarEstadoHeladera);
             get("/", ((HeladeraController) FactoryController.controller("heladeras"))::mostrarCantidadHeladerasActivas);
+            post("/heladeras/{id}/quitar-alerta", ((HeladeraController) FactoryController.controller("heladeras"))::quitarAlerta);
         });
 
         Server.app().routes(()->{
@@ -62,6 +64,7 @@ public class Router {
             get("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::create);
             post("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::update, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR);
             post("/registro/fisico", ((HumanoController) FactoryController.controller("humano"))::save);
+            post("/registro/fisico/{id}/darse-de-baja", ((HumanoController) FactoryController.controller("humano"))::delete);
             get("/persona/fisico/{id}", ((HumanoController) FactoryController.controller("humano"))::show, RolUsuario.FISICO , RolUsuario.ADMINISTRADOR );
             get("/asignar-rol", ((HumanoController) FactoryController.controller("humano")):: asignarRol);
         });

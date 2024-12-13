@@ -6,6 +6,7 @@ import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.EntityManager.EntityManagerHelper;
 import Service.Server.exceptions.UserAlreadyExistsException;
+import Service.Server.exceptions.UserNoLongerExistsException;
 import jakarta.persistence.NoResultException;
 
 import java.util.List;
@@ -42,9 +43,14 @@ public class RepoPersona extends Dao {
 
     public Persona existeUsuarioSso(String correo) {
         try {
-            return (Persona) EntityManagerHelper.getEntityManager().createQuery(
+            Persona persona = (Persona) EntityManagerHelper.getEntityManager().createQuery(
                     "SELECT p FROM Persona p WHERE p.credencialDeAcceso.nombreUsuario = :correo"
             ).setParameter("correo", correo).getSingleResult();
+
+            if(!persona.getAlta()){
+                throw new UserNoLongerExistsException();
+            }
+            return persona;
 
         } catch (NoResultException e) {
             return null;

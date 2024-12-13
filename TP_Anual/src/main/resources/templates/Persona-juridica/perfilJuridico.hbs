@@ -61,7 +61,12 @@
                         <p><strong>Sede: </strong>{{usuario.direccion.calle}}  {{usuario.direccion.numero}}</p>
                         <p><strong>Localidad: </strong> {{usuario.direccion.localidad}} </p>
                         <p><strong>Medio de Contacto: </strong> {{usuario.correElectronico}} </p>
-<!--                        <a href="#" class="btn btn-primary mt-3">Editar Perfil</a>-->
+                        <form method="POST" action="/registro/darse-de-baja" onsubmit="return confirmarBaja();">
+                            <div class="d-flex justify-content-between mt-4">
+                                <input type="hidden" id="idHumano" value="{{usuario.id}}" name="idHumano">
+                                <button type="submit" class="btn btn-danger">Darse de baja</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -88,6 +93,14 @@
 <script src="../../js/main.js"></script>
 <script src="../../js/scripts-index.js"></script>
 <script src="../../js/scripts-header.js"></script>
+
+<script>
+    function confirmarBaja() {
+        return confirm("¿Estás seguro de que deseas darte de baja? Esta acción no se puede deshacer.");
+    }
+</script>
+
+
 </body>
 
 </html>

@@ -14,7 +14,8 @@ public class AppHandlers {
             new CapacidadHeladeraHandler(),
             new SinViandasHandler(),
             new UsuarioYaTieneRolHandler(),
-            new UserAlreadyExistsHandler()
+            new UserAlreadyExistsHandler(),
+            new UserNoLongerExistsHandler()
     };
 
     public static void applyHandlers(Javalin app) {

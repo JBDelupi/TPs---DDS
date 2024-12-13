@@ -50,9 +50,13 @@ public abstract class Persona  {
     @Enumerated(EnumType.STRING)
     private RolUsuario tipoUsuario;
 
+    @Column(name = "alta")
+    private Boolean alta;
+
 
     public Persona() {
         this.roles = new ArrayList<>();
+        this.alta = true;
     }
 
     public void notify(Mensaje publicacion){

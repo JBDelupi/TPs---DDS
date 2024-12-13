@@ -2,8 +2,10 @@ package Controller;
 
 import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Builder.UsuariosBuilder.FisicoBuilder;
+import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Fisico;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
@@ -22,6 +24,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.Objects;
 
 public class HumanoController extends Controller  {
 
@@ -31,7 +34,20 @@ public class HumanoController extends Controller  {
         this.repo = repo;
     }
 
+    public void delete(Context context){
+        this.estaLogueado(context);
 
+        String id = context.formParam("idHumano");
+
+        Persona persona = repo.buscar(Persona.class, Integer.parseInt(id));
+        persona.setAlta(false);
+
+        repo.modificar(persona);
+
+
+
+        context.render("Persona-humana/dadoDeBaja.hbs");
+    }
 
     public void create(Context context){
 
@@ -41,9 +57,9 @@ public class HumanoController extends Controller  {
 
     public void save(Context context){
 
-        String nombre = context.formParam("nombre") ;
+        String nombre = context.formParam("nombre");
         String apellido = context.formParam("apellido") ;
-        LocalDate fechaNacimiento = LocalDate.parse(context.formParam("fecha_nacimiento"));
+        LocalDate fechaNacimiento = LocalDate.parse(Objects.requireNonNull(context.formParam("fecha_nacimiento")));
         String correo = context.formParam("correo");
         String nroDocumento = context.formParam("documento");
         String calle = context.formParam("calle");

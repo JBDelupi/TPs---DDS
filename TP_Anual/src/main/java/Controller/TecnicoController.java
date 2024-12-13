@@ -74,10 +74,10 @@ public class TecnicoController extends Controller {
         MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
         registry.counter("dds.tecnicosCreados").increment();
 
-        Map<String,Object> model = new HashMap<>();
+        Map<String,Object> model = this.basicModel(context);
         model.put("persona",fisico);
         model.put("fecha_actual", LocalDate.now());
-        model = this.basicModel(context);
+
         context.render("Tecnico/registro_exitoso.hbs",model);
     }
 

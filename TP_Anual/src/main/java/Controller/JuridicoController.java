@@ -4,6 +4,7 @@ import Models.Domain.Builder.CredencialDeAccesoBuilder;
 import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Builder.UsuariosBuilder.JuridicoBuilder;
 import Models.Domain.Personas.Actores.Juridico;
+import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Domain.Personas.Utilidades.TipoJuridico;
@@ -113,5 +114,17 @@ public class JuridicoController extends Controller implements ICrudViewsHandler 
 
     }
 
+    public void delete(Context context){
+        this.estaLogueado(context);
+
+        String id = context.formParam("idHumano");
+
+        Persona persona = repo.buscar(Persona.class, Integer.parseInt(id));
+        persona.setAlta(false);
+
+        repo.modificar(persona);
+
+        context.render("Persona-humana/dadoDeBaja.hbs");
+    }
 
 }

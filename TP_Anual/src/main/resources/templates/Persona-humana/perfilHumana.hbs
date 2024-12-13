@@ -89,11 +89,15 @@
                             </div>
 
                             <div class="d-flex justify-content-between mt-4">
-<!--                                <a href="#" class="btn btn-primary">Edit Profile</a>-->
                                 <button type="submit" class="btn btn-success">Guardar Medio de Notificación</button>
                             </div>
                         </form>
-
+                        <form method="POST" action="/registro/darse-de-baja" onsubmit="return confirmarBaja();">
+                            <div class="d-flex justify-content-between mt-4">
+                                <input type="hidden" id="idHumano" value="{{usuario.id}}" name="idHumano">
+                                <button type="submit" class="btn btn-danger">Darse de baja</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -147,6 +151,12 @@
             inputCodigoNotificacion.placeholder = 'Ingrese su correo electrónico';
         }
     });
+</script>
+
+<script>
+    function confirmarBaja() {
+        return confirm("¿Estás seguro de que deseas darte de baja? Esta acción no se puede deshacer.");
+    }
 </script>
 
 </body>

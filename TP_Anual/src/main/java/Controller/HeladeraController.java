@@ -186,6 +186,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         Map<String, Object> model = this.basicModel(context);
 
         String idHeladera = context.pathParam("id");
+        Alerta alerta = repo.ultimaAlerta(idHeladera);
 
         Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(idHeladera));
 
@@ -193,6 +194,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
         model.put("heladera", heladera);
         model.put("fallasTecnicas", fallasTecnicas);
+        model.put("hayAlerta", alerta != null);
 
         context.render("Heladera/estadoHeladera.hbs", model);
     }
@@ -237,5 +239,22 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         context.render("main/index.hbs", model);
     }
 
+    public void quitarAlerta(Context context){
+        this.estaLogueado(context);
+
+        String idHeladera = context.pathParam("id");
+
+        Alerta alerta = repo.ultimaAlerta(idHeladera);
+
+        boolean nuevoEstado = Boolean.parseBoolean(context.formParam("estado-alerta"));
+
+        if(nuevoEstado) {
+            alerta.setSolucionado(true);
+            repo.modificar(alerta);
+        }
+
+        context.redirect("/heladeras/" + idHeladera + "/estado");
+
+    }
 
 }
