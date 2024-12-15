@@ -19,7 +19,6 @@ public class ImportadorCSV {
 
 
     private ImportadorCSV(InputStream input, String separador) throws CsvValidationException, IOException {
-        this.colaboradoresDTO = new HashSet<>();
         this.adapterImportadorCSV = new AdapterLectorArchivoCSV();
         this.cargarDatosColaborador(input,separador);
 
@@ -59,6 +58,7 @@ public class ImportadorCSV {
 
 
     private void ToDtoColaborador(List<String[]> list) {
+        this.colaboradoresDTO = new HashSet<>();
 
         for (String[] linea : list) {
 
