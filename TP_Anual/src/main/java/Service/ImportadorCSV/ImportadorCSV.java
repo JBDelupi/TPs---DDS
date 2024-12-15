@@ -6,6 +6,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import lombok.Getter;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,20 +15,19 @@ import java.util.Set;
 public class ImportadorCSV {
     private AdapterImportadorCSV adapterImportadorCSV;
     private Set<FisicoDTO> colaboradoresDTO;
-    private String URL;
     private static ImportadorCSV instacia;
 
-    private ImportadorCSV(String URL, String separador) throws CsvValidationException, IOException {
-        this.URL = URL;
+
+    private ImportadorCSV(InputStream input, String separador) throws CsvValidationException, IOException {
         this.colaboradoresDTO = new HashSet<>();
         this.adapterImportadorCSV = new AdapterLectorArchivoCSV();
-        this.cargarDatosColaborador(separador);
+        this.cargarDatosColaborador(input,separador);
 
     }
 
-    public static ImportadorCSV getInstance(String URL, String separador) throws CsvValidationException, IOException {
+    public static ImportadorCSV getInstance(InputStream input , String separador) throws CsvValidationException, IOException {
         if(instacia==null){
-            instacia = new ImportadorCSV(URL, separador);
+            instacia = new ImportadorCSV(input, separador);
         }
         return instacia;
     }
@@ -36,8 +36,8 @@ public class ImportadorCSV {
 
 
 
-    private void cargarDatosColaborador(String separador) throws CsvValidationException, IOException {
-        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(URL, separador);
+    private void cargarDatosColaborador(InputStream input,String separador) throws CsvValidationException, IOException {
+        List<String[]> datosCSV = adapterImportadorCSV.cargarArchivosCSV(input, separador);
         this.ToDtoColaborador(datosCSV);
     }
 

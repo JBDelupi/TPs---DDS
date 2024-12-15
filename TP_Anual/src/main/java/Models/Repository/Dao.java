@@ -33,6 +33,7 @@ public abstract class Dao {
             em.flush(); // Fuerza la sincronización con la base de datos
             em.clear(); // Limpia el caché de primer nivel para evitar inconsistencias
             em.getTransaction().commit();
+            em.close();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

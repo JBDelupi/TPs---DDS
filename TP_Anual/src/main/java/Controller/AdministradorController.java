@@ -9,6 +9,7 @@ import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -38,11 +39,11 @@ public class AdministradorController  extends Controller {
         this.estaLogueado(context);
         Map<String, Object> model = this.basicModel(context);
 
-
         UploadedFile file = context.uploadedFile("csvFileInput");
         String token = context.formParam("token");
 
-        String filename = file.filename();
+        InputStream filename = file.content();
+
 
         Set<FisicoDTO> importadosCSV = ImportadorCSV.getInstance( filename, token).getColaboradoresDTO();
         GeneradorFisico.generar(importadosCSV.stream().toList());

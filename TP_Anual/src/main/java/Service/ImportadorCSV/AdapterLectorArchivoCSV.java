@@ -12,10 +12,9 @@ import java.util.List;
 
 public class AdapterLectorArchivoCSV implements  AdapterImportadorCSV{
 
-    public List<String[]> cargarArchivosCSV(String Link, String separador) throws IOException, CsvValidationException {
+    public List<String[]> cargarArchivosCSV(InputStream input, String separador) throws IOException, CsvValidationException {
         List<String[]> list = new ArrayList<>();
-        InputStream inputStream = new FileInputStream(Link);
-        CSVReader csvReader = new CSVReader((new InputStreamReader(inputStream)));
+        CSVReader csvReader = new CSVReader((new InputStreamReader(input)));
         String[] fila = null;
         String[] parsear;
         while( (fila = csvReader.readNext()) != null ) {
