@@ -26,10 +26,12 @@ public abstract class Controller {
 
     public Map<String, Object> basicModel(Context context){
         Map<String, Object> model = new HashMap<>();
+
         String id = context.sessionAttribute("idPersona");
         this.usuario = EntityManagerHelper.getEntityManager().find(Persona.class, Integer.parseInt(id));
         model.put("rol", context.sessionAttribute("rolTipo").toString().toLowerCase());
         model.put("usuario", this.usuario);
+
         return model;
     }
 

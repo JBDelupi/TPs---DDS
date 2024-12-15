@@ -9,6 +9,8 @@ import Models.Domain.Builder.HeladeraBuilder;
 import Models.Domain.Heladera.Heladera;
 import Models.Domain.Heladera.Incidentes.Alerta;
 import Models.Domain.Heladera.Suscripciones.Utilidades.StrategySuscripcion;
+import Models.Domain.Personas.Actores.Persona;
+import Models.Domain.Personas.Actores.TipoRol;
 import Models.Domain.Personas.DatosPersonales.Direccion;
 import Models.Repository.RepoHeladera;
 import Service.APIPuntos.Punto;
@@ -117,9 +119,9 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
         this.estaLogueado(context);
         Map<String, Object> model = this.basicModel(context);
 
+
         // <-- HELADERA -->
         String id = context.pathParam("id");
-
         Heladera heladera = repo.buscar(Heladera.class,Integer.parseInt(id));
         Alerta alerta = repo.ultimaAlerta(id);
 
@@ -142,6 +144,7 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
     @Override
     public void update(Context context) {
         this.estaLogueado(context);
+
         String idSuscripcion = context.formParam("idSuscripcion");
         String idHeladera = context.formParam("heladeraId");
 
@@ -154,12 +157,13 @@ public class HeladeraController extends Controller implements ICrudViewsHandler 
 
     @Override
     public void edit(Context context) {
-        this.estaLogueado(context);
 
         String opcionSuscripcion = context.formParam("opcionSuscripcion");
         String numeroViandasStr = context.formParam("numeroViandas");
         String id = context.pathParam("id");
 
+
+        this.usuario = repo.buscar(Persona.class,Integer.parseInt(context.sessionAttribute("idPersona")));
 
         ObserverHeladera suscripcion = StrategySuscripcion.Strategy(opcionSuscripcion,numeroViandasStr,this.getUsuario());
         Heladera heladera = repo.buscar(Heladera.class,Integer.parseInt(id));
