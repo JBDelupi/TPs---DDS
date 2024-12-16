@@ -1,13 +1,13 @@
 -- INSERT INTO persona
 INSERT INTO persona VALUES
-                        ( 1, 'Fisico', NULL, 'tduren@frba.utn.edu.ar', 'c4ca4238a0b923820dcc509a6f75849b', 'tduren@frba.utn.edu.ar', NULL, NULL, NULL, 'Correo', 'tduren@frba.utn.edu.ar', NULL, 'FISICO'),
-                        ( 2, 'Fisico', '1', 'admin@admin.com', '61cc0e405f4b518d264c089ac8b642ef', 'admin@admin.com', NULL, 'barrio-norte', NULL, 'Correo', 'admin', '1', 'ADMINISTRADOR'),
-                        ( 3, 'Juridico', 'Honduras', 'tduren@frba.utn.edu.ar', '48ae1b30bbaea617ba41b86ac1bc4066', 'tduren@frba.utn.edu.ar', NULL, 'belgrano', NULL, 'Correo', 'coto', '353', 'JURIDICO'),
-                        ( 4, 'Fisico', 'Paparela', NULL, '2e30386cae53dbc989d91731a75a1815', NULL, NULL, 'Palermo', NULL, 'Correo', '7512313', '422', 'FISICO'),
-                        ( 5, 'Fisico', 'Paparela', NULL, '0bf943895a165911d18e1455c5ee19a4', NULL, NULL, 'Belgrano', NULL, 'Correo', '5341234123', '422', 'FISICO'),
-                        ( 6, 'Fisico', 'Paparela', NULL, 'f9b06c8e59979f4ccfd96de8746576b5', NULL, NULL, 'Belgrano', NULL, 'Correo', '45432434', '422', 'FISICO'),
-                        ( 7, 'Fisico', 'Paparela', NULL, 'a2926b49905fdc107b05e1f6f3257da5', NULL, NULL, 'Belgrano', NULL, 'Correo', '545234234', '422', 'FISICO'),
-                        ( 8, 'Fisico', 'Paparela', NULL, '46310eb402e184bb757862862f12606a', NULL, NULL, 'Flores', NULL, 'Correo', '3453453', '422', 'FISICO');
+                        ('T', 1, 'Fisico', NULL, 'tduren@frba.utn.edu.ar', 'c4ca4238a0b923820dcc509a6f75849b', 'tduren@frba.utn.edu.ar', NULL, NULL, NULL, 'Correo', 'tduren@frba.utn.edu.ar', NULL, 'FISICO'),
+                        ('T', 2, 'Fisico', '1', 'admin@admin.com', '61cc0e405f4b518d264c089ac8b642ef', 'admin@admin.com', NULL, 'barrio-norte', NULL, 'Correo', 'admin', '1', 'ADMINISTRADOR'),
+                        ('T', 3, 'Juridico', 'Honduras', 'tduren@frba.utn.edu.ar', '48ae1b30bbaea617ba41b86ac1bc4066', 'tduren@frba.utn.edu.ar', NULL, 'belgrano', NULL, 'Correo', 'coto', '353', 'JURIDICO'),
+                        ('T', 4, 'Fisico', 'Paparela', NULL, '2e30386cae53dbc989d91731a75a1815', NULL, NULL, 'Palermo', NULL, 'Correo', '7512313', '422', 'FISICO'),
+                        ('T', 5, 'Fisico', 'Paparela', NULL, '0bf943895a165911d18e1455c5ee19a4', NULL, NULL, 'Belgrano', NULL, 'Correo', '5341234123', '422', 'FISICO'),
+                        ('T', 6, 'Fisico', 'Paparela', NULL, 'f9b06c8e59979f4ccfd96de8746576b5', NULL, NULL, 'Belgrano', NULL, 'Correo', '45432434', '422', 'FISICO'),
+                        ('T', 7, 'Fisico', 'Paparela', NULL, 'a2926b49905fdc107b05e1f6f3257da5', NULL, NULL, 'Belgrano', NULL, 'Correo', '545234234', '422', 'FISICO'),
+                        ('T', 8, 'Fisico', 'Paparela', NULL, '46310eb402e184bb757862862f12606a', NULL, NULL, 'Flores', NULL, 'Correo', '3453453', '422', 'FISICO');
 
 -- INSERT INTO tarjeta
 INSERT INTO tarjeta VALUES
