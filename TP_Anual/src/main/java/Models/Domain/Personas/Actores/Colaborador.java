@@ -5,6 +5,7 @@ import Models.Domain.Producto.Canje;
 import Models.Domain.FormasDeContribucion.Utilidades.Contribucion;
 import Models.Domain.FormasDeContribucion.ContribucionesJuridicas.OfrecerProducto;
 import Models.Domain.Tarjetas.TarjetaAccesos;
+import Service.Notificacion.Mensaje.MensajeCanje;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -63,6 +64,7 @@ public class Colaborador extends Rol {
         puntaje -= producto.getPuntosNecesarios() * cantidad;
         producto.setStock(producto.getStock() - cantidad);
         Canje canje = new Canje(producto, this, cantidad);
+
         historialCanje.add(canje);
 
     }

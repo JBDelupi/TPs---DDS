@@ -5,6 +5,8 @@ import Models.Domain.Personas.Actores.Colaborador;
 import Models.Domain.Personas.Actores.Persona;
 import Models.Domain.Personas.Actores.TipoRol;
 import Models.Repository.RepoContribucion;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
+import Service.Notificacion.Mensaje.MensajeCanje;
 import Service.Observabilidad.MetricsRegistry;
 import io.javalin.http.Context;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -54,8 +56,11 @@ public class ProductoController extends Controller {
 
         String id = context.sessionAttribute("idPersona");
         this.usuario = repo.buscar(Persona.class,Integer.parseInt(id));
+
         Colaborador colaborador = (Colaborador) getUsuario().getRol(TipoRol.COLABORADOR);
         colaborador.realizarCanje(producto,cantidad);
+
+        new MensajeCanje(usuario.getCorreElectronico(), producto.getProducto().getNombre() + producto.getProducto().getDescripcion() );
 
 
         repo.modificar(colaborador);
