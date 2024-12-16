@@ -13,9 +13,9 @@ public class AdapterBotWhatsapp {
     public static final String AUTH_TOKEN = System.getenv("WHATSAPP_ADAPTER_TOKEN");
 
 
-    //private String numero = "+12673812069"; Esta hardcodeado, es el segundo numero
 
     public void Notificar(String numero, String contenido) {
+
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
@@ -24,6 +24,8 @@ public class AdapterBotWhatsapp {
                         new com.twilio.type.PhoneNumber("whatsapp:+14155238886"), // Este es el numero de Twilio
                         contenido)
                 .create();
+
+
 
     }
 }

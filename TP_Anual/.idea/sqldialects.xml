@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/borrarDatos.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scripts1.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scripts4.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scripts5.sql" dialect="PostgreSQL" />
   </component>
 </project>
