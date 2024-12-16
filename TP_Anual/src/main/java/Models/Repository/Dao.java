@@ -11,7 +11,6 @@ public abstract class Dao {
 
     public <T> List<T> buscarTodos(Class<T> type) {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        em.clear();
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<T> criteria = builder.createQuery(type);
         criteria.from(type);
@@ -20,7 +19,6 @@ public abstract class Dao {
 
     public <T> T buscar(Class<T> type, int id) {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        em.clear();
         return em.find(type, id);
     }
 

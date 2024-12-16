@@ -212,7 +212,6 @@ public class FactoryContribucion {
         String motivo = dto.getParams().get("motivo");
 
         // validarSolicitud(obtenerColaborador().getTarjeta().getSolicitudesDeApertura(), TipoDonacion.DONACION_DE_VIANDA);
-        Colaborador colaborador = this.obtenerColaborador();
 
         //  colaborador.getTarjeta().agregarNuevoUso(heladeraDestino, TipoAccion.AGREGAR);
 
@@ -232,6 +231,7 @@ public class FactoryContribucion {
                 .motivos(motivo)
                 .construir();
 
+        Colaborador colaborador = this.obtenerColaborador();
         colaborador.agregarNuevaDonacion(donacion);
 
         repo.modificar(colaborador);

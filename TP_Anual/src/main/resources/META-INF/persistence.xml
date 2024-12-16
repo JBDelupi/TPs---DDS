@@ -8,7 +8,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <!-- Para PostgreSQL (descomenta esta parte si usas PostgreSQL) -->
-
+        
                <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
                <property name="hibernate.connection.url" value="jdbc:postgresql://dpg-ct4h5v3tq21c7393kt7g-a.oregon-postgres.render.com:5432/deccocolaboracion" />
                <property name="hibernate.connection.username" value="deccocolaboracion_user" />
