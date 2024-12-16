@@ -1,3 +1,21 @@
+-- Eliminar los datos de todas las tablas
+DO $$
+    DECLARE
+        stmt text;
+    BEGIN
+        SELECT string_agg('TRUNCATE TABLE ' || quote_ident(schemaname) || '.' || quote_ident(tablename) || ' CASCADE;', ' ')
+        INTO stmt
+        FROM pg_tables
+        WHERE schemaname = 'public'
+          AND tablename NOT LIKE 'pg_%'  -- Excluir tablas del sistema
+          AND tablename NOT LIKE 'sql_%'; -- Excluir tablas generadas automáticamente;
+        IF stmt IS NOT NULL THEN
+            EXECUTE stmt;
+        END IF;
+    END $$;
+
+
+
 -- INSERT INTO persona
 INSERT INTO persona VALUES
                         ('T', 1, 'Fisico', NULL, 'tduren@frba.utn.edu.ar', 'c4ca4238a0b923820dcc509a6f75849b', 'tduren@frba.utn.edu.ar', NULL, NULL, NULL, 'Correo', 'tduren@frba.utn.edu.ar', NULL, 'FISICO'),
