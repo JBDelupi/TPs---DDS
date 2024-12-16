@@ -106,6 +106,7 @@ public class FactoryContribucion {
         Heladera heladera = repo.buscar(Heladera.class, Integer.parseInt(heladeraId));
         heladera.agregarVianda(vianda);
 
+        repo.modificar(heladera);
 
         DonacionDeViandaBuilder builder = new DonacionDeViandaBuilder();
         Contribucion donacion = builder.heladera(heladera).vianda(vianda).construir();
@@ -223,6 +224,9 @@ public class FactoryContribucion {
             Vianda vianda = heladeraOrigen.obtenerVianda();
             heladeraDestino.agregarVianda(vianda);
         }
+
+        repo.modificar(heladeraOrigen);
+        repo.modificar(heladeraDestino);
 
         DistribucionDeViandasBuilder builder = new DistribucionDeViandasBuilder();
         Contribucion donacion = builder.heladeraOrigen(heladeraOrigen)
