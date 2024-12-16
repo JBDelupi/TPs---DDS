@@ -17,12 +17,6 @@ En este repositorio encontrarás los avances del Trabajo Práctico Anual (TP Anu
 | Gianluca  | Petri     |
 | Lucas     | Pérez     |
 
-## Estructura del Repositorio
-
-El repositorio está organizado de la siguiente manera:
-
-- **TP_Anual**: Contiene los avances del Trabajo Práctico Anual del grupo.
-- **Ejercicios**: Incluye los ejercicios individuales y grupales realizados durante el curso.
 
 ## Descripción del Sistema 📝
 
