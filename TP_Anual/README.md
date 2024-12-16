@@ -23,7 +23,7 @@ En este repositorio encontrarás los avances del Trabajo Práctico Anual (TP Anu
 El sistema Decco es una plataforma integral diseñada para gestionar la distribución de viandas a personas vulnerables mediante heladeras ubicadas en diferentes lugares. Permite a los colaboradores contribuir con viandas, gestionar heladeras y generar reportes sobre su estado y las contribuciones realizadas.
 
 <div align="center">
-    <img src="/TP_Anual/imagen-readme.png" alt="Descripción del Sistema" width="600">
+    <img src="/TP_Anual/imagen-readme.png" alt="Descripción del Sistema" width="800">
 </div>
 
 ## Tecnología Utilizada 💻
