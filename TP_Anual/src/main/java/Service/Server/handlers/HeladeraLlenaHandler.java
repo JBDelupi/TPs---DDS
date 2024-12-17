@@ -17,7 +17,7 @@ public class HeladeraLlenaHandler implements IHandler{
             MeterRegistry registry = MetricsRegistry.getInstance().getRegistry();
             registry.counter("dds.exception.heladeraLlena").increment();
 
-            context.render("heladera/heladeraLlena.hbs");
+            context.render("Heladera/heladeraLlena.hbs");
         });
     }
 }
