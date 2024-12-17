@@ -86,7 +86,8 @@ public class TecnicoController extends Controller {
     public void index(Context context) {
         this.estaLogueado(context);
 
-        context.render("Tecnico/index_registro_tecnico.hbs");
+
+        context.render("Tecnico/index_registro_tecnico.hbs",this.basicModel(context));
     }
 
 
@@ -94,7 +95,7 @@ public class TecnicoController extends Controller {
     public void create(Context context) {
         this.estaLogueado(context);
 
-        context.render("Tecnico/registroTecnico.hbs");
+        context.render("Tecnico/registroTecnico.hbs",this.basicModel(context));
     }
 
 

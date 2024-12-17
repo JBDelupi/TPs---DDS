@@ -54,4 +54,3 @@ VALUES
     ('T', 0, 0, 0, 4, 4, 'F', 'Bruselas', '-34.6372', 'Barracas', '-58.3847', '12'),
     ('T', 0, 0, 0, 4, 4, 'F', 'Bruselas', '-34.5625', 'Belgrano', '-58.4585', '12');
 
-select * from tecnico

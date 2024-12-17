@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ServicioPuntosAPI {
         private static ServicioPuntosAPI instacia = null;
-        private static final String urlAPI = "https://cfb38f5b-9894-469c-840f-2ac4749c2096.mock.pstmn.io";
+        private static final String urlAPI = "https://5958e9d3-1a00-4382-af27-a313a78e3415.mock.pstmn.io";
 
         private Retrofit retrofit;
 

@@ -15,7 +15,6 @@ public class GeneradorFisico {
         FisicoMapper mapper = new FisicoMapper();
         fisicoDTOS.forEach(f->repo.existeUsuario(f.getMail()));
         for (FisicoDTO fisicoDTO : fisicoDTOS) {
-            new MensajeBienvenida(fisicoDTO.getMail(), fisicoDTO.getNumDocumento());
             Fisico fisico = mapper.toEntity(fisicoDTO);
             repo.agregar(fisico);
         }

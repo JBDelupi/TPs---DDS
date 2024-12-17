@@ -24,20 +24,10 @@ public abstract class Dao {
 
 
     public void agregar(Object unObjeto) {
-        EntityManager em = EntityManagerHelper.getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(unObjeto);
-            em.flush(); // Fuerza la sincronización con la base de datos
-            em.clear(); // Limpia el caché de primer nivel para evitar inconsistencias
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        }
+        EntityManagerHelper.getEntityManager().getTransaction().begin();
+        EntityManagerHelper.getEntityManager().persist(unObjeto);
+        EntityManagerHelper.getEntityManager().getTransaction().commit();
+        EntityManagerHelper.getEntityManager().close();
     }
 
 

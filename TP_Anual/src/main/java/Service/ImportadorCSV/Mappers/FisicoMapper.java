@@ -13,6 +13,7 @@ import Models.Domain.Personas.DatosPersonales.TipoDeDocumento;
 import Service.ImportadorCSV.DTO.FactoryContribucionDTO;
 import Service.ImportadorCSV.DTO.FisicoDTO;
 import Service.ImportadorCSV.DTO.FormaColaboracionDTO;
+import Service.Notificacion.Mensaje.MensajeBienvenida;
 import Service.Validador.CredencialDeAcceso;
 import Service.Validador.Encriptador;
 
@@ -38,6 +39,7 @@ public class FisicoMapper {
 
         fisico.setCodigoDeNotificacion(dto.getMail());
 
+        new MensajeBienvenida(fisico.getCodigoDeNotificacion(), fisico.getNumeroDocumento());
 
 
         ColaboradorBuilder colaboradorBuilder = new ColaboradorBuilder();

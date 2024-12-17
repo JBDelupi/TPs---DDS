@@ -69,6 +69,7 @@ public class FallaTecnica extends Incidente {
         }
         if (solucionado) {
             this.solucionado = true;
+            this.fechaSolucionado = LocalDateTime.now();
             heladera.setEstadoActual(EstadoHeladera.DISPONIBLE);
         }
 
