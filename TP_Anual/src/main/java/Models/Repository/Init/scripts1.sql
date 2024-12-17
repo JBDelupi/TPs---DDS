@@ -2,16 +2,26 @@
 DO $$
     DECLARE
         stmt text;
+        seq RECORD;
     BEGIN
+        -- TRUNCATE todas las tablas
         SELECT string_agg('TRUNCATE TABLE ' || quote_ident(schemaname) || '.' || quote_ident(tablename) || ' CASCADE;', ' ')
         INTO stmt
         FROM pg_tables
-        WHERE schemaname = 'public'
-          AND tablename NOT LIKE 'pg_%'  -- Excluir tablas del sistema
-          AND tablename NOT LIKE 'sql_%'; -- Excluir tablas generadas automáticamente;
+        WHERE schemaname = 'public';
+
         IF stmt IS NOT NULL THEN
             EXECUTE stmt;
         END IF;
+
+        -- Reiniciar todas las secuencias
+        FOR seq IN
+            SELECT relname AS sequence_name
+            FROM pg_class
+            WHERE relkind = 'S'  -- 'S' son las secuencias
+            LOOP
+                EXECUTE 'ALTER SEQUENCE ' || seq.sequence_name || ' RESTART WITH 1;';
+            END LOOP;
     END $$;
 
 
