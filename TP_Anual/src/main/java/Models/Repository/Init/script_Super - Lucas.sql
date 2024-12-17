@@ -29,9 +29,9 @@ DO $$
 
 
 WITH new_persona AS (
-INSERT INTO persona (tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, mediodenotificacion, nombreusuario, numero, tipousuario)
+INSERT INTO persona (tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, mediodenotificacion, nombreusuario, numero, tipousuario, alta)
 VALUES
-    ('Juridico', 'Bruselas', 'lucasiturrioz212@gmail.com', MD5('1'), 'fisico1@gmail.com', NULL, 'Ituzaingo', NULL, 'Correo', 'coto', '1', 'JURIDICO')
+    ('Juridico', 'Bruselas', 'lucasiturrioz212@gmail.com', MD5('1'), 'fisico1@gmail.com', NULL, 'Ituzaingo', NULL, 'Correo', 'coto', '1', 'JURIDICO', true)
     RETURNING id
     ),
 -- Insertar en la tabla juridico usando el id de persona
@@ -79,9 +79,9 @@ INSERT INTO heladera (id,
 
 
     WITH new_persona AS (
-    INSERT INTO persona (tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, mediodenotificacion, nombreusuario, numero, tipousuario)
+    INSERT INTO persona (tipo, calle, codigo_de_notificacion, contrasenia, correo_electronico, latitud, localidad, longitud, mediodenotificacion, nombreusuario, numero, tipousuario, alta)
         VALUES
-            ('Fisico', 'Av. Juan b Justo', 'lucasiturrioz212@gmail.com', MD5('1'), 'tecnico1@gmail.com', NULL, 'Floresta', NULL, 'Correo', 'tecnico1', '123', 'FISICO')
+            ('Fisico', 'Av. Juan b Justo', 'lucasiturrioz212@gmail.com', MD5('1'), 'tecnico1@gmail.com', NULL, 'Floresta', NULL, 'Correo', 'tecnico1', '123', 'FISICO', true)
         RETURNING id
 ),
 

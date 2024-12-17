@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/Script_CSV - Nahu.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/Script_PuntoRecomendacion - Perez.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/borrarDatos.sql" dialect="PostgreSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scripts1.sql" dialect="PostgreSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scripts4.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/scriptFinal.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/script_Canje - Bauti.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/script_MedioNotificacion - Joaco.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/script_Reporte - Tobi.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/script_Super - Lucas.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/Models/Repository/Init/script_Tecnico - Gian.sql" dialect="PostgreSQL" />
   </component>
 </project>
