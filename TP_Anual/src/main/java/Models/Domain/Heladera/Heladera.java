@@ -3,6 +3,7 @@ package Models.Domain.Heladera;
 import Models.Domain.Excepciones.HeladeraLlenaException;
 import Models.Domain.Excepciones.SinViandasException;
 import Models.Domain.Heladera.Incidentes.Alerta;
+import Models.Domain.Heladera.Incidentes.Incidente;
 import Models.Domain.Heladera.Incidentes.Utilidades.TipoAlerta;
 import Models.Domain.Heladera.Suscripciones.*;
 import Models.Domain.Heladera.Suscripciones.Utilidades.TipoDePublicacion;
@@ -12,6 +13,7 @@ import Models.Domain.Heladera.Sensores.Sensor;
 import Models.Domain.Heladera.Sensores.SensorMovimiento;
 import Models.Domain.Heladera.Sensores.SensorTemperatura;
 import Models.Repository.EntityManager.EntityManagerHelper;
+import Models.Repository.RepoIncidente;
 import Service.Notificacion.Mensaje.MensajeAlerta;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -183,9 +185,10 @@ public class Heladera {
 
     public void generarIncidente (TipoAlerta tipo){
         Alerta nuevaAlerta = new Alerta(tipo, this);
+        RepoIncidente repoIncidente = new RepoIncidente();
+        repoIncidente.agregar(nuevaAlerta);
         this.registrarAlerta();
         this.notificar(nuevaAlerta);
-        EntityManagerHelper.persist(nuevaAlerta);
         registrarAlerta();
     }
 
