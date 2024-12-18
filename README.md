@@ -16,6 +16,9 @@ En este repositorio encontrarás los avances del Trabajo Práctico Anual (TP Anu
 | Gianluca  | Petri     |
 | Lucas     | Pérez     |
 
+<img src = "https://i.ibb.co/BBM2L0f/file.jpg">
+
+
 ## Estructura del Repositorio
 
 El repositorio está organizado de la siguiente manera:
